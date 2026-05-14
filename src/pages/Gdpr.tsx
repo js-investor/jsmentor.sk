@@ -1,5 +1,5 @@
 import FooterSection from "@/components/sections/FooterSection";
-import brandLogo from "@/assets/images/js-investor-logo.png";
+import brandLogo from "@/assets/images/js-mentor-logo.png";
 import { ArrowLeft } from "lucide-react";
 
 const gdprDocument = `Dokumentácia k posúdeniu vplyvu plánovaných spracovateľských operácií
@@ -517,7 +517,7 @@ const Gdpr = () => (
   <main className="section-white min-h-screen">
     <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 md:px-10 lg:px-16 py-4 md:py-[0.8rem] backdrop-blur-md bg-cream/90 border-b border-primary/10">
       <a href="/" className="flex items-center">
-        <img src={brandLogo} alt="JS Investor logo" className="h-10 md:h-12 w-auto" />
+        <img src={brandLogo} alt="JS Mentor logo" className="h-10 md:h-12 w-auto" />
       </a>
       <a href="/" className="btn-pill">
         Prejsť na hlavnú stránku

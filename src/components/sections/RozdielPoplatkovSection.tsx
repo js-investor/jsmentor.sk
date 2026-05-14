@@ -58,7 +58,7 @@ const RozdielPoplatkovSection = () => (
 
             <div>
               <p className="mb-2 font-sans text-body text-foreground">
-                <strong className="h6">JS Investor (JS Wealth Map)</strong>
+                <strong className="h6">JS Mentor (JS Wealth Map)</strong>
                 <br />
                 <span className="text-body text-muted-foreground">ročný poplatok: 0,4 % + 0,3 %</span>
               </p>

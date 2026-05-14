@@ -1,4 +1,4 @@
-import brandLogo from "@/assets/images/js-investor-logo.png";
+import brandLogo from "@/assets/images/js-mentor-logo.png";
 import FooterSection from "@/components/sections/FooterSection";
 import { motion } from "framer-motion";
 import { Home } from "lucide-react";
@@ -18,7 +18,7 @@ const NotFound = () => (
       style={{ backgroundColor: "rgba(255, 249, 245, 0.9)" }}
     >
       <Link to="/" className="flex items-center">
-        <img src={brandLogo} alt="JS Investor logo" className="h-10 w-auto md:h-12" />
+        <img src={brandLogo} alt="JS Mentor logo" className="h-10 w-auto md:h-12" />
       </Link>
       <Link to="/" className="btn-pill">
         Hlavná stránka

@@ -1,4 +1,4 @@
-import brandLogoWhite from "@/assets/images/js-investor-logo-biele.png";
+import brandLogoWhite from "@/assets/images/js-mentor-logo-biele.png";
 import { Instagram, Youtube, Podcast, Linkedin } from "lucide-react";
 
 const FooterSection = () => (
@@ -20,7 +20,7 @@ const FooterSection = () => (
             <a href="/" className="inline-flex">
               <img
                 src={brandLogoWhite}
-                alt="JS Investor logo"
+                alt="JS Mentor logo"
                 className="h-10 md:h-12 w-auto"
               />
             </a>

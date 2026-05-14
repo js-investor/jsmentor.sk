@@ -11,7 +11,7 @@ import RecenzieKlientovSection from "@/components/sections/RecenzieKlientovSecti
 import PoplatkyPorovnanieSection from "@/components/sections/PoplatkyPorovnanieSection";
 import PodmienkyPorovnanieSection from "@/components/sections/PodmienkyPorovnanieSection";
 import RozdielPoplatkovSection from "@/components/sections/RozdielPoplatkovSection";
-import KtoStojiZaJsInvestorSection from "@/components/sections/KtoStojiZaJsInvestorSection";
+import KtoStojiZaJsMentorSection from "@/components/sections/KtoStojiZaJsMentorSection";
 import GaranciaSection from "@/components/sections/GaranciaSection";
 import UrgenciaSection from "@/components/sections/UrgenciaSection";
 import FaqLoremSection from "@/components/sections/FaqLoremSection";
@@ -105,7 +105,7 @@ const Index = () => (
     <PoplatkyPorovnanieSection />
     <PodmienkyPorovnanieSection />
     <RozdielPoplatkovSection />
-    <KtoStojiZaJsInvestorSection />
+    <KtoStojiZaJsMentorSection />
     <GaranciaSection />
     <UrgenciaSection />
     <FaqLoremSection

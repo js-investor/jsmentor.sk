@@ -1,28 +1,4 @@
 {
-  "redirects": [
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.jsinvestor.com"
-        }
-      ],
-      "destination": "/konzultacia",
-      "permanent": false
-    },
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "jsinvestor.com"
-        }
-      ],
-      "destination": "/konzultacia",
-      "permanent": false
-    }
-  ],
   "rewrites": [
     {
       "source": "/(.*)",

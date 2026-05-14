@@ -2,7 +2,7 @@ import { Mail, Phone } from "lucide-react";
 import { FormEvent, useState } from "react";
 import type { ReactNode } from "react";
 import CtaResponseNote from "@/components/CtaResponseNote";
-import ivanBookingImage from "@/assets/images/jsinvestor-biznis-portret-ivan-interier-svetlo.jpg";
+import ivanBookingImage from "@/assets/images/jsmentor-biznis-portret-ivan-interier-svetlo.jpg";
 
 const MAKE_WEBHOOK_URL = import.meta.env.VITE_MAKE_WEBHOOK_URL;
 
@@ -288,7 +288,7 @@ const BookingSection = ({
                     <Phone className="h-5 w-5" />
                   </a>
                   <a
-                    href="mailto:info@jsinvestor.com"
+                    href="mailto:info@jsmentor.sk"
                     aria-label="Poslať email"
                     className="inline-flex text-primary transition-colors hover:text-primary/80"
                   >

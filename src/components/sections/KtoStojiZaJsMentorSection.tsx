@@ -1,5 +1,5 @@
 import AnimatedSection from "@/components/AnimatedSection";
-import ivanPortrait from "@/assets/images/jsinvestor-ivan-obleku-cita-dokumenty-financie.jpg";
+import ivanPortrait from "@/assets/images/jsmentor-ivan-obleku-cita-dokumenty-financie.jpg";
 
 const facts = [
   "531+ klientov",
@@ -8,7 +8,7 @@ const facts = [
   "115 000+ sledovateľov na Instagrame",
 ];
 
-const KtoStojiZaJsInvestorSection = () => (
+const KtoStojiZaJsMentorSection = () => (
   <section className="bg-footer-bg section-padding relative overflow-hidden">
     <div className="absolute inset-0 bg-dot-grid opacity-20" />
     <div className="section-container relative z-10">
@@ -31,7 +31,7 @@ const KtoStojiZaJsInvestorSection = () => (
 
         <AnimatedSection delay={0.06}>
           <div className="flex h-full flex-col justify-center p-2 md:p-3">
-            <p className="font-sans text-small font-semibold uppercase tracking-[0.08em] text-cream/80">Kto stojí za JS Investor</p>
+            <p className="font-sans text-small font-semibold uppercase tracking-[0.08em] text-cream/80">Kto stojí za JS Mentor</p>
 
             <h2 className="mt-3 headline-serif text-cream">
               Nie som poisťovák, bankový ani bežný poradca.
@@ -75,4 +75,4 @@ const KtoStojiZaJsInvestorSection = () => (
   </section>
 );
 
-export default KtoStojiZaJsInvestorSection;
+export default KtoStojiZaJsMentorSection;

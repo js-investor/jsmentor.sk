@@ -1,4 +1,4 @@
-import brandLogo from "@/assets/images/js-investor-logo.png";
+import brandLogo from "@/assets/images/js-mentor-logo.png";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
@@ -53,7 +53,7 @@ const SiteHeader = ({ items = defaultItems, ctaLabel = "Lorem ipsum", ctaHref, c
       <a href="/" className="flex items-center shrink-0">
         <img
           src={brandLogo}
-          alt="JS Investor logo"
+          alt="JS Mentor logo"
           className="h-8 md:h-12 w-auto max-w-none min-w-[102px] md:min-w-[153px] shrink-0 object-contain"
         />
       </a>
