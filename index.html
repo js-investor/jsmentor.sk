@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="sk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/js-favicon.png" />
+    <title>JS Investor | Investičná stratégia na mieru</title>
+    <meta name="description" content="Investuješ chaoticky alebo neinvestuješ vôbec? Ivan Jasik ti postaví finančný plán na mieru. Rezervuj si bezplatný úvodný hovor.">
+    <meta name="author" content="Ivan Jasik — JS Investor" />
+    <script>
+      (function () {
+        var host = window.location.hostname;
+        var isLocal =
+          host === "localhost" ||
+          host === "127.0.0.1" ||
+          host === "::1" ||
+          host.endsWith(".local");
+
+        if (isLocal) return;
+
+        var script = document.createElement("script");
+        script.id = "Cookiebot";
+        script.src = "https://consent.cookiebot.com/uc.js";
+        script.setAttribute("data-cbid", "cc841a7d-368e-408c-a011-7548c3546b69");
+        script.setAttribute("data-blockingmode", "auto");
+        script.type = "text/javascript";
+        document.head.appendChild(script);
+      })();
+    </script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="7e759685-573b-4de6-add2-08363e920e53"></script>
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WLMMMD44');
+    </script>
+    <!-- End Google Tag Manager -->
+    <script>
+      (function () {
+        const milestones = [25, 50, 75, 90, 100];
+        const fired = new Set();
+
+        function getScrollPercent() {
+          const doc = document.documentElement;
+          const body = document.body;
+          const scrollTop = window.scrollY || doc.scrollTop || body.scrollTop || 0;
+          const scrollHeight = Math.max(
+            body.scrollHeight,
+            doc.scrollHeight,
+            body.offsetHeight,
+            doc.offsetHeight,
+            body.clientHeight,
+            doc.clientHeight
+          );
+          const viewport = window.innerHeight || doc.clientHeight || 0;
+          const maxScrollable = Math.max(scrollHeight - viewport, 0);
+          if (maxScrollable === 0) return 100;
+          return Math.min(100, Math.round((scrollTop / maxScrollable) * 100));
+        }
+
+        function trackDepth() {
+          const percent = getScrollPercent();
+          milestones.forEach((m) => {
+            if (percent >= m && !fired.has(m)) {
+              fired.add(m);
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({
+                event: "scroll_depth",
+                percent_scrolled: m,
+                page_path: location.pathname,
+                page_title: document.title
+              });
+            }
+          });
+        }
+
+        window.addEventListener("scroll", trackDepth, { passive: true });
+        window.addEventListener("load", trackDepth);
+      })();
+    </script>
+
+    
+    
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/src/assets/images/jsinvestor-biznis-portret-ivan-interier-svetlo.jpg">
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Lovable" />
+    <meta name="twitter:image" content="/src/assets/images/jsinvestor-biznis-portret-ivan-interier-svetlo.jpg">
+    <meta property="og:title" content="JS Investor | Investičná stratégia na mieru">
+  <meta name="twitter:title" content="JS Investor | Investičná stratégia na mieru">
+  <meta property="og:description" content="Už 8 rokov staviam Slovákom finančné stratégie, ktoré fungujú aj v kríze. Do 14 dní ti postavím plán na mieru. Prvý hovor je bezplatný.">
+  <meta name="twitter:description" content="Už 8 rokov staviam Slovákom finančné stratégie, ktoré fungujú aj v kríze. Do 14 dní ti postavím plán na mieru. Prvý hovor je bezplatný.">
+  <meta property="og:url" content="https://jsinvestor.com">
+</head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WLMMMD44"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
