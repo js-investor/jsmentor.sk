@@ -470,13 +470,6 @@
   }
 
   @media (max-width: 767px) {
-    .btn-primary:not(.btn-primary-site-header),
-    .btn-pill {
-      width: 100%;
-      justify-content: center;
-      text-align: center;
-    }
-
     .btn-primary-site-header {
       width: auto;
       max-width: calc(100% - 5.75rem);

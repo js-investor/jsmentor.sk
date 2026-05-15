@@ -17,30 +17,41 @@ const HomeDesignHeaderSection = () => {
       }
       subtitle={
         <>
-          Pridaj sa do HeroHero komunity a nauč sa ako
-          <br />
-          <strong>vybudovať majetok bez stresu a chaosu.</strong>
+          Pridaj sa do HeroHero komunity a nauč sa ako&nbsp;
+          <strong className="font-bold text-foreground">vybudovať majetok bez stresu a chaosu.</strong>
         </>
       }
       trustBadges={[
         <>
-          <span className="text-2xl mb-2">⭐⭐⭐⭐⭐</span>
-          <span className="[font-family:var(--font-serif)] font-black text-xl md:text-2xl text-foreground">118 000+ ľudí</span>
-          <span className="text-small text-muted-foreground">ma sleduje na Instagrame</span>
+          <span className="mb-2 text-2xl md:text-3xl">⭐⭐⭐⭐⭐</span>
+          <span className="[font-family:var(--font-serif)] text-2xl font-black text-foreground">
+            118 000+ ľudí
+          </span>
+          <span className="font-sans text-[1.0625rem] font-medium leading-snug text-muted-foreground md:text-small md:font-normal">
+            ma sleduje na Instagrame
+          </span>
         </>,
         <>
-          <span className="text-3xl mb-2">🚀</span>
-          <span className="[font-family:var(--font-serif)] font-black text-xl md:text-2xl text-foreground">14 dní ZADARMO</span>
-          <span className="text-small text-muted-foreground">na vyskúšanie</span>
+          <span className="mb-2 text-3xl md:text-4xl">🚀</span>
+          <span className="[font-family:var(--font-serif)] text-2xl font-black text-foreground">
+            14 dní ZADARMO
+          </span>
+          <span className="font-sans text-[1.0625rem] font-medium leading-snug text-muted-foreground md:text-small md:font-normal">
+            na vyskúšanie
+          </span>
         </>,
         <>
-          <span className="text-3xl mb-2">🍌</span>
-          <span className="[font-family:var(--font-serif)] font-black text-xl md:text-2xl text-foreground">Len 7 € mesačne</span>
-          <span className="text-small text-muted-foreground">(alebo 60 € ročne)</span>
+          <span className="mb-2 text-3xl md:text-4xl">🍌</span>
+          <span className="[font-family:var(--font-serif)] text-2xl font-black text-foreground">
+            Len 7 € mesačne
+          </span>
+          <span className="font-sans text-[1.0625rem] font-medium leading-snug text-muted-foreground md:text-small md:font-normal">
+            (alebo 60 € ročne)
+          </span>
         </>,
       ]}
       fullWidthBadge={
-        <div className="relative isolate overflow-hidden rounded-2xl border border-[#3d3128]/50 shadow-[inset_0_1px_0_rgba(255,249,245,0.12),0_12px_40px_-12px_rgba(28,22,18,0.55)]">
+        <div className="relative isolate overflow-hidden rounded-2xl shadow-[inset_0_1px_0_rgba(255,249,245,0.12),0_12px_40px_-12px_rgba(28,22,18,0.55)]">
           {/* základný teplý přechod */}
           <div
             className="pointer-events-none absolute inset-0"
@@ -71,34 +82,32 @@ const HomeDesignHeaderSection = () => {
           {/* ďalší teplý wash — „vyblednutá fotka“ */}
           <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[#c4a882]/15 mix-blend-multiply" />
 
-          <div className="relative z-[1] flex flex-col gap-1 pb-0 text-[#fdf8f2] md:flex-row md:items-stretch md:gap-0 md:pt-2 md:pb-0">
-            <div className="flex flex-col items-start justify-start gap-2 px-6 pt-5 pb-0 text-left md:flex-1 md:min-w-0 md:justify-center md:px-8 md:py-0 md:pr-5">
+          <div className="relative z-[1] flex min-h-[280px] flex-col gap-8 pb-0 pt-2 text-[#fdf8f2] sm:min-h-[300px] md:min-h-[320px] md:flex-row md:items-stretch md:gap-0 md:pb-0 md:pt-2">
+            <div className="flex w-full flex-col items-start justify-center gap-3 px-4 pb-0 pt-8 text-left sm:px-6 md:min-h-0 md:min-w-0 md:flex-1 md:justify-center md:px-8 md:py-12 md:pr-5">
               <span className="text-2xl leading-none md:text-3xl" aria-hidden>
                 📚
               </span>
-              <h2 className="[font-family:var(--font-serif)] text-2xl font-bold leading-[1.15] tracking-normal text-[#fdf8f2] md:text-3xl lg:text-4xl">
-                Vzdelávaj sa v peniazoch
+              <h2 className="w-full [font-family:var(--font-serif)] text-2xl font-bold leading-[1.15] tracking-normal text-[#fdf8f2] md:text-3xl lg:text-4xl">
+                Nauč sa pracovať s peniazmi
               </h2>
-              <p className="max-w-md font-sans text-small leading-relaxed text-[#f0ebe3]/90 md:text-body">
-                Keď nebudeš spokojný, predplatné vieš{" "}
-                <br />
-                zrušiť kedykoľvek.
+              <p className="w-full max-w-none font-sans text-[1.0625rem] leading-relaxed text-[#f0ebe3]/90 md:max-w-md md:text-body">
+                Keď nebudeš spokojný, predplatné vieš kedykoľvek zrušiť.
               </p>
             </div>
 
-            <div className="relative mt-auto flex w-full shrink-0 flex-col justify-end overflow-hidden px-4 pt-2 pb-0 md:mt-0 md:w-[42%] lg:w-[38%] md:self-stretch md:px-5 md:pb-0 md:pt-6">
+            <div className="relative flex w-full min-h-0 flex-1 shrink-0 flex-col items-center justify-end overflow-hidden px-4 pb-0 pt-0 md:flex-none md:w-[42%] md:items-center md:justify-end md:self-stretch md:overflow-hidden md:px-5 md:pb-0 md:pt-6 lg:w-[38%]">
               <img
                 src={brandPatternDark}
                 alt=""
                 aria-hidden
                 className="pointer-events-none absolute right-0 top-0 z-0 h-auto max-h-[min(598px,100%)] w-auto max-w-[min(495px,100%)] origin-top-right select-none opacity-[0.1] md:max-h-[min(690px,100%)] md:max-w-[min(546px,100%)]"
               />
-              <div className="relative z-[1] flex w-full justify-center">
-                <div className="relative -translate-x-1 sm:-translate-x-2 md:-translate-x-2 lg:-translate-x-3">
+              <div className="relative z-[1] flex w-full justify-center leading-none md:w-auto">
+                <div className="relative mx-auto md:mx-auto md:translate-x-0 lg:translate-x-0">
                   <img
                     src={ivanKnihaJsMentor}
                     alt="Ivan Jašík s knihou Psychológia peňazí"
-                    className="relative z-[1] block max-h-[220px] w-auto max-w-full object-contain object-bottom contrast-[1.05] saturate-[0.92] brightness-[0.97] sepia-[0.22] drop-shadow-[0_8px_22px_rgba(28,22,18,0.4)] sm:max-h-[248px] md:max-h-[275px]"
+                    className="relative z-[1] mx-auto block max-h-64 w-auto max-w-full object-contain object-bottom contrast-[1.05] saturate-[0.92] brightness-[0.97] sepia-[0.22] drop-shadow-[0_8px_22px_rgba(28,22,18,0.4)] sm:max-h-72 md:max-h-80"
                   />
                   <div className="pointer-events-none absolute bottom-2 left-1/2 z-[1] hidden h-16 w-12 -translate-x-1/2 rounded-full bg-gradient-to-tr from-white/10 to-transparent opacity-20 blur-md md:block" />
                 </div>

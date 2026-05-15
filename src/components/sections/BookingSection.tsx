@@ -193,13 +193,15 @@ const BookingSection = ({
       </div>
 
       <div className="pt-1">
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="btn-primary w-full px-6 py-3 text-sm disabled:cursor-not-allowed disabled:opacity-70"
-        >
-          {isSubmitting ? "Odosielam..." : "Odoslať formulár"}
-        </button>
+        <div className="flex justify-center sm:justify-start">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="btn-primary px-6 py-3 text-sm disabled:cursor-not-allowed disabled:opacity-70"
+          >
+            {isSubmitting ? "Odosielam..." : "Odoslať formulár"}
+          </button>
+        </div>
         <div className="mt-2">
           <CtaResponseNote />
         </div>

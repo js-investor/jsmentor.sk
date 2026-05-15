@@ -63,7 +63,7 @@ const HeroSectionTemplate = ({
             {title}
           </h1>
         </div>
-        <p className="text-lead font-sans text-muted-foreground mb-10 md:mb-12">{subtitle}</p>
+        <p className="text-lead font-sans text-muted-foreground mb-10 max-md:text-pretty md:mb-12">{subtitle}</p>
         {description ? (
           <p className="text-body font-sans text-foreground/70 mb-10 md:mb-12">{description}</p>
         ) : null}
@@ -80,13 +80,13 @@ const HeroSectionTemplate = ({
         ) : null}
 
         {(trustBadges.length > 0 || fullWidthBadge) ? (
-          <div className="w-full md:w-[85%] max-w-[969px] mx-auto mb-10 md:mb-12 flex flex-col gap-3">
+          <div className="mx-auto mb-10 flex w-full max-w-[969px] flex-col gap-2 md:mb-12 md:w-[85%] md:gap-3">
             {trustBadges.length > 0 ? (
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              <div className="grid grid-cols-1 gap-2 sm:gap-3 sm:grid-cols-3">
                 {trustBadges.map((badge, index) => (
                   <div
                     key={index}
-                    className="flex min-h-[9rem] flex-col items-center justify-center rounded-2xl border border-[#D5CCC2] bg-[#F1ECE6] px-4 py-5 text-center sm:min-h-[10rem]"
+                    className="flex flex-col items-center justify-center rounded-2xl border border-[#D5CCC2] bg-[#F1ECE6] px-3 py-3.5 text-center sm:min-h-[11.5rem] md:min-h-[10rem] md:px-4 md:py-5"
                   >
                     {badge}
                   </div>

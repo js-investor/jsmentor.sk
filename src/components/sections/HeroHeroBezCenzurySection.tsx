@@ -48,7 +48,7 @@ const HeroHeroBezCenzurySection = () => (
       <AnimatedSection>
         <header className="mx-auto mb-12 max-w-4xl text-center md:mb-16">
           <h2 className="headline-serif leading-[1.15]">
-            Ideme totálne bez cenzúry <span aria-hidden>🔓</span>
+            Ideme naplno bez cenzúry <span aria-hidden>🔓</span>
           </h2>
           <p className="sub-headline mt-5 text-foreground/85">
             Instagram odstraňuje účty a blokuje môj obsah. Na HeroHero ti{" "}
@@ -68,12 +68,7 @@ const HeroHeroBezCenzurySection = () => (
             <div className="md:hidden">
               <div className="relative w-full overflow-hidden bg-gradient-to-br from-[#fffbfb] via-[#fdf4f3] to-[#fcecea] px-4 py-4">
                 <div className="pointer-events-none absolute -right-8 -top-10 h-24 w-24 rounded-full bg-[#A52821]/15 blur-2xl" />
-                <p className="font-serif text-lg font-extrabold tracking-tight text-[#2a1411]">
-                  Stará realita{" "}
-                  <span className="font-sans text-xs font-semibold normal-case tracking-normal text-[#A52821]">
-                    (väčšina ľudí)
-                  </span>
-                </p>
+                <p className="font-serif text-lg font-extrabold tracking-tight text-[#2a1411]">Väčšina ľudí v realite</p>
               </div>
               <div className="divide-y divide-[#A52821]/14 bg-[#A52821]/[0.04]">
                 {comparisons.map((row, index) => {
@@ -101,7 +96,7 @@ const HeroHeroBezCenzurySection = () => (
                 <div className="relative w-full overflow-hidden bg-gradient-to-br from-emerald-100/95 via-teal-50/90 to-[#ecfdf5] px-4 py-4">
                   <div className="pointer-events-none absolute -left-6 bottom-0 h-20 w-20 rounded-full bg-emerald-400/20 blur-2xl" />
                   <p className="font-serif text-lg font-extrabold tracking-tight text-emerald-950">
-                    JS Mentor na Hero Hero
+                    Ľudia v JS Hero Hero komunite
                   </p>
                 </div>
                 <div className="divide-y divide-emerald-900/10 bg-emerald-50/35">
@@ -133,17 +128,12 @@ const HeroHeroBezCenzurySection = () => (
               <div className="flex w-full flex-col md:grid md:grid-cols-2 md:divide-x md:divide-[#A52821]/18">
                 <div className="relative w-full overflow-hidden border-b border-[#A52821]/18 bg-gradient-to-br from-[#fffbfb] via-[#fdf4f3] to-[#fcecea] px-5 py-4 md:border-b-0">
                   <div className="pointer-events-none absolute -right-8 -top-10 h-24 w-24 rounded-full bg-[#A52821]/15 blur-2xl" />
-                  <p className="font-serif text-xl font-extrabold tracking-tight text-[#2a1411]">
-                    Stará realita{" "}
-                    <span className="font-sans text-sm font-semibold normal-case tracking-normal text-[#A52821]">
-                      (väčšina ľudí)
-                    </span>
-                  </p>
+                  <p className="font-serif text-xl font-extrabold tracking-tight text-[#2a1411]">Väčšina ľudí v realite</p>
                 </div>
                 <div className="relative w-full overflow-hidden bg-gradient-to-br from-emerald-100/95 via-teal-50/90 to-[#ecfdf5] px-5 py-4">
                   <div className="pointer-events-none absolute -left-6 bottom-0 h-20 w-20 rounded-full bg-emerald-400/20 blur-2xl" />
                   <p className="font-serif text-xl font-extrabold tracking-tight text-emerald-950">
-                    JS Mentor na Hero Hero
+                    Ľudia v JS Hero Hero komunite
                   </p>
                 </div>
               </div>
