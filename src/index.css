@@ -71,6 +71,22 @@
 }
 
 @font-face {
+  font-family: 'Calvino';
+  src: url('./assets/fonts/calvino/Calvino-Grande-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Calvino';
+  src: url('./assets/fonts/calvino/Calvino-Grande-Black-Italic.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Gilroy';
   src: url('./assets/fonts/gilroy/Gilroy-Regular.ttf') format('truetype');
   font-weight: 400;
@@ -304,7 +320,7 @@
 
   .headline-hero {
     font-family: var(--font-serif);
-    @apply h1 text-foreground;
+    @apply h1 text-foreground font-black;
   }
 
   .sub-headline {
@@ -454,10 +470,22 @@
   }
 
   @media (max-width: 767px) {
-    .btn-primary,
+    .btn-primary:not(.btn-primary-site-header),
     .btn-pill {
       width: 100%;
       justify-content: center;
+      text-align: center;
+    }
+
+    .btn-primary-site-header {
+      width: auto;
+      max-width: calc(100% - 5.75rem);
+      flex-shrink: 1;
+      min-width: 0;
+      padding: 0.45rem 0.7rem;
+      font-size: 0.75rem;
+      line-height: 1.2;
+      white-space: normal;
       text-align: center;
     }
 
