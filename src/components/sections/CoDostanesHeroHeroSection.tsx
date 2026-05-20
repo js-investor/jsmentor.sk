@@ -19,11 +19,36 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useMemo, useState } from "react";
+import type { ReactNode } from "react";
+
+const benefitBold = (text: string) => (
+  <strong className="font-bold text-foreground">{text}</strong>
+);
+
+const BenefitLabel = ({
+  lead,
+  bold,
+  tail,
+}: {
+  lead?: string;
+  bold: string;
+  tail?: string;
+}) => (
+  <>
+    {lead}
+    {benefitBold(bold)}
+    {tail}
+  </>
+);
 
 const forest = "#023c2e";
 const forestMuted = "#065f4a";
 /** Spodok sekcie „Ochutnávka“ – o kúsok svetlejšia ako `forest` */
 const forestGradientEnd = "#0a5a47";
+/** Horná zóna „Čo presne dostaneš…“ – čierny gradient (bez zeleného nádychu) */
+const heroBlackStart = "#222222";
+const heroBlackMid = "#141414";
+const heroBlackEnd = "#0a0a0a";
 
 /** Širší obsah než default `section-container` (1200px) — hero + ochutnávka videí. */
 const contentWide = "mx-auto w-full max-w-[1400px]";
@@ -70,19 +95,71 @@ const financialFlowIcons: LucideIcon[] = [
   BarChart3,
 ];
 
-/** Jemné taby na čiernom – výraznejšia „kartička“ (globálny reset maže box-shadow, preto spoliehame na border + fill). */
+/** Jemné taby – svetlé pozadie na tmavom bloku */
 const heroBenefitRowClass =
-  "flex items-center gap-3 rounded-3xl border border-emerald-400/30 bg-emerald-950/55 px-3 py-2 sm:gap-3.5 sm:px-4 sm:py-2.5 md:px-4";
+  "flex items-center gap-3 rounded-3xl border border-white/25 bg-[#FFF9F5] px-3 py-2 text-foreground/90 sm:gap-3.5 sm:px-4 sm:py-2.5 md:px-4";
 const heroBenefitIconClass =
-  "h-5 w-5 shrink-0 text-emerald-200 sm:h-6 sm:w-6 md:h-7 md:w-7";
+  "h-5 w-5 shrink-0 text-primary sm:h-6 sm:w-6 md:h-7 md:w-7";
 
-const heroHeroBenefits: { Icon: LucideIcon; label: string }[] = [
-  { Icon: Video, label: "Hĺbkové videá s pravdou, ktorú inde nenájdeš" },
-  { Icon: PieChart, label: "Rozbory konkrétnych fondov a produktov na slovenskom trhu" },
-  { Icon: Users, label: "Reálne konzultácie s ľuďmi (anonymizované), ich situácia + moje riešenie" },
-  { Icon: TrendingUp, label: "Týždenné/marketové updaty, čo sa deje a ako na to reagovať" },
-  { Icon: BookOpen, label: "Praktické návody: rezerva, hypotéka, dane, optimalizácia, investovanie" },
-  { Icon: Mic, label: "Odpovede na vaše otázky + hosťovské debaty s odborníkmi" },
+const heroHeroBenefits: {
+  Icon: LucideIcon;
+  label: ReactNode;
+}[] = [
+  {
+    Icon: Video,
+    label: (
+      <BenefitLabel
+        bold="Skutočná pravda o peniazoch,"
+        tail=" ktorú kvôli algoritmom na sociálnych sieťach nenájdeš."
+      />
+    ),
+  },
+  {
+    Icon: PieChart,
+    label: (
+      <BenefitLabel
+        bold="Nezávislé rozbory fondov a produktov na slovenskom trhu."
+        tail=" Zistíš, čo sa ti reálne oplatí."
+      />
+    ),
+  },
+  {
+    Icon: Users,
+    label: (
+      <BenefitLabel
+        lead="Reálne (anonymizované) konzultácie: Konkrétne "
+        bold="životné situácie ľudí a moje priame riešenia."
+      />
+    ),
+  },
+  {
+    Icon: TrendingUp,
+    label: (
+      <BenefitLabel
+        lead="Týždenné trhové updaty. "
+        bold="Čo sa práve deje vo svete peňazí"
+        tail=" a ako na to správne reagovať."
+      />
+    ),
+  },
+  {
+    Icon: BookOpen,
+    label: (
+      <BenefitLabel
+        bold="Praktické návody a stratégie"
+        tail=". Krok za krokom k vytvoreniu rezervy, hypotéke a investíciám."
+      />
+    ),
+  },
+  {
+    Icon: Mic,
+    label: (
+      <BenefitLabel
+        lead="Odpovede na tvoje otázky a "
+        bold="exkluzívne rozhovory s prizvanými odborníkmi."
+      />
+    ),
+  },
 ];
 
 const CoDostanesHeroHeroSection = () => {
@@ -126,12 +203,17 @@ const CoDostanesHeroHeroSection = () => {
         }}
       />
       {/* —— Čierna zóna —— */}
-      <div className="relative overflow-hidden rounded-[2rem] bg-black pt-16 pb-14 md:rounded-[2.5rem] md:pb-20 md:pt-20">
+      <div
+        className="relative overflow-hidden rounded-[2rem] pt-16 pb-14 md:rounded-[2.5rem] md:pb-20 md:pt-20"
+        style={{
+          background: `linear-gradient(180deg, ${heroBlackStart} 0%, ${heroBlackMid} 48%, ${heroBlackEnd} 100%)`,
+        }}
+      >
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.35]"
+          className="pointer-events-none absolute inset-0 opacity-40"
           style={{
-            backgroundImage: `radial-gradient(ellipse 120% 80% at 50% -20%, ${forestMuted} 0%, transparent 55%),
-              linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.4) 100%)`,
+            backgroundImage: `radial-gradient(ellipse 110% 75% at 50% -18%, rgba(255,255,255,0.07) 0%, transparent 52%),
+              linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.28) 100%)`,
           }}
         />
         <div
@@ -155,11 +237,11 @@ const CoDostanesHeroHeroSection = () => {
                   Každý týždeň čerstvý obsah priamo odo mňa.
                 </p>
                 <ul
-                  className="flex flex-col gap-1.5 text-left font-sans text-[1.02rem] leading-snug text-white/88 sm:gap-2 md:text-[1.06rem] md:leading-relaxed lg:text-[1.12rem]"
+                  className="flex flex-col gap-1.5 text-left font-sans text-[1.02rem] leading-snug sm:gap-2 md:text-[1.06rem] md:leading-relaxed lg:text-[1.12rem]"
                   aria-label="Čo dostaneš v Hero Hero"
                 >
-                  {heroHeroBenefits.map(({ Icon, label }) => (
-                    <li key={label}>
+                  {heroHeroBenefits.map(({ Icon, label }, index) => (
+                    <li key={index}>
                       <div className={heroBenefitRowClass}>
                         <Icon className={heroBenefitIconClass} strokeWidth={2.1} aria-hidden />
                         <span className="min-w-0 flex-1">{label}</span>
@@ -239,10 +321,10 @@ const CoDostanesHeroHeroSection = () => {
                     key={item.id}
                     type="button"
                     onClick={() => setOpenVideoId(item.id)}
-                    className={`w-full rounded-2xl px-4 py-3.5 text-left transition-colors md:px-5 md:py-4 ${
+                    className={`w-full rounded-2xl border px-4 py-3.5 text-left transition-colors md:px-5 md:py-4 ${
                       isActive
-                        ? "bg-[#e4d8c8] text-black"
-                        : "text-white/55 hover:bg-white/[0.04] hover:text-white/85"
+                        ? "border-[#b9a894]/70 bg-[#e4d8c8] text-black"
+                        : "border-white/15 bg-white/[0.08] text-white/70 hover:border-white/25 hover:bg-white/[0.14] hover:text-white/90"
                     }`}
                   >
                     <span className="font-bold font-serif text-[1.15rem] leading-snug sm:text-[1.22rem] md:text-[1.35rem] md:leading-[1.2]">

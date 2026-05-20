@@ -103,15 +103,6 @@ const listItem = {
   },
 };
 
-const footerBlock = {
-  hidden: { opacity: 0, y: 10 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.48, ease: [0.22, 1, 0.36, 1], delay: 0.2 },
-  },
-};
-
 const StaleSaTiToDejeSection = () => (
   <section
     id="stale-sa-ti-to-deje"
@@ -159,16 +150,6 @@ const StaleSaTiToDejeSection = () => (
             </motion.div>
           ))}
         </motion.div>
-
-        <motion.p
-          className="quote-serif mx-auto mt-10 max-w-2xl text-center text-foreground/90 md:mt-14"
-          variants={footerBlock}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-32px" }}
-        >
-          Ak si pri aspoň jednom bode prikývol, nie si sám.
-        </motion.p>
       </div>
     </div>
   </section>

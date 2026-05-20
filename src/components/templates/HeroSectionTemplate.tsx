@@ -18,6 +18,10 @@ type HeroSectionTemplateProps = {
   badges?: string[];
   videoSrc?: string;
   videoTitle?: string;
+  /** Skryje horný „pill“ pod `md` (užší hero na mobile). */
+  hidePreheaderBelowMd?: boolean;
+  /** Skryje lead / podnadpis pod `md`. */
+  hideSubtitleBelowMd?: boolean;
 };
 
 const HeroSectionTemplate = ({
@@ -36,6 +40,8 @@ const HeroSectionTemplate = ({
   badges = [],
   videoSrc,
   videoTitle = "Hero video",
+  hidePreheaderBelowMd = false,
+  hideSubtitleBelowMd = false,
 }: HeroSectionTemplateProps) => (
   <>
     <SiteHeader ctaLabel={headerCtaLabel} ctaHref={headerCtaHref} ctaOnClick={headerCtaOnClick} />
@@ -53,17 +59,33 @@ const HeroSectionTemplate = ({
         className="max-w-[980px] mx-auto text-center"
       >
         {preheader ? (
-          <p className="inline-block bg-[#cdbca2] rounded-full px-4 py-1.5 text-small font-sans font-semibold uppercase tracking-[0.12em] text-black mb-8">
+          <p
+            className={`bg-[#cdbca2] rounded-full px-4 py-1.5 text-small font-sans font-semibold uppercase tracking-[0.12em] text-black mb-8 ${
+              hidePreheaderBelowMd ? "hidden md:inline-block" : "inline-block"
+            }`}
+          >
             {preheader}
           </p>
         ) : null}
-        <div className="relative mb-8 md:mb-10">
+        <div
+          className={`relative ${
+            hideSubtitleBelowMd
+              ? "mb-10 md:mb-10"
+              : "mb-8 md:mb-10"
+          }`}
+        >
           <div className="absolute -inset-x-12 -inset-y-6 bg-gradient-to-r from-primary/10 via-primary/25 to-primary/10 blur-3xl rounded-full animate-glow-pulse pointer-events-none" />
           <h1 className="headline-hero relative z-10">
             {title}
           </h1>
         </div>
-        <p className="text-lead font-sans text-muted-foreground mb-10 max-md:text-pretty md:mb-12">{subtitle}</p>
+        <p
+          className={`text-lead font-sans text-muted-foreground mb-10 max-md:text-pretty md:mb-12 ${
+            hideSubtitleBelowMd ? "hidden md:block" : ""
+          }`}
+        >
+          {subtitle}
+        </p>
         {description ? (
           <p className="text-body font-sans text-foreground/70 mb-10 md:mb-12">{description}</p>
         ) : null}

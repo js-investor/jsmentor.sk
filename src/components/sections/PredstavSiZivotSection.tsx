@@ -57,7 +57,7 @@ const PredstavSiZivotSection = () => (
 
           <div className="mt-16 space-y-4 md:mt-20 md:space-y-5">
             <p className="quote-serif text-foreground/90">
-              Konečne zažiješ ten pocit, keď {bold("ťa peniaze prestanú strestovať")} a stanú sa zdrojom slobody.
+              Konečne zažiješ ten pocit, keď {bold("ťa peniaze prestanú stresovať")} a stanú sa zdrojom slobody.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2.5 md:gap-x-3 md:gap-y-3">
               {lifeBubbles.map((label, index) => (

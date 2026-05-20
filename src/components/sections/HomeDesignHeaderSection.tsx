@@ -5,6 +5,8 @@ import ivanKnihaJsMentor from "@/assets/images/ivan-jasik-js-mentor-kniha.png";
 const HomeDesignHeaderSection = () => {
   return (
     <HeroSectionTemplate
+      hidePreheaderBelowMd
+      hideSubtitleBelowMd
       headerCtaLabel="🚀 Vyskúšať na 14 dní ZADARMO"
       headerCtaHref="#formular"
       preheader={<>TVOJA CESTA K PRVÝM 100 000 € 🔥</>}

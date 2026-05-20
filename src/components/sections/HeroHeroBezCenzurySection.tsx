@@ -22,7 +22,7 @@ const comparisonRows: { problem: ReactNode; hero: ReactNode }[] = [
   {
     problem: (
       <>
-        {bold("Nevieš, komu a čomu veriť.")} Každý hovorí na sociálnych sieťach aj v médiach niečo iné.
+        {bold("Nevieš, komu a čomu veriť.")} Každý hovorí na sociálnych sieťach aj v médiách niečo iné.
       </>
     ),
     hero: (
@@ -68,7 +68,7 @@ const comparisonRows: { problem: ReactNode; hero: ReactNode }[] = [
   {
     problem: (
       <>
-        Každý rok si na rovnakom mieste, pretože {bold("nemáš žiadný systém ani plán")}
+        Každý rok si na rovnakom mieste, pretože {bold("nemáš žiadny systém ani plán")}
       </>
     ),
     hero: (
@@ -118,7 +118,7 @@ const HeroHeroBezCenzurySection = () => (
       <AnimatedSection>
         <header className="mx-auto mb-12 max-w-4xl text-center md:mb-16">
           <h2 className="headline-serif leading-[1.15]">
-            Ideme naplno bez cenzúry <span aria-hidden>🔓</span>
+            Ideme naplno a bez cenzúry <span aria-hidden>🔓</span>
           </h2>
           <p className="sub-headline mt-5 text-foreground/85">
             Instagram odstraňuje účty a blokuje môj obsah. Na HeroHero ti{" "}
