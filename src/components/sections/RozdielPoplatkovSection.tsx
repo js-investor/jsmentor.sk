@@ -1,5 +1,4 @@
 import AnimatedSection from "@/components/AnimatedSection";
-import CtaResponseNote from "@/components/CtaResponseNote";
 import { CalendarDays, PiggyBank, TrendingUp } from "lucide-react";
 
 const RozdielPoplatkovSection = () => (
@@ -91,9 +90,6 @@ const RozdielPoplatkovSection = () => (
           <a href="#formular" className="btn-primary mt-5 inline-flex">
             Získať Wealth Map
           </a>
-          <div>
-            <CtaResponseNote />
-          </div>
         </div>
       </AnimatedSection>
     </div>

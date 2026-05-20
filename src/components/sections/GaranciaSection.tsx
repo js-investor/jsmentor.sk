@@ -1,5 +1,4 @@
 import AnimatedSection from "@/components/AnimatedSection";
-import CtaResponseNote from "@/components/CtaResponseNote";
 import { CheckCircle2 } from "lucide-react";
 
 const scrollToBooking = () => {
@@ -74,9 +73,6 @@ const GaranciaSection = () => (
             <button type="button" onClick={scrollToBooking} className="btn-primary text-body">
               Získať Wealth Map
             </button>
-            <div>
-              <CtaResponseNote />
-            </div>
           </div>
         </div>
       </AnimatedSection>

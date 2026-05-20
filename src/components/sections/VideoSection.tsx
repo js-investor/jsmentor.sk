@@ -1,6 +1,4 @@
 import AnimatedSection from "@/components/AnimatedSection";
-import CtaResponseNote from "@/components/CtaResponseNote";
-
 const scrollToBooking = () => {
   document.getElementById("formular")?.scrollIntoView({ behavior: "smooth" });
 };
@@ -47,9 +45,6 @@ const VideoSection = ({ ctaLabel = "Získať Wealth Map" }: VideoSectionProps) =
           <button type="button" onClick={scrollToBooking} className="btn-primary text-body">
             {ctaLabel}
           </button>
-          <div>
-            <CtaResponseNote />
-          </div>
         </div>
       </AnimatedSection>
     </div>

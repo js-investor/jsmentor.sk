@@ -1,5 +1,4 @@
 import AnimatedSection from "@/components/AnimatedSection";
-import CtaResponseNote from "@/components/CtaResponseNote";
 import SectionHeader from "@/components/SectionHeader";
 import brandPattern from "@/assets/logo/js-brand-pattern.svg";
 import { TrendingDown, Percent, Compass } from "lucide-react";
@@ -108,9 +107,6 @@ const StrataSection = () => (
           <button onClick={scrollToBooking} className="btn-primary text-body">
             Získať Wealth Map
           </button>
-          <div>
-            <CtaResponseNote />
-          </div>
         </div>
       </AnimatedSection>
     </div>

@@ -1,5 +1,4 @@
 import AnimatedSection from "@/components/AnimatedSection";
-import CtaResponseNote from "@/components/CtaResponseNote";
 import { CheckCircle2, XCircle } from "lucide-react";
 import type { ReactNode } from "react";
 
@@ -118,9 +117,6 @@ const PreKohoSection = () => (
             <a href="#formular" className="btn-primary text-body">
               Získať Wealth Map
             </a>
-            <div>
-              <CtaResponseNote />
-            </div>
           </div>
         </div>
       </AnimatedSection>

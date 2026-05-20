@@ -1,7 +1,6 @@
 import { Mail, Phone } from "lucide-react";
 import { FormEvent, useState } from "react";
 import type { ReactNode } from "react";
-import CtaResponseNote from "@/components/CtaResponseNote";
 import ivanBookingImage from "@/assets/images/jsmentor-biznis-portret-ivan-interier-svetlo.jpg";
 
 const MAKE_WEBHOOK_URL = import.meta.env.VITE_MAKE_WEBHOOK_URL;
@@ -201,9 +200,6 @@ const BookingSection = ({
           >
             {isSubmitting ? "Odosielam..." : "Odoslať formulár"}
           </button>
-        </div>
-        <div className="mt-2">
-          <CtaResponseNote />
         </div>
         {submitStatus === "success" ? (
           <p className="mt-3 font-sans text-sm text-primary">Ďakujem, formulár bol úspešne odoslaný. Ozvem sa ti do 48 hodín.</p>

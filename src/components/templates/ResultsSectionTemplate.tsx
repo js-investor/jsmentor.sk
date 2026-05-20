@@ -1,5 +1,4 @@
 import AnimatedSection from "@/components/AnimatedSection";
-import CtaResponseNote from "@/components/CtaResponseNote";
 import brandPattern from "@/assets/logo/js-brand-pattern.svg";
 import vysledokGrafAndrej from "@/assets/images/vysledok-graf-andrej.png";
 import vysledokGrafBrano from "@/assets/images/vysledok-graf-brano.png";
@@ -49,7 +48,6 @@ type ResultsSectionTemplateProps = {
   title: ReactNode;
   subtitle: ReactNode;
   ctaLabel: string;
-  showCtaResponseNote?: boolean;
   ctaHref?: string;
   onCtaClick?: () => void;
   sectionClassName?: string;
@@ -59,7 +57,6 @@ const ResultsSectionTemplate = ({
   title,
   subtitle,
   ctaLabel,
-  showCtaResponseNote = false,
   ctaHref = "#formular",
   onCtaClick,
   sectionClassName = "relative overflow-hidden py-12 md:py-24 lg:py-28 scroll-mt-24",
@@ -218,11 +215,6 @@ const ResultsSectionTemplate = ({
                   {ctaLabel}
                 </button>
               )}
-              {showCtaResponseNote ? (
-                <div>
-                  <CtaResponseNote />
-                </div>
-              ) : null}
             </div>
           </div>
         </AnimatedSection>

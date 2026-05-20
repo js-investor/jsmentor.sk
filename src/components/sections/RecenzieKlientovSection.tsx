@@ -1,5 +1,4 @@
 import AnimatedSection from "@/components/AnimatedSection";
-import CtaResponseNote from "@/components/CtaResponseNote";
 import type { ReactNode } from "react";
 
 const testimonials = [
@@ -77,9 +76,6 @@ const RecenzieKlientovSection = ({
           <a href={ctaHref} className="btn-primary-light text-body">
             {ctaLabel}
           </a>
-          <div className="[&_p]:text-white/90 [&_svg]:text-white">
-            <CtaResponseNote />
-          </div>
         </div>
       </AnimatedSection>
     </div>

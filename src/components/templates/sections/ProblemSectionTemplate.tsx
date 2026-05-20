@@ -1,5 +1,4 @@
 import AnimatedSection from "@/components/AnimatedSection";
-import CtaResponseNote from "@/components/CtaResponseNote";
 import brandPattern from "@/assets/logo/js-brand-pattern.svg";
 import { Clock3, Percent, PiggyBank, Wallet } from "lucide-react";
 import type { ReactNode } from "react";
@@ -109,9 +108,6 @@ const ProblemSectionTemplate = ({
                 {ctaLabel}
               </button>
             )}
-            <div>
-              <CtaResponseNote />
-            </div>
           </div>
         </div>
       </AnimatedSection>

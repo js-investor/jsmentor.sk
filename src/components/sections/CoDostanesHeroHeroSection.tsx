@@ -1,0 +1,292 @@
+import {
+  BadgeEuro,
+  BarChart3,
+  BookOpen,
+  Briefcase,
+  Coins,
+  CreditCard,
+  Landmark,
+  LineChart,
+  Mic,
+  Percent,
+  PieChart,
+  PiggyBank,
+  Shield,
+  TrendingUp,
+  Users,
+  Video,
+  Wallet,
+  type LucideIcon,
+} from "lucide-react";
+import { useMemo, useState } from "react";
+
+const forest = "#023c2e";
+const forestMuted = "#065f4a";
+/** Spodok sekcie „Ochutnávka“ – o kúsok svetlejšia ako `forest` */
+const forestGradientEnd = "#0a5a47";
+
+/** Širší obsah než default `section-container` (1200px) — hero + ochutnávka videí. */
+const contentWide = "mx-auto w-full max-w-[1400px]";
+
+/** Nahraď vlastnými Vimeo ID, keď ich budeš mať pre tieto tri videá. */
+const showcaseVideos = [
+  {
+    id: "invest-start",
+    title: "Čo by som urobil dnes, keby začínam s investovaním?",
+    description:
+      "Získaš presnú mapu, ako by som si dnes krok za krokom rozložil peniaze z bežného platu. Zistíš, akým drahým chybám začiatočníkov sa oblúkom vyhnúť a na čo sa sústrediť, aby si si okamžite vybudoval nepriestrelnú finančnú rezervu.",
+    vimeoId: "1145809910",
+  },
+  {
+    id: "loan-prepay",
+    title: "Prečo je mimoriadne splatenie úveru väčšia chyba, ako sa zdá",
+    description:
+      "Toto ťa v banke nenaučia. Na čistej matematike ti ukážem, prečo ťa snaha o „rýchle splatenie hypotéky“ môže v konečnom dôsledku pripraviť o desiatky tisíc eur (a dozvieš sa, čo presne by si mal s tými peniazmi urobiť radšej, aby zarábali tebe, nie banke).",
+    vimeoId: "1183644074",
+  },
+  {
+    id: "rental-flat",
+    title: "Investičný byt: Je to naozaj taký luxus, ako tvrdia na internete?",
+    description:
+      "Zabudni na instagramové pozlátko. Urobíme si tvrdú analýzu reality. Pozrieme sa na reálne čísla, skryté poplatky a skutočnú prácu s nájomníkmi. Odhalíš, či sa ti investícia do nehnuteľnosti dnes vôbec oplatí, alebo ti len zbytočne zožerie úspory a nervy.",
+    vimeoId: "1175801732",
+  },
+] as const;
+
+const FLOW_PATH = "M -20 38 C 120 180, 250 252, 396 204 C 502 170, 545 84, 662 116 C 760 144, 832 220, 920 292";
+
+const financialFlowIcons: LucideIcon[] = [
+  Wallet,
+  BadgeEuro,
+  Coins,
+  TrendingUp,
+  LineChart,
+  Briefcase,
+  CreditCard,
+  Percent,
+  Shield,
+  PiggyBank,
+  Landmark,
+  BarChart3,
+];
+
+/** Jemné taby na čiernom – výraznejšia „kartička“ (globálny reset maže box-shadow, preto spoliehame na border + fill). */
+const heroBenefitRowClass =
+  "flex items-center gap-3 rounded-3xl border border-emerald-400/30 bg-emerald-950/55 px-3 py-2 sm:gap-3.5 sm:px-4 sm:py-2.5 md:px-4";
+const heroBenefitIconClass =
+  "h-5 w-5 shrink-0 text-emerald-200 sm:h-6 sm:w-6 md:h-7 md:w-7";
+
+const heroHeroBenefits: { Icon: LucideIcon; label: string }[] = [
+  { Icon: Video, label: "Hĺbkové videá s pravdou, ktorú inde nenájdeš" },
+  { Icon: PieChart, label: "Rozbory konkrétnych fondov a produktov na slovenskom trhu" },
+  { Icon: Users, label: "Reálne konzultácie s ľuďmi (anonymizované), ich situácia + moje riešenie" },
+  { Icon: TrendingUp, label: "Týždenné/marketové updaty, čo sa deje a ako na to reagovať" },
+  { Icon: BookOpen, label: "Praktické návody: rezerva, hypotéka, dane, optimalizácia, investovanie" },
+  { Icon: Mic, label: "Odpovede na vaše otázky + hosťovské debaty s odborníkmi" },
+];
+
+const CoDostanesHeroHeroSection = () => {
+  const [openVideoId, setOpenVideoId] = useState<string>(showcaseVideos[0].id);
+  const selectedVideo = useMemo(
+    () => showcaseVideos.find((video) => video.id === openVideoId) ?? showcaseVideos[0],
+    [openVideoId]
+  );
+
+  return (
+    <section id="co-dostanes-hero-hero" className="relative w-full scroll-mt-24 text-white">
+      <style>{`
+        .co-finance-flow-icon {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 2rem;
+          height: 2rem;
+          offset-path: path("${FLOW_PATH}");
+          offset-rotate: auto 90deg;
+          will-change: offset-distance;
+          animation: co-finance-flow 16s linear infinite;
+        }
+        @keyframes co-finance-flow {
+          from { offset-distance: 0%; }
+          to { offset-distance: 100%; }
+        }
+        @media (min-width: 768px) {
+          .co-finance-flow-icon {
+            width: 2.75rem;
+            height: 2.75rem;
+          }
+        }
+      `}</style>
+
+      <div className="relative mx-3 overflow-hidden rounded-[2rem] md:mx-5 md:rounded-[2.5rem]" style={{ backgroundColor: forest }}>
+      <div
+        className="pointer-events-none absolute inset-0 opacity-35"
+        style={{
+          background: `radial-gradient(ellipse 120% 85% at 100% 0%, ${forestMuted} 0%, transparent 55%)`,
+        }}
+      />
+      {/* —— Čierna zóna —— */}
+      <div className="relative overflow-hidden rounded-[2rem] bg-black pt-16 pb-14 md:rounded-[2.5rem] md:pb-20 md:pt-20">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.35]"
+          style={{
+            backgroundImage: `radial-gradient(ellipse 120% 80% at 50% -20%, ${forestMuted} 0%, transparent 55%),
+              linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.4) 100%)`,
+          }}
+        />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+          }}
+        />
+
+        <div className={`relative z-10 px-5 md:px-8 ${contentWide}`}>
+          {/* Wispr-like hero row: chips + copy vľavo, ribbon vpravo */}
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
+            <div className="lg:col-span-5">
+              <div className="space-y-5 text-center sm:text-left">
+                <h2 className="headline-serif text-balance text-[2.2rem] font-extrabold leading-[1.05] text-white sm:text-[2.7rem] md:text-[3.35rem] md:leading-[1.03]">
+                  Čo presne dostaneš v Hero Hero
+                </h2>
+                <p className="font-sans text-[1.0625rem] leading-relaxed text-white/65 md:text-[1.125rem]">
+                  Každý týždeň čerstvý obsah priamo odo mňa.
+                </p>
+                <ul
+                  className="flex flex-col gap-1.5 text-left font-sans text-[1.02rem] leading-snug text-white/88 sm:gap-2 md:text-[1.06rem] md:leading-relaxed lg:text-[1.12rem]"
+                  aria-label="Čo dostaneš v Hero Hero"
+                >
+                  {heroHeroBenefits.map(({ Icon, label }) => (
+                    <li key={label}>
+                      <div className={heroBenefitRowClass}>
+                        <Icon className={heroBenefitIconClass} strokeWidth={2.1} aria-hidden />
+                        <span className="min-w-0 flex-1">{label}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-8 flex justify-center sm:justify-start">
+                  <a href="#formular" className="btn-primary text-body inline-flex">
+                    🚀 Vyskúšať na 14 dní ZADARMO
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Vizuál s mobilným mockupom */}
+            <div className="relative mx-auto min-h-[280px] w-full max-w-xl lg:col-span-7 lg:max-w-none lg:min-h-[360px]">
+              {financialFlowIcons.map((Icon, index) => {
+                const iconCount = financialFlowIcons.length;
+                const delayPerIcon = 16 / iconCount;
+                return (
+                  <div
+                    key={`${Icon.displayName ?? Icon.name}-${index}`}
+                    className="co-finance-flow-icon z-10"
+                    style={{ animationDelay: `-${index * delayPerIcon}s` }}
+                  >
+                    <div className="flex h-8 w-8 items-center justify-center rounded-[0.45rem] border border-white/20 bg-black/70 shadow-[0_6px_18px_rgba(0,0,0,0.35)] md:h-11 md:w-11 md:rounded-xl">
+                      <Icon className="h-4 w-4 text-emerald-300/95 md:h-5 md:w-5" aria-hidden />
+                    </div>
+                  </div>
+                );
+              })}
+
+              {/* Mobilný mockup – placeholder bez Rive */}
+              <div className="relative z-20 mx-auto mt-8 flex w-[58%] max-w-[250px] justify-center sm:absolute sm:left-[34%] sm:top-[-4%] sm:mt-0 sm:w-[44%] sm:max-w-[255px] md:left-[40%] md:top-[-8%]">
+                <div className="relative aspect-[9/18] w-full rounded-[2rem] border border-white/20 bg-gradient-to-b from-white/[0.12] to-white/[0.03] p-1 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.65)]">
+                  <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[1.65rem] bg-gradient-to-b from-[#0a1210] to-black">
+                    <div className="mx-auto mt-3 h-1 w-10 rounded-full bg-white/15" aria-hidden />
+                    <div className="flex flex-1 flex-col justify-center gap-2 px-3 pb-4 pt-6">
+                      <div className="h-2 w-3/4 rounded-full bg-white/10" />
+                      <div className="h-2 w-full rounded-full bg-white/[0.06]" />
+                      <div className="mt-3 space-y-1.5 rounded-xl border border-emerald-500/25 bg-emerald-500/[0.08] p-2">
+                        <div className="h-1.5 w-5/6 rounded-full bg-emerald-300/35" />
+                        <div className="h-1.5 w-2/3 rounded-full bg-emerald-300/20" />
+                      </div>
+                      <div className="h-2 w-5/6 rounded-full bg-white/[0.07]" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* —— Zelená zóna — 2 stĺpce (zoznam + video) —— */}
+      <div
+        id="ukazky-videii"
+        className="relative w-full scroll-mt-24 overflow-hidden py-14 md:py-20"
+        style={{
+          background: `linear-gradient(180deg, ${forest} 0%, ${forestGradientEnd} 100%)`,
+        }}
+      >
+        <p
+          className={`headline-serif mb-8 w-full ${contentWide} px-5 text-balance text-center !font-black leading-[1.12] text-white text-2xl sm:text-3xl md:mb-12 md:px-8 md:text-[2.125rem] lg:text-[2.65rem] lg:leading-[1.1]`}
+        >
+          Ochutnávka obsahu, ktorý nájdeš na Hero Hero už dnes.
+        </p>
+        <div className={`relative z-10 px-5 md:px-8 ${contentWide}`}>
+          <div className="mx-auto grid w-full gap-8 lg:grid-cols-[2fr_3fr] lg:gap-x-14 lg:gap-y-10">
+            <nav className="flex flex-col gap-2" aria-label="Zoznam ukážok videí">
+              {showcaseVideos.map((item) => {
+                const isActive = openVideoId === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => setOpenVideoId(item.id)}
+                    className={`w-full rounded-2xl px-4 py-3.5 text-left transition-colors md:px-5 md:py-4 ${
+                      isActive
+                        ? "bg-[#e4d8c8] text-black"
+                        : "text-white/55 hover:bg-white/[0.04] hover:text-white/85"
+                    }`}
+                  >
+                    <span className="font-bold font-serif text-[1.15rem] leading-snug sm:text-[1.22rem] md:text-[1.35rem] md:leading-[1.2]">
+                      {item.title}
+                    </span>
+                  </button>
+                );
+              })}
+            </nav>
+
+            <div className="min-w-0">
+              <p className="mb-6 font-sans text-[1.05rem] leading-relaxed text-white/80 md:mb-7 md:text-[1.125rem]">
+                {selectedVideo.description}
+              </p>
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+                {showcaseVideos.map((item) => {
+                  const isVisible = openVideoId === item.id;
+                  return (
+                    <div
+                      key={item.id}
+                      className={`absolute inset-0 transition-opacity duration-75 ${
+                        isVisible
+                          ? "z-10 opacity-100"
+                          : "pointer-events-none z-0 opacity-0"
+                      }`}
+                      aria-hidden={!isVisible}
+                    >
+                      <iframe
+                        title={item.title}
+                        src={`https://player.vimeo.com/video/${item.vimeoId}?autoplay=0&title=0&portrait=0&byline=0`}
+                        className="block h-full w-full"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+  );
+};
+
+export default CoDostanesHeroHeroSection;

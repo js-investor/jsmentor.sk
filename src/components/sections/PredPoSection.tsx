@@ -1,5 +1,4 @@
 import AnimatedSection from "@/components/AnimatedSection";
-import CtaResponseNote from "@/components/CtaResponseNote";
 import { CheckCircle2, XCircle } from "lucide-react";
 
 const beforeItems = [
@@ -88,9 +87,6 @@ const PredPoSection = () => (
           <a href="#formular" className="btn-primary text-body">
             Získať Wealth Map
           </a>
-          <div>
-            <CtaResponseNote />
-          </div>
         </div>
       </AnimatedSection>
     </div>

@@ -1,5 +1,4 @@
 import AnimatedSection from "@/components/AnimatedSection";
-import CtaResponseNote from "@/components/CtaResponseNote";
 import { useState } from "react";
 import type { ReactNode } from "react";
 
@@ -125,9 +124,6 @@ const FaqLoremSection = ({
               <button type="button" className="btn-primary text-body">
                 Lorem ipsum
               </button>
-              <div>
-                <CtaResponseNote />
-              </div>
             </div>
           </AnimatedSection>
         ) : null}

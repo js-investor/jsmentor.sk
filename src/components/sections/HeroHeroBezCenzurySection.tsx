@@ -1,29 +1,83 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import { ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
+import type { ReactNode } from "react";
 
-const comparisons = [
+const problemHeader = "Čo rieši väčšina ľudí (a možno aj ty)";
+const heroHeader = "V Hero Hero je to úplne iné";
+
+const bold = (text: string) => (
+  <strong className="font-bold text-inherit">{text}</strong>
+);
+
+const comparisonRows: { problem: ReactNode; hero: ReactNode }[] = [
   {
-    oldSide: "Chaos v peniazoch a neustály stres",
-    newSide: "Jasnosť a istota vo financiách",
+    problem: <>Chaotické financie a {bold("neustály stres okolo peňazí")}</>,
+    hero: (
+      <>
+        {bold("Konečne máš jasno")} a presne vieš, čo robiť.
+      </>
+    ),
   },
   {
-    oldSide: "Nevieš, čomu veriť na Instagrame a YouTube",
-    newSide: "Konkrétne rady na slovenské produkty a situácie",
+    problem: (
+      <>
+        {bold("Nevieš, komu a čomu veriť.")} Každý hovorí na sociálnych sieťach aj v médiach niečo iné.
+      </>
+    ),
+    hero: (
+      <>
+        {bold("Prístup k obsahu, ktorý mi Instagram blokuje")} alebo ti nedovolí povedať priamo
+      </>
+    ),
   },
   {
-    oldSide: "Odkladáš investovanie „na neskôr“",
-    newSide: "Reálne prípady ľudí + moje priame odporúčania",
+    problem: <>Odkladáš dôležité veci {bold("„na neskôr“")}</>,
+    hero: (
+      <>
+        {bold("Každý týždeň")} nový hodnotný obsah
+      </>
+    ),
   },
   {
-    oldSide: "Platíš zbytočné poplatky a strácaš peniaze na inflácii",
-    newSide: "Obsah, ktorý ti Instagram nikdy nedovolí ukázať",
+    problem: (
+      <>
+        Platíš {bold("zbytočne vysoké poplatky")} a {bold("inflácia žerie tvoje úspory")} každý rok
+      </>
+    ),
+    hero: (
+      <>
+        Reálne finančné situácie, {bold("rozhovory s bežnými ľuďmi")} (napr. páry, podnikatelia,...) a moje
+        rady
+      </>
+    ),
   },
   {
-    oldSide: "Nemáš jasný plán. Každý rok si na rovnakom mieste",
-    newSide: "Každý týždeň nové hodnotné video + novinky",
+    problem: (
+      <>
+        {bold("Problémy s peniazmi")} ovplyvňujú tvoje vzťahy, deti aj tvoj vnútorný pokoj
+      </>
+    ),
+    hero: (
+      <>
+        Praktické {bold("tipy, ktoré môžeš hneď použiť")} (napr. pri tvorbe rezervy, investovaní,
+        hypotéke)
+      </>
+    ),
   },
-] as const;
+  {
+    problem: (
+      <>
+        Každý rok si na rovnakom mieste, pretože {bold("nemáš žiadný systém ani plán")}
+      </>
+    ),
+    hero: (
+      <>
+        {bold("Konkrétne rozbory slovenských produktov")}, fondov a platforiem
+      </>
+    ),
+  },
+];
 
 const rowVariants = {
   hidden: { opacity: 0, y: 14 },
@@ -33,6 +87,22 @@ const rowVariants = {
     transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const, delay: 0.06 * i },
   }),
 };
+
+const cellTextClass =
+  "font-sans text-[0.9375rem] font-normal leading-snug md:text-base md:leading-relaxed";
+
+const leftHeaderClass =
+  "relative overflow-hidden bg-gradient-to-br from-[#fffbfb] via-[#fdf4f3] to-[#fcecea] px-4 py-4 md:px-5 md:py-5";
+const rightHeaderClass =
+  "relative overflow-hidden border-t border-[#A52821]/14 bg-gradient-to-br from-emerald-100/95 via-teal-50/90 to-[#ecfdf5] px-4 py-4 md:border-l md:border-t-0 md:px-5 md:py-5";
+
+const leftRowClass = (index: number) =>
+  index % 2 === 0
+    ? "bg-[#fdf4f3] md:border-r md:border-[#A52821]/14"
+    : "bg-[#f5e6e4] md:border-r md:border-[#A52821]/14";
+
+const rightRowClass = (index: number) =>
+  index % 2 === 0 ? "bg-emerald-50/90" : "bg-teal-50/75";
 
 const HeroHeroBezCenzurySection = () => (
   <section
@@ -52,129 +122,78 @@ const HeroHeroBezCenzurySection = () => (
           </h2>
           <p className="sub-headline mt-5 text-foreground/85">
             Instagram odstraňuje účty a blokuje môj obsah. Na HeroHero ti{" "}
-            <strong className="font-bold text-foreground">poviem skutočnú pravdu o peniazoch, ktorú ti tají tvoj bankár aj poradca</strong>,
-            pretože by prišiel o províziu.
+            <strong className="font-bold text-foreground">
+              poviem skutočnú pravdu o peniazoch, ktorú ti tají tvoj bankár aj poradca
+            </strong>
+            , pretože by prišiel o províziu.
           </p>
         </header>
       </AnimatedSection>
 
       <AnimatedSection className="mx-auto max-w-4xl">
-        {/* rám: tvoja červená #A52821 ↔ zelená strana */}
-        <div
-          className="relative rounded-2xl bg-gradient-to-br from-[#A52821]/55 via-[#edd9d7]/50 to-emerald-400/65 p-[2px] shadow-[0_20px_56px_-22px_rgba(16,85,60,0.28),0_12px_36px_-16px_rgba(165,40,33,0.2)]"
-        >
+        <div className="relative rounded-2xl bg-gradient-to-br from-[#A52821]/55 via-[#edd9d7]/50 to-emerald-400/65 p-[2px] shadow-[0_20px_56px_-22px_rgba(16,85,60,0.28),0_12px_36px_-16px_rgba(165,40,33,0.2)]">
           <div className="overflow-hidden rounded-[0.9rem] bg-white ring-1 ring-black/[0.05]">
-            {/* Mobile: najprv celý „starý“ stĺpec, potom celý „nový“ — bez striedania riadkov */}
-            <div className="md:hidden">
-              <div className="relative w-full overflow-hidden bg-gradient-to-br from-[#fffbfb] via-[#fdf4f3] to-[#fcecea] px-4 py-4">
+            {/*
+              Jeden grid: na md sú priame deti v poradí ľavá bunka, pravá bunka →
+              stĺpec 1 = červený, stĺpec 2 = zelený. motion.div má display:contents,
+              aby nezlomil zoradenie buniek.
+            */}
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              <div className={`${leftHeaderClass} border-b border-[#A52821]/14`}>
                 <div className="pointer-events-none absolute -right-8 -top-10 h-24 w-24 rounded-full bg-[#A52821]/15 blur-2xl" />
-                <p className="font-serif text-lg font-extrabold tracking-tight text-[#2a1411]">Väčšina ľudí v realite</p>
+                <p className="font-serif text-xl leading-snug tracking-tight text-[#2a1411] md:text-2xl">
+                  <strong className="font-bold">{problemHeader}</strong>
+                </p>
               </div>
-              <div className="divide-y divide-[#A52821]/14 bg-[#A52821]/[0.04]">
-                {comparisons.map((row, index) => {
-                  const stripe = index % 2 === 0 ? "bg-[#A52821]/[0.055]" : "bg-[#A52821]/[0.09]";
-                  return (
-                    <motion.div
-                      key={`mobile-old-${row.oldSide}`}
-                      custom={index}
-                      variants={rowVariants}
-                      initial="hidden"
-                      whileInView="show"
-                      viewport={{ once: true, margin: "-40px" }}
-                      className={`flex w-full gap-2.5 px-4 py-3 ${stripe}`}
+              <div className={`${rightHeaderClass} border-b border-[#A52821]/14`}>
+                <div className="pointer-events-none absolute -left-6 bottom-0 h-20 w-20 rounded-full bg-emerald-400/20 blur-2xl" />
+                <p className="font-serif text-xl leading-snug tracking-tight text-emerald-950 md:text-2xl">
+                  <strong className="font-bold">{heroHeader}</strong>
+                </p>
+              </div>
+
+              {comparisonRows.map((row, index) => (
+                <motion.div
+                  key={index}
+                  custom={index}
+                  variants={rowVariants}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, margin: "-40px" }}
+                  className="contents"
+                >
+                  <div
+                    className={`flex gap-2.5 border-b border-[#A52821]/14 px-4 py-3.5 md:gap-3 md:px-5 md:py-4 ${leftRowClass(index)} ${
+                      index === comparisonRows.length - 1 ? "md:border-b-0" : ""
+                    }`}
+                  >
+                    <span
+                      className="mt-0.5 shrink-0 text-[0.9375rem] leading-none md:text-base"
+                      aria-hidden
                     >
-                      <span className="mt-0.5 shrink-0 text-base leading-none" aria-hidden>
-                        ❌
-                      </span>
-                      <p className="font-sans text-sm font-medium leading-snug text-[#3a1815]">{row.oldSide}</p>
-                    </motion.div>
-                  );
-                })}
-              </div>
-
-              <div className="relative border-t-2 border-[#A52821]/22 bg-gradient-to-r from-[#A52821]/[0.06] via-transparent to-emerald-500/10">
-                <div className="relative w-full overflow-hidden bg-gradient-to-br from-emerald-100/95 via-teal-50/90 to-[#ecfdf5] px-4 py-4">
-                  <div className="pointer-events-none absolute -left-6 bottom-0 h-20 w-20 rounded-full bg-emerald-400/20 blur-2xl" />
-                  <p className="font-serif text-lg font-extrabold tracking-tight text-emerald-950">
-                    Ľudia v JS Hero Hero komunite
-                  </p>
-                </div>
-                <div className="divide-y divide-emerald-900/10 bg-emerald-50/35">
-                  {comparisons.map((row, index) => {
-                    const stripe = index % 2 === 0 ? "bg-emerald-50/65" : "bg-teal-50/50";
-                    return (
-                      <motion.div
-                        key={`mobile-new-${row.newSide}`}
-                        custom={index + comparisons.length}
-                        variants={rowVariants}
-                        initial="hidden"
-                        whileInView="show"
-                        viewport={{ once: true, margin: "-40px" }}
-                        className={`flex w-full gap-2.5 px-4 py-3 ${stripe}`}
-                      >
-                        <span className="mt-0.5 shrink-0 text-base leading-none" aria-hidden>
-                          ✅
-                        </span>
-                        <p className="font-sans text-sm font-semibold leading-snug text-emerald-950">{row.newSide}</p>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-
-            {/* Desktop: klasické porovnanie vedľa seba */}
-            <div className="hidden md:block">
-              <div className="flex w-full flex-col md:grid md:grid-cols-2 md:divide-x md:divide-[#A52821]/18">
-                <div className="relative w-full overflow-hidden border-b border-[#A52821]/18 bg-gradient-to-br from-[#fffbfb] via-[#fdf4f3] to-[#fcecea] px-5 py-4 md:border-b-0">
-                  <div className="pointer-events-none absolute -right-8 -top-10 h-24 w-24 rounded-full bg-[#A52821]/15 blur-2xl" />
-                  <p className="font-serif text-xl font-extrabold tracking-tight text-[#2a1411]">Väčšina ľudí v realite</p>
-                </div>
-                <div className="relative w-full overflow-hidden bg-gradient-to-br from-emerald-100/95 via-teal-50/90 to-[#ecfdf5] px-5 py-4">
-                  <div className="pointer-events-none absolute -left-6 bottom-0 h-20 w-20 rounded-full bg-emerald-400/20 blur-2xl" />
-                  <p className="font-serif text-xl font-extrabold tracking-tight text-emerald-950">
-                    Ľudia v JS Hero Hero komunite
-                  </p>
-                </div>
-              </div>
-
-              <div className="divide-y divide-[#A52821]/14 bg-gradient-to-b from-[#A52821]/[0.035] via-white to-emerald-50/28">
-                {comparisons.map((row, index) => {
-                  const stripeLeft = index % 2 === 0 ? "bg-[#A52821]/[0.055]" : "bg-[#A52821]/[0.09]";
-                  const stripeRight = index % 2 === 0 ? "bg-emerald-50/65" : "bg-teal-50/50";
-                  return (
-                    <motion.div
-                      key={row.oldSide}
-                      custom={index}
-                      variants={rowVariants}
-                      initial="hidden"
-                      whileInView="show"
-                      viewport={{ once: true, margin: "-40px" }}
-                      className="grid w-full grid-cols-2 divide-x divide-[#A52821]/16"
+                      ❌
+                    </span>
+                    <p className={`${cellTextClass} text-[#3a1815]`}>{row.problem}</p>
+                  </div>
+                  <div
+                    className={`flex gap-2.5 border-b border-t border-[#A52821]/14 px-4 py-3.5 md:gap-3 md:border-l md:border-t-0 md:px-5 md:py-4 ${rightRowClass(index)} ${
+                      index === comparisonRows.length - 1 ? "border-b-0" : ""
+                    }`}
+                  >
+                    <span
+                      className="mt-0.5 shrink-0 text-[0.9375rem] leading-none md:text-base"
+                      aria-hidden
                     >
-                      <div className={`flex w-full gap-3 px-5 py-3.5 ${stripeLeft}`}>
-                        <span className="mt-0.5 shrink-0 text-[0.95rem] leading-none" aria-hidden>
-                          ❌
-                        </span>
-                        <p className="font-sans text-[0.9375rem] font-medium leading-relaxed text-[#3a1815]">
-                          {row.oldSide}
-                        </p>
-                      </div>
-                      <div className={`flex w-full gap-3 px-5 py-3.5 ${stripeRight}`}>
-                        <span className="mt-0.5 shrink-0 text-[0.95rem] leading-none" aria-hidden>
-                          ✅
-                        </span>
-                        <p className="font-sans text-[0.9375rem] font-semibold leading-relaxed text-emerald-950">
-                          {row.newSide}
-                        </p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
+                      ✅
+                    </span>
+                    <p className={`${cellTextClass} text-emerald-950`}>{row.hero}</p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
+
         <div className="relative z-[1] mx-auto mt-8 w-full max-w-4xl px-2 text-center md:mt-10">
           <p className="mx-auto max-w-2xl text-balance font-sans text-[0.98rem] leading-relaxed text-foreground md:max-w-none md:text-[1.0625rem] md:leading-snug">
             <ShieldCheck

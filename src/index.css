@@ -205,6 +205,8 @@
 
   html {
     scroll-behavior: smooth;
+    /* Vyhradí miesto pre zvislý scrollbar → obsah sa neposúva a okraje pôsobia rovnomerne. */
+    scrollbar-gutter: stable;
   }
 
   body {

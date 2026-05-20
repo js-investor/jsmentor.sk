@@ -17,7 +17,8 @@ const HomeDesignHeaderSection = () => {
       }
       subtitle={
         <>
-          Pridaj sa do HeroHero komunity a nauč sa ako&nbsp;
+          Pridaj sa do HeroHero komunity a nauč sa ako{" "}
+          <br className="hidden md:block" />
           <strong className="font-bold text-foreground">vybudovať majetok bez stresu a chaosu.</strong>
         </>
       }
@@ -41,7 +42,7 @@ const HomeDesignHeaderSection = () => {
           </span>
         </>,
         <>
-          <span className="mb-2 text-3xl md:text-4xl">🍌</span>
+          <span className="mb-2 text-3xl md:text-4xl">💸</span>
           <span className="[font-family:var(--font-serif)] text-2xl font-black text-foreground">
             Len 7 € mesačne
           </span>
