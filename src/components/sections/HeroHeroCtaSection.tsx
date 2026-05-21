@@ -8,7 +8,7 @@ const forestGradientEnd = "#0a5a47";
 const HeroHeroCtaSection = () => (
   <section
     id="vyskusat-hero-hero"
-    className="section-padding relative scroll-mt-24 overflow-hidden"
+    className="hero-section-pad relative scroll-mt-24 overflow-hidden px-5 md:px-8 pt-[72px] pb-[72px] md:pt-[96px] md:pb-[96px]"
     style={{ backgroundColor: "#FFF9F5" }}
   >
     <div className="pointer-events-none absolute inset-0 bg-dot-grid opacity-[0.18]" />
@@ -60,7 +60,7 @@ const HeroHeroCtaSection = () => (
               />
 
               <div className="relative z-10 mx-auto max-w-2xl">
-                <h2 className="headline-serif text-balance text-white">
+                <h2 className="headline-landing-section text-balance text-white">
                   Tak čo, ideme na to?
                 </h2>
 
@@ -68,7 +68,7 @@ const HeroHeroCtaSection = () => (
                   Nemáš čo stratiť.
                 </p>
                 <p className="mt-2 font-sans text-[1.0625rem] leading-relaxed text-emerald-100/85 md:text-[1.1875rem]">
-                  Máš 14 dní úplne zadarmo.
+                  Máš 15 dní úplne zadarmo.
                 </p>
 
                 <div className="mt-10 md:mt-12">
@@ -76,7 +76,7 @@ const HeroHeroCtaSection = () => (
                     href="#formular"
                     className="btn-primary-light text-body inline-flex min-h-[3.25rem] px-8 py-4 text-[1.0625rem] md:min-h-[3.5rem] md:px-10 md:text-[1.125rem]"
                   >
-                    🚀 Vyskúšať na 14 dní ZADARMO
+                    🚀 Vyskúšať na 15 dní ZADARMO
                   </a>
                 </div>
               </div>

@@ -12,7 +12,7 @@ const faqs = [
   {
     question: "Čo ak zistím, že to pre mňa nie je? Musím sa zaviazať na dlhšiu dobu?",
     answer:
-      "Vôbec nie. Osobne nenávidím skryté poplatky a nezmyselné viazanosti presne tak ako ty. Preto si môžeš celú komunitu vyskúšať na prvých 14 dní úplne zadarmo. Vojdi dnu, pozri si videá, získaj prístup ku všetkým benefitom a ak zistíš, že ti to nedáva hodnotu, členstvo jedným klikom zrušíš. Rozhodnutie je len na tebe.",
+      "Vôbec nie. Osobne nenávidím skryté poplatky a nezmyselné viazanosti presne tak ako ty. Preto si môžeš celú komunitu vyskúšať na prvých 15 dní úplne zadarmo. Vojdi dnu, pozri si videá, získaj prístup ku všetkým benefitom a ak zistíš, že ti to nedáva hodnotu, členstvo jedným klikom zrušíš. Rozhodnutie je len na tebe.",
   },
   {
     question: "Prečo by som mal platiť, keď je internet a Instagram plný finančných rád zadarmo?",
@@ -32,31 +32,32 @@ const HeroHeroFaqSection = () => {
   return (
     <section
       id="faq"
-      className="section-white section-padding relative scroll-mt-24 bg-background"
+      className="hero-section-pad relative scroll-mt-24 px-5 md:px-8 pt-[72px] pb-[72px] md:pt-[96px] md:pb-[96px]"
+      style={{ backgroundColor: "#F0ECE6" }}
     >
       <div className="section-container">
         <AnimatedSection>
           <div className="mx-auto max-w-3xl">
-            <h2 className="headline-serif mb-10 text-center md:mb-14">
+            <h2 className="headline-landing-section mb-[54px] text-center text-foreground">
               Možno sa pýtaš...
             </h2>
 
-            <div>
+            <div className="space-y-3">
               {faqs.map((faq, index) => {
                 const isOpen = openIndex === index;
                 return (
-                  <div key={faq.question} className="border-b border-[#E5E7EB]">
+                  <div key={faq.question}>
                     <button
                       type="button"
                       onClick={() => setOpenIndex((prev) => (prev === index ? null : index))}
-                      className="flex w-full items-start justify-between gap-4 py-7 text-left md:py-9"
+                      className="flex w-full items-start justify-between gap-4 rounded-xl bg-[#0c0c0c] px-5 py-6 text-left md:px-6 md:py-7"
                       aria-expanded={isOpen}
                     >
-                      <span className="[font-family:var(--font-serif)] text-[1.35rem] font-bold leading-snug text-foreground md:text-[1.65rem] md:leading-[1.22]">
+                      <span className="[font-family:var(--font-serif)] text-[1.35rem] font-bold leading-snug text-white md:text-[1.65rem] md:leading-[1.22]">
                         {faq.question}
                       </span>
                       <ChevronDown
-                        className={`mt-1 h-6 w-6 shrink-0 text-foreground/45 transition-transform duration-200 md:mt-1.5 ${
+                        className={`mt-1 h-6 w-6 shrink-0 text-white/55 transition-transform duration-200 md:mt-1.5 ${
                           isOpen ? "rotate-180" : ""
                         }`}
                         strokeWidth={1.75}
@@ -64,7 +65,7 @@ const HeroHeroFaqSection = () => {
                       />
                     </button>
                     {isOpen ? (
-                      <p className="pb-7 pr-8 font-sans text-[1.0625rem] leading-relaxed text-[#4B5563] md:pb-9 md:text-[1.1875rem] md:leading-relaxed">
+                      <p className="px-1 pb-2 pt-4 pr-6 font-sans text-[1.0625rem] leading-relaxed text-foreground/80 md:px-2 md:pb-3 md:pt-5 md:text-[1.1875rem] md:leading-relaxed">
                         {faq.answer}
                       </p>
                     ) : null}

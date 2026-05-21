@@ -31,7 +31,7 @@ const visionItems: ReactNode[] = [
 const PredstavSiZivotSection = () => (
   <section
     id="predstav-si-zivot"
-    className="section-white section-padding relative overflow-hidden scroll-mt-24"
+    className="section-white hero-section-pad relative scroll-mt-24 overflow-hidden px-5 md:px-8 pt-[72px] pb-[72px] md:pt-[96px] md:pb-[96px]"
     style={{ backgroundColor: "#FFF9F5" }}
   >
     <div className="absolute inset-0 bg-dot-grid opacity-20 pointer-events-none" />
@@ -40,7 +40,7 @@ const PredstavSiZivotSection = () => (
     <div className="section-container relative z-10">
       <AnimatedSection>
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="headline-serif mb-10 md:mb-12">
+          <h2 className="headline-landing-section mb-[54px]">
             <span aria-hidden>🔥</span> Predstav si, že tvoj život vyzerá takto...
           </h2>
 
@@ -87,7 +87,7 @@ const PredstavSiZivotSection = () => (
             </p>
             <div className="pt-4 md:pt-6">
               <a href="#formular" className="btn-primary text-body">
-                🚀 Vyskúšať na 14 dní ZADARMO
+                🚀 Vyskúšať na 15 dní ZADARMO
               </a>
             </div>
           </div>

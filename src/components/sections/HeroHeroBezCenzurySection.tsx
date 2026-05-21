@@ -88,26 +88,30 @@ const rowVariants = {
   }),
 };
 
+const forest = "#023c2e";
+const forestMid = "#065f4a";
+const forestGradientEnd = "#0a5a47";
+
 const cellTextClass =
   "font-sans text-[0.9375rem] font-normal leading-snug md:text-base md:leading-relaxed";
 
-const leftHeaderClass =
-  "relative overflow-hidden bg-gradient-to-br from-[#fffbfb] via-[#fdf4f3] to-[#fcecea] px-4 py-4 md:px-5 md:py-5";
-const rightHeaderClass =
-  "relative overflow-hidden border-t border-[#A52821]/14 bg-gradient-to-br from-emerald-100/95 via-teal-50/90 to-[#ecfdf5] px-4 py-4 md:border-l md:border-t-0 md:px-5 md:py-5";
+const leftHeaderClass = "relative overflow-hidden px-4 py-4 md:px-5 md:py-5";
+const leftHeaderStyle = { backgroundColor: "#141414" };
+const rightHeaderClass = "relative overflow-hidden px-4 py-4 md:px-5 md:py-5";
+const rightHeaderStyle = {
+  background: `linear-gradient(145deg, ${forest} 0%, ${forestMid} 48%, ${forestGradientEnd} 100%)`,
+};
 
 const leftRowClass = (index: number) =>
-  index % 2 === 0
-    ? "bg-[#fdf4f3] md:border-r md:border-[#A52821]/14"
-    : "bg-[#f5e6e4] md:border-r md:border-[#A52821]/14";
+  index % 2 === 0 ? "bg-[#0c0c0c]" : "bg-[#141414]";
 
 const rightRowClass = (index: number) =>
-  index % 2 === 0 ? "bg-emerald-50/90" : "bg-teal-50/75";
+  index % 2 === 0 ? "bg-[#023c2e]" : "bg-[#034f3d]";
 
 const HeroHeroBezCenzurySection = () => (
   <section
     id="bez-cenzury"
-    className="section-padding relative overflow-hidden scroll-mt-24"
+    className="hero-section-pad-spacious relative scroll-mt-24 overflow-hidden px-5 md:px-8 pt-[96px] pb-[96px] md:pt-[120px] md:pb-[120px]"
     style={{ backgroundColor: "#FFF9F5" }}
   >
     <div className="absolute inset-0 bg-dot-grid opacity-50" />
@@ -116,8 +120,8 @@ const HeroHeroBezCenzurySection = () => (
 
     <div className="section-container relative z-10">
       <AnimatedSection>
-        <header className="mx-auto mb-12 max-w-4xl text-center md:mb-16">
-          <h2 className="headline-serif leading-[1.15]">
+        <header className="mx-auto mb-[54px] max-w-4xl text-center">
+          <h2 className="headline-landing-section">
             Ideme naplno a bez cenzúry <span aria-hidden>🔓</span>
           </h2>
           <p className="sub-headline mt-5 text-foreground/85">
@@ -131,63 +135,58 @@ const HeroHeroBezCenzurySection = () => (
       </AnimatedSection>
 
       <AnimatedSection className="mx-auto max-w-4xl">
-        <div className="relative rounded-2xl bg-gradient-to-br from-[#A52821]/55 via-[#edd9d7]/50 to-emerald-400/65 p-[2px] shadow-[0_20px_56px_-22px_rgba(16,85,60,0.28),0_12px_36px_-16px_rgba(165,40,33,0.2)]">
-          <div className="overflow-hidden rounded-[0.9rem] bg-white ring-1 ring-black/[0.05]">
-            {/*
-              Jeden grid: na md sú priame deti v poradí ľavá bunka, pravá bunka →
-              stĺpec 1 = červený, stĺpec 2 = zelený. motion.div má display:contents,
-              aby nezlomil zoradenie buniek.
-            */}
-            <div className="grid grid-cols-1 md:grid-cols-2">
-              <div className={`${leftHeaderClass} border-b border-[#A52821]/14`}>
-                <div className="pointer-events-none absolute -right-8 -top-10 h-24 w-24 rounded-full bg-[#A52821]/15 blur-2xl" />
-                <p className="font-serif text-xl leading-snug tracking-tight text-[#2a1411] md:text-2xl">
+        <div className="overflow-hidden rounded-2xl shadow-[0_20px_56px_-22px_rgba(2,60,46,0.35)]">
+          <div className="flex flex-col md:grid md:grid-cols-2">
+            <div className="flex flex-col">
+              <div className={leftHeaderClass} style={leftHeaderStyle}>
+                <p className="font-serif text-xl leading-snug tracking-tight text-white md:text-2xl">
                   <strong className="font-bold">{problemHeader}</strong>
                 </p>
               </div>
-              <div className={`${rightHeaderClass} border-b border-[#A52821]/14`}>
-                <div className="pointer-events-none absolute -left-6 bottom-0 h-20 w-20 rounded-full bg-emerald-400/20 blur-2xl" />
-                <p className="font-serif text-xl leading-snug tracking-tight text-emerald-950 md:text-2xl">
-                  <strong className="font-bold">{heroHeader}</strong>
-                </p>
-              </div>
-
               {comparisonRows.map((row, index) => (
                 <motion.div
-                  key={index}
+                  key={`problem-${index}`}
                   custom={index}
                   variants={rowVariants}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true, margin: "-40px" }}
-                  className="contents"
+                  className={`flex gap-2.5 px-4 py-3.5 md:gap-3 md:px-5 md:py-4 ${leftRowClass(index)}`}
                 >
-                  <div
-                    className={`flex gap-2.5 border-b border-[#A52821]/14 px-4 py-3.5 md:gap-3 md:px-5 md:py-4 ${leftRowClass(index)} ${
-                      index === comparisonRows.length - 1 ? "md:border-b-0" : ""
-                    }`}
+                  <span
+                    className="mt-0.5 shrink-0 text-[0.9375rem] leading-none text-[#E85D4A] md:text-base"
+                    aria-hidden
                   >
-                    <span
-                      className="mt-0.5 shrink-0 text-[0.9375rem] leading-none md:text-base"
-                      aria-hidden
-                    >
-                      ❌
-                    </span>
-                    <p className={`${cellTextClass} text-[#3a1815]`}>{row.problem}</p>
-                  </div>
-                  <div
-                    className={`flex gap-2.5 border-b border-t border-[#A52821]/14 px-4 py-3.5 md:gap-3 md:border-l md:border-t-0 md:px-5 md:py-4 ${rightRowClass(index)} ${
-                      index === comparisonRows.length - 1 ? "border-b-0" : ""
-                    }`}
+                    ❌
+                  </span>
+                  <p className={`${cellTextClass} text-white/90`}>{row.problem}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="flex flex-col">
+              <div className={rightHeaderClass} style={rightHeaderStyle}>
+                <p className="font-serif text-xl leading-snug tracking-tight text-white md:text-2xl">
+                  <strong className="font-bold">{heroHeader}</strong>
+                </p>
+              </div>
+              {comparisonRows.map((row, index) => (
+                <motion.div
+                  key={`hero-${index}`}
+                  custom={index}
+                  variants={rowVariants}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, margin: "-40px" }}
+                  className={`flex gap-2.5 px-4 py-3.5 md:gap-3 md:px-5 md:py-4 ${rightRowClass(index)}`}
+                >
+                  <span
+                    className="mt-0.5 shrink-0 text-[0.9375rem] leading-none md:text-base"
+                    aria-hidden
                   >
-                    <span
-                      className="mt-0.5 shrink-0 text-[0.9375rem] leading-none md:text-base"
-                      aria-hidden
-                    >
-                      ✅
-                    </span>
-                    <p className={`${cellTextClass} text-emerald-950`}>{row.hero}</p>
-                  </div>
+                    ✅
+                  </span>
+                  <p className={`${cellTextClass} text-white/90`}>{row.hero}</p>
                 </motion.div>
               ))}
             </div>

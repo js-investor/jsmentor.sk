@@ -7,7 +7,7 @@ const HomeDesignHeaderSection = () => {
     <HeroSectionTemplate
       hidePreheaderBelowMd
       hideSubtitleBelowMd
-      headerCtaLabel="🚀 Vyskúšať na 14 dní ZADARMO"
+      headerCtaLabel="🚀 Vyskúšať na 15 dní ZADARMO"
       headerCtaHref="#formular"
       preheader={<>TVOJA CESTA K PRVÝM 100 000 € 🔥</>}
       title={
@@ -27,28 +27,28 @@ const HomeDesignHeaderSection = () => {
       trustBadges={[
         <>
           <span className="mb-2 text-2xl md:text-3xl">⭐⭐⭐⭐⭐</span>
-          <span className="[font-family:var(--font-serif)] text-2xl font-black text-foreground">
+          <span className="[font-family:var(--font-serif)] text-2xl font-black text-white">
             118 000+ ľudí
           </span>
-          <span className="font-sans text-[1.0625rem] font-medium leading-snug text-muted-foreground md:text-small md:font-normal">
+          <span className="font-sans text-[1.0625rem] font-medium leading-snug text-white/80 md:text-small md:font-normal">
             ma sleduje na Instagrame
           </span>
         </>,
         <>
           <span className="mb-2 text-3xl md:text-4xl">🚀</span>
-          <span className="[font-family:var(--font-serif)] text-2xl font-black text-foreground">
-            14 dní ZADARMO
+          <span className="[font-family:var(--font-serif)] text-2xl font-black text-white">
+            15 dní ZADARMO
           </span>
-          <span className="font-sans text-[1.0625rem] font-medium leading-snug text-muted-foreground md:text-small md:font-normal">
+          <span className="font-sans text-[1.0625rem] font-medium leading-snug text-white/80 md:text-small md:font-normal">
             na vyskúšanie
           </span>
         </>,
         <>
           <span className="mb-2 text-3xl md:text-4xl">💸</span>
-          <span className="[font-family:var(--font-serif)] text-2xl font-black text-foreground">
+          <span className="[font-family:var(--font-serif)] text-2xl font-black text-white">
             Len 7 € mesačne
           </span>
-          <span className="font-sans text-[1.0625rem] font-medium leading-snug text-muted-foreground md:text-small md:font-normal">
+          <span className="font-sans text-[1.0625rem] font-medium leading-snug text-white/80 md:text-small md:font-normal">
             (alebo 60 € ročne)
           </span>
         </>,
@@ -119,7 +119,7 @@ const HomeDesignHeaderSection = () => {
           </div>
         </div>
       }
-      heroCtaLabel="🚀 Vyskúšať na 14 dní ZADARMO"
+      heroCtaLabel="🚀 Vyskúšať na 15 dní ZADARMO"
       heroCtaHref="#formular"
       videoSrc="https://player.vimeo.com/video/1145809910"
       videoTitle="JS Mentor hero video"

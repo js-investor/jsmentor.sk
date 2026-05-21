@@ -7,7 +7,7 @@ type SiteHeaderProps = {
 };
 
 const SiteHeader = ({
-  ctaLabel = "🚀 Vyskúšať na 14 dní ZADARMO",
+  ctaLabel = "🚀 Vyskúšať na 15 dní ZADARMO",
   ctaHref,
   ctaOnClick,
 }: SiteHeaderProps) => {

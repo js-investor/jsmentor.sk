@@ -84,6 +84,10 @@ const painItems: { Icon: LucideIcon; content: ReactNode }[] = [
   },
 ];
 
+const painSectionBgOuter = "#000000";
+const painSectionBgInner = "#171717";
+const painSectionBg = `radial-gradient(ellipse 85% 75% at 50% 42%, ${painSectionBgInner} 0%, ${painSectionBgOuter} 58%, ${painSectionBgOuter} 100%)`;
+
 const listParent = {
   hidden: {},
   visible: {
@@ -106,26 +110,24 @@ const listItem = {
 const StaleSaTiToDejeSection = () => (
   <section
     id="stale-sa-ti-to-deje"
-    className="section-cream section-padding relative overflow-hidden scroll-mt-24"
+    className="hero-section-pad relative scroll-mt-24 overflow-hidden px-5 md:px-8 pt-[72px] pb-[72px] text-white md:pt-[96px] md:pb-[96px]"
+    style={{
+      backgroundColor: painSectionBgOuter,
+      backgroundImage: painSectionBg,
+    }}
   >
-    <div className="pointer-events-none absolute inset-0 bg-dot-grid opacity-[0.22]" />
-    <div
-      className="pointer-events-none absolute inset-0 opacity-100"
-      style={{
-        background:
-          "radial-gradient(120% 80% at 50% -10%, hsl(var(--primary) / 0.06) 0%, transparent 55%), linear-gradient(180deg, hsl(var(--cream)) 0%, hsl(var(--primary) / 0.02) 100%)",
-      }}
-    />
     <div className="section-container relative z-10">
       <div className="mx-auto max-w-5xl">
         <motion.div
-          className="mb-10 text-center md:mb-12"
+          className="mb-[54px] text-center"
           initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-72px" }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="headline-serif">Stále sa ti to deje?</h2>
+          <h2 className="headline-landing-section text-white">
+            Stále sa ti to deje?
+          </h2>
         </motion.div>
 
         <motion.div

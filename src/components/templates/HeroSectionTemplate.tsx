@@ -108,7 +108,11 @@ const HeroSectionTemplate = ({
                 {trustBadges.map((badge, index) => (
                   <div
                     key={index}
-                    className="flex flex-col items-center justify-center rounded-2xl border border-[#D5CCC2] bg-[#F1ECE6] px-3 py-3.5 text-center sm:min-h-[11.5rem] md:min-h-[10rem] md:px-4 md:py-5"
+                    className="flex flex-col items-center justify-center rounded-2xl border border-white/15 px-3 py-3.5 text-center text-white shadow-[0_10px_32px_-12px_rgba(2,60,46,0.45)] sm:min-h-[11.5rem] md:min-h-[10rem] md:px-4 md:py-5"
+                    style={{
+                      background:
+                        "linear-gradient(145deg, #023c2e 0%, #065f4a 48%, #0a5a47 100%)",
+                    }}
                   >
                     {badge}
                   </div>

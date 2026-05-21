@@ -18,6 +18,7 @@ import {
   Wallet,
   type LucideIcon,
 } from "lucide-react";
+import jsMentorHeroHeroScreen from "@/assets/images/js-mentor-hero-hero.png";
 import { useMemo, useState } from "react";
 import type { ReactNode } from "react";
 
@@ -45,10 +46,10 @@ const forest = "#023c2e";
 const forestMuted = "#065f4a";
 /** Spodok sekcie „Ochutnávka“ – o kúsok svetlejšia ako `forest` */
 const forestGradientEnd = "#0a5a47";
-/** Horná zóna „Čo presne dostaneš…“ – čierny gradient (bez zeleného nádychu) */
-const heroBlackStart = "#222222";
-const heroBlackMid = "#141414";
-const heroBlackEnd = "#0a0a0a";
+/** Horná zóna „Čo presne dostaneš…“ – radiálna čierna (ako sekcia recenzií) */
+const heroBlackOuter = "#000000";
+const heroBlackInner = "#171717";
+const heroBlackSectionBg = `radial-gradient(ellipse 85% 75% at 50% 42%, ${heroBlackInner} 0%, ${heroBlackOuter} 58%, ${heroBlackOuter} 100%)`;
 
 /** Širší obsah než default `section-container` (1200px) — hero + ochutnávka videí. */
 const contentWide = "mx-auto w-full max-w-[1400px]";
@@ -206,14 +207,14 @@ const CoDostanesHeroHeroSection = () => {
       <div
         className="relative overflow-hidden rounded-[2rem] pt-16 pb-14 md:rounded-[2.5rem] md:pb-20 md:pt-20"
         style={{
-          background: `linear-gradient(180deg, ${heroBlackStart} 0%, ${heroBlackMid} 48%, ${heroBlackEnd} 100%)`,
+          backgroundColor: heroBlackOuter,
+          backgroundImage: heroBlackSectionBg,
         }}
       >
         <div
-          className="pointer-events-none absolute inset-0 opacity-40"
+          className="pointer-events-none absolute inset-0 opacity-25"
           style={{
-            backgroundImage: `radial-gradient(ellipse 110% 75% at 50% -18%, rgba(255,255,255,0.07) 0%, transparent 52%),
-              linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.28) 100%)`,
+            backgroundImage: `radial-gradient(ellipse 110% 75% at 50% -18%, rgba(255,255,255,0.06) 0%, transparent 52%)`,
           }}
         />
         <div
@@ -251,14 +252,14 @@ const CoDostanesHeroHeroSection = () => {
                 </ul>
                 <div className="mt-8 flex justify-center sm:justify-start">
                   <a href="#formular" className="btn-primary text-body inline-flex">
-                    🚀 Vyskúšať na 14 dní ZADARMO
+                    🚀 Vyskúšať na 15 dní ZADARMO
                   </a>
                 </div>
               </div>
             </div>
 
             {/* Vizuál s mobilným mockupom */}
-            <div className="relative mx-auto min-h-[280px] w-full max-w-xl lg:col-span-7 lg:max-w-none lg:min-h-[360px]">
+            <div className="relative mx-auto min-h-[275px] w-full max-w-xl lg:col-span-7 lg:max-w-none lg:min-h-[345px]">
               {financialFlowIcons.map((Icon, index) => {
                 const iconCount = financialFlowIcons.length;
                 const delayPerIcon = 16 / iconCount;
@@ -275,19 +276,22 @@ const CoDostanesHeroHeroSection = () => {
                 );
               })}
 
-              {/* Mobilný mockup – placeholder bez Rive */}
-              <div className="relative z-20 mx-auto mt-8 flex w-[58%] max-w-[250px] justify-center sm:absolute sm:left-[34%] sm:top-[-4%] sm:mt-0 sm:w-[44%] sm:max-w-[255px] md:left-[40%] md:top-[-8%]">
-                <div className="relative aspect-[9/18] w-full rounded-[2rem] border border-white/20 bg-gradient-to-b from-white/[0.12] to-white/[0.03] p-1 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.65)]">
-                  <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[1.65rem] bg-gradient-to-b from-[#0a1210] to-black">
-                    <div className="mx-auto mt-3 h-1 w-10 rounded-full bg-white/15" aria-hidden />
-                    <div className="flex flex-1 flex-col justify-center gap-2 px-3 pb-4 pt-6">
-                      <div className="h-2 w-3/4 rounded-full bg-white/10" />
-                      <div className="h-2 w-full rounded-full bg-white/[0.06]" />
-                      <div className="mt-3 space-y-1.5 rounded-xl border border-emerald-500/25 bg-emerald-500/[0.08] p-2">
-                        <div className="h-1.5 w-5/6 rounded-full bg-emerald-300/35" />
-                        <div className="h-1.5 w-2/3 rounded-full bg-emerald-300/20" />
-                      </div>
-                      <div className="h-2 w-5/6 rounded-full bg-white/[0.07]" />
+              {/* Mobilný mockup — screenshot Hero Hero v „obrazovke“ */}
+              <div className="relative z-20 mx-auto mt-5 flex w-[56%] max-w-[255px] justify-center sm:absolute sm:left-[34%] sm:top-[-7%] sm:mt-0 sm:w-[44%] sm:max-w-[265px] md:left-[40%] md:top-[-11%] md:max-w-[280px] lg:top-[-12%] lg:max-w-[295px]">
+                <div className="relative aspect-[9/17] w-full rounded-[2rem] border border-white/20 bg-gradient-to-b from-white/[0.12] to-white/[0.03] p-1 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.65)]">
+                  <div className="relative flex h-full w-full items-start justify-center overflow-hidden rounded-[1.65rem] bg-white">
+                    <img
+                      src={jsMentorHeroHeroScreen}
+                      alt="Hero Hero — profil JsMentor v mobilnej aplikácii"
+                      className="h-full w-full object-contain object-top"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div
+                      className="pointer-events-none absolute inset-x-0 top-0 z-10 flex justify-center pt-2.5"
+                      aria-hidden
+                    >
+                      <div className="h-1 w-10 rounded-full bg-black/25 backdrop-blur-sm" />
                     </div>
                   </div>
                 </div>
