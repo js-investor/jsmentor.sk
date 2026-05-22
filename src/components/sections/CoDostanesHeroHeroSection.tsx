@@ -18,12 +18,13 @@ import {
   Wallet,
   type LucideIcon,
 } from "lucide-react";
+import brandPattern from "@/assets/logo/js-brand-pattern.svg";
 import jsMentorHeroHeroScreen from "@/assets/images/js-mentor-hero-hero.png";
 import { useMemo, useState } from "react";
 import type { ReactNode } from "react";
 
 const benefitBold = (text: string) => (
-  <strong className="font-bold text-foreground">{text}</strong>
+  <strong className="font-bold text-white">{text}</strong>
 );
 
 const BenefitLabel = ({
@@ -35,17 +36,29 @@ const BenefitLabel = ({
   bold: string;
   tail?: string;
 }) => (
-  <>
+  <span className="text-white/90">
     {lead}
     {benefitBold(bold)}
     {tail}
-  </>
+  </span>
 );
 
 const forest = "#023c2e";
 const forestMuted = "#065f4a";
 /** Spodok sekcie „Ochutnávka“ – o kúsok svetlejšia ako `forest` */
 const forestGradientEnd = "#0a5a47";
+const brandIconGradient = `linear-gradient(145deg, ${forest} 0%, ${forestMuted} 48%, ${forestGradientEnd} 100%)`;
+const brandIconMaskStyle = {
+  background: brandIconGradient,
+  WebkitMaskImage: `url(${brandPattern})`,
+  maskImage: `url(${brandPattern})`,
+  WebkitMaskRepeat: "no-repeat",
+  maskRepeat: "no-repeat",
+  WebkitMaskPosition: "center",
+  maskPosition: "center",
+  WebkitMaskSize: "contain",
+  maskSize: "contain",
+} as const;
 /** Horná zóna „Čo presne dostaneš…“ – radiálna čierna (ako sekcia recenzií) */
 const heroBlackOuter = "#000000";
 const heroBlackInner = "#171717";
@@ -96,11 +109,8 @@ const financialFlowIcons: LucideIcon[] = [
   BarChart3,
 ];
 
-/** Jemné taby – svetlé pozadie na tmavom bloku */
-const heroBenefitRowClass =
-  "flex items-center gap-3 rounded-3xl border border-white/25 bg-[#FFF9F5] px-3 py-2 text-foreground/90 sm:gap-3.5 sm:px-4 sm:py-2.5 md:px-4";
-const heroBenefitIconClass =
-  "h-5 w-5 shrink-0 text-primary sm:h-6 sm:w-6 md:h-7 md:w-7";
+const heroBenefitDividerClass =
+  "h-px w-full bg-gradient-to-r from-white via-white/35 to-transparent";
 
 const heroHeroBenefits: {
   Icon: LucideIcon;
@@ -238,15 +248,22 @@ const CoDostanesHeroHeroSection = () => {
                   Každý týždeň čerstvý obsah priamo odo mňa.
                 </p>
                 <ul
-                  className="flex flex-col gap-1.5 text-left font-sans text-[1.02rem] leading-snug sm:gap-2 md:text-[1.06rem] md:leading-relaxed lg:text-[1.12rem]"
+                  className="flex flex-col text-left font-sans text-[1.02rem] leading-snug md:text-[1.06rem] md:leading-relaxed lg:text-[1.12rem]"
                   aria-label="Čo dostaneš v Hero Hero"
                 >
                   {heroHeroBenefits.map(({ Icon, label }, index) => (
-                    <li key={index}>
-                      <div className={heroBenefitRowClass}>
-                        <Icon className={heroBenefitIconClass} strokeWidth={2.1} aria-hidden />
+                    <li key={index} className="flex flex-col">
+                      <div className="flex items-start gap-3 py-3 sm:gap-3.5 sm:py-3.5">
+                        <Icon
+                          className="mt-0.5 h-5 w-5 shrink-0 text-white sm:h-6 sm:w-6"
+                          strokeWidth={2.1}
+                          aria-hidden
+                        />
                         <span className="min-w-0 flex-1">{label}</span>
                       </div>
+                      {index < heroHeroBenefits.length - 1 ? (
+                        <div className={heroBenefitDividerClass} aria-hidden />
+                      ) : null}
                     </li>
                   ))}
                 </ul>
@@ -269,8 +286,17 @@ const CoDostanesHeroHeroSection = () => {
                     className="co-finance-flow-icon z-10"
                     style={{ animationDelay: `-${index * delayPerIcon}s` }}
                   >
-                    <div className="flex h-8 w-8 items-center justify-center rounded-[0.45rem] border border-white/20 bg-black/70 shadow-[0_6px_18px_rgba(0,0,0,0.35)] md:h-11 md:w-11 md:rounded-xl">
-                      <Icon className="h-4 w-4 text-emerald-300/95 md:h-5 md:w-5" aria-hidden />
+                    <div className="relative flex h-8 w-8 items-center justify-center shadow-[0_6px_18px_rgba(0,0,0,0.35)] md:h-11 md:w-11">
+                      <div
+                        className="absolute inset-0"
+                        style={brandIconMaskStyle}
+                        aria-hidden
+                      />
+                      <Icon
+                        className="relative z-10 h-4 w-4 text-white md:h-5 md:w-5"
+                        strokeWidth={2.1}
+                        aria-hidden
+                      />
                     </div>
                   </div>
                 );
