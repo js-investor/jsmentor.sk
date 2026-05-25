@@ -735,12 +735,72 @@
 #CybotCookiebotDialog
   .CybotCookiebotDialogBodyLevelButtonSliderWrapperDisabled
   input:checked
+  + .CybotCookiebotDialogBodyLevelButtonSlider,
+#CybotCookiebotDialog
+  .CybotCookiebotDialogBodyLevelButtonSliderWrapperFullWidth
+  input:checked
   + .CybotCookiebotDialogBodyLevelButtonSlider {
   background-color: #29614a !important;
 }
 
 #CybotCookiebotDialog .CybotCookiebotDialogBodyLevelButtonSliderWrapper .CybotCookiebotDialogBodyLevelButtonSlider {
   background-color: #c5d4cf !important;
+}
+
+#CybotCookiebotDialog .CybotCookiebotDialogBodyLevelButtonLabel:hover,
+#CybotCookiebotDialog .CybotCookiebotDialogBodyLevelButtonLabel:hover .CybotCookiebotDialogBodyLevelButtonDescription,
+#CybotCookiebotDialog .CybotCookiebotDialogBodyLevelButtonLabel:focus-within,
+#CybotCookiebotDialog .CybotCookiebotDialogBodyLevelButtonLabel:focus-within .CybotCookiebotDialogBodyLevelButtonDescription {
+  color: #29614a !important;
+  cursor: pointer;
+}
+
+#CybotCookiebotDialog.CybotEdge #CybotCookiebotDialogBodyEdgeMoreDetails a {
+  color: #29614a !important;
+}
+
+#CybotCookiebotDialog.CybotEdge #CybotCookiebotDialogBodyEdgeMoreDetails a:hover,
+#CybotCookiebotDialog.CybotEdge #CybotCookiebotDialogBodyEdgeMoreDetails a:focus {
+  color: #023c2e !important;
+}
+
+#CybotCookiebotDialogNav .CybotCookiebotDialogNavItemLink.CybotCookiebotDialogActive {
+  border-color: transparent !important;
+  border-bottom: 1px solid #29614a !important;
+  color: #29614a !important;
+}
+
+#CybotCookiebotDialogNav .CybotCookiebotDialogNavItemLink:hover,
+#CybotCookiebotDialogNav .CybotCookiebotDialogNavItemLink:focus {
+  color: #29614a !important;
+}
+
+#CybotCookiebotDialog .CybotCookiebotDialogDetailBodyContentCookieContainerButton,
+#CybotCookiebotDialog .CybotCookiebotDialogDetailBodyContentCookieContainerButton span,
+#CybotCookiebotDialog .CybotCookiebotDialogDetailBodyContentCookieProvider,
+#CybotCookiebotDialog .CybotCookiebotDialogDetailBodyContentCookieInfoTitle {
+  transition: color 0.2s ease;
+}
+
+#CybotCookiebotDialog .CybotCookiebotDialogDetailBodyContentCookieContainerButton:hover,
+#CybotCookiebotDialog .CybotCookiebotDialogDetailBodyContentCookieContainerButton:hover span,
+#CybotCookiebotDialog .CybotCookiebotDialogDetailBodyContentCookieContainerButton:focus,
+#CybotCookiebotDialog .CybotCookiebotDialogDetailBodyContentCookieContainerButton:focus span {
+  color: #29614a !important;
+}
+
+#CybotCookiebotDialog a.CybotCookiebotDialogDetailBodyContentCookieProvider:hover,
+#CybotCookiebotDialog a.CybotCookiebotDialogDetailBodyContentCookieProvider:focus {
+  color: #29614a !important;
+}
+
+#CybotCookiebotDialog a.CybotCookiebotDialogDetailBodyContentCookieLink {
+  color: #29614a !important;
+}
+
+#CybotCookiebotDialog a.CybotCookiebotDialogDetailBodyContentCookieLink:hover,
+#CybotCookiebotDialog a.CybotCookiebotDialogDetailBodyContentCookieLink:focus {
+  color: #023c2e !important;
 }
 
 #CookiebotWidget .CookiebotWidget-logo svg circle,
