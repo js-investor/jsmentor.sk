@@ -4,8 +4,10 @@ import brandPattern from "@/assets/logo/js-brand-pattern.svg";
 import { TrendingUp, Wallet, Clock, Check } from "lucide-react";
 import { ReactNode } from "react";
 
+import { scrollToFormular } from "@/lib/scrollToFormular";
+
 const scrollToBooking = () => {
-  document.getElementById("formular")?.scrollIntoView({ behavior: "smooth" });
+  scrollToFormular();
 };
 
 const cards: { icon: ReactNode; stat: string; title: string; body: string }[] = [

@@ -6,34 +6,50 @@ import recenzia3 from "@/assets/images/recenzia-3.png";
 import recenzia4 from "@/assets/images/recenzia-4.png";
 import recenzia5 from "@/assets/images/recenzia-5.png";
 import recenzia6 from "@/assets/images/recenzia-6.png";
+import recenzia7 from "@/assets/images/recenzia-7.png";
+import recenzia8 from "@/assets/images/recenzia-8.png";
+import recenzia9 from "@/assets/images/recenzia-9.png";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useMemo } from "react";
 import { cn } from "@/lib/utils";
+import { scrollToFormular } from "@/lib/scrollToFormular";
+
+type ReviewImage = { src: string; alt: string };
 
 /** Poradie v lightboxe: 6 prvá, potom 1–5 */
-const LIGHTBOX_IMAGES = [
+const BASE_REVIEW_IMAGES: ReviewImage[] = [
   { src: recenzia6, alt: "Recenzia klienta — screenshot 6" },
   { src: recenzia1, alt: "Recenzia klienta — screenshot 1" },
   { src: recenzia2, alt: "Recenzia klienta — screenshot 2" },
   { src: recenzia3, alt: "Recenzia klienta — screenshot 3" },
   { src: recenzia4, alt: "Recenzia klienta — screenshot 4" },
   { src: recenzia5, alt: "Recenzia klienta — screenshot 5" },
-] as const;
+];
+
+/** Len stránka /konzultacia */
+const KONZULTACIA_EXTRA_REVIEW_IMAGES: ReviewImage[] = [
+  { src: recenzia7, alt: "Recenzia klienta — screenshot 7" },
+  { src: recenzia8, alt: "Recenzia klienta — screenshot 8" },
+  { src: recenzia9, alt: "Recenzia klienta — screenshot 9" },
+];
 
 const scrollToBooking = () => {
-  document.getElementById("formular")?.scrollIntoView({ behavior: "smooth" });
+  scrollToFormular();
 };
 
 function ReviewsLightbox({
+  images,
   open,
   onOpenChange,
   startIndex,
 }: {
+  images: ReviewImage[];
   open: boolean;
   onOpenChange: (open: boolean) => void;
   startIndex: number;
 }) {
   const [index, setIndex] = useState(startIndex);
-  const len = LIGHTBOX_IMAGES.length;
+  const len = images.length;
 
   useEffect(() => {
     if (open) setIndex(startIndex);
@@ -56,7 +72,7 @@ function ReviewsLightbox({
     return () => window.removeEventListener("keydown", onKey);
   }, [open, go]);
 
-  const current = LIGHTBOX_IMAGES[index];
+  const current = images[index];
 
   const navBtn =
     "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35";
@@ -139,9 +155,22 @@ function ReviewsLightbox({
 
 type MoreReviewsSectionProps = {
   ctaLabel?: string;
+  /** Pridá recenzie 7–9 (použiť len na /konzultacia). */
+  includeKonzultaciaReviews?: boolean;
 };
 
-const MoreReviewsSection = ({ ctaLabel = "Získať Wealth Map" }: MoreReviewsSectionProps) => {
+const MoreReviewsSection = ({
+  ctaLabel = "Získať Wealth Map",
+  includeKonzultaciaReviews = false,
+}: MoreReviewsSectionProps) => {
+  const reviewImages = useMemo(
+    () =>
+      includeKonzultaciaReviews
+        ? [...BASE_REVIEW_IMAGES, ...KONZULTACIA_EXTRA_REVIEW_IMAGES]
+        : BASE_REVIEW_IMAGES,
+    [includeKonzultaciaReviews]
+  );
+
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
@@ -167,9 +196,9 @@ const MoreReviewsSection = ({ ctaLabel = "Získať Wealth Map" }: MoreReviewsSec
         <div className="mt-10 w-full">
           {/* Recenzie: masonry layout, na desktope 3 stĺpce */}
           <div className="columns-1 gap-3 space-y-3 md:columns-4 md:space-y-4">
-            {LIGHTBOX_IMAGES.map((item, idx) => (
+            {reviewImages.map((item, idx) => (
               <button
-                key={item.alt}
+                key={item.src}
                 type="button"
                 onClick={() => openAt(idx)}
                 className={cn(
@@ -196,7 +225,12 @@ const MoreReviewsSection = ({ ctaLabel = "Získať Wealth Map" }: MoreReviewsSec
         </div>
       </div>
 
-      <ReviewsLightbox open={lightboxOpen} onOpenChange={setLightboxOpen} startIndex={lightboxIndex} />
+      <ReviewsLightbox
+        images={reviewImages}
+        open={lightboxOpen}
+        onOpenChange={setLightboxOpen}
+        startIndex={lightboxIndex}
+      />
     </section>
   );
 };

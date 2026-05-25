@@ -1,8 +1,10 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeader from "@/components/SectionHeader";
 
+import { scrollToFormular } from "@/lib/scrollToFormular";
+
 const scrollToBooking = () => {
-  document.getElementById("formular")?.scrollIntoView({ behavior: "smooth" });
+  scrollToFormular();
 };
 
 const testimonials = [

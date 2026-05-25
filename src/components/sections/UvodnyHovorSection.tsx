@@ -1,7 +1,9 @@
 import AnimatedSection from "@/components/AnimatedSection";
 
+import { scrollToFormular } from "@/lib/scrollToFormular";
+
 const scrollToBooking = () => {
-  document.getElementById("formular")?.scrollIntoView({ behavior: "smooth" });
+  scrollToFormular();
 };
 
 const steps = [
