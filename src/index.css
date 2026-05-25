@@ -333,15 +333,14 @@
     @apply max-w-[1200px] mx-auto;
   }
 
-  /* Plávajúca pill navigácia (/konzultacia) */
-  .site-header-shell {
-    @apply fixed top-0 left-0 right-0 z-50 px-4 pt-3 md:px-6 md:pt-4 pointer-events-none;
+  /* Plávajúci header — /konzultacia */
+  .konzultacia-header-shell {
+    @apply pointer-events-none fixed inset-x-0 top-0 z-50 px-4 pt-3 md:px-6 md:pt-4;
   }
 
-  .site-header-bar {
-    @apply pointer-events-auto relative mx-auto grid w-full max-w-[1200px] items-center gap-3
-      rounded-full backdrop-blur-xl backdrop-saturate-150
-      px-4 py-2.5 md:px-6 md:py-3;
+  .konzultacia-header-bar {
+    @apply pointer-events-auto relative mx-auto flex w-full max-w-[1400px] items-center justify-between gap-3
+      rounded-2xl border px-4 py-2.5 backdrop-blur-xl backdrop-saturate-150 md:gap-4 md:rounded-full md:px-5 md:py-3;
     background-color: rgba(255, 255, 255, 0.97) !important;
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
     box-shadow:
@@ -350,17 +349,32 @@
       0 10px 28px -8px rgba(41, 97, 74, 0.08) !important;
   }
 
-  .site-header-bar--logo-only {
-    @apply grid-cols-1 justify-items-start;
+  .konzultacia-header-bar--logo-only {
+    @apply justify-start;
   }
 
-  .site-header-bar--full {
-    @apply grid-cols-[auto_1fr_auto];
+  .konzultacia-header-nav {
+    @apply flex flex-1 flex-wrap items-center justify-center gap-0.5 lg:gap-1;
   }
 
-  .site-header-mobile-panel {
-    @apply absolute top-[calc(100%+0.5rem)] left-0 right-0 z-50 overflow-hidden rounded-2xl
-      backdrop-blur-xl backdrop-saturate-150 px-2 py-2;
+  .konzultacia-header-actions {
+    @apply flex shrink-0 items-center gap-2;
+  }
+
+  .konzultacia-header-secondary-cta {
+    @apply inline-flex h-10 items-center justify-center whitespace-nowrap rounded-full border border-primary/20
+      bg-white/70 px-4 font-sans text-sm font-semibold text-primary transition-colors
+      hover:border-primary/35 hover:bg-white;
+  }
+
+  .konzultacia-header-menu-toggle {
+    @apply inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-primary/15
+      bg-white/80 text-primary transition-colors hover:border-primary/30 hover:bg-primary/5;
+  }
+
+  .konzultacia-header-mobile-panel {
+    @apply absolute left-0 right-0 top-[calc(100%+0.5rem)] z-50 overflow-hidden rounded-2xl px-2 py-2
+      backdrop-blur-xl backdrop-saturate-150;
     background-color: rgba(255, 255, 255, 0.98) !important;
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
     box-shadow:
@@ -368,10 +382,9 @@
       0 10px 24px -6px rgba(0, 0, 0, 0.07) !important;
   }
 
-  .site-header-menu-toggle {
-    @apply inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full
-      border border-primary/15 bg-white/50 text-primary transition-colors
-      hover:border-primary/30 hover:bg-primary/5 justify-self-end xl:hidden;
+  .konzultacia-header-mobile-link {
+    @apply w-full rounded-xl px-4 py-3 text-center font-sans text-base font-medium text-foreground
+      transition-colors hover:bg-primary/5 hover:text-primary;
   }
 
   .eyebrow {
@@ -444,9 +457,20 @@
     @apply text-lead font-sans text-cream/85 mt-4 md:mt-6;
   }
 
+  /** CTA na zelenom pozadí — krémové tlačidlo, nezelený gradient */
   .btn-primary-light {
-    @apply btn-primary bg-[#d4dfdb] text-primary hover:bg-[#c5d4cf];
+    @apply inline-flex items-center justify-center px-8 py-4 font-sans font-semibold text-base rounded-full transition-all duration-300 cursor-pointer;
     width: auto;
+    background: linear-gradient(180deg, #fff9f5 0%, #f0ebe3 100%);
+    color: var(--btn-primary-from);
+    box-shadow:
+      0 10px 28px -8px rgba(0, 0, 0, 0.35),
+      0 0 0 1px rgba(255, 255, 255, 0.12) inset;
+  }
+
+  .btn-primary-light:hover {
+    background: linear-gradient(180deg, #f5ebe3 0%, #e5d9ce 100%);
+    transform: translateY(-1px);
   }
 
   .quote-serif {
@@ -573,7 +597,9 @@
 
   @media (prefers-reduced-motion: reduce) {
     .btn-primary:hover,
-    .btn-primary {
+    .btn-primary,
+    .btn-primary-light:hover,
+    .btn-primary-light {
       transform: none;
     }
 

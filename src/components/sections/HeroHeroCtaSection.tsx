@@ -74,7 +74,7 @@ const HeroHeroCtaSection = () => (
                 <div className="mt-10 md:mt-12">
                   <a
                     href="#formular"
-                    className="btn-primary text-body inline-flex min-h-[3.25rem] px-8 py-4 text-[1.0625rem] shadow-[0_10px_28px_-8px_rgba(0,0,0,0.45)] ring-2 ring-white/25 md:min-h-[3.5rem] md:px-10 md:text-[1.125rem]"
+                    className="btn-primary-light text-body inline-flex min-h-[3.25rem] px-8 py-4 text-[1.0625rem] md:min-h-[3.5rem] md:px-10 md:text-[1.125rem]"
                   >
                     🚀 Vyskúšať na 15 dní ZADARMO
                   </a>

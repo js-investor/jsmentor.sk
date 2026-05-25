@@ -6,8 +6,13 @@ import vysledokGrafKristian from "@/assets/images/vysledok-graf-kristian.png";
 import vysledokGrafLukas from "@/assets/images/vysledok-graf-lukas.png";
 import vysledokGrafPeter from "@/assets/images/vysledok-graf-peter.png";
 import vysledokGrafSamuel from "@/assets/images/vysledok-graf-samuel.png";
+import { LineChart } from "lucide-react";
 import { useState } from "react";
 import type { ReactNode } from "react";
+
+const StoryChartIcon = () => (
+  <LineChart className="h-5 w-5 text-white" strokeWidth={2.2} aria-hidden />
+);
 
 const stories = [
   { name: "Samuel", role: "Štátny zamestnanec", meta: "Investuje pravidelne | 3 roky", amount: "18 427 €", percent: "(+50,02 %)", chartImage: vysledokGrafSamuel },
@@ -133,7 +138,7 @@ const ResultsSectionTemplate = ({
                   <article className="flex flex-col h-full rounded-[14px] border border-[#e7e2da] bg-white px-4 py-4 shadow-[0_2px_14px_rgba(0,0,0,0.06)]">
                     <div className="flex items-start gap-3.5">
                       <div className="h-10 w-10 shrink-0 rounded-[10px] flex items-center justify-center shadow-sm bg-center bg-cover" style={{ backgroundImage: `url(${brandPattern})` }}>
-                        <span className="font-sans text-base font-bold text-white">%</span>
+                        <StoryChartIcon />
                       </div>
                       <div className="min-w-0 pt-0.5">
                         <p className="[font-family:var(--font-serif)] h5 leading-none text-[#296A52]">{story.name}</p>
@@ -177,7 +182,7 @@ const ResultsSectionTemplate = ({
               <article className="flex flex-col h-full rounded-[14px] border border-[#e7e2da] bg-white px-4 py-4 shadow-[0_2px_14px_rgba(0,0,0,0.06)]">
                 <div className="flex items-start gap-3.5">
                   <div className="h-10 w-10 shrink-0 rounded-[10px] flex items-center justify-center shadow-sm bg-center bg-cover" style={{ backgroundImage: `url(${brandPattern})` }}>
-                    <span className="font-sans text-base font-bold text-white">%</span>
+                    <StoryChartIcon />
                   </div>
                   <div className="min-w-0 pt-0.5">
                     <p className="[font-family:var(--font-serif)] h5 leading-none text-[#296A52]">{story.name}</p>

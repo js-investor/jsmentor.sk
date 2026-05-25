@@ -1,5 +1,4 @@
 const HEADER_SELECTOR = "[data-js-site-header]";
-const FORMULAR_SCROLL_TARGET = "[data-formular-scroll-target]";
 const HEADER_FALLBACK_PX = 88;
 const GAP_PX = 16;
 
@@ -49,14 +48,8 @@ function resolveFormularScrollTarget(): HTMLElement | null {
   const section = document.getElementById("formular");
   if (!(section instanceof HTMLElement)) return null;
 
-  // Homepage CTA (`cardOnLight`) — začiatok celej sekcie, nie len pravý formulár
-  if (section.dataset.bookingVariant === "cardOnLight") {
-    return section;
-  }
-
-  return (
-    document.querySelector<HTMLElement>(FORMULAR_SCROLL_TARGET) ?? section
-  );
+  // Vždy začiatok booking sekcie (nadpis + layout), nie len `<form>` vpravo
+  return section;
 }
 
 function scrollToFormularElement(behavior: ScrollBehavior): void {
@@ -79,7 +72,7 @@ function scrollToFormularElement(behavior: ScrollBehavior): void {
   window.setTimeout(settle, 520);
 }
 
-/** Scroll to booking CTA: homepage → celá `#formular` sekcia; /konzultacia → formulár. */
+/** Scroll na začiatok sekcie `#formular` (pod fixný header). */
 export function scrollToFormular(): void {
   scrollToFormularElement("smooth");
 }
