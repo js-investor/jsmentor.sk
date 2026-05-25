@@ -60,7 +60,7 @@ const HeroSectionTemplate = ({
       >
         {preheader ? (
           <p
-            className={`bg-[#cdbca2] rounded-full px-4 py-1.5 text-small font-sans font-semibold uppercase tracking-[0.12em] text-black mb-8 ${
+            className={`rounded-full bg-[#8A7057] px-4 py-1.5 text-small font-sans font-semibold uppercase tracking-[0.12em] text-white mb-8 ${
               hidePreheaderBelowMd ? "hidden md:inline-block" : "inline-block"
             }`}
           >

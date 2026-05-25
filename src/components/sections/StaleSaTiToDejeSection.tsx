@@ -84,10 +84,6 @@ const painItems: { Icon: LucideIcon; content: ReactNode }[] = [
   },
 ];
 
-const painSectionBgOuter = "#000000";
-const painSectionBgInner = "#171717";
-const painSectionBg = `radial-gradient(ellipse 85% 75% at 50% 42%, ${painSectionBgInner} 0%, ${painSectionBgOuter} 58%, ${painSectionBgOuter} 100%)`;
-
 const listParent = {
   hidden: {},
   visible: {
@@ -110,12 +106,10 @@ const listItem = {
 const StaleSaTiToDejeSection = () => (
   <section
     id="stale-sa-ti-to-deje"
-    className="hero-section-pad relative scroll-mt-24 overflow-hidden px-5 md:px-8 pt-[72px] pb-[72px] text-white md:pt-[96px] md:pb-[96px]"
-    style={{
-      backgroundColor: painSectionBgOuter,
-      backgroundImage: painSectionBg,
-    }}
+    className="hero-section-pad relative scroll-mt-24 overflow-hidden px-5 md:px-8 pt-[72px] pb-[72px] md:pt-[96px] md:pb-[96px]"
+    style={{ backgroundColor: "#F0ECE6" }}
   >
+    <div className="absolute inset-0 bg-dot-grid opacity-20 pointer-events-none" />
     <div className="section-container relative z-10">
       <div className="mx-auto max-w-5xl">
         <motion.div
@@ -125,7 +119,7 @@ const StaleSaTiToDejeSection = () => (
           viewport={{ once: true, margin: "-72px" }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="headline-landing-section text-white">
+          <h2 className="headline-landing-section text-foreground">
             Stále sa ti to deje?
           </h2>
         </motion.div>
@@ -141,7 +135,7 @@ const StaleSaTiToDejeSection = () => (
             <motion.div
               key={index}
               variants={listItem}
-              className="flex items-center gap-3.5 rounded-2xl border border-[#d4c4b2]/80 bg-[#F6F1EC] px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] transition-[box-shadow,border-color] duration-300 hover:border-[#c9b8a4] hover:shadow-[0_10px_28px_-18px_rgba(0,0,0,0.12)] sm:gap-4 sm:px-5 sm:py-4"
+              className="flex items-center gap-3.5 rounded-2xl border border-[#d4c4b2]/80 bg-[#FFF9F5] px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] transition-[box-shadow,border-color] duration-300 hover:border-[#c9b8a4] hover:shadow-[0_10px_28px_-18px_rgba(0,0,0,0.12)] sm:gap-4 sm:px-5 sm:py-4"
             >
               <span className="shrink-0 text-[#C74D3D]" aria-hidden>
                 <Icon className="h-8 w-8 sm:h-9 sm:w-9" strokeWidth={2.1} />
