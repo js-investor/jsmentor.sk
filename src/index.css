@@ -705,35 +705,70 @@
 
 }
 
-/* Cookiebot widget brand color override (blue -> project green) */
+/* Cookiebot — brand green #29614A (dialog + widget) */
+#CybotCookiebotDialogFooter .CybotCookiebotDialogBodyButton,
+#CybotCookiebotDialogFooter #CybotCookiebotDialogBodyLevelButtonCustomize,
+#CybotCookiebotDialogFooter #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection,
+#CybotCookiebotDialogFooter #CybotCookiebotDialogBodyButtonAccept,
+#CybotCookiebotDialogFooter #CybotCookiebotDialogBodyLevelButtonAccept,
+#CybotCookiebotDialogFooter #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll {
+  background-color: #29614a !important;
+  border: 2px solid #29614a !important;
+  border-color: #29614a !important;
+  color: #fff !important;
+}
+
+#CybotCookiebotDialogFooter .CybotCookiebotDialogBodyButton:hover,
+#CybotCookiebotDialogFooter #CybotCookiebotDialogBodyLevelButtonCustomize:hover,
+#CybotCookiebotDialogFooter #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection:hover,
+#CybotCookiebotDialogFooter #CybotCookiebotDialogBodyButtonAccept:hover,
+#CybotCookiebotDialogFooter #CybotCookiebotDialogBodyLevelButtonAccept:hover,
+#CybotCookiebotDialogFooter #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll:hover {
+  background-color: #023c2e !important;
+  border-color: #023c2e !important;
+}
+
+#CybotCookiebotDialog
+  .CybotCookiebotDialogBodyLevelButtonSliderWrapper
+  input:checked
+  + .CybotCookiebotDialogBodyLevelButtonSlider,
+#CybotCookiebotDialog
+  .CybotCookiebotDialogBodyLevelButtonSliderWrapperDisabled
+  input:checked
+  + .CybotCookiebotDialogBodyLevelButtonSlider {
+  background-color: #29614a !important;
+}
+
+#CybotCookiebotDialog .CybotCookiebotDialogBodyLevelButtonSliderWrapper .CybotCookiebotDialogBodyLevelButtonSlider {
+  background-color: #c5d4cf !important;
+}
+
 #CookiebotWidget .CookiebotWidget-logo svg circle,
 #CookiebotWidget .CookiebotWidget-show-consent-details svg path,
 #CookiebotWidget .Cookiebotwidget-consent-icon svg path,
 #CookiebotWidget .CookiebotWidget-main-logo svg path {
-  fill: hsl(var(--primary)) !important;
+  fill: #29614a !important;
 }
 
-/* Keep the cookie toggle glyph visible on green background */
 #CookiebotWidget .CookiebotWidget-logo svg path {
   fill: #ffffff !important;
 }
 
 #CookiebotWidget #CookiebotWidget-btn-withdraw,
 #CookiebotWidget #CookiebotWidget-btn-change {
-  background-color: hsl(var(--primary)) !important;
-  border-color: hsl(var(--primary)) !important;
-  color: hsl(var(--primary-foreground)) !important;
+  background-color: #29614a !important;
+  border-color: #29614a !important;
+  color: #fff !important;
 }
 
 #CookiebotWidget #CookiebotWidget-btn-withdraw:hover,
 #CookiebotWidget #CookiebotWidget-btn-change:hover {
-  background-color: hsl(var(--forest-hover)) !important;
-  border-color: hsl(var(--forest-hover)) !important;
+  background-color: #023c2e !important;
+  border-color: #023c2e !important;
 }
 
-/* Consent details toggle/link text should match project green */
 #CookiebotWidget .CookiebotWidget-show-consent-details,
 #CookiebotWidget .CookiebotWidget-consent-details button {
-  color: hsl(var(--primary)) !important;
+  color: #29614a !important;
 }
 
