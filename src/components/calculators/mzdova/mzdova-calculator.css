@@ -1,0 +1,192 @@
+#mzv3-w,
+#mzv3-w *,
+#mzv3-w *::before,
+#mzv3-w *::after {
+  box-sizing: border-box;
+}
+
+#mzv3-w {
+  --midnight-blue: #111111;
+  --dim-grey: hsl(var(--border));
+  --sienna: hsl(var(--muted-foreground));
+  --misty-rose: hsl(var(--cream));
+  --seashell: hsl(var(--secondary));
+  --rosy-brown: hsl(var(--border));
+  --floral-white: hsl(var(--cream));
+  font-family: var(--font-sans);
+  color: hsl(var(--foreground));
+  width: 100%;
+}
+
+#mzv3-w h1,
+#mzv3-w h2,
+#mzv3-w h3,
+#mzv3-w .mzv3-title {
+  font-family: var(--font-serif) !important;
+  font-weight: 400 !important;
+}
+
+#mzv3-w .mzv3-shell {
+  border: 1px solid var(--dim-grey);
+  border-radius: 24px;
+  padding: clamp(16px, 2.6vw, 30px);
+  background: linear-gradient(180deg, var(--floral-white) 0%, #fff 24%, #fff 100%);
+  box-shadow: 0 18px 44px -28px rgba(17, 17, 17, 0.45);
+}
+
+#mzv3-w .hidden {
+  display: none !important;
+}
+
+#mzv3-w .mylife-btn-row {
+  max-width: 100%;
+  padding: 4px 0 14px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+#mzv3-w .mylife-btn-email,
+#mzv3-w .mylife-btn-pdf {
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  min-height: 46px;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+#mzv3-w .mylife-btn-email {
+  background: hsl(var(--cream));
+  border-color: #111;
+  color: #111;
+}
+
+#mzv3-w .mylife-btn-email:hover {
+  background: hsl(var(--border));
+}
+
+#mzv3-w .mylife-btn-pdf {
+  background: hsl(var(--primary));
+  border-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+#mzv3-w .mzv3-type-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: min(100%, 430px);
+  border: 1px solid var(--dim-grey);
+  border-radius: 12px;
+  background: #fff;
+  padding: 6px;
+}
+
+#mzv3-w .mzv3-switch-btn,
+#mzv3-w .mzv3-seg-btn,
+#mzv3-w .seg-btn {
+  flex: 1;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 12px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  background: transparent;
+  color: var(--sienna);
+  cursor: pointer;
+}
+
+#mzv3-w .mzv3-seg-btn,
+#mzv3-w .seg-btn {
+  font-size: 13px;
+  padding: 8px 12px;
+}
+
+#mzv3-w .mzv3-switch-btn.sel,
+#mzv3-w .mzv3-seg-btn.sel,
+#mzv3-w .seg-btn.sel {
+  background: hsl(var(--primary));
+  color: #fff;
+}
+
+#mzv3-w .seg,
+#mzv3-w .mzv3-seg-wrap {
+  display: inline-flex;
+  align-items: center;
+  background: var(--floral-white);
+  border-radius: 8px;
+  padding: 4px;
+  border: 1px solid var(--dim-grey);
+  width: 100%;
+}
+
+#mzv3-w .input-field {
+  transition: all 0.2s ease;
+  border: 1px solid var(--rosy-brown) !important;
+  width: 100% !important;
+  min-height: 52px !important;
+  padding: 12px 14px !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+  color: var(--midnight-blue) !important;
+}
+
+#mzv3-w .input-field:focus {
+  outline: none !important;
+  border-color: var(--midnight-blue) !important;
+  background-color: var(--floral-white) !important;
+}
+
+#mzv3-w .bd-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--dim-grey);
+  gap: 12px;
+}
+
+#mzv3-w .bd-row:last-child {
+  border-bottom: none;
+}
+
+#mzv3-w .bd-label {
+  font-size: 13px;
+  color: var(--sienna);
+  flex: 1;
+}
+
+#mzv3-w .bd-val {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--midnight-blue);
+  text-align: right;
+  white-space: nowrap;
+}
+
+#mzv3-w .bd-sep {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--sienna);
+  font-weight: 700;
+  padding: 16px 0 6px;
+  border-bottom: 1px solid var(--dim-grey);
+  margin-top: 8px;
+}
+
+#mzv3-w .bd-total {
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 2px solid var(--dim-grey);
+  border-bottom: none;
+}

@@ -10,6 +10,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const forest = "#023c2e";
 const forestMid = "#065f4a";
@@ -132,6 +133,12 @@ const HeroHeroBonusySection = () => (
               Už predpripravené pre komunitu Hero Hero. Spočítaj si rezervu, investície, hypotéku alebo
               dopad rozhodnutia — bez chaosu v Exceli a bez hádania vzorcov.
             </p>
+            <Link
+              to="/kalkulacky"
+              className="mt-5 inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-sans text-sm font-semibold text-[#023c2e] shadow-sm transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            >
+              Otvoriť kalkulačky
+            </Link>
           </div>
         </div>
       </AnimatedSection>

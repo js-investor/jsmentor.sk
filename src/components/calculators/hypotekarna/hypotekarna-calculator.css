@@ -1,0 +1,395 @@
+/**
+ * Scoped widget styles — tokens aligned with site (Calvino, Gilroy, primary/cream).
+ * Root id must match HypotekarnaCalculator.tsx (#hypo-calc-root).
+ */
+#hypo-calc-root *,
+#hypo-calc-root *::before,
+#hypo-calc-root *::after {
+  box-sizing: border-box;
+}
+
+#hypo-calc-root {
+  font-family: var(--font-sans);
+  color: hsl(var(--charcoal));
+  width: 100%;
+}
+
+#hypo-calc-root .hypo-heading,
+#hypo-calc-root .hypo-subheading-serif {
+  font-family: var(--font-serif);
+}
+
+#hypo-calc-root .ml-input {
+  border: 1px solid hsl(var(--border)) !important;
+  width: 100% !important;
+  background: hsl(var(--card)) !important;
+  color: hsl(var(--foreground)) !important;
+  font-family: var(--font-sans) !important;
+  padding: 14px 16px;
+  border-radius: calc(var(--radius) - 4px);
+  font-size: 1rem;
+  font-weight: 500;
+  transition: border-color 0.2s;
+}
+
+#hypo-calc-root .ml-input:focus {
+  outline: none !important;
+  border-color: hsl(var(--primary)) !important;
+  background: hsl(var(--cream)) !important;
+}
+
+#hypo-calc-root canvas {
+  pointer-events: auto !important;
+  cursor: crosshair;
+}
+
+#hypo-calc-root .ml-toggle {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+#hypo-calc-root .ml-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+#hypo-calc-root .ml-toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: hsl(var(--muted));
+  border-radius: 22px;
+  transition: 0.3s;
+}
+
+#hypo-calc-root .ml-toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background: hsl(var(--card));
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+#hypo-calc-root .ml-toggle input:checked + .ml-toggle-slider {
+  background: hsl(var(--primary));
+}
+
+#hypo-calc-root .ml-toggle input:checked + .ml-toggle-slider:before {
+  transform: translateX(18px);
+}
+
+#hypo-calc-root .ml-variant-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: calc(var(--radius) - 4px);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-sans);
+  transition: all 0.2s;
+}
+
+#hypo-calc-root .ml-variant-tab.active {
+  background: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+#hypo-calc-root .ml-variant-tab.inactive {
+  background: hsl(var(--muted)) !important;
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+#hypo-calc-root .ml-variant-tab.inactive:hover {
+  background: hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+#hypo-calc-root .ml-add-variant {
+  width: 36px;
+  height: 36px;
+  border-radius: calc(var(--radius) - 4px);
+  background: hsl(var(--muted)) !important;
+  border: none !important;
+  color: hsl(var(--muted-foreground)) !important;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  transition: all 0.2s;
+}
+
+#hypo-calc-root .ml-add-variant:hover {
+  background: hsl(var(--secondary)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+#hypo-calc-root .ml-panel-disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+#hypo-calc-root .ml-dropdown {
+  position: relative;
+}
+
+#hypo-calc-root .hypo-variant-bar {
+  margin: 24px 0;
+}
+
+#hypo-calc-root #hypo-variant-tabs {
+  column-gap: 12px !important;
+  row-gap: 10px !important;
+}
+
+#hypo-calc-root #hypo-variant-tabs .ml-add-variant {
+  margin-left: 10px !important;
+}
+
+#hypo-calc-root #hypo-variant-tabs .ml-dropdown {
+  margin-right: 2px;
+}
+
+#hypo-calc-root .ml-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: calc(var(--radius) - 4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 1000;
+  min-width: 160px;
+  padding: 4px;
+  display: none;
+}
+
+#hypo-calc-root .ml-dropdown-menu.open {
+  display: block;
+}
+
+#hypo-calc-root .ml-dropdown-item {
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 6px;
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans);
+}
+
+#hypo-calc-root .ml-dropdown-item:hover {
+  background: hsl(var(--cream));
+}
+
+#hypo-calc-root .ml-dropdown-item.danger {
+  color: hsl(var(--destructive));
+}
+
+#hypo-calc-root .ml-dropdown-item.danger:hover {
+  background: hsl(0 93% 94%);
+}
+
+#hypo-comparison-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2147483647;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+#hypo-comparison-modal.open {
+  display: flex;
+}
+
+#hypo-calc-root .ml-modal-box {
+  background: hsl(var(--card));
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
+}
+
+#hypo-calc-root .ml-modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid hsl(var(--border));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+#hypo-calc-root .ml-modal-body {
+  overflow-y: auto;
+  padding: 24px;
+  flex: 1;
+}
+
+#hypo-calc-root .ml-slider-wrap {
+  padding: 16px 24px;
+  border-bottom: 1px solid hsl(var(--border));
+  background: hsl(var(--cream));
+  flex-shrink: 0;
+}
+
+#hypo-calc-root .ml-compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+#hypo-calc-root .ml-compare-table th {
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: hsl(var(--muted-foreground));
+  font-weight: 700;
+  border-bottom: 2px solid hsl(var(--border));
+}
+
+#hypo-calc-root .ml-compare-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid hsl(var(--muted));
+  color: hsl(var(--foreground));
+}
+
+#hypo-calc-root .ml-compare-table tr:last-child td {
+  border-bottom: none;
+}
+
+#hypo-calc-root .ml-compare-table .section-header td {
+  background: hsl(var(--cream));
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: hsl(var(--muted-foreground));
+  padding: 8px 16px;
+}
+
+#hypo-calc-root .ml-compare-table .highlight td {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+#hypo-calc-root .hypo-btn-row {
+  max-width: 100%;
+  padding: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: hsl(var(--cream));
+}
+
+#hypo-calc-root .hypo-btn-email {
+  padding: 12px 20px;
+  border-radius: calc(var(--radius) - 4px);
+  font-weight: 500;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  background: hsl(var(--cream)) !important;
+  border: 1px solid hsl(var(--foreground)) !important;
+  color: hsl(var(--foreground)) !important;
+  font-family: var(--font-sans) !important;
+}
+
+#hypo-calc-root .hypo-btn-email:hover {
+  background: hsl(var(--border)) !important;
+}
+
+#hypo-calc-root .hypo-btn-pdf {
+  padding: 12px 20px;
+  border-radius: calc(var(--radius) - 4px);
+  font-weight: 500;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  background: hsl(var(--primary)) !important;
+  border: 1px solid hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+  font-family: var(--font-sans) !important;
+  box-shadow: 0 4px 14px rgba(41, 106, 82, 0.25);
+}
+
+#hypo-calc-root .hypo-btn-compare {
+  padding: 12px 20px;
+  border-radius: calc(var(--radius) - 4px);
+  font-weight: 500;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  background: hsl(var(--forest-hover)) !important;
+  border: 1px solid hsl(var(--forest-hover)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+  font-family: var(--font-sans) !important;
+}
+
+@media (max-width: 640px) {
+  #hypo-calc-root .hypo-btn-row {
+    justify-content: center;
+    padding: 16px;
+  }
+
+  #hypo-calc-root .hypo-btn-email,
+  #hypo-calc-root .hypo-btn-pdf,
+  #hypo-calc-root .hypo-btn-compare {
+    flex: 1;
+    min-width: 0;
+  }
+
+  #hypo-comparison-modal {
+    padding: 72px 0 0;
+    align-items: stretch;
+  }
+
+  #hypo-calc-root .ml-modal-box {
+    max-width: none;
+    width: 100%;
+    height: calc(100dvh - 72px);
+    max-height: calc(100dvh - 72px);
+    border-radius: 0;
+  }
+
+  #hypo-calc-root .ml-modal-header {
+    padding: 14px 16px;
+  }
+
+  #hypo-calc-root .ml-slider-wrap {
+    padding: 12px 16px;
+  }
+
+  #hypo-calc-root .ml-modal-body {
+    padding: 16px;
+  }
+}
