@@ -282,7 +282,7 @@ export function mountRentovaCalculator(): () => void {
     if (addVariantBtn) addVariantBtn.style.display = variants.length >= 4 ? "none" : "";
   };
 
-  (window as any).mlSwitchVariant = (id) => {
+  (window as any).mlSwitchVariant = (id: string) => {
     if (id === activeVariantId) return;
     save();
     activeVariantId = id;
@@ -303,7 +303,7 @@ export function mountRentovaCalculator(): () => void {
     renderTabs();
     calculate();
   };
-  (window as any).mlRenameVariant = (id) => {
+  (window as any).mlRenameVariant = (id: string) => {
     const v = variants.find((x) => x.id === id);
     if (!v) return;
     const n = prompt("Nový názov varianty:", v.name);
@@ -311,7 +311,7 @@ export function mountRentovaCalculator(): () => void {
     v.name = n.trim();
     renderTabs();
   };
-  (window as any).mlDuplicateVariant = (id) => {
+  (window as any).mlDuplicateVariant = (id: string) => {
     if (variants.length >= 4) return alert("Maximálny počet variantov je 4.");
     save();
     const src = variants.find((x) => x.id === id);
@@ -324,7 +324,7 @@ export function mountRentovaCalculator(): () => void {
     renderTabs();
     calculate();
   };
-  (window as any).mlDeleteVariant = (id) => {
+  (window as any).mlDeleteVariant = (id: string) => {
     if (variants.length <= 1) return;
     if (!confirm("Zmazať túto variantu?")) return;
     const was = id === activeVariantId;
