@@ -239,8 +239,8 @@ export function mountPodlaPrijmuCalculator(): () => void {
     }
     const created = new Chart(canvas, {
       type: "doughnut",
-      data: { labels: ["Hodnota", "Zvyšok"], datasets: [{ data: [displayValue, remaining], backgroundColor: [color, "#e5e7eb"], borderWidth: 0, circumference: 180, rotation: 270, cutout: "75%" }] },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { tooltip: { enabled: false }, legend: { display: false } } },
+      data: { labels: ["Hodnota", "Zvyšok"], datasets: [{ data: [displayValue, remaining], backgroundColor: [color, "#e5e7eb"], borderWidth: 0, circumference: 180, rotation: 270 }] },
+      options: { cutout: "75%", responsive: true, maintainAspectRatio: false, plugins: { tooltip: { enabled: false }, legend: { display: false } } },
     });
     set(created);
   };

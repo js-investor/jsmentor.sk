@@ -14,19 +14,8 @@ type Data = {
 };
 type Variant = { id: string; name: string; data: Data | null };
 
-declare global {
-  interface Window {
-    mlSwitchVariant?: (id: string) => void;
-    mlAddVariant?: () => void;
-    mlRenameVariant?: (id: string) => void;
-    mlDuplicateVariant?: (id: string) => void;
-    mlDeleteVariant?: (id: string) => void;
-    mlOpenComparison?: () => void;
-    mlCloseComparison?: () => void;
-    mlSendEmail?: () => void;
-    mlDownloadPDF?: () => Promise<void>;
-  }
-}
+// Note: globals are also declared in hypotekarna with different signatures.
+// We cast through `any` here to avoid cross-calculator type conflicts.
 
 export function mountRentovaCalculator(): () => void {
   let chartInstance: Chart | null = null;
@@ -254,7 +243,7 @@ export function mountRentovaCalculator(): () => void {
       const tab = document.createElement("button");
       tab.type = "button";
       tab.className = "ml-variant-tab " + (v.id === activeVariantId ? "active" : "inactive");
-      tab.onclick = () => window.mlSwitchVariant?.(v.id);
+      tab.onclick = () => (window as any).mlSwitchVariant?.(v.id);
       const label = document.createElement("span");
       label.innerText = v.name;
       tab.appendChild(label);
@@ -283,9 +272,9 @@ export function mountRentovaCalculator(): () => void {
         };
         menu.appendChild(i);
       };
-      item("Premenovať", () => window.mlRenameVariant?.(v.id));
-      item("Duplikovať", () => window.mlDuplicateVariant?.(v.id));
-      if (variants.length > 1) item("Zmazať", () => window.mlDeleteVariant?.(v.id), true);
+      item("Premenovať", () => (window as any).mlRenameVariant?.(v.id));
+      item("Duplikovať", () => (window as any).mlDuplicateVariant?.(v.id));
+      if (variants.length > 1) item("Zmazať", () => (window as any).mlDeleteVariant?.(v.id), true);
       wrap.appendChild(tab);
       wrap.appendChild(menu);
       variantTabsEl.appendChild(wrap);
@@ -293,7 +282,7 @@ export function mountRentovaCalculator(): () => void {
     if (addVariantBtn) addVariantBtn.style.display = variants.length >= 4 ? "none" : "";
   };
 
-  window.mlSwitchVariant = (id) => {
+  (window as any).mlSwitchVariant = (id: string) => {
     if (id === activeVariantId) return;
     save();
     activeVariantId = id;
@@ -302,7 +291,7 @@ export function mountRentovaCalculator(): () => void {
     renderTabs();
     calculate();
   };
-  window.mlAddVariant = () => {
+  (window as any).mlAddVariant = () => {
     save();
     if (variants.length >= 4) return alert("Maximálny počet variantov je 4.");
     variantCounter += 1;
@@ -314,7 +303,7 @@ export function mountRentovaCalculator(): () => void {
     renderTabs();
     calculate();
   };
-  window.mlRenameVariant = (id) => {
+  (window as any).mlRenameVariant = (id: string) => {
     const v = variants.find((x) => x.id === id);
     if (!v) return;
     const n = prompt("Nový názov varianty:", v.name);
@@ -322,7 +311,7 @@ export function mountRentovaCalculator(): () => void {
     v.name = n.trim();
     renderTabs();
   };
-  window.mlDuplicateVariant = (id) => {
+  (window as any).mlDuplicateVariant = (id: string) => {
     if (variants.length >= 4) return alert("Maximálny počet variantov je 4.");
     save();
     const src = variants.find((x) => x.id === id);
@@ -335,7 +324,7 @@ export function mountRentovaCalculator(): () => void {
     renderTabs();
     calculate();
   };
-  window.mlDeleteVariant = (id) => {
+  (window as any).mlDeleteVariant = (id: string) => {
     if (variants.length <= 1) return;
     if (!confirm("Zmazať túto variantu?")) return;
     const was = id === activeVariantId;
@@ -347,19 +336,19 @@ export function mountRentovaCalculator(): () => void {
     renderTabs();
     calculate();
   };
-  window.mlOpenComparison = () => {
+  (window as any).mlOpenComparison = () => {
     renderComparison();
     compareModal?.classList.add("open");
   };
-  window.mlCloseComparison = () => compareModal?.classList.remove("open");
-  window.mlSendEmail = () => {
+  (window as any).mlCloseComparison = () => compareModal?.classList.remove("open");
+  (window as any).mlSendEmail = () => {
     const s = calculate();
     const body = encodeURIComponent(
       `Rentová kalkulačka\n\nCieľová suma: ${fmt(s.requiredCapital)}\nVáš kapitál: ${fmt(s.projectedCapital)}\nStav cieľa: ${s.percentage}%\nMesačne chýba: ${s.capitalGap > 0 ? fmt(s.monthlyGap) : "0 €"}`,
     );
     window.location.href = `mailto:?subject=Rentová kalkulačka&body=${body}`;
   };
-  window.mlDownloadPDF = async () => {
+  (window as any).mlDownloadPDF = async () => {
     const btn = document.getElementById("ml-btn-pdf") as HTMLButtonElement | null;
     if (!btn) return;
     if (btn.dataset.busy === "1") return;
@@ -393,7 +382,7 @@ export function mountRentovaCalculator(): () => void {
   const onDocClick = () => document.querySelectorAll("#rentova-calc-root .ml-dropdown-menu").forEach((m) => m.classList.remove("open"));
   document.addEventListener("click", onDocClick);
   const onModalClick = (e: Event) => {
-    if (e.target === compareModal) window.mlCloseComparison?.();
+    if (e.target === compareModal) (window as any).mlCloseComparison?.();
   };
   compareModal?.addEventListener("click", onModalClick);
 
@@ -418,15 +407,15 @@ export function mountRentovaCalculator(): () => void {
     document.removeEventListener("click", onDocClick);
     compareModal?.removeEventListener("click", onModalClick);
     listeners.forEach(({ el, fn }) => el.removeEventListener("input", fn));
-    delete window.mlSwitchVariant;
-    delete window.mlAddVariant;
-    delete window.mlRenameVariant;
-    delete window.mlDuplicateVariant;
-    delete window.mlDeleteVariant;
-    delete window.mlOpenComparison;
-    delete window.mlCloseComparison;
-    delete window.mlSendEmail;
-    delete window.mlDownloadPDF;
+    delete (window as any).mlSwitchVariant;
+    delete (window as any).mlAddVariant;
+    delete (window as any).mlRenameVariant;
+    delete (window as any).mlDuplicateVariant;
+    delete (window as any).mlDeleteVariant;
+    delete (window as any).mlOpenComparison;
+    delete (window as any).mlCloseComparison;
+    delete (window as any).mlSendEmail;
+    delete (window as any).mlDownloadPDF;
   };
 }
 
