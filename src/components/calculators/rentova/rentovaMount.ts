@@ -14,19 +14,9 @@ type Data = {
 };
 type Variant = { id: string; name: string; data: Data | null };
 
-declare global {
-  interface Window {
-    mlSwitchVariant?: (id: string) => void;
-    mlAddVariant?: () => void;
-    mlRenameVariant?: (id: string) => void;
-    mlDuplicateVariant?: (id: string) => void;
-    mlDeleteVariant?: (id: string) => void;
-    mlOpenComparison?: () => void;
-    mlCloseComparison?: () => void;
-    mlSendEmail?: () => void;
-    mlDownloadPDF?: () => Promise<void>;
-  }
-}
+// Note: globals are also declared in hypotekarna with different signatures.
+// We cast through `any` here to avoid cross-calculator type conflicts.
+const w = window as unknown as Record<string, ((...args: unknown[]) => unknown) | undefined>;
 
 export function mountRentovaCalculator(): () => void {
   let chartInstance: Chart | null = null;
