@@ -14,7 +14,7 @@ declare global {
 
 export function mountMzdovaCalculator(): () => void {
   /** Legislatíva SR 2026 — zladené s Webflow embedom */
-  const NCZD_YEAR = 5966.73;
+  void 5966.73; // NCZD_YEAR (kept for reference)
   const NCZD_MONTH = 497.23;
   const NCZD_FULL_LIMIT_YEAR = 26083.13;
   const NCZD_PHASE_OUT_COEF = 14661.11;
