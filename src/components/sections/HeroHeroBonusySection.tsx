@@ -134,7 +134,7 @@ const HeroHeroBonusySection = () => (
               dopad rozhodnutia — bez chaosu v Exceli a bez hádania vzorcov.
             </p>
             <Link
-              to="/kalkulacky"
+              to="/bonusy"
               className="mt-5 inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-sans text-sm font-semibold text-[#023c2e] shadow-sm transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               Otvoriť kalkulačky

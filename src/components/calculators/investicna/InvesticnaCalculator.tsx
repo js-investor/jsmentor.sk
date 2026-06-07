@@ -1,5 +1,6 @@
 import { useLayoutEffect } from "react";
 import brandPattern from "@/assets/logo/js-brand-pattern.svg";
+import "../shared/calculator-toolbar.css";
 import "./investicna-calculator.css";
 import { mountInvesticnaCalculator } from "./investicnaMount";
 
@@ -15,30 +16,35 @@ const InvesticnaCalculator = () => {
   useLayoutEffect(() => mountInvesticnaCalculator(), []);
 
   return (
-    <div id="inv-calc-root" className="w-full py-10 md:py-12 px-4 sm:px-6 bg-cream">
-      <div className="max-w-6xl mx-auto">
-        <div className="inv-btn-row inv-no-export rounded-2xl border border-border/60">
-          <button type="button" className="inv-btn-compare" id="inv-btn-compare" onClick={() => window.invOpenComparison?.()}>
-            <CompareIcon />
-            Porovnať
-          </button>
-        </div>
-
-        <div className="inv-variant-row inv-no-export rounded-b-xl border border-t-0 border-border/60 -mt-px sm:border sm:rounded-xl sm:mt-4 sm:border-border/60">
-          <div id="inv-variant-tabs" className="inv-variant-tabs" />
+    <div id="inv-calc-root" className="w-full font-sans text-foreground">
+      <div className="calc-variant-toolbar inv-no-export rounded-2xl border border-border/60 overflow-hidden mx-[-0.125rem] sm:mx-0">
+        <div className="calc-variant-toolbar-variants">
+          <div id="inv-variant-tabs" className="calc-variant-tabs" />
           <button
             type="button"
             id="inv-add-variant"
             className="ml-add-variant"
-            title="Pridať variantu"
-            aria-label="Pridať variantu"
+            title="Pridať variant"
+            aria-label="Pridať variant"
             onClick={() => window.invAddVariant?.()}
           >
             +
           </button>
         </div>
+        <button
+          type="button"
+          className="calc-btn-compare"
+          id="inv-btn-compare"
+          onClick={() => window.invOpenComparison?.()}
+        >
+          <CompareIcon />
+          Porovnať
+        </button>
+      </div>
 
-        <div className="my-10 text-center max-w-2xl mx-auto">
+      <div className="calc-body-shell">
+        <div className="max-w-6xl mx-auto">
+        <div className="mb-10 text-center max-w-2xl mx-auto md:mb-12">
           <h1 className="text-[clamp(1.75rem,4vw,3rem)] mb-4 inv-heading-serif text-foreground leading-tight font-normal">
             Investičná kalkulačka
           </h1>
@@ -229,21 +235,22 @@ const InvesticnaCalculator = () => {
             </div>
           </div>
         </div>
+        </div>
+      </div>
 
-        <div id="inv-comparison-modal" className="inv-modal-overlay">
-          <div className="inv-modal-box">
-            <div className="inv-modal-header">
-              <div>
-                <h3 className="text-xl inv-heading-serif text-foreground m-0 font-normal">Porovnanie variantov</h3>
-                <p className="text-sm text-muted-foreground mt-1 mb-0">Prehľad vstupov a výsledkov investičných scenárov.</p>
-              </div>
-              <button type="button" className="inv-btn-email shrink-0" onClick={() => window.invCloseComparison?.()}>
-                Zavrieť
-              </button>
+      <div id="inv-comparison-modal" className="inv-modal-overlay">
+        <div className="inv-modal-box">
+          <div className="inv-modal-header">
+            <div>
+              <h3 className="text-xl inv-heading-serif text-foreground m-0 font-normal">Porovnanie variantov</h3>
+              <p className="text-sm text-muted-foreground mt-1 mb-0">Prehľad vstupov a výsledkov investičných scenárov.</p>
             </div>
-            <div className="inv-modal-body">
-              <table className="inv-compare-table" id="inv-compare-table" />
-            </div>
+            <button type="button" className="inv-btn-email shrink-0" onClick={() => window.invCloseComparison?.()}>
+              Zavrieť
+            </button>
+          </div>
+          <div className="inv-modal-body">
+            <table className="inv-compare-table" id="inv-compare-table" />
           </div>
         </div>
       </div>

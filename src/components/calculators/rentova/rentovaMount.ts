@@ -21,7 +21,7 @@ export function mountRentovaCalculator(): () => void {
   let chartInstance: Chart | null = null;
   let variantCounter = 1;
   let activeVariantId = "v1";
-  let variants: Variant[] = [{ id: "v1", name: "Varianta 1", data: null }];
+  let variants: Variant[] = [{ id: "v1", name: "Variant 1", data: null }];
 
   const root = document.getElementById("rentova-calc-root");
   if (!root) return () => {};
@@ -296,7 +296,7 @@ export function mountRentovaCalculator(): () => void {
     if (variants.length >= 4) return alert("Maximálny počet variantov je 4.");
     variantCounter += 1;
     const base = clone(active().data || getForm());
-    const nv = { id: "v" + variantCounter, name: "Varianta " + variantCounter, data: base };
+    const nv = { id: "v" + variantCounter, name: "Variant " + variantCounter, data: base };
     variants.push(nv);
     activeVariantId = nv.id;
     setForm(nv.data);
@@ -306,7 +306,7 @@ export function mountRentovaCalculator(): () => void {
   (window as any).mlRenameVariant = (id: string) => {
     const v = variants.find((x) => x.id === id);
     if (!v) return;
-    const n = prompt("Nový názov varianty:", v.name);
+    const n = prompt("Nový názov variantu:", v.name);
     if (!n || !n.trim()) return;
     v.name = n.trim();
     renderTabs();
@@ -326,7 +326,7 @@ export function mountRentovaCalculator(): () => void {
   };
   (window as any).mlDeleteVariant = (id: string) => {
     if (variants.length <= 1) return;
-    if (!confirm("Zmazať túto variantu?")) return;
+    if (!confirm("Zmazať tento variant?")) return;
     const was = id === activeVariantId;
     variants = variants.filter((v) => v.id !== id);
     if (was) {

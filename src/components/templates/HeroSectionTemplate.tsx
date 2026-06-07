@@ -1,4 +1,5 @@
 import SiteHeader from "@/components/layout/SiteHeader";
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 
@@ -11,6 +12,8 @@ type HeroSectionTemplateProps = {
   subtitle: ReactNode;
   description?: ReactNode;
   trustBadges?: ReactNode[];
+  /** Jednotný panel so štatistikami namiesto troch samostatných kariet. */
+  trustStatsPanel?: ReactNode;
   fullWidthBadge?: ReactNode;
   heroCtaLabel?: string;
   heroCtaHref?: string;
@@ -22,6 +25,14 @@ type HeroSectionTemplateProps = {
   hidePreheaderBelowMd?: boolean;
   /** Skryje lead / podnadpis pod `md`. */
   hideSubtitleBelowMd?: boolean;
+  /** Voliteľné triedy podnadpisu (napr. `hero-subheadline`). */
+  subtitleClassName?: string;
+  /** Voliteľné triedy horného pillu (preheader). */
+  preheaderClassName?: string;
+  /** Voliteľné triedy popisu pod podnadpisom (napr. `hero-description`). */
+  descriptionClassName?: string;
+  /** Menšie spodné odsadenie, keď hero priamo nadväzuje ďalšia sekcia rovnakej farby. */
+  compactBottom?: boolean;
 };
 
 const HeroSectionTemplate = ({
@@ -33,6 +44,7 @@ const HeroSectionTemplate = ({
   subtitle,
   description,
   trustBadges = [],
+  trustStatsPanel,
   fullWidthBadge,
   heroCtaLabel,
   heroCtaHref,
@@ -42,7 +54,26 @@ const HeroSectionTemplate = ({
   videoTitle = "Hero video",
   hidePreheaderBelowMd = false,
   hideSubtitleBelowMd = false,
-}: HeroSectionTemplateProps) => (
+  subtitleClassName,
+  preheaderClassName,
+  descriptionClassName,
+  compactBottom = false,
+}: HeroSectionTemplateProps) => {
+  const heroCta = heroCtaLabel ? (
+    <div className="flex justify-center mb-10 md:mb-12">
+      {heroCtaHref ? (
+        <a href={heroCtaHref} className="btn-primary text-body">
+          {heroCtaLabel}
+        </a>
+      ) : (
+        <button type="button" onClick={heroCtaOnClick} className="btn-primary text-body">
+          {heroCtaLabel}
+        </button>
+      )}
+    </div>
+  ) : null;
+
+  return (
   <>
     <SiteHeader ctaLabel={headerCtaLabel} ctaHref={headerCtaHref} ctaOnClick={headerCtaOnClick} />
 
@@ -51,7 +82,12 @@ const HeroSectionTemplate = ({
       <div className="absolute top-20 right-[20%] w-[400px] h-[400px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-[10%] w-[300px] h-[300px] rounded-full bg-forest-glow/5 blur-[80px] pointer-events-none" />
 
-    <div className="relative z-10 px-5 md:px-10 lg:px-0 pb-[4rem] pt-12 md:pt-16 lg:pt-20 max-w-[980px] mx-auto">
+    <div
+      className={cn(
+        "relative z-10 mx-auto max-w-[980px] px-5 pt-12 md:px-10 md:pt-16 lg:px-0 lg:pt-20",
+        compactBottom ? "pb-8 md:pb-10" : "pb-[4rem]",
+      )}
+    >
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -60,9 +96,12 @@ const HeroSectionTemplate = ({
       >
         {preheader ? (
           <p
-            className={`rounded-full bg-[#8A7057] px-4 py-1.5 text-small font-sans font-semibold uppercase tracking-[0.12em] text-white mb-8 ${
-              hidePreheaderBelowMd ? "hidden md:inline-block" : "inline-block"
-            }`}
+            className={cn(
+              preheaderClassName ??
+                "rounded-full bg-[#8A7057] px-4 py-1.5 text-small font-sans font-semibold uppercase tracking-[0.12em] text-white",
+              "mb-8",
+              hidePreheaderBelowMd ? "hidden md:inline-block" : "inline-block",
+            )}
           >
             {preheader}
           </p>
@@ -80,15 +119,28 @@ const HeroSectionTemplate = ({
           </h1>
         </div>
         <p
-          className={`text-lead font-sans text-muted-foreground mb-10 max-md:text-pretty md:mb-12 ${
-            hideSubtitleBelowMd ? "hidden md:block" : ""
-          }`}
+          className={cn(
+            subtitleClassName ??
+              "text-lead font-sans font-normal text-muted-foreground max-md:text-pretty",
+            "mb-8 md:mb-10",
+            hideSubtitleBelowMd && "hidden md:block",
+          )}
         >
           {subtitle}
         </p>
         {description ? (
-          <p className="text-body font-sans text-foreground/70 mb-10 md:mb-12">{description}</p>
+          <p
+            className={cn(
+              descriptionClassName ??
+                "text-body font-sans font-normal text-foreground/70",
+              heroCtaLabel ? "mb-6 md:mb-8" : "mb-10 md:mb-12",
+            )}
+          >
+            {description}
+          </p>
         ) : null}
+
+        {heroCta}
 
         {videoSrc ? (
           <div className="w-full md:w-[85%] max-w-[969px] mx-auto rounded-2xl overflow-hidden aspect-video bg-black shadow-[0_8px_32px_-4px_rgba(0,0,0,0.18),0_24px_64px_-12px_rgba(0,0,0,0.28),0_0_0_1px_rgba(0,0,0,0.1)] mb-10 md:mb-12">
@@ -101,9 +153,16 @@ const HeroSectionTemplate = ({
           </div>
         ) : null}
 
-        {(trustBadges.length > 0 || fullWidthBadge) ? (
-          <div className="mx-auto mb-10 flex w-full max-w-[969px] flex-col gap-2 md:mb-12 md:w-[85%] md:gap-3">
-            {trustBadges.length > 0 ? (
+        {(trustStatsPanel || trustBadges.length > 0 || fullWidthBadge) ? (
+          <div
+            className={cn(
+              "mx-auto flex w-full max-w-[969px] flex-col gap-2 md:w-[85%] md:gap-3",
+              compactBottom ? "mb-4 md:mb-6" : "mb-10 md:mb-12",
+            )}
+          >
+            {trustStatsPanel ? (
+              trustStatsPanel
+            ) : trustBadges.length > 0 ? (
               <div className="grid grid-cols-1 gap-2 sm:gap-3 sm:grid-cols-3">
                 {trustBadges.map((badge, index) => (
                   <div
@@ -128,20 +187,6 @@ const HeroSectionTemplate = ({
           </div>
         ) : null}
 
-        {heroCtaLabel ? (
-          <div className="flex justify-center mb-6">
-            {heroCtaHref ? (
-              <a href={heroCtaHref} className="btn-primary text-body">
-                {heroCtaLabel}
-              </a>
-            ) : (
-              <button type="button" onClick={heroCtaOnClick} className="btn-primary text-body">
-                {heroCtaLabel}
-              </button>
-            )}
-          </div>
-        ) : null}
-
         {badges.length > 0 ? (
           <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-small font-sans text-muted-foreground">
             {badges.map((badge, index) => (
@@ -156,7 +201,8 @@ const HeroSectionTemplate = ({
     </div>
     </section>
   </>
-);
+  );
+};
 
 export type { HeroSectionTemplateProps };
 export default HeroSectionTemplate;

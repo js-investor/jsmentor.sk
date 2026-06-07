@@ -52,7 +52,7 @@ export function mountInvesticnaCalculator(): () => void {
   let chartInstance: Chart | null = null;
   let variantCounter = 1;
   let activeVariantId = "v1";
-  let variants: Variant[] = [{ id: "v1", name: "Varianta 1", data: null }];
+  let variants: Variant[] = [{ id: "v1", name: "Variant 1", data: null }];
   const toggleBtn = document.getElementById("inv-advanced-toggle");
   const contentDiv = document.getElementById("inv-advanced-content");
   const arrowIcon = document.getElementById("inv-arrow-icon");
@@ -158,7 +158,7 @@ export function mountInvesticnaCalculator(): () => void {
       const menuBtn = document.createElement("button");
       menuBtn.type = "button";
       menuBtn.innerHTML = "⋮";
-      menuBtn.setAttribute("aria-label", "Možnosti varianty");
+      menuBtn.setAttribute("aria-label", "Možnosti variantu");
       menuBtn.style.cssText =
         "background:none;border:none;cursor:pointer;padding:2px 4px;color:inherit;font-size:16px;line-height:1;";
       menuBtn.onclick = (e) => {
@@ -451,7 +451,7 @@ export function mountInvesticnaCalculator(): () => void {
     variantCounter += 1;
     const src = getActiveVariant();
     const data = cloneData(src?.data ?? getFormData());
-    const v: Variant = { id: "v" + variantCounter, name: "Varianta " + variantCounter, data };
+    const v: Variant = { id: "v" + variantCounter, name: "Variant " + variantCounter, data };
     variants.push(v);
     activeVariantId = v.id;
     setFormData(v.data);
@@ -462,7 +462,7 @@ export function mountInvesticnaCalculator(): () => void {
   window.invRenameVariant = function (id: string): void {
     const v = variants.find((x) => x.id === id);
     if (!v) return;
-    const name = prompt("Nový názov varianty:", v.name);
+    const name = prompt("Nový názov variantu:", v.name);
     if (!name || !name.trim()) return;
     v.name = name.trim();
     renderVariantTabs();
@@ -491,7 +491,7 @@ export function mountInvesticnaCalculator(): () => void {
 
   window.invDeleteVariant = function (id: string): void {
     if (variants.length <= 1) return;
-    if (!confirm("Zmazať túto variantu?")) return;
+    if (!confirm("Zmazať tento variant?")) return;
     const wasActive = id === activeVariantId;
     variants = variants.filter((x) => x.id !== id);
     if (!variants.length) return;

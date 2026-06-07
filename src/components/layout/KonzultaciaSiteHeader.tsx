@@ -121,6 +121,8 @@ const KonzultaciaSiteHeader = ({
           )}
         </nav>
 
+        <div className="konzultacia-header-mobile-cta xl:hidden">{ctaButton}</div>
+
         <div className="konzultacia-header-actions">
           <div className="hidden items-center gap-2.5 xl:flex">
             {renderSecondaryCta(secondaryCtaClassName)}
@@ -166,7 +168,6 @@ const KonzultaciaSiteHeader = ({
             {secondaryCtaLabel ? (
               <div className="mt-2">{renderSecondaryCta("konzultacia-header-mobile-link font-semibold text-primary")}</div>
             ) : null}
-            <div className="mt-3 flex justify-center">{ctaButton}</div>
           </div>
         ) : null}
       </div>

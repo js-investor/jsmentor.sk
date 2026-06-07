@@ -1,5 +1,6 @@
 import { useLayoutEffect } from "react";
 import brandPattern from "@/assets/logo/js-brand-pattern.svg";
+import "../shared/calculator-toolbar.css";
 import "./rentova-calculator.css";
 import { mountRentovaCalculator } from "./rentovaMount";
 
@@ -15,22 +16,30 @@ const RentovaCalculator = () => {
   useLayoutEffect(() => mountRentovaCalculator(), []);
 
   return (
-    <div id="rentova-calc-root" className="py-12 px-4 sm:px-6 bg-cream">
-      <div className="max-w-6xl mx-auto">
-        <div className="mylife-btn-row ml-no-export">
-          <button type="button" id="ml-btn-compare" className="mylife-btn-compare" onClick={() => window.mlOpenComparison?.()}>
-            <CompareIcon /> Porovnať
-          </button>
-        </div>
-
-        <div className="ml-variant-row ml-no-export">
-          <div id="ml-variant-tabs" className="ml-variant-tabs" />
-          <button type="button" id="ml-add-variant" className="ml-add-variant" onClick={() => window.mlAddVariant?.()}>
+    <div id="rentova-calc-root" className="w-full font-sans text-foreground">
+      <div className="calc-variant-toolbar ml-no-export rounded-2xl border border-border/60 overflow-hidden mx-[-0.125rem] sm:mx-0">
+        <div className="calc-variant-toolbar-variants">
+          <div id="ml-variant-tabs" className="calc-variant-tabs" />
+          <button
+            type="button"
+            id="ml-add-variant"
+            className="ml-add-variant"
+            title="Pridať variant"
+            aria-label="Pridať variant"
+            onClick={() => window.mlAddVariant?.()}
+          >
             +
           </button>
         </div>
+        <button type="button" id="ml-btn-compare" className="calc-btn-compare" onClick={() => window.mlOpenComparison?.()}>
+          <CompareIcon />
+          Porovnať
+        </button>
+      </div>
 
-        <div className="mb-10 text-center max-w-2xl mx-auto">
+      <div className="calc-body-shell">
+        <div className="max-w-6xl mx-auto">
+        <div className="mb-10 text-center max-w-2xl mx-auto md:mb-12">
           <h1 className="text-4xl md:text-5xl mb-4 font-serif text-foreground leading-tight">Rentová kalkulačka</h1>
           <p className="text-lg text-muted-foreground leading-relaxed">Zistite, aký kapitál potrebujete na dosiahnutie vašej vysnívanej renty.</p>
         </div>
@@ -163,6 +172,7 @@ const RentovaCalculator = () => {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
 

@@ -65,21 +65,8 @@
   user-select: none;
 }
 
-/* Tlačidlá ako na hypo kalkulačke */
-#inv-calc-root .inv-btn-row {
-  max-width: 100%;
-  padding: 16px;
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  background: #fff9f5;
-  border: 1px solid #e2dccf;
-}
-
 #inv-calc-root .inv-btn-email,
-#inv-calc-root .inv-btn-pdf,
-#inv-calc-root .inv-btn-compare {
+#inv-calc-root .inv-btn-pdf {
   padding: 12px 20px;
   border-radius: calc(var(--radius) - 4px);
   font-weight: 500;
@@ -109,95 +96,12 @@
   box-shadow: 0 4px 14px rgba(41, 106, 82, 0.25);
 }
 
-#inv-calc-root .inv-btn-compare {
-  background: hsl(var(--forest-hover));
-  border: 1px solid hsl(var(--forest-hover));
-  color: hsl(var(--primary-foreground));
-}
-
-#inv-calc-root .inv-btn-email:hover {
-  background: hsl(var(--cream));
-}
-
-#inv-calc-root .inv-btn-pdf:hover {
-  filter: brightness(0.92);
-}
-
-#inv-calc-root .inv-btn-compare:hover {
-  filter: brightness(0.92);
-}
-
 #inv-calc-root .inv-btn-email:hover {
   background: hsl(var(--border));
 }
 
-#inv-calc-root .inv-variant-row {
-  padding: 16px;
-  background: #fff9f5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  border: 1px solid #e2dccf;
-}
-
-#inv-calc-root .inv-variant-tabs {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-#inv-calc-root .ml-variant-tab {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: calc(var(--radius) - 4px);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  font-family: var(--font-sans);
-  transition: all 0.2s;
-}
-
-#inv-calc-root .ml-variant-tab.active {
-  background: hsl(var(--primary)) !important;
-  color: hsl(var(--primary-foreground)) !important;
-}
-
-#inv-calc-root .ml-variant-tab.inactive {
-  background: hsl(var(--muted)) !important;
-  color: hsl(var(--muted-foreground)) !important;
-}
-
-#inv-calc-root .ml-variant-tab.inactive:hover {
-  background: hsl(var(--border)) !important;
-  color: hsl(var(--foreground)) !important;
-}
-
-#inv-calc-root .ml-add-variant {
-  width: 36px;
-  height: 36px;
-  border-radius: calc(var(--radius) - 4px);
-  background: hsl(var(--muted)) !important;
-  border: none !important;
-  color: hsl(var(--muted-foreground)) !important;
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-sans);
-  transition: all 0.2s;
-}
-
-#inv-calc-root .ml-add-variant:hover {
-  background: hsl(var(--secondary)) !important;
-  color: hsl(var(--foreground)) !important;
+#inv-calc-root .inv-btn-pdf:hover {
+  filter: brightness(0.92);
 }
 
 #inv-calc-root .ml-dropdown {
@@ -314,20 +218,10 @@
 }
 
 @media (max-width: 640px) {
-  #inv-calc-root .inv-btn-row {
-    justify-content: center;
-    padding: 16px;
-  }
-
   #inv-calc-root .inv-btn-email,
-  #inv-calc-root .inv-btn-pdf,
-  #inv-calc-root .inv-btn-compare {
+  #inv-calc-root .inv-btn-pdf {
     flex: 1;
     min-width: 0;
-  }
-
-  #inv-calc-root .inv-variant-row {
-    padding: 16px;
   }
 
   #inv-calc-root .inv-modal-overlay.open {

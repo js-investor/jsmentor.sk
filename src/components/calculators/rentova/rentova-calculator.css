@@ -34,19 +34,8 @@
   display: none !important;
 }
 
-#rentova-calc-root .mylife-btn-row {
-  max-width: 100%;
-  padding: 24px 24px 16px;
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  background: hsl(var(--cream));
-}
-
 #rentova-calc-root .mylife-btn-email,
-#rentova-calc-root .mylife-btn-pdf,
-#rentova-calc-root .mylife-btn-compare {
+#rentova-calc-root .mylife-btn-pdf {
   padding: 12px 20px;
   border-radius: 8px;
   font-weight: 500;
@@ -73,66 +62,6 @@
   background: hsl(var(--primary));
   border-color: hsl(var(--primary));
   color: #fff;
-}
-
-#rentova-calc-root .mylife-btn-compare {
-  background: hsl(var(--forest-hover));
-  border-color: hsl(var(--forest-hover));
-  color: #fff;
-}
-
-#rentova-calc-root .ml-variant-row {
-  padding: 0 24px 16px;
-  background: hsl(var(--cream));
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-#rentova-calc-root .ml-variant-tabs {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
-
-#rentova-calc-root .ml-variant-tab {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-}
-
-#rentova-calc-root .ml-variant-tab.active {
-  background: hsl(var(--primary)) !important;
-  color: #fff !important;
-}
-
-#rentova-calc-root .ml-variant-tab.inactive {
-  background: hsl(var(--muted)) !important;
-  color: hsl(var(--muted-foreground)) !important;
-}
-
-#rentova-calc-root .ml-add-variant {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  background: hsl(var(--muted)) !important;
-  border: none !important;
-  color: hsl(var(--muted-foreground)) !important;
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 #rentova-calc-root .ml-dropdown {

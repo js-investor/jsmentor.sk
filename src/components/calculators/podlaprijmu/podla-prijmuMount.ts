@@ -35,7 +35,7 @@ export function mountPodlaPrijmuCalculator(): () => void {
   let dstiChartInstance: Chart | null = null;
   let variantCounter = 1;
   let activeVariantId = "v1";
-  let variants: Variant[] = [{ id: "v1", name: "Varianta 1", data: null }];
+  let variants: Variant[] = [{ id: "v1", name: "Variant 1", data: null }];
 
   const root = document.getElementById("dti-calc-root");
   if (!root) return () => {};
@@ -349,7 +349,7 @@ export function mountPodlaPrijmuCalculator(): () => void {
     variantCounter += 1;
     const src = getActiveVariant();
     const data = cloneData(src?.data || getFormData());
-    const v = { id: `v${variantCounter}`, name: `Varianta ${variantCounter}`, data };
+    const v = { id: `v${variantCounter}`, name: `Variant ${variantCounter}`, data };
     variants.push(v);
     activeVariantId = v.id;
     setFormData(v.data);
@@ -359,7 +359,7 @@ export function mountPodlaPrijmuCalculator(): () => void {
   window.dtiRenameVariant = (id) => {
     const v = variants.find((x) => x.id === id);
     if (!v) return;
-    const name = prompt("Nový názov varianty:", v.name);
+    const name = prompt("Nový názov variantu:", v.name);
     if (!name || !name.trim()) return;
     v.name = name.trim();
     renderVariantTabs();
@@ -379,7 +379,7 @@ export function mountPodlaPrijmuCalculator(): () => void {
   };
   window.dtiDeleteVariant = (id) => {
     if (variants.length <= 1) return;
-    if (!confirm("Zmazať túto variantu?")) return;
+    if (!confirm("Zmazať tento variant?")) return;
     const wasActive = id === activeVariantId;
     variants = variants.filter((x) => x.id !== id);
     if (wasActive) {

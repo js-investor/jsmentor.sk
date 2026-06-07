@@ -1,5 +1,6 @@
 import { useLayoutEffect } from "react";
 import brandPattern from "@/assets/logo/js-brand-pattern.svg";
+import "../shared/calculator-toolbar.css";
 import "./hypotekarna-calculator.css";
 import { mountHypotekarnaCalculator } from "./hypotekarnaMount";
 
@@ -16,18 +17,19 @@ const HypotekarnaCalculator = () => {
 
   return (
     <div id="hypo-calc-root" className="w-full font-sans text-foreground">
-      <div className="hypo-btn-row rounded-2xl border border-border/60 overflow-hidden mx-[-0.125rem] sm:mx-0">
-        <button type="button" className="hypo-btn-compare" onClick={() => window.mlOpenComparison?.()}>
+      <div className="calc-variant-toolbar rounded-2xl border border-border/60 overflow-hidden mx-[-0.125rem] sm:mx-0">
+        <div className="calc-variant-toolbar-variants" id="hypo-variant-tabs" />
+        <button
+          type="button"
+          className="calc-btn-compare"
+          onClick={() => window.mlOpenComparison?.()}
+        >
           <CompareIcon />
           Porovnať
         </button>
       </div>
 
-      <div className="hypo-variant-bar bg-cream px-4 md:px-6 pt-4 pb-4 rounded-b-xl border border-t-0 border-border/60 -mt-px sm:border sm:rounded-xl sm:-mt-0 sm:border-border/60">
-        <div className="flex items-center gap-3 flex-wrap" id="hypo-variant-tabs" />
-      </div>
-
-      <div id="hypo-compare-wrapper" className="bg-cream px-4 md:px-6 pt-4 pb-12 md:pb-14 border-x border-b border-border/60 rounded-b-xl sm:rounded-xl sm:border sm:-mt-0">
+      <div id="hypo-compare-wrapper" className="calc-body-shell">
         <div className="hypo-print-container max-w-full mx-0">
           <div className="mb-10 text-center max-w-[700px] mx-auto">
             <h2 className="headline-serif mb-3">
@@ -352,7 +354,7 @@ const HypotekarnaCalculator = () => {
       </div>
 
       <div className="hypo-btn-row pt-5 pb-7 rounded-xl border border-border/60 mx-[-0.125rem] sm:mx-0 mt-6">
-        <button type="button" className="hypo-btn-compare" onClick={() => window.mlOpenComparison?.()}>
+        <button type="button" className="calc-btn-compare" onClick={() => window.mlOpenComparison?.()}>
           <CompareIcon />
           Porovnať
         </button>

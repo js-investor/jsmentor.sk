@@ -86,56 +86,6 @@
   transform: translateX(18px);
 }
 
-#hypo-calc-root .ml-variant-tab {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: calc(var(--radius) - 4px);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  font-family: var(--font-sans);
-  transition: all 0.2s;
-}
-
-#hypo-calc-root .ml-variant-tab.active {
-  background: hsl(var(--primary)) !important;
-  color: hsl(var(--primary-foreground)) !important;
-}
-
-#hypo-calc-root .ml-variant-tab.inactive {
-  background: hsl(var(--muted)) !important;
-  color: hsl(var(--muted-foreground)) !important;
-}
-
-#hypo-calc-root .ml-variant-tab.inactive:hover {
-  background: hsl(var(--border)) !important;
-  color: hsl(var(--foreground)) !important;
-}
-
-#hypo-calc-root .ml-add-variant {
-  width: 36px;
-  height: 36px;
-  border-radius: calc(var(--radius) - 4px);
-  background: hsl(var(--muted)) !important;
-  border: none !important;
-  color: hsl(var(--muted-foreground)) !important;
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-sans);
-  transition: all 0.2s;
-}
-
-#hypo-calc-root .ml-add-variant:hover {
-  background: hsl(var(--secondary)) !important;
-  color: hsl(var(--foreground)) !important;
-}
-
 #hypo-calc-root .ml-panel-disabled {
   opacity: 0.45;
   pointer-events: none;
@@ -143,10 +93,6 @@
 
 #hypo-calc-root .ml-dropdown {
   position: relative;
-}
-
-#hypo-calc-root .hypo-variant-bar {
-  margin: 24px 0;
 }
 
 #hypo-calc-root #hypo-variant-tabs {
@@ -339,22 +285,6 @@
   box-shadow: 0 4px 14px rgba(41, 106, 82, 0.25);
 }
 
-#hypo-calc-root .hypo-btn-compare {
-  padding: 12px 20px;
-  border-radius: calc(var(--radius) - 4px);
-  font-weight: 500;
-  font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  cursor: pointer;
-  background: hsl(var(--forest-hover)) !important;
-  border: 1px solid hsl(var(--forest-hover)) !important;
-  color: hsl(var(--primary-foreground)) !important;
-  font-family: var(--font-sans) !important;
-}
-
 @media (max-width: 640px) {
   #hypo-calc-root .hypo-btn-row {
     justify-content: center;
@@ -363,7 +293,7 @@
 
   #hypo-calc-root .hypo-btn-email,
   #hypo-calc-root .hypo-btn-pdf,
-  #hypo-calc-root .hypo-btn-compare {
+  #hypo-calc-root .hypo-btn-row .calc-btn-compare {
     flex: 1;
     min-width: 0;
   }

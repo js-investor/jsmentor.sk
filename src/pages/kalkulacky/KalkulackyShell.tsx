@@ -1,7 +1,12 @@
 import PageWrapper from "@/components/layout/PageWrapper";
 import KonzultaciaSiteHeader from "@/components/layout/KonzultaciaSiteHeader";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
-import { KALKULACKY_WHATSAPP_HREF } from "@/pages/kalkulacky/kalkulackyConfig";
+import {
+  BONUSY_BASE_PATH,
+  BONUSY_PDF_MENU_ITEM,
+  KALKULACKY_CALCULATORS,
+  KALKULACKY_WHATSAPP_HREF,
+} from "@/pages/kalkulacky/kalkulackyConfig";
 import type { ReactNode } from "react";
 
 type KalkulackyShellProps = {
@@ -12,11 +17,14 @@ const KalkulackyShell = ({ children }: KalkulackyShellProps) => (
   <PageWrapper>
     <KonzultaciaSiteHeader
       items={[
-        { label: "Hypotéka vs. investovanie", href: "/kalkulacky/hypo-smart" },
-        { label: "Investície", href: "/kalkulacky/investicna" },
-        { label: "Mzdy", href: "/kalkulacky/mzdova-kalkulacka" },
-        { label: "Úvery (DTI & DSTI)", href: "/kalkulacky/uvery" },
-        { label: "Renta", href: "/kalkulacky/rentova-kalkulacka" },
+        ...KALKULACKY_CALCULATORS.map((c) => ({
+          label: c.menuLabel,
+          href: `${BONUSY_BASE_PATH}/${c.slug}`,
+        })),
+        {
+          label: BONUSY_PDF_MENU_ITEM.label,
+          ...(BONUSY_PDF_MENU_ITEM.href ? { href: BONUSY_PDF_MENU_ITEM.href } : {}),
+        },
       ]}
       ctaLabel="Napíš mi na WhatsApp"
       ctaHref={KALKULACKY_WHATSAPP_HREF}

@@ -1,5 +1,6 @@
 import KalkulackyShell from "@/pages/kalkulacky/KalkulackyShell";
 import KalkulackaPage from "@/pages/kalkulacky/KalkulackaPage";
+import { BONUSY_BASE_PATH } from "@/pages/kalkulacky/kalkulackyConfig";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { ReactNode } from "react";
@@ -14,13 +15,15 @@ type KalkulackyProductPageProps = {
 const KalkulackyProductPage = ({ title, hideTitle = false, children }: KalkulackyProductPageProps) => (
   <KalkulackyShell>
     <div className="section-container">
-      <Link
-        to="/kalkulacky"
-        className="inline-flex items-center gap-2 font-sans text-sm text-primary hover:text-forest-hover transition-colors mb-6 md:mb-8"
-      >
-        <ArrowLeft className="h-4 w-4 shrink-0" aria-hidden />
-        Späť na kalkulačky
-      </Link>
+      <div className="mb-6 flex justify-center md:mb-8">
+        <Link
+          to={BONUSY_BASE_PATH}
+          className="inline-flex items-center gap-2 font-sans text-sm text-primary transition-colors hover:text-forest-hover"
+        >
+          <ArrowLeft className="h-4 w-4 shrink-0" aria-hidden />
+          Späť na bonusy
+        </Link>
+      </div>
       {!hideTitle ? <KalkulackaPage title={title} /> : null}
       {children}
     </div>

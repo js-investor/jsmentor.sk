@@ -60,7 +60,7 @@ export function mountHypotekarnaCalculator(): () => void {
   let variants: Variant[] = [
     {
       id: 1,
-      name: "Varianta 1",
+      name: "Variant 1",
       mortgageEnabled: true,
       investEnabled: true,
       mortgage: { amount: 150_000, years: 20, rate: 4.9 },
@@ -102,7 +102,7 @@ export function mountHypotekarnaCalculator(): () => void {
       };
       const menuBtn = document.createElement("button");
       menuBtn.type = "button";
-      menuBtn.setAttribute("aria-label", "Možnosti varianty");
+      menuBtn.setAttribute("aria-label", "Možnosti variantu");
       menuBtn.style.cssText = "background:none;border:none;cursor:pointer;padding:2px 4px;color:inherit;font-size:16px;line-height:1;";
       menuBtn.innerHTML = "⋮";
       menuBtn.onclick = (e) => {
@@ -135,7 +135,7 @@ export function mountHypotekarnaCalculator(): () => void {
       addBtn.type = "button";
       addBtn.className = "ml-add-variant";
       addBtn.innerHTML = "+";
-      addBtn.title = "Pridať variantu";
+      addBtn.title = "Pridať variant";
       addBtn.onclick = () => window.mlAddVariant?.();
       container.appendChild(addBtn);
     }
@@ -156,7 +156,7 @@ export function mountHypotekarnaCalculator(): () => void {
     saveCurrentVariant();
     const newV: Variant = {
       id: nextId++,
-      name: "Varianta " + (variants.length + 1),
+      name: "Variant " + (variants.length + 1),
       mortgageEnabled: true,
       investEnabled: true,
       mortgage: { amount: 150_000, years: 20, rate: 4.9 },
@@ -170,7 +170,7 @@ export function mountHypotekarnaCalculator(): () => void {
   window.mlRenameVariant = function (id: number) {
     const v = variants.find((x) => x.id === id);
     if (!v) return;
-    const name = prompt("Nový názov varianty:", v.name);
+    const name = prompt("Nový názov variantu:", v.name);
     if (name && name.trim()) {
       v.name = name.trim();
       renderTabs();
@@ -191,7 +191,7 @@ export function mountHypotekarnaCalculator(): () => void {
 
   window.mlDeleteVariant = function (id: number) {
     if (variants.length <= 1) return;
-    if (!confirm("Zmazať túto variantu?")) return;
+    if (!confirm("Zmazať tento variant?")) return;
     variants = variants.filter((x) => x.id !== id);
     delete cachedResults[id];
     if (activeId === id) switchVariant(variants[0].id);
@@ -695,7 +695,7 @@ Vygenerované dňa ${date} — ${BRAND_SITE}`);
       const options = variants
         .map((v, i) => `${i + 1}. ${v.name}${v.id === activeId ? " (aktuálna)" : ""}`)
         .join("\n");
-      const picked = prompt(`Vyber variantu pre PDF (zadaj číslo):\n${options}`, String(variants.findIndex((v) => v.id === activeId) + 1));
+      const picked = prompt(`Vyber variant pre PDF (zadaj číslo):\n${options}`, String(variants.findIndex((v) => v.id === activeId) + 1));
       if (picked === null) {
         btns.forEach((b, i) => {
           if (b) b.innerHTML = oldHtml[i] ?? "";
@@ -704,7 +704,7 @@ Vygenerované dňa ${date} — ${BRAND_SITE}`);
       }
       const idx = parseInt(picked, 10) - 1;
       if (!Number.isInteger(idx) || idx < 0 || idx >= variants.length) {
-        alert("Neplatný výber varianty.");
+        alert("Neplatný výber variantu.");
         btns.forEach((b, i) => {
           if (b) b.innerHTML = oldHtml[i] ?? "";
         });
