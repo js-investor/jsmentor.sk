@@ -8,12 +8,14 @@ import PageWrapper from "@/components/layout/PageWrapper";
 
 const Index = () => (
   <PageWrapper>
-    <HomeDesignHeaderSection />
-    <HeroHeroIvanSection />
-    <HeroHeroChybySection />
-    <HeroHeroNastrojeSection />
-    <HeroHeroDarkGradientSection />
-    <HeroHeroKalkulackySection />
+    <div className="page-home">
+      <HomeDesignHeaderSection />
+      <HeroHeroIvanSection />
+      <HeroHeroChybySection />
+      <HeroHeroNastrojeSection />
+      <HeroHeroDarkGradientSection />
+      <HeroHeroKalkulackySection />
+    </div>
   </PageWrapper>
 );
 

@@ -87,6 +87,14 @@
 }
 
 @font-face {
+  font-family: 'Recoleta';
+  src: url('./assets/fonts/recoleta/Recoleta Black.otf') format('opentype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Gilroy';
   src: url('./assets/fonts/gilroy/Gilroy-Regular.ttf') format('truetype');
   font-weight: 400;
@@ -177,6 +185,7 @@
     --footer-bg: 155 41% 27%;
 
     --font-serif: 'Calvino', serif;
+    --font-serif-home: 'Recoleta', serif;
     --font-sans: 'Gilroy', sans-serif;
 
     --sidebar-background: 25 100% 98%;
@@ -232,6 +241,10 @@
     font-family: var(--font-serif);
     font-weight: 800;
     line-height: 1.2;
+  }
+
+  .page-home {
+    --font-serif: var(--font-serif-home);
   }
 }
 

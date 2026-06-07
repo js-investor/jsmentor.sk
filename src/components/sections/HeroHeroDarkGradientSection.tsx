@@ -26,7 +26,7 @@ const showcaseVideos = [
 ] as const;
 
 const videoTitleClass =
-  "mx-auto mb-6 max-w-xl font-sans text-[1.125rem] font-bold leading-snug text-white md:mb-7 md:text-[1.3125rem] lg:text-[1.4375rem]";
+  "mx-auto mb-6 max-w-xl font-sans text-[1.3125rem] font-semibold leading-snug text-white md:mb-7 md:text-[1.5rem] lg:text-[1.625rem]";
 
 const durationBadgeClass =
   "mt-4 inline-flex rounded-md border border-white/10 bg-[#2A2A2A] px-5 py-1.5 font-sans text-sm font-medium text-white/80 md:px-6 md:py-2 md:text-base";
