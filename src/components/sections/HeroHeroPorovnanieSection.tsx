@@ -116,38 +116,58 @@ const HeroHeroPorovnanieSection = () => (
         </div>
       </AnimatedSection>
 
-      {/* ── Mobile: stacked pairs ── */}
-      <div className="mx-auto flex max-w-lg flex-col gap-4 lg:hidden">
-        {comparisonItems.map(({ chaosTitle, chaos, knowHowTitle, knowHow }, i) => (
-          <motion.div
-            key={chaos}
-            custom={i}
-            variants={itemVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-40px" }}
-            className="flex flex-col gap-2"
-          >
-            <div
+      {/* ── Mobile: all chaos first, then all know-how ── */}
+      <div className="mx-auto flex max-w-lg flex-col lg:hidden">
+
+        {/* Červené — chaos */}
+        <ul className="flex flex-col gap-3">
+          {comparisonItems.map(({ chaos }, i) => (
+            <motion.li
+              key={chaos}
+              custom={i}
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-40px" }}
               className="flex items-start gap-4 rounded-2xl border-[0.5px] border-[#F5C0BA] px-4 py-4"
               style={{ backgroundColor: "#FEF6F5" }}
             >
               <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FDECEA]">
                 <X className="h-3.5 w-3.5 text-[#C0392B]" strokeWidth={2.8} />
               </span>
-              <p className="font-sans text-[1.1875rem] leading-[1.6] text-foreground/60">{chaos}</p>
-            </div>
-            <div
+              <p className="font-sans text-[1.0625rem] leading-[1.6] text-foreground/70">{chaos}</p>
+            </motion.li>
+          ))}
+        </ul>
+
+        {/* Medzera */}
+        <div className="my-6 flex items-center gap-3" aria-hidden>
+          <div className="h-px flex-1 bg-foreground/10" />
+          <span className="font-sans text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-foreground/35">vs.</span>
+          <div className="h-px flex-1 bg-foreground/10" />
+        </div>
+
+        {/* Zelené — know-how */}
+        <ul className="flex flex-col gap-3">
+          {comparisonItems.map(({ knowHow }, i) => (
+            <motion.li
+              key={knowHow}
+              custom={i + comparisonItems.length}
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-40px" }}
               className="flex items-start gap-4 rounded-2xl border-[0.5px] border-[#A7F3C4] px-4 py-4"
               style={{ backgroundColor: "#F2FDF5" }}
             >
               <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#DCFCE7]">
                 <Check className="h-3.5 w-3.5 text-[#16a34a]" strokeWidth={2.8} />
               </span>
-              <p className="font-sans text-[1.1875rem] leading-[1.6] text-foreground">{knowHow}</p>
-            </div>
-          </motion.div>
-        ))}
+              <p className="font-sans text-[1.0625rem] leading-[1.6] text-foreground">{knowHow}</p>
+            </motion.li>
+          ))}
+        </ul>
+
       </div>
 
       {/* CTA */}
