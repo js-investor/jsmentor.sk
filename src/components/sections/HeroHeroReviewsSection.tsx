@@ -180,7 +180,7 @@ const HeroHeroReviewsSection = () => (
     </div>
 
     <div className="section-container relative z-10 mt-[54px] px-5 text-center md:px-8">
-      <a href="https://herohero.co/jsmentor" target="_blank" rel="noopener noreferrer" className="btn-primary text-body inline-flex">
+      <a href="https://herohero.co/jsmentor" target="_blank" rel="noopener noreferrer" className="btn-primary text-body inline-flex" data-umami-event="click_herohero" data-umami-event-section="reviews">
         Chcem sa pridať ZADARMO 🚀
       </a>
     </div>

@@ -82,7 +82,7 @@ const HeroHeroNastrojeSection = () => (
               </li>
             ))}
             <li className="flex justify-center pt-2 md:pt-3">
-              <a href="https://herohero.co/jsmentor" target="_blank" rel="noopener noreferrer" className="btn-primary text-body">
+              <a href="https://herohero.co/jsmentor" target="_blank" rel="noopener noreferrer" className="btn-primary text-body" data-umami-event="click_herohero" data-umami-event-section="nastroje">
                 Chcem sa pridať ZADARMO 🚀
               </a>
             </li>

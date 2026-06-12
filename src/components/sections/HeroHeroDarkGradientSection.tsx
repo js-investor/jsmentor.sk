@@ -62,6 +62,8 @@ const HeroHeroDarkGradientSection = () => (
                 target="_blank"
                 rel="noopener noreferrer"
                 className="relative block w-full rounded-xl shadow-[0_12px_40px_-16px_rgba(0,0,0,0.55)] transition-transform duration-300 hover:scale-[1.03]"
+                data-umami-event="click_video_herohero"
+                data-umami-event-section="ukazky-play"
               >
                 <img
                   src={item.img}
@@ -87,8 +89,12 @@ const HeroHeroDarkGradientSection = () => (
       <AnimatedSection delay={0.2}>
         <div className="mt-14 w-full text-center md:mt-16 lg:mt-20">
           <a
-            href="https://herohero.co/jsmentor" target="_blank" rel="noopener noreferrer"
+            href="https://herohero.co/jsmentor"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 font-sans text-body font-semibold text-[#023c2e] shadow-sm transition-colors hover:bg-white/90"
+            data-umami-event="click_herohero"
+            data-umami-event-section="ukazky-cta"
           >
             Chcem si to pozrieť 👀
           </a>
