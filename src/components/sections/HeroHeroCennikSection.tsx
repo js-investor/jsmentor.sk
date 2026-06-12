@@ -101,7 +101,7 @@ const HeroHeroCennikSection = () => (
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 font-sans text-[1.125rem] font-semibold text-[#023c2e] shadow-[0_4px_20px_rgba(0,0,0,0.22)] transition-all duration-200 hover:bg-white/92 hover:shadow-[0_10px_32px_rgba(0,0,0,0.28)]"
               >
-                Vyskúšať na 15 dní úplne ZADARMO 🚀
+                Vyskúšať na 15 dní ZADARMO 🚀
               </a>
             </div>
           </div>

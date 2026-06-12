@@ -1,29 +1,32 @@
 import AnimatedSection from "@/components/AnimatedSection";
+import imgInvestovat from "@/assets/images/Ako by som začal investovať v roku 2026, keby som dnes začínal od nuly.webp";
+import imgByt from "@/assets/images/Investicny byt.webp";
+import imgHypoteka from "@/assets/images/Mimoriadna splátka hypotéky.webp";
 
 /** Radiálny prechod — tmavší stred, rýchlejší prechod do čiernej. */
 const sectionBackground =
   "radial-gradient(ellipse 88% 78% at 50% 38%, #121212 0%, #080808 42%, #030303 72%, #000000 100%)";
 
-const showcaseVideos = [
+const showcaseItems = [
   {
     title: "Ako by som začal investovať v roku 2026, keby som dnes začínal od nuly",
     duration: "14 minút",
-    vimeoId: "1145809910",
+    img: imgInvestovat,
     tiltClass: "-rotate-[2.5deg]",
   },
   {
     title: "Kúpil som investičný byt. Toto sú riziká, o ktorých sa nahlas nehovorí.",
     duration: "21 minút",
-    vimeoId: "1175801732",
+    img: imgByt,
     tiltClass: "rotate-[2.5deg]",
   },
   {
     title: "Mimoriadna splátka hypotéky: kedy dáva zmysel a kedy je to drahá chyba",
     duration: "11 minút",
-    vimeoId: "1183644074",
+    img: imgHypoteka,
     tiltClass: "-rotate-[2.5deg]",
   },
-] as const;
+];
 
 const videoTitleClass =
   "mx-auto mb-6 max-w-xl font-sans text-[1.3125rem] font-semibold leading-snug text-white md:mb-7 md:text-[1.5rem] lg:text-[1.625rem]";
@@ -47,24 +50,35 @@ const HeroHeroDarkGradientSection = () => (
       </AnimatedSection>
 
       <div className="mx-auto mt-14 flex w-full max-w-xl flex-col gap-16 md:mt-16 md:max-w-2xl md:gap-20 lg:mt-20 lg:max-w-3xl lg:gap-28">
-        {showcaseVideos.map((video, index) => (
-          <AnimatedSection key={video.vimeoId} delay={0.05 * index}>
+        {showcaseItems.map((item, index) => (
+          <AnimatedSection key={item.title} delay={0.05 * index}>
             <article
-              className={`mx-auto flex w-full max-w-[min(100%,420px)] flex-col items-center text-center md:max-w-[540px] lg:max-w-[640px] ${video.tiltClass}`}
+              className={`mx-auto flex w-full max-w-[min(100%,420px)] flex-col items-center text-center md:max-w-[540px] lg:max-w-[640px] ${item.tiltClass}`}
             >
-              <h3 className={videoTitleClass}>{video.title}</h3>
+              <h3 className={videoTitleClass}>{item.title}</h3>
 
-              <div className="aspect-video w-full overflow-hidden rounded-xl border-2 border-white bg-black shadow-[0_12px_40px_-16px_rgba(0,0,0,0.55)]">
-                <iframe
-                  title={video.title}
-                  src={`https://player.vimeo.com/video/${video.vimeoId}?autoplay=0&title=0&portrait=0&byline=0`}
-                  className="block h-full w-full"
-                  allow="autoplay; fullscreen; picture-in-picture"
+              <a
+                href="https://herohero.co/jsmentor"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative block w-full rounded-xl shadow-[0_12px_40px_-16px_rgba(0,0,0,0.55)] transition-transform duration-300 hover:scale-[1.03]"
+              >
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  className="block w-full h-auto rounded-xl"
                   loading="lazy"
                 />
-              </div>
+                <div className="absolute inset-0 flex items-center justify-center bg-black/20 rounded-xl">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 shadow-lg md:h-20 md:w-20">
+                    <svg className="ml-1 h-7 w-7 text-[#023c2e] md:h-8 md:w-8" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5.14v14l11-7-11-7z" />
+                    </svg>
+                  </div>
+                </div>
+              </a>
 
-              <span className={durationBadgeClass}>{video.duration}</span>
+              <span className={durationBadgeClass}>{item.duration}</span>
             </article>
           </AnimatedSection>
         ))}
@@ -73,7 +87,7 @@ const HeroHeroDarkGradientSection = () => (
       <AnimatedSection delay={0.2}>
         <div className="mt-14 w-full text-center md:mt-16 lg:mt-20">
           <a
-            href="#formular"
+            href="https://herohero.co/jsmentor" target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 font-sans text-body font-semibold text-[#023c2e] shadow-sm transition-colors hover:bg-white/90"
           >
             Chcem si to pozrieť 👀

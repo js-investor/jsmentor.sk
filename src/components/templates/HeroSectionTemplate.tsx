@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 type HeroSectionTemplateProps = {
   headerCtaLabel?: string;
   headerCtaHref?: string;
+  headerCtaTarget?: string;
   headerCtaOnClick?: () => void;
   preheader?: ReactNode;
   title: ReactNode;
@@ -17,6 +18,7 @@ type HeroSectionTemplateProps = {
   fullWidthBadge?: ReactNode;
   heroCtaLabel?: string;
   heroCtaHref?: string;
+  heroCtaTarget?: string;
   heroCtaOnClick?: () => void;
   badges?: string[];
   videoSrc?: string;
@@ -38,6 +40,7 @@ type HeroSectionTemplateProps = {
 const HeroSectionTemplate = ({
   headerCtaLabel,
   headerCtaHref,
+  headerCtaTarget,
   headerCtaOnClick,
   preheader,
   title,
@@ -48,6 +51,7 @@ const HeroSectionTemplate = ({
   fullWidthBadge,
   heroCtaLabel,
   heroCtaHref,
+  heroCtaTarget,
   heroCtaOnClick,
   badges = [],
   videoSrc,
@@ -62,7 +66,7 @@ const HeroSectionTemplate = ({
   const heroCta = heroCtaLabel ? (
     <div className="flex justify-center mb-10 md:mb-12">
       {heroCtaHref ? (
-        <a href={heroCtaHref} className="btn-primary text-body">
+        <a href={heroCtaHref} target={heroCtaTarget} rel={heroCtaTarget === "_blank" ? "noopener noreferrer" : undefined} className="btn-primary text-body">
           {heroCtaLabel}
         </a>
       ) : (
@@ -75,7 +79,7 @@ const HeroSectionTemplate = ({
 
   return (
   <>
-    <SiteHeader ctaLabel={headerCtaLabel} ctaHref={headerCtaHref} ctaOnClick={headerCtaOnClick} />
+    <SiteHeader ctaLabel={headerCtaLabel} ctaHref={headerCtaHref} ctaTarget={headerCtaTarget} ctaOnClick={headerCtaOnClick} />
 
     <section className="relative overflow-hidden" style={{ backgroundColor: "#FFF9F5" }}>
       <div className="absolute inset-0 bg-dot-grid opacity-50" />

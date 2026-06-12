@@ -3,18 +3,20 @@ import brandLogo from "@/assets/images/js-mentor-logo.png";
 type SiteHeaderProps = {
   ctaLabel?: string;
   ctaHref?: string;
+  ctaTarget?: string;
   ctaOnClick?: () => void;
 };
 
 const SiteHeader = ({
   ctaLabel = "Chcem sa pridať ZADARMO 🚀",
   ctaHref,
+  ctaTarget,
   ctaOnClick,
 }: SiteHeaderProps) => {
   const ctaClassName = "btn-primary btn-primary-site-header text-body";
 
   const ctaButton = ctaHref ? (
-    <a href={ctaHref} className={ctaClassName}>
+    <a href={ctaHref} target={ctaTarget} rel={ctaTarget === "_blank" ? "noopener noreferrer" : undefined} className={ctaClassName}>
       {ctaLabel}
     </a>
   ) : (

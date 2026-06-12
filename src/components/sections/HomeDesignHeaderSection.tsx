@@ -9,7 +9,8 @@ const HomeDesignHeaderSection = () => {
       subtitleClassName="hero-subheadline"
       descriptionClassName="hero-description"
       headerCtaLabel="Chcem sa pridať ZADARMO 🚀"
-      headerCtaHref="#formular"
+      headerCtaHref="https://herohero.co/jsmentor"
+      headerCtaTarget="_blank"
       preheader={<>Toto nie sú finančné rozprávky</>}
       title={
         <>
@@ -22,7 +23,8 @@ const HomeDesignHeaderSection = () => {
       description="V mojej komunite ti ukážem, ako robiť lepšie rozhodnutia pri investovaní, hypotéke, fondoch, ETF, nehnuteľnostiach, rente a produktoch, ktoré ťa môžu stáť tisíce eur."
       trustStatsPanel={<HeroTrustStatsBar />}
       heroCtaLabel="Chcem sa pridať ZADARMO 🚀"
-      heroCtaHref="#formular"
+      heroCtaHref="https://herohero.co/jsmentor"
+      heroCtaTarget="_blank"
       videoSrc="https://player.vimeo.com/video/1198650601"
       videoTitle="JS Mentor hero video"
     />

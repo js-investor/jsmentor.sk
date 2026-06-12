@@ -1,7 +1,7 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import { cn } from "@/lib/utils";
 import { Star } from "lucide-react";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const reviewsBg = "#0c0c0c";
 
@@ -27,6 +27,7 @@ const reviewsRowBottom = [
   "Si prvý človek, ktorému verím natoľko, že som ti zveril naplánovanie svojich investícií. Preto by som ti rád touto cestou poďakoval za tvoj priateľský, ľudský a zároveň odborný prístup. Oceňujem tiež tvoju trpezlivosť a snahu vysvetliť mi vo svete financií veci, ktoré mi neboli jasné. S tvojou podporou má nastavené investovanie celá moja rodina. Si veľmi príjemný človek a kedykoľvek si s tebou rád pokecám aj mimo financií. Prajem ti veľa osobných aj pracovných úspechov a komukoľvek rád spoluprácu s tebou odporučím.",
 ] as const;
 
+/** Karta pre marquee (desktop) */
 const ReviewCard = ({ quote }: { quote: string }) => (
   <article className="flex w-[18rem] shrink-0 flex-col rounded-2xl border border-[#E8E0D8] bg-white p-4 sm:w-[18.75rem] md:w-[20rem] lg:w-[21.5rem] md:p-5">
     <div className="mb-3 flex items-start gap-0.5" aria-label="Hodnotenie 5 z 5">
@@ -35,6 +36,20 @@ const ReviewCard = ({ quote }: { quote: string }) => (
       ))}
     </div>
     <p className="font-sans text-[0.8125rem] leading-relaxed text-foreground/85 md:text-[0.875rem]">
+      {quote}
+    </p>
+  </article>
+);
+
+/** Karta pre mobile marquee */
+const MobileReviewCard = ({ quote }: { quote: string }) => (
+  <article className="flex w-[78vw] max-w-[320px] shrink-0 flex-col rounded-2xl border border-[#E8E0D8] bg-white p-5">
+    <div className="mb-3 flex items-start gap-0.5" aria-label="Hodnotenie 5 z 5">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star key={i} className={reviewStarClass} strokeWidth={0} aria-hidden />
+      ))}
+    </div>
+    <p className="font-sans text-[0.9375rem] leading-relaxed text-foreground/85">
       {quote}
     </p>
   </article>
@@ -87,10 +102,60 @@ const ReviewMarqueeRow = ({ items, direction, className }: ReviewMarqueeRowProps
   );
 };
 
+const allReviews = [...reviewsRowTop, ...reviewsRowBottom];
+
+const MobileReviewMarquee = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const timerRef = useRef<number | null>(null);
+  const isTouchingRef = useRef(false);
+  // Duplikujeme pre nekonečný loop
+  const loopItems = [...allReviews, ...allReviews, ...allReviews];
+
+  const startAutoScroll = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = window.setInterval(() => {
+      const el = scrollRef.current;
+      if (!el || isTouchingRef.current) return;
+      el.scrollLeft += 1;
+      // Keď dôjdeme do 2/3 dĺžky, skočíme späť na 1/3 (seamless loop)
+      const third = el.scrollWidth / 3;
+      if (el.scrollLeft >= third * 2) {
+        el.scrollLeft = third;
+      }
+    }, 16);
+  }, []);
+
+  useEffect(() => {
+    // Nastav počiatočnú pozíciu na 1/3 (stred duplikovaného obsahu)
+    const el = scrollRef.current;
+    if (el) el.scrollLeft = el.scrollWidth / 3;
+    startAutoScroll();
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [startAutoScroll]);
+
+  const onTouchStart = useCallback(() => { isTouchingRef.current = true; }, []);
+  const onTouchEnd = useCallback(() => { isTouchingRef.current = false; }, []);
+
+  return (
+    <div
+      ref={scrollRef}
+      className="flex gap-3 overflow-x-auto md:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      style={{ paddingLeft: "1.25rem", paddingRight: "1.25rem" }}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      onTouchCancel={onTouchEnd}
+    >
+      {loopItems.map((quote, i) => (
+        <MobileReviewCard key={i} quote={quote} />
+      ))}
+    </div>
+  );
+};
+
 const HeroHeroReviewsSection = () => (
   <section
     id="recenzie"
-    className="hero-section-pad relative scroll-mt-24 overflow-hidden bg-[#0c0c0c] px-5 md:px-8 pt-[72px] pb-[72px] text-white md:pt-[96px] md:pb-[96px]"
+    className="hero-section-pad relative scroll-mt-24 bg-[#0c0c0c] md:overflow-hidden pt-[72px] pb-[72px] text-white md:pt-[96px] md:pb-[96px]"
     aria-labelledby="recenzie-heading"
   >
     <div className="section-container relative z-10 px-5 md:px-8">
@@ -103,13 +168,19 @@ const HeroHeroReviewsSection = () => (
       </AnimatedSection>
     </div>
 
-    <div className="relative z-10 mx-auto w-full max-w-[1180px] space-y-3 px-4 md:max-w-[1280px] md:space-y-4 md:px-6 lg:max-w-[1360px] lg:px-8">
+    {/* Desktop — dva marquee riadky */}
+    <div className="relative z-10 mx-auto hidden w-full max-w-[1180px] space-y-3 px-4 md:block md:max-w-[1280px] md:space-y-4 md:px-6 lg:max-w-[1360px] lg:px-8">
       <ReviewMarqueeRow items={reviewsRowTop} direction="left" />
       <ReviewMarqueeRow items={reviewsRowBottom} direction="right" />
     </div>
 
+    {/* Mobile — infinity marquee, pauza pri dotyku */}
+    <div className="relative z-10">
+      <MobileReviewMarquee />
+    </div>
+
     <div className="section-container relative z-10 mt-[54px] px-5 text-center md:px-8">
-      <a href="#formular" className="btn-primary text-body inline-flex">
+      <a href="https://herohero.co/jsmentor" target="_blank" rel="noopener noreferrer" className="btn-primary text-body inline-flex">
         Chcem sa pridať ZADARMO 🚀
       </a>
     </div>

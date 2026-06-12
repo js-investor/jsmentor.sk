@@ -109,6 +109,7 @@ export default {
         "float": "float 5s ease-in-out infinite",
         "reviews-marquee-left": "reviews-marquee-left 50s linear infinite",
         "reviews-marquee-right": "reviews-marquee-right 58s linear infinite",
+        "reviews-marquee-mobile": "reviews-marquee-left 75s linear infinite",
       },
     },
   },

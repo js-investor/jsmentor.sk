@@ -192,7 +192,7 @@ const HeroHeroKalkulackySection = () => (
           ))}
         </div>
 
-        <a href="#formular" className="btn-primary mt-8 inline-flex text-body sm:mt-10">
+        <a href="https://herohero.co/jsmentor" target="_blank" rel="noopener noreferrer" className="btn-primary mt-8 inline-flex text-body sm:mt-10">
           Chcem tieto bonusy 🎁
         </a>
       </AnimatedSection>
