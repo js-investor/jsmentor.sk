@@ -33,7 +33,7 @@ const MzdovaCalculator = () => {
               <h2 className="headline-serif mb-6 border-b border-cream pb-4">Vstupné údaje</h2>
 
               <div className="mb-6">
-                <label id="mzv3-salary-label" className="block text-sm font-bold uppercase tracking-wide text-muted-foreground mb-2">
+                <label id="mzv3-salary-label" className="block text-[15px] font-bold uppercase tracking-wide text-muted-foreground mb-2">
                   Hrubá mesačná mzda
                 </label>
                 <div className="relative">
@@ -43,7 +43,7 @@ const MzdovaCalculator = () => {
               </div>
 
               <div className="mb-6" id="mzv3-dir-wrap">
-                <label className="block text-xs text-muted-foreground uppercase tracking-wide mb-2">Smer výpočtu</label>
+                <label className="block text-[15px] font-bold text-muted-foreground uppercase tracking-wide mb-2">Smer výpočtu</label>
                 <div id="mzv3-seg-wrap" className="mzv3-seg-wrap">
                   <button type="button" id="mzv3-d-gross" onClick={() => window.mzv3SetDir?.("gross")} className="mzv3-seg-btn sel">
                     Hrubá → Čistá
@@ -55,8 +55,8 @@ const MzdovaCalculator = () => {
               </div>
 
               <div className="mb-6 hidden" id="mzv3-szco-income-wrap">
-                <label className="block text-xs text-muted-foreground uppercase tracking-wide mb-2">Základ dane (príjmy – výdavky)</label>
-                <p className="text-[11px] text-muted-foreground">
+                <label className="block text-[15px] font-bold text-muted-foreground uppercase tracking-wide mb-2">Základ dane (príjmy – výdavky)</label>
+                <p className="text-[14px] text-muted-foreground">
                   Zadajte mesačný základ dane (príjmy mínus výdavky / paušálne výdavky). Odvody sa platia z vymeriavacieho základu = ½
                   základu dane.
                 </p>
@@ -64,7 +64,7 @@ const MzdovaCalculator = () => {
 
               <div className="mb-4 flex items-center gap-3">
                 <input type="checkbox" id="mzv3-ztpp" className="w-4 h-4 accent-black" />
-                <label htmlFor="mzv3-ztpp" className="text-sm text-foreground">
+                <label htmlFor="mzv3-ztpp" className="text-[15px] text-foreground">
                   Osoba so zdravotným postihnutím (ZŤP)
                   <span className="mt-1 block text-[10px] text-muted-foreground">
                     Zdravotné poistenie 2,5% / 8% namiesto 5% / 16%
@@ -74,7 +74,7 @@ const MzdovaCalculator = () => {
 
               <div id="mzv3-emp-opts">
                 <div className="mb-4">
-                  <label className="block text-xs text-muted-foreground uppercase tracking-wide mb-2">Uplatnenie NČZD</label>
+                  <label className="block text-[15px] font-bold text-muted-foreground uppercase tracking-wide mb-2">Uplatnenie NČZD</label>
                   <div className="seg">
                     <button type="button" className="seg-btn sel" id="mzv3-nczd-yes" onClick={() => window.mzv3SetNczd?.(true)}>
                       Áno
@@ -83,20 +83,20 @@ const MzdovaCalculator = () => {
                       Nie
                     </button>
                   </div>
-                  <p className="text-[10px] text-muted-foreground mt-1">
+                  <p className="text-[14px] text-muted-foreground mt-1">
                     NČZD 2026: 497,23 €/mes (5 966,73 €/rok). Pri základe dane nad 26 083,13 €/rok sa kráti.
                   </p>
                 </div>
 
                 <div className="mb-4">
-                  <label className="block text-xs text-muted-foreground uppercase tracking-wide mb-2">Daňový bonus na deti</label>
+                  <label className="block text-[15px] font-bold text-muted-foreground uppercase tracking-wide mb-2">Daňový bonus na deti</label>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-[11px] text-muted-foreground block mb-1">Deti do 15 rokov (100 €/mes)</label>
+                      <label className="text-[14px] text-muted-foreground block mb-1">Deti do 15 rokov (100 €/mes)</label>
                       <input type="number" id="mzv3-ch15" defaultValue={0} min={0} max={10} className="input-field p-2 rounded text-sm w-full" />
                     </div>
                     <div>
-                      <label className="text-[11px] text-muted-foreground block mb-1">Deti 15–18 rokov (50 €/mes)</label>
+                      <label className="text-[14px] text-muted-foreground block mb-1">Deti 15–18 rokov (50 €/mes)</label>
                       <input type="number" id="mzv3-ch18" defaultValue={0} min={0} max={10} className="input-field p-2 rounded text-sm w-full" />
                     </div>
                   </div>
@@ -105,8 +105,8 @@ const MzdovaCalculator = () => {
 
               <div id="mzv3-szco-opts" className="hidden">
                 <div className="mb-4 rounded-lg border border-border bg-cream/60 p-3">
-                  <p className="text-[11px] font-semibold text-foreground mb-1">Vymeriavací základ SZČO 2026</p>
-                  <p className="text-[10px] text-muted-foreground leading-relaxed">
+                  <p className="text-[15px] font-semibold text-foreground mb-1">Vymeriavací základ SZČO 2026</p>
+                  <p className="text-[14px] text-muted-foreground leading-relaxed">
                     Min. VZ sociálne: <strong>914,40 €/mes</strong>
                     <br />
                     Minimálne sociálne odvody: <strong>303,11 €/mes</strong> (33,15%)
@@ -116,21 +116,21 @@ const MzdovaCalculator = () => {
                 </div>
                 <div className="mb-4 flex items-center gap-3">
                   <input type="checkbox" id="mzv3-szco-minbase" className="w-4 h-4 accent-black" />
-                  <label htmlFor="mzv3-szco-minbase" className="text-sm text-foreground">
+                  <label htmlFor="mzv3-szco-minbase" className="text-[15px] text-foreground">
                     Platiť iba minimálne odvody
                     <span className="mt-1 block text-[10px] text-muted-foreground">Bez ohľadu na výšku príjmu</span>
                   </label>
                 </div>
                 <div className="mb-4 flex items-center gap-3">
                   <input type="checkbox" id="mzv3-szco-pausch" className="w-4 h-4 accent-black" />
-                  <label htmlFor="mzv3-szco-pausch" className="text-sm text-foreground">
+                  <label htmlFor="mzv3-szco-pausch" className="text-[15px] text-foreground">
                     Paušálne výdavky (60%, max 20 000 €/rok)
                   </label>
                 </div>
               </div>
 
               <div className="border-t border-cream pt-4 mt-2">
-                <p className="text-[10px] text-muted-foreground italic">
+                <p className="text-[14px] text-muted-foreground italic">
                   Výpočet je orientačný. Sadzby pre rok 2026 (SR). SZČO: odvody sa platia mesačne ako preddavky, ročné zúčtovanie v
                   daňovom priznaní.
                 </p>
@@ -142,13 +142,13 @@ const MzdovaCalculator = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-primary text-primary-foreground p-6 rounded-xl flex flex-col justify-between relative overflow-hidden min-h-[140px] mzv3-card">
                 <div className="relative z-10">
-                  <h3 id="mzv3-hero-label" className="text-cream text-xs uppercase tracking-widest font-medium mb-1">
+                  <h3 id="mzv3-hero-label" className="text-cream text-[15px] uppercase tracking-widest font-medium mb-1">
                     Čistá mzda
                   </h3>
                   <div className="text-3xl md:text-4xl font-serif mt-2" id="mzv3-net">
                     0 €
                   </div>
-                  <div className="text-xs text-white/80 mt-2" id="mzv3-net-sub" />
+                  <div className="text-[14px] text-white/80 mt-2" id="mzv3-net-sub" />
                 </div>
                 <img
                   src={brandPattern}
@@ -163,13 +163,13 @@ const MzdovaCalculator = () => {
                 />
               </div>
               <div className="bg-[#FFF9F5] p-6 rounded-xl border border-border min-h-[140px] mzv3-card relative overflow-hidden">
-                <h3 id="mzv3-second-label" className="text-muted-foreground text-xs uppercase tracking-widest font-medium mb-1 relative z-10">
+                <h3 id="mzv3-second-label" className="text-muted-foreground text-[15px] uppercase tracking-widest font-medium mb-1 relative z-10">
                   Náklady zamestnávateľa
                 </h3>
                 <div className="text-3xl font-serif text-foreground relative z-10" id="mzv3-super">
                   0 €
                 </div>
-                <div className="text-xs text-muted-foreground mt-2 relative z-10" id="mzv3-super-sub">
+                <div className="text-[14px] text-muted-foreground mt-2 relative z-10" id="mzv3-super-sub">
                   Superhrubá mzda
                 </div>
                 <img
@@ -202,26 +202,26 @@ const MzdovaCalculator = () => {
               <h3 className="text-base font-serif text-foreground mb-3">Ročný prehľad</h3>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
                 <div>
-                  <span className="block text-[10px] text-muted-foreground uppercase mb-1">Hrubá/rok</span>
-                  <span className="block text-sm font-semibold" id="mzv3-gross-yr">
+                  <span className="block text-[14px] font-bold text-muted-foreground uppercase mb-1">Hrubá/rok</span>
+                  <span className="block text-[1.125rem] font-semibold" id="mzv3-gross-yr">
                     0 €
                   </span>
                 </div>
                 <div>
-                  <span className="block text-[10px] text-muted-foreground uppercase mb-1">Čistá/rok</span>
-                  <span className="block text-sm font-semibold" id="mzv3-net-yr">
+                  <span className="block text-[14px] font-bold text-muted-foreground uppercase mb-1">Čistá/rok</span>
+                  <span className="block text-[1.125rem] font-semibold" id="mzv3-net-yr">
                     0 €
                   </span>
                 </div>
                 <div>
-                  <span className="block text-[10px] text-muted-foreground uppercase mb-1">Odvody/rok</span>
-                  <span className="block text-sm font-semibold" id="mzv3-odvody-yr">
+                  <span className="block text-[14px] font-bold text-muted-foreground uppercase mb-1">Odvody/rok</span>
+                  <span className="block text-[1.125rem] font-semibold" id="mzv3-odvody-yr">
                     0 €
                   </span>
                 </div>
                 <div>
-                  <span className="block text-[10px] text-muted-foreground uppercase mb-1">Daň/rok</span>
-                  <span className="block text-sm font-semibold" id="mzv3-tax-yr">
+                  <span className="block text-[14px] font-bold text-muted-foreground uppercase mb-1">Daň/rok</span>
+                  <span className="block text-[1.125rem] font-semibold" id="mzv3-tax-yr">
                     0 €
                   </span>
                 </div>

@@ -38,7 +38,7 @@ const benefitTabs: { Icon: LucideIcon; label: string }[] = [
 ];
 
 const tabTextClass =
-  "font-sans text-[1.1875rem] leading-snug text-white md:text-[1.375rem] lg:text-[1.5rem]";
+  "font-sans text-[1.1875rem] font-bold leading-snug text-white md:text-[1.375rem] lg:text-[1.5rem]";
 
 const HeroHeroNastrojeSection = () => (
   <section

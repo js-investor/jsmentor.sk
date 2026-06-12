@@ -1,8 +1,12 @@
+import HeroHeroCasteFaqSection from "@/components/sections/HeroHeroCasteFaqSection";
+import HeroHeroCennikSection from "@/components/sections/HeroHeroCennikSection";
 import HeroHeroChybySection from "@/components/sections/HeroHeroChybySection";
 import HeroHeroDarkGradientSection from "@/components/sections/HeroHeroDarkGradientSection";
 import HeroHeroIvanSection from "@/components/sections/HeroHeroIvanSection";
 import HeroHeroKalkulackySection from "@/components/sections/HeroHeroKalkulackySection";
 import HeroHeroNastrojeSection from "@/components/sections/HeroHeroNastrojeSection";
+import HeroHeroPorovnanieSection from "@/components/sections/HeroHeroPorovnanieSection";
+import HeroHeroReviewsSection from "@/components/sections/HeroHeroReviewsSection";
 import HomeDesignHeaderSection from "@/components/sections/HomeDesignHeaderSection";
 import PageWrapper from "@/components/layout/PageWrapper";
 
@@ -15,6 +19,10 @@ const Index = () => (
       <HeroHeroNastrojeSection />
       <HeroHeroDarkGradientSection />
       <HeroHeroKalkulackySection />
+      <HeroHeroReviewsSection />
+      <HeroHeroCennikSection />
+      <HeroHeroPorovnanieSection />
+      <HeroHeroCasteFaqSection />
     </div>
   </PageWrapper>
 );

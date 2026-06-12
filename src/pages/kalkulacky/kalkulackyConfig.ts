@@ -39,7 +39,7 @@ export const KALKULACKY_CALCULATORS: KalkulackaCalculatorMeta[] = [
   },
   {
     slug: "uverova-kalkulacka",
-    title: "Úverová kalkulačka (DTI & DSTI)",
+    title: "Úverová kalkulačka",
     menuLabel: "Úvery",
     description:
       "Výpočet maximálnej hypotéky podľa tvojho príjmu, záväzkov a limitov DTI/DSTI.",

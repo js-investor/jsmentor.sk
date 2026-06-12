@@ -30,7 +30,7 @@ const KalkulackyShell = ({ children }: KalkulackyShellProps) => (
       ctaHref={KALKULACKY_WHATSAPP_HREF}
       ctaIcon={<WhatsAppIcon className="h-[1.05rem] w-[1.05rem] shrink-0 md:h-[1.125rem] md:w-[1.125rem]" />}
     />
-    <section className="section-white min-h-[50vh] pt-[9rem] pb-20 md:pt-[11rem] md:pb-28 lg:pt-[12rem] lg:pb-32">
+    <section className="page-home section-white min-h-[50vh] pt-[9rem] pb-20 md:pt-[11rem] md:pb-28 lg:pt-[12rem] lg:pb-32">
       {children}
     </section>
   </PageWrapper>

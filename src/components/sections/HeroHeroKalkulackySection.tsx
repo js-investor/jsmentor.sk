@@ -22,7 +22,7 @@ type CalculatorItem = {
 const serifTitle = (bold: string, rest?: string) => (
   <span className="[font-family:var(--font-serif)] text-[1.125rem] leading-snug text-foreground sm:text-[1.125rem] md:text-[1.4375rem] lg:text-[1.5rem]">
     <strong className="font-bold">{bold}</strong>
-    {rest ? ` ${rest}` : null}
+    {rest ? <span className="font-[500]"> {rest}</span> : null}
   </span>
 );
 
@@ -100,13 +100,13 @@ const KalkulackyBracketLabel = () => (
         vectorEffect="non-scaling-stroke"
       />
       <path
-        d="M 16 9 V 43"
+        d="M 16 9 V 38"
         stroke="currentColor"
         strokeWidth="1"
         vectorEffect="non-scaling-stroke"
       />
       <path
-        d="M 16 57 V 91"
+        d="M 16 62 V 91"
         stroke="currentColor"
         strokeWidth="1"
         vectorEffect="non-scaling-stroke"
@@ -120,7 +120,7 @@ const KalkulackyBracketLabel = () => (
     </svg>
 
     <span
-      className="absolute -left-px top-1/2 z-10 -translate-y-1/2 font-serif text-[1rem] leading-none tracking-[0.02em] text-foreground [writing-mode:vertical-rl] rotate-180 sm:text-[1.0625rem] md:text-[1.125rem] lg:text-[1.1875rem]"
+      className="absolute left-[16%] top-1/2 z-10 -translate-y-1/2 font-serif font-normal text-[1rem] leading-none tracking-[0.02em] text-foreground [writing-mode:vertical-rl] rotate-180 sm:text-[1.0625rem] md:text-[1.125rem] lg:text-[1.1875rem]"
       style={{ backgroundColor: "#FFF9F5" }}
     >
       kalkulačky
@@ -139,7 +139,7 @@ const HeroHeroKalkulackySection = () => (
     <div className="section-container relative z-10">
       <AnimatedSection className="flex w-full justify-center">
         <h2 className="headline-landing-section mx-auto max-w-4xl text-pretty text-center text-[2.125rem] leading-[1.12] text-foreground md:max-w-xl md:text-[3.375rem] lg:max-w-2xl">
-          A k tomu dostaneš aj praktické bonusy <span aria-hidden>🎁</span>
+          <span className="font-[500]">A k tomu dostaneš aj</span>{" "}<strong className="font-bold">praktické bonusy</strong> <span aria-hidden>🎁</span>
         </h2>
       </AnimatedSection>
 

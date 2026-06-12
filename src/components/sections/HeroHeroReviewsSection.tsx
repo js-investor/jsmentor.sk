@@ -11,8 +11,8 @@ const reviewsEdgeFadeRight = `linear-gradient(to left, ${reviewsBg} 0%, ${review
 
 const reviewStarClass = "h-4 w-4 fill-[#F5A623] text-[#FBBF24]";
 
+/** Texty prevzaté zo screenshotov recenzia-1 … recenzia-9 */
 const reviewsRowTop = [
-  "Ivu môžem len odporučiť. Sledovala som jeho profil na Instagrame dlhší čas a po nejakom čase som sa mu ozvala, že by som mala záujem o investovanie — dohodli sme sa na call, kde mi všetko vysvetlil, aké sú možnosti, a potom mi pomohol aj so založením. Môžem len odporučiť, má skvelý profesionálny prístup ku svojim klientom.",
   "Spolupráca s tebou sa mi veľmi páči, až vďaka tebe som pochopila, prečo má investovanie zmysel a že najdôležitejšia je dlhodobá stratégia. Všetko bolo vysvetlené zrozumiteľne a prakticky. Pomohol si mi nastaviť jasný plán, vďaka čomu mám istotu a viem, čo robím.",
   "Veľká spokojnosť. Ivan je odborník, ktorý vie presne, čo robí. Všetko mi detailne vysvetlil a pomohol mi nastaviť financie oveľa lepšie. Konečne mám pocit, že moje peniaze pracujú pre mňa. Určite odporúčam!",
   "S pánom Jašíkom investujem vyše pol roka. Portfólio bolo zložené na mieru, berúc do úvahy všetky podstatné faktory (vek, cieľ, iné investičné produkty). Vždy ústretová a férová konverzácia a kvalitné pravidelné reporty. Vrelo odporúčam.",
@@ -21,12 +21,10 @@ const reviewsRowTop = [
 ] as const;
 
 const reviewsRowBottom = [
+  "Ivu môžem len odporučiť. Sledovala som jeho profil na Instagrame dlhší čas a po nejakom čase som sa mu ozvala, že by som mala záujem o investovanie — dohodli sme sa na call, kde mi všetko vysvetlil, aké sú možnosti, a potom mi pomohol aj so založením. Môžem len odporučiť, má skvelý profesionálny prístup ku svojim klientom.",
   "Mal som s Ivanom online konzultácie a musím povedať, že celý prístup bol veľmi profesionálny a hlavne zrozumiteľný. Všetko mi detailne vysvetlil, ukázal prezentáciu, možnosti investovania aj rozdiely oproti iným online platformám. Páčilo sa mi, že netlačil nasilu predaj, ale normálne ma previedol celým procesom a odpovedal na všetky otázky, aj na tie, na ktoré som sa hneď nenapadol. Za mňa veľmi dobrá skúsenosť — ak chce človek investovaniu naozaj rozumieť a nie len slepo klikať v aplikácii.",
-  "Na Ivana som natrafila v podstate náhodne na IG, zaujal ma jeho profil a informácie, ktoré zdieľal. Začala som sa ešte len orientovať vo veciach ohľadom investovania a keď som ho oslovila, bol mi veľmi nápomocný — všetko vysvetlil, nastavil po individuálnom zhodnotení investovanie a stratégiu. Venuje sa mi, keď aktuálne treba. Individuálne sme aj prednedávnom nastavovali investičné portfólio, s čím som nadmieru spokojná.",
-  "Si prvý človek, ktorému verím natoľko, že som ti zveril naplánovanie svojich investícií. Oceňujem tvoj priateľský, ľudský a zároveň odborný prístup, trpezlivosť a snahu vysvetliť mi veci, ktoré mi neboli jasné. S tvojou podporou má nastavené investovanie celá moja rodina. Si veľmi príjemný človek a komukoľvek rád spoluprácu s tebou odporučím.",
-  "Začal som pracovať v zahraničí a nevedel som, čo s prvými úsporami. Ivan mi za dva týždne postavil plán, podľa ktorého investujem dodnes.",
-  "Ivan je skutočný profesionál. Spolupracujeme už 4 roky. Nemusím riešiť financie. Viem, že sú v dobrých rukách.",
-  "Ako podnikateľ potrebujem niekoho, kto rozumie biznisovým peniazom. Ivan presne vie, ako z firemného zisku spraviť osobný majetok.",
+  "Na Ivana som natrafila v podstate náhodne na IG, zaujal ma jeho profil a informácie, ktoré zdieľal. Začala som sa ešte len orientovať vo veciach ohľadom investovania a keď som ho oslovila, bol mi veľmi nápomocný — všetko vysvetlil, nastavil po individuálnom zhodnotení investovanie a stratégiu, venuje sa mi, keď aktuálne treba. Som nadšená, ako sa dá budovať majetok rozumne a s primeraným rizikom. Individuálne sme aj prednedávnom nastavovali investičné portfólio, s čím som nadmieru spokojná.",
+  "Si prvý človek, ktorému verím natoľko, že som ti zveril naplánovanie svojich investícií. Preto by som ti rád touto cestou poďakoval za tvoj priateľský, ľudský a zároveň odborný prístup. Oceňujem tiež tvoju trpezlivosť a snahu vysvetliť mi vo svete financií veci, ktoré mi neboli jasné. S tvojou podporou má nastavené investovanie celá moja rodina. Si veľmi príjemný človek a kedykoľvek si s tebou rád pokecám aj mimo financií. Prajem ti veľa osobných aj pracovných úspechov a komukoľvek rád spoluprácu s tebou odporučím.",
 ] as const;
 
 const ReviewCard = ({ quote }: { quote: string }) => (
@@ -99,11 +97,8 @@ const HeroHeroReviewsSection = () => (
       <AnimatedSection>
         <header className="mx-auto mb-[54px] max-w-3xl text-center">
           <h2 id="recenzie-heading" className="headline-landing-section text-white">
-            Čo hovoria členovia
+            Takto to vyzerá v praxi
           </h2>
-          <p className="sub-headline mt-4 text-white/70">
-            Skutočné skúsenosti ľudí, ktorí so mnou spolupracujú alebo investujú podľa môjho plánu.
-          </p>
         </header>
       </AnimatedSection>
     </div>
@@ -111,6 +106,12 @@ const HeroHeroReviewsSection = () => (
     <div className="relative z-10 mx-auto w-full max-w-[1180px] space-y-3 px-4 md:max-w-[1280px] md:space-y-4 md:px-6 lg:max-w-[1360px] lg:px-8">
       <ReviewMarqueeRow items={reviewsRowTop} direction="left" />
       <ReviewMarqueeRow items={reviewsRowBottom} direction="right" />
+    </div>
+
+    <div className="section-container relative z-10 mt-[54px] px-5 text-center md:px-8">
+      <a href="#formular" className="btn-primary text-body inline-flex">
+        Chcem sa pridať ZADARMO 🚀
+      </a>
     </div>
   </section>
 );

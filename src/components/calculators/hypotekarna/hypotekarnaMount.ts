@@ -329,7 +329,7 @@ export function mountHypotekarnaCalculator(): () => void {
     const evts = window._hypoCalcEvents ?? [];
     if (evts.length === 0) {
       list.innerHTML =
-        '<p style="font-size:14px;color:hsl(var(--muted-foreground));font-style:italic;">Zatiaľ žiadne pridané udalosti.</p>';
+        '<p style="font-size:15px;color:hsl(var(--muted-foreground));font-style:italic;">Zatiaľ žiadne pridané udalosti.</p>';
       badge.style.display = "none";
     } else {
       badge.textContent = String(evts.length);
@@ -337,7 +337,7 @@ export function mountHypotekarnaCalculator(): () => void {
       evts.forEach((evt) => {
         const div = document.createElement("div");
         div.style.cssText =
-          "display:flex;justify-content:space-between;align-items:center;background:hsl(var(--card));padding:10px 12px;border-radius:6px;border:1px solid hsl(var(--border));font-size:13px;";
+          "display:flex;justify-content:space-between;align-items:center;background:hsl(var(--card));padding:10px 12px;border-radius:6px;border:1px solid hsl(var(--border));font-size:15px;";
         div.innerHTML = `<div style="display:flex;align-items:center;gap:12px;"><span style="font-weight:700;background:hsl(var(--foreground));color:hsl(var(--background));width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:11px;">${evt.year}.</span><span style="font-weight:600;">${evt.label}</span></div><div style="display:flex;align-items:center;gap:12px;"><span style="font-weight:700;color:hsl(var(--primary));">${evt.valText}</span><button type="button" data-remove="${evt.id}" style="color:hsl(var(--muted-foreground));background:none;border:none;cursor:pointer;font-size:15px;">✕</button></div>`;
         div.querySelector("button[data-remove]")?.addEventListener("click", () => window.removeEvent?.(evt.id));
         list.appendChild(div);

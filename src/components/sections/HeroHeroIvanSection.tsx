@@ -13,8 +13,10 @@ const HeroHeroIvanSection = () => (
         <div className="mx-auto w-full max-w-[775px] space-y-10 text-left md:w-[68%] md:space-y-8">
           <p className="font-sans text-[1.125rem] leading-relaxed text-foreground/90 md:text-body">
             Volám sa Ivan a už viac ako 8 rokov zdieľam obsah o peniazoch a raste na Instagrame. Nie som špekulant,
-            som odborník s licenciou v Národnej banke Slovenska a som absolventom{" "}
-            <span className="font-semibold text-foreground">EFA</span> (najväčší finančný titul v EÚ).
+            som odborník{" "}
+            <strong className="font-bold text-foreground">s licenciou v Národnej banke Slovenska</strong>
+            {" "}a som absolventom{" "}
+            <strong className="font-bold text-foreground">EFA (najväčší finančný titul v EÚ)</strong>.
           </p>
 
           <p className="headline-serif text-[2rem] text-balance leading-[1.15] text-foreground md:text-[2.125rem] lg:text-[2.5rem]">
@@ -30,7 +32,8 @@ const HeroHeroIvanSection = () => (
           </p>
 
           <p className="font-sans text-[1.125rem] leading-relaxed text-foreground/90 md:text-body">
-            Riešil som bežné témy, ktoré Slováci riešia každý deň: hypotéky, investovanie, fondy, ETF,
+            <strong className="font-bold text-foreground">Riešil som bežné témy,</strong>{" "}
+            ktoré Slováci riešia každý deň: hypotéky, investovanie, fondy, ETF,
             nehnuteľnosti, rentu, poplatky a rozhodnutia, ktoré môžu človeka stáť tisíce eur.
           </p>
         </div>

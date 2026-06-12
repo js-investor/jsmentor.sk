@@ -50,16 +50,16 @@ const RentovaCalculator = () => {
               <h2 className="headline-serif mb-6 border-b border-cream pb-4">Vaše parametre</h2>
               <div className="mb-6 grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-muted-foreground block mb-1">Súčasný vek</label>
+                  <label className="text-[15px] font-bold text-muted-foreground block mb-1">Súčasný vek</label>
                   <input type="number" id="ml-currentAge" defaultValue={35} className="input-field p-3 rounded text-lg font-medium" />
                 </div>
                 <div>
-                  <label className="text-xs text-muted-foreground block mb-1">Vek odchodu</label>
+                  <label className="text-[15px] font-bold text-muted-foreground block mb-1">Vek odchodu</label>
                   <input type="number" id="ml-retirementAge" defaultValue={65} className="input-field p-3 rounded text-lg font-medium" />
                 </div>
               </div>
               <div className="mb-6">
-                <label className="block text-sm font-bold uppercase tracking-wide text-muted-foreground mb-2">Cieľová mesačná renta</label>
+                <label className="block text-[15px] font-bold uppercase tracking-wide text-muted-foreground mb-2">Cieľová mesačná renta</label>
                 <div className="relative">
                   <input type="number" id="ml-desiredRent" defaultValue={1500} step={50} className="input-field p-3 rounded text-lg font-medium pr-8" />
                   <span className="absolute right-4 top-3.5 text-muted-foreground">€</span>
@@ -67,8 +67,8 @@ const RentovaCalculator = () => {
               </div>
               <div className="mb-8">
                 <div className="flex justify-between mb-2">
-                  <label className="text-sm font-bold uppercase tracking-wide text-muted-foreground">Doba poberania</label>
-                  <span id="ml-durationVal" className="text-sm font-bold">
+                  <label className="text-[15px] font-bold uppercase tracking-wide text-muted-foreground">Doba poberania</label>
+                  <span id="ml-durationVal" className="text-[15px] font-bold">
                     25 rokov
                   </span>
                 </div>
@@ -76,24 +76,24 @@ const RentovaCalculator = () => {
               </div>
               <div className="border-t border-cream pt-4">
                 <div id="ml-advanced-toggle" className="flex justify-between items-center font-medium">
-                  <span className="text-sm uppercase tracking-wide">Pokročilé nastavenia</span>
+                  <span className="text-[15px] uppercase tracking-wide">Pokročilé nastavenia</span>
                   <span id="ml-arrow-icon">▼</span>
                 </div>
                 <div id="ml-advanced-content" className="hidden mt-4 space-y-4">
                   <div>
-                    <label className="text-xs text-muted-foreground block mb-1">Očakávaný ročný výnos (%)</label>
+                    <label className="text-[15px] font-bold text-muted-foreground block mb-1">Očakávaný ročný výnos (%)</label>
                     <input type="number" id="ml-interestRate" defaultValue={7} step={0.1} className="input-field p-2 rounded text-sm" />
                   </div>
                   <div>
-                    <label className="text-xs text-muted-foreground block mb-1">Odhadovaná inflácia (%)</label>
+                    <label className="text-[15px] font-bold text-muted-foreground block mb-1">Odhadovaná inflácia (%)</label>
                     <input type="number" id="ml-inflationRate" defaultValue={2.5} step={0.1} className="input-field p-2 rounded text-sm" />
                   </div>
                   <div>
-                    <label className="text-xs text-muted-foreground block mb-1">Súčasné úspory (€)</label>
+                    <label className="text-[15px] font-bold text-muted-foreground block mb-1">Súčasné úspory (€)</label>
                     <input type="number" id="ml-currentSavings" defaultValue={0} step={100} className="input-field p-2 rounded text-sm" />
                   </div>
                   <div>
-                    <label className="text-xs text-muted-foreground block mb-1">Mesačná investícia (€)</label>
+                    <label className="text-[15px] font-bold text-muted-foreground block mb-1">Mesačná investícia (€)</label>
                     <input type="number" id="ml-monthlyInvestment" defaultValue={200} step={10} className="input-field p-2 rounded text-sm" />
                   </div>
                 </div>
@@ -104,8 +104,8 @@ const RentovaCalculator = () => {
           <div className="lg:col-span-8 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="bg-primary text-primary-foreground p-6 rounded-xl relative overflow-hidden min-h-[160px]">
-                <h3 className="text-cream text-sm uppercase tracking-widest mb-1">Cieľová suma</h3>
-                <p className="text-xs text-white/80 mb-4">Kapitál potrebný pri odchode do dôchodku</p>
+                <h3 className="text-cream text-[15px] uppercase tracking-widest mb-1">Cieľová suma</h3>
+                <p className="text-[14px] text-white/80 mb-4">Kapitál potrebný pri odchode do dôchodku</p>
                 <div className="text-3xl md:text-4xl font-serif" id="ml-requiredCapital">
                   0 €
                 </div>
@@ -122,11 +122,11 @@ const RentovaCalculator = () => {
                 />
               </div>
               <div className="bg-[#FFF9F5] p-6 rounded-xl border border-border min-h-[160px] relative overflow-hidden">
-                <h3 className="text-muted-foreground text-sm uppercase tracking-widest mb-1 relative z-10">Chýbajúca investícia</h3>
+                <h3 className="text-muted-foreground text-[15px] uppercase tracking-widest mb-1 relative z-10">Chýbajúca investícia</h3>
                 <div className="text-3xl md:text-4xl font-serif text-foreground relative z-10" id="ml-monthlyGap">
                   0 €
                 </div>
-                <div className="mt-2 text-sm text-foreground relative z-10">
+                <div className="mt-2 text-[14px] text-foreground relative z-10">
                   Pri <span id="ml-roiDisplay">7%</span> zhodnotení.
                 </div>
                 <img
@@ -151,23 +151,17 @@ const RentovaCalculator = () => {
                 <canvas id="ml-rentChart" />
               </div>
               <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center border-t border-cream pt-4">
-                <div>
-                  <span className="block text-xs text-muted-foreground uppercase">Inflačná renta</span>
-                  <span className="block text-lg font-serif" id="ml-inflatedRentVal">
-                    0 €
-                  </span>
+                <div className="rounded-lg p-4" style={{ backgroundColor: "#F0ECE6" }}>
+                  <span className="block text-[15px] font-bold text-muted-foreground uppercase">Inflačná renta</span>
+                  <span className="block text-3xl font-serif font-normal text-foreground mt-1" id="ml-inflatedRentVal">0 €</span>
                 </div>
-                <div>
-                  <span className="block text-xs text-muted-foreground uppercase">Váš kapitál</span>
-                  <span className="block text-lg font-serif" id="ml-projectedCapital">
-                    0 €
-                  </span>
+                <div className="rounded-lg p-4" style={{ backgroundColor: "#F0ECE6" }}>
+                  <span className="block text-[15px] font-bold text-muted-foreground uppercase">Váš kapitál</span>
+                  <span className="block text-3xl font-serif font-normal text-foreground mt-1" id="ml-projectedCapital">0 €</span>
                 </div>
-                <div>
-                  <span className="block text-xs text-muted-foreground uppercase">Stav cieľa</span>
-                  <span className="block text-lg font-serif" id="ml-goalStatus">
-                    0%
-                  </span>
+                <div className="rounded-lg p-4" style={{ backgroundColor: "#F0ECE6" }}>
+                  <span className="block text-[15px] font-bold text-muted-foreground uppercase">Stav cieľa</span>
+                  <span className="block text-3xl font-serif font-normal text-foreground mt-1" id="ml-goalStatus">0%</span>
                 </div>
               </div>
             </div>

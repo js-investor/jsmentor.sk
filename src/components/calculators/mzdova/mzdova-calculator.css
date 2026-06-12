@@ -98,7 +98,7 @@
   border-radius: 8px;
   padding: 10px 12px;
   text-align: center;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   background: transparent;
   color: var(--sienna);
@@ -107,7 +107,7 @@
 
 #mzv3-w .mzv3-seg-btn,
 #mzv3-w .seg-btn {
-  font-size: 13px;
+  font-size: 15px;
   padding: 8px 12px;
 }
 
@@ -160,13 +160,13 @@
 }
 
 #mzv3-w .bd-label {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--sienna);
   flex: 1;
 }
 
 #mzv3-w .bd-val {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--midnight-blue);
   text-align: right;
@@ -174,7 +174,7 @@
 }
 
 #mzv3-w .bd-sep {
-  font-size: 11px;
+  font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--sienna);

@@ -78,8 +78,8 @@ const HeroHeroDarkGradientSection = () => (
           >
             Chcem si to pozrieť 👀
           </a>
-          <p className="mt-4 w-full font-sans text-[0.875rem] leading-relaxed text-white/70 md:text-[0.9375rem]">
-            15 dní zadarmo. Potom 7 € mesačne. Zrušíš kedykoľvek.
+          <p className="mt-4 w-full font-sans font-[500] text-[1.0625rem] leading-relaxed text-white/70 md:text-[1.25rem]">
+            15 dní zadarmo. Potom <strong className="[font-family:var(--font-serif)] font-[900] text-white">7 €</strong> mesačne. Zrušíš kedykoľvek.
           </p>
         </div>
       </AnimatedSection>

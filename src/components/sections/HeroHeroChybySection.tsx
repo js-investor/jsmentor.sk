@@ -16,7 +16,7 @@ const painTabs: ReactNode[] = [
 ];
 
 const tabTextClass =
-  "font-sans text-[1.0625rem] leading-snug text-foreground md:text-[1.1875rem] lg:text-[1.25rem]";
+  "font-sans text-[1.125rem] leading-snug text-foreground md:text-[1.25rem]";
 
 const HeroHeroChybySection = () => (
   <section
@@ -42,7 +42,8 @@ const HeroHeroChybySection = () => (
         <AnimatedSection delay={0.06}>
           <div className="flex flex-col justify-center text-left">
             <h2 className="headline-landing-section text-balance leading-[1.12] text-white">
-              Toto sú chyby, ktoré ľudí stoja najviac peňazí. A často vyzerajú úplne normálne.
+              <strong className="font-bold">Toto sú chyby,</strong>{" "}
+              <span className="font-normal">ktoré ľudí stoja najviac peňazí. A často vyzerajú úplne normálne.</span>
             </h2>
 
             <p className="hero-description !mx-0 !max-w-none mt-6 text-left text-white/90 md:mt-8">
