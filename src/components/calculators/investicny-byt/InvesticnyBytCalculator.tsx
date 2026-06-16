@@ -235,7 +235,7 @@ const InvesticnyBytCalculator = () => {
 
       {/* ===== HERO ===== */}
       <div className="text-center mb-10 md:mb-[50px] max-w-[760px] mx-auto px-5">
-        <Pill>Interaktívna mapa 🇸🇰</Pill>
+        <Pill>Interaktívna mapa</Pill>
         <h1 className="[font-family:var(--font-serif)] font-black text-[clamp(1.875rem,6vw,3.125rem)] leading-[1.15] tracking-[-0.015em] text-foreground mb-3">
           Koľko ti zarobí byt<br />za <span className="text-primary">{Y} rokov</span>?
         </h1>
