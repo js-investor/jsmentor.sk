@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { BarChart3, FileDown, House, Percent, Receipt, Wallet, MapPin } from "lucide-react";
+import { BarChart3, FileDown, House, Percent, Receipt, Wallet, MapPin, TrendingUp } from "lucide-react";
 
 export const BONUSY_BASE_PATH = "/bonusy";
 
@@ -61,6 +61,14 @@ export const KALKULACKY_CALCULATORS: KalkulackaCalculatorMeta[] = [
       "Interaktívna mapa Slovenska: zisti, koľko ti zarobí investičný byt za 5–30 rokov v každom krajskom meste.",
     Icon: MapPin,
   },
+  {
+    slug: "etf-semafor",
+    title: "ETF semafor 🚦",
+    menuLabel: "ETF semafor",
+    description:
+      "15 otázok, 3 minúty. Zisti, či investuješ správne — stratégia, poplatky, dane a chyby, ktoré ťa potichu stoja peniaze.",
+    Icon: TrendingUp,
+  },
 ];
 
 /** Položka menu — doplniť `href`, keď bude PDF pripravené. */
@@ -94,11 +102,21 @@ export const KALKULACKY_LEGACY_PATH_REDIRECTS: { from: string; to: string }[] = 
  * spoľahlivejšie otvorí Web WhatsApp / aplikáciu ako krátke wa.me v novom tabe.
  */
 const MENTOR_WHATSAPP_E164 = "421902519328";
-const MENTOR_WHATSAPP_PREFILL_MESSAGE = "Ahoj, mám otázku ku kalkulačkám z JS Mentor.";
-export const KALKULACKY_WHATSAPP_HREF = `https://api.whatsapp.com/send?${new URLSearchParams({
-  phone: MENTOR_WHATSAPP_E164,
-  text: MENTOR_WHATSAPP_PREFILL_MESSAGE,
-}).toString()}`;
+
+export function makeWhatsAppHref(message: string): string {
+  return `https://api.whatsapp.com/send?${new URLSearchParams({
+    phone: MENTOR_WHATSAPP_E164,
+    text: message,
+  }).toString()}`;
+}
+
+export const KALKULACKY_WHATSAPP_HREF = makeWhatsAppHref(
+  "Ahoj, mám otázku ku kalkulačkám z JS Mentor."
+);
+
+export const ETF_SEMAFOR_WHATSAPP_HREF = makeWhatsAppHref(
+  "Ahoj Ivan, mám otázku."
+);
 
 export const KALKULACKY_KONZULTACIA_CARD = {
   title: "Mám otázku k výsledku",

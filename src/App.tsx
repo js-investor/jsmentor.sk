@@ -1,4 +1,11 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+};
 import Index from "./pages/Index.tsx";
 import Konzultacia from "./pages/Konzultacia.tsx";
 import Gdpr from "./pages/Gdpr.tsx";
@@ -15,6 +22,7 @@ import MzdovaCalculator from "./components/calculators/mzdova/MzdovaCalculator.t
 import PodlaPrijmuCalculator from "./components/calculators/podlaprijmu/PodlaPrijmuCalculator.tsx";
 import RentovaCalculator from "./components/calculators/rentova/RentovaCalculator.tsx";
 import InvesticnyBytCalculator from "./components/calculators/investicny-byt/InvesticnyBytCalculator.tsx";
+import EtfSemaforCalculator from "./components/calculators/etf-semafor/EtfSemaforCalculator.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import type { ReactNode } from "react";
 
@@ -25,10 +33,12 @@ const calculatorBySlug: Record<string, ReactNode> = {
   "uverova-kalkulacka": <PodlaPrijmuCalculator />,
   "rentova-kalkulacka": <RentovaCalculator />,
   "investicny-byt": <InvesticnyBytCalculator />,
+  "etf-semafor":    <EtfSemaforCalculator />,
 };
 
 const App = () => (
   <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <ScrollToTop />
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/konzultacia" element={<Konzultacia />} />
