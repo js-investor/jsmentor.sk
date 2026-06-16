@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { BarChart3, FileDown, House, Percent, Receipt, Wallet } from "lucide-react";
+import { BarChart3, FileDown, House, Percent, Receipt, Wallet, MapPin } from "lucide-react";
 
 export const BONUSY_BASE_PATH = "/bonusy";
 
@@ -52,6 +52,14 @@ export const KALKULACKY_CALCULATORS: KalkulackaCalculatorMeta[] = [
     description:
       "Zisti, aký kapitál potrebuješ na požadovanú rentu a koľko treba pravidelne investovať.",
     Icon: Percent,
+  },
+  {
+    slug: "investicny-byt",
+    title: "Investičný byt",
+    menuLabel: "Investičný byt",
+    description:
+      "Interaktívna mapa Slovenska: zisti, koľko ti zarobí investičný byt za 5–30 rokov v každom krajskom meste.",
+    Icon: MapPin,
   },
 ];
 

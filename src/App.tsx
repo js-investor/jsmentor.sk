@@ -14,6 +14,7 @@ import InvesticnaCalculator from "./components/calculators/investicna/Investicna
 import MzdovaCalculator from "./components/calculators/mzdova/MzdovaCalculator.tsx";
 import PodlaPrijmuCalculator from "./components/calculators/podlaprijmu/PodlaPrijmuCalculator.tsx";
 import RentovaCalculator from "./components/calculators/rentova/RentovaCalculator.tsx";
+import InvesticnyBytCalculator from "./components/calculators/investicny-byt/InvesticnyBytCalculator.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import type { ReactNode } from "react";
 
@@ -23,6 +24,7 @@ const calculatorBySlug: Record<string, ReactNode> = {
   "mzdova-kalkulacka": <MzdovaCalculator />,
   "uverova-kalkulacka": <PodlaPrijmuCalculator />,
   "rentova-kalkulacka": <RentovaCalculator />,
+  "investicny-byt": <InvesticnyBytCalculator />,
 };
 
 const App = () => (

@@ -27,6 +27,17 @@
   cursor: pointer;
 }
 
+/* dark variant used in dark sections */
+.iby-range-dark {
+  background: rgba(245,237,224,.15);
+}
+.iby-range-dark::-webkit-slider-thumb {
+  border-color: #111210;
+}
+.iby-range-dark::-moz-range-thumb {
+  border-color: #111210;
+}
+
 /* ===== map regions ===== */
 .iby-kraj {
   cursor: pointer;

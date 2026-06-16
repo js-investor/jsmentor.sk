@@ -12,6 +12,7 @@ type HeaderItem = {
 type KonzultaciaSiteHeaderProps = {
   items?: HeaderItem[];
   ctaLabel?: string;
+  ctaMobileLabel?: string;
   ctaHref?: string;
   ctaIcon?: ReactNode;
   ctaOnClick?: () => void;
@@ -27,6 +28,7 @@ const navLinkClass =
 const KonzultaciaSiteHeader = ({
   items = [],
   ctaLabel = "Chcem začať teraz",
+  ctaMobileLabel,
   ctaHref,
   ctaIcon,
   ctaOnClick,
@@ -63,6 +65,29 @@ const KonzultaciaSiteHeader = ({
     <button type="button" onClick={ctaOnClick} className={ctaClassName}>
       {ctaIcon}
       {ctaLabel}
+    </button>
+  );
+
+  const mobileLabel = ctaMobileLabel ? (
+    <>
+      <span className="sm:hidden">{ctaMobileLabel}</span>
+      <span className="hidden sm:inline">{ctaLabel}</span>
+    </>
+  ) : ctaLabel;
+  const ctaMobileButton = ctaHref ? (
+    <a
+      href={ctaHref}
+      {...(ctaOpensNewTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      className={ctaClassName}
+      onClick={() => setMobileMenuOpen(false)}
+    >
+      {ctaIcon}
+      {mobileLabel}
+    </a>
+  ) : (
+    <button type="button" onClick={ctaOnClick} className={ctaClassName}>
+      {ctaIcon}
+      {mobileLabel}
     </button>
   );
 
@@ -121,7 +146,7 @@ const KonzultaciaSiteHeader = ({
           )}
         </nav>
 
-        <div className="konzultacia-header-mobile-cta xl:hidden">{ctaButton}</div>
+        <div className="konzultacia-header-mobile-cta xl:hidden">{ctaMobileButton}</div>
 
         <div className="konzultacia-header-actions">
           <div className="hidden items-center gap-2.5 xl:flex">

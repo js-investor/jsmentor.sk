@@ -4,7 +4,7 @@ import { KALKULACKY_WHATSAPP_HREF } from "@/pages/kalkulacky/kalkulackyConfig";
 
 // ===== TYPES & DATA =====
 interface KrajData { name: string; m2: number; hist: number; rent2i: number; }
-interface TypData  { name: string; m: number; pk: number; rk: number; cm: number; }
+interface TypData  { name: string; short: string; m: number; pk: number; rk: number; cm: number; }
 
 const KRAJE: Record<string, KrajData> = {
   BA: { name: "Bratislava",      m2: 4500, hist: 8.5, rent2i: 870 },
@@ -18,11 +18,11 @@ const KRAJE: Record<string, KrajData> = {
 };
 
 const TYPY: Record<string, TypData> = {
-  G:    { name: "Garsónka",      m: 26, pk: 1.18, rk: 0.65, cm: 110 },
-  "1i": { name: "1-izbový",      m: 36, pk: 1.12, rk: 0.80, cm: 130 },
-  "2i": { name: "2-izbový",      m: 56, pk: 1.00, rk: 1.00, cm: 160 },
-  "3i": { name: "3-izbový",      m: 72, pk: 0.95, rk: 1.30, cm: 190 },
-  "4i": { name: "4-izbový",      m: 90, pk: 0.92, rk: 1.60, cm: 220 },
+  G:    { name: "Garsónka",      short: "Garsónka",  m: 26, pk: 1.18, rk: 0.65, cm: 110 },
+  "1i": { name: "1-izbový byt",  short: "1-izbový",  m: 36, pk: 1.12, rk: 0.80, cm: 130 },
+  "2i": { name: "2-izbový byt",  short: "2-izbový",  m: 56, pk: 1.00, rk: 1.00, cm: 160 },
+  "3i": { name: "3-izbový byt",  short: "3-izbový",  m: 72, pk: 0.95, rk: 1.30, cm: 190 },
+  "4i": { name: "4-izbový byt",  short: "4-izbový",  m: 90, pk: 0.92, rk: 1.60, cm: 220 },
 };
 
 const MAP_PATHS: Record<string, string> = {
@@ -131,7 +131,7 @@ const ResCard = ({ label, value, color }: { label: string; value: string; color?
 // ===== MAIN COMPONENT =====
 const InvesticnyBytCalculator = () => {
   const [kraj, setKraj] = useState("ZA");
-  const [typ, setTyp] = useState("2i");
+  const [typ, setTyp] = useState("2i"); // G | 1i | 2i | 3i | 4i | X
   const [costM, setCostM] = useState(160);
   const [costY, setCostY] = useState(300);
   const [customPrice, setCustomPrice] = useState(225000);
@@ -221,7 +221,7 @@ const InvesticnyBytCalculator = () => {
 
   const hd = hoverYear !== null ? chartData[hoverYear] : null;
 
-  // Table
+  // Table — matches original: typ==="X" falls back to 2i
   const tblTyp = typ === "X" ? "2i" : typ;
   const tableRows = Object.entries(KRAJE).sort((a, b) => b[1].m2 - a[1].m2).map(([k, kd]) => {
     const p = autoPrice(k, tblTyp), r = autoRent(k, tblTyp);
@@ -242,11 +242,11 @@ const InvesticnyBytCalculator = () => {
         <p className="text-[16.5px] text-muted-foreground font-[500] leading-relaxed max-w-[580px] mx-auto mt-3">
           Vyber krajské mesto a typ bytu. Ceny kalibrované na aktuálne ponuky (nehnutelnosti.sk), nájmy z Deloitte Rent Index — žiadne realitkárske rozprávky.
         </p>
-        <div className="flex flex-wrap justify-center gap-3 mt-[30px]">
+        <div className="grid grid-cols-3 gap-2 mt-[30px] sm:gap-3">
           {[{ l: "NBS + trh", s: "ceny · Q1 2026" }, { l: "Deloitte", s: "nájmy · Q4 2025" }, { l: "8 miest", s: "celé Slovensko" }].map(b => (
-            <div key={b.l} className="bg-card border border-border rounded-[14px] px-[22px] py-[14px] min-w-[130px]">
-              <strong className="block text-[18px] font-black text-foreground">{b.l}</strong>
-              <span className="text-[11px] font-semibold text-muted-foreground">{b.s}</span>
+            <div key={b.l} className="bg-card border border-border rounded-[14px] px-3 py-3 sm:px-[22px] sm:py-[14px]">
+              <strong className="block text-[14px] sm:text-[18px] font-black text-foreground leading-tight">{b.l}</strong>
+              <span className="text-[10px] sm:text-[11px] font-semibold text-muted-foreground leading-tight">{b.s}</span>
             </div>
           ))}
         </div>
@@ -303,7 +303,7 @@ const InvesticnyBytCalculator = () => {
             {(["G", "1i", "2i", "3i", "4i"] as const).map(t => (
               <button key={t} type="button" onClick={() => handleTypClick(t)}
                 className={`iby-chip${typ === t ? " active" : ""}`}>
-                {TYPY[t].name}
+                {TYPY[t].short}
               </button>
             ))}
             <button type="button" onClick={() => handleTypClick("X")}
@@ -312,49 +312,54 @@ const InvesticnyBytCalculator = () => {
             </button>
           </div>
 
+          {/* Auto-cards / Custom inputs — mutually exclusive, exactly 2 boxes always */}
           {typ !== "X" ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
               <div className="bg-background border border-border rounded-[14px] p-[22px] text-left">
                 <div className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-muted-foreground">Cena bytu</div>
-                <div className="text-[clamp(22px,3.4vw,30px)] font-black text-foreground mt-1">{fmt(price)}</div>
+                <div className="text-[clamp(22px,3.4vw,30px)] font-black text-foreground mt-1">{fmt(autoPrice(kraj, typ))}</div>
                 <div className="text-[11.5px] text-muted-foreground font-semibold mt-1.5 leading-relaxed">
                   ~{TYPY[typ].m} m² × {Math.round(K.m2 * TYPY[typ].pk).toLocaleString("sk-SK")} €/m² · {K.name}
                 </div>
               </div>
               <div className="bg-background border border-border rounded-[14px] p-[22px] text-left">
                 <div className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-muted-foreground">Priemerný nájom (aj s energiami)</div>
-                <div className="text-[clamp(22px,3.4vw,30px)] font-black text-foreground mt-1">{fmt(rent)} <span className="text-[14px] font-bold text-muted-foreground">/mes.</span></div>
+                <div className="text-[clamp(22px,3.4vw,30px)] font-black text-foreground mt-1">{fmt(autoRent(kraj, typ))} <span className="text-[14px] font-bold text-muted-foreground">/mes.</span></div>
                 <div className="text-[11.5px] text-muted-foreground font-semibold mt-1.5 leading-relaxed">
-                  priemer · {K.name} · <em className="not-italic text-primary font-bold">nájom zvyšujeme priemerne o cca 3 % ročne</em>
+                  priemer · {K.name} <em className="not-italic text-primary font-bold">(nájom zvyšujeme priemerne o cca 3 % ročne)</em>
                 </div>
               </div>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6 text-left">
-              <div className="border-2 border-primary rounded-[14px] p-[16px_20px]">
-                <label className="block text-[11px] font-extrabold uppercase tracking-[0.1em] text-muted-foreground mb-1.5">Cena bytu (€)</label>
+              <div className="bg-background border border-border rounded-[14px] p-[22px]">
+                <div className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-muted-foreground">Cena bytu (€)</div>
                 <input type="number" value={customPrice} min={10000} step={1000}
-                  onChange={e => setCustomPrice(+e.target.value)} className="iby-num-input" />
+                  onChange={e => setCustomPrice(+e.target.value)}
+                  className="iby-num-input text-[clamp(22px,3.4vw,30px)] font-black text-foreground mt-1 block" />
               </div>
-              <div className="border-2 border-primary rounded-[14px] p-[16px_20px]">
-                <label className="block text-[11px] font-extrabold uppercase tracking-[0.1em] text-muted-foreground mb-1.5">Nájom mesačne (€)</label>
+              <div className="bg-background border border-border rounded-[14px] p-[22px]">
+                <div className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-muted-foreground">Nájom mesačne (€)</div>
                 <input type="number" value={customRent} min={0} step={10}
-                  onChange={e => setCustomRent(+e.target.value)} className="iby-num-input" />
-                <p className="text-[11px] text-muted-foreground font-semibold mt-1.5">Koľko reálne vyberieš od nájomníka.</p>
+                  onChange={e => setCustomRent(+e.target.value)}
+                  className="iby-num-input text-[clamp(22px,3.4vw,30px)] font-black text-foreground mt-1 block" />
+                <div className="text-[11.5px] text-muted-foreground font-semibold mt-1.5 leading-relaxed">Koľko reálne vyberieš od nájomníka.</div>
               </div>
             </div>
           )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 text-left">
-            <div className="bg-background border border-border rounded-[14px] p-[18px_20px]">
-              <label className="block text-[11px] font-extrabold uppercase tracking-[0.1em] text-muted-foreground mb-1">Mesačné náklady z nájmu (€)</label>
-              <input type="number" value={costM} min={0} step={10} onChange={e => setCostM(+e.target.value)} className="iby-num-input" />
-              <p className="text-[11px] text-muted-foreground font-semibold mt-1 leading-relaxed">správa, fond opráv… <em className="not-italic text-primary font-bold">(náklady zvyšujeme priemerne o 2 % ročne)</em></p>
+            <div className="bg-background border border-border rounded-[14px] p-[22px]">
+              <div className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-muted-foreground">Mesačné náklady z nájmu (€)</div>
+              <input type="number" value={costM} min={0} step={10} onChange={e => setCostM(+e.target.value)}
+                className="iby-num-input text-[clamp(22px,3.4vw,30px)] font-black text-foreground mt-1 block" />
+              <div className="text-[11.5px] text-muted-foreground font-semibold mt-1.5 leading-relaxed">správa, fond opráv… <em className="not-italic text-primary font-bold">(náklady zvyšujeme priemerne o 2 % ročne)</em></div>
             </div>
-            <div className="bg-background border border-border rounded-[14px] p-[18px_20px]">
-              <label className="block text-[11px] font-extrabold uppercase tracking-[0.1em] text-muted-foreground mb-1">Ročné náklady (€)</label>
-              <input type="number" value={costY} min={0} step={50} onChange={e => setCostY(+e.target.value)} className="iby-num-input" />
-              <p className="text-[11px] text-muted-foreground font-semibold mt-1 leading-relaxed">poistenie, daň z nehnuteľnosti… <em className="not-italic text-primary font-bold">(zvyšujeme priemerne o 2 % ročne)</em></p>
+            <div className="bg-background border border-border rounded-[14px] p-[22px]">
+              <div className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-muted-foreground">Ročné náklady (€)</div>
+              <input type="number" value={costY} min={0} step={50} onChange={e => setCostY(+e.target.value)}
+                className="iby-num-input text-[clamp(22px,3.4vw,30px)] font-black text-foreground mt-1 block" />
+              <div className="text-[11.5px] text-muted-foreground font-semibold mt-1.5 leading-relaxed">poistenie, daň z nehnuteľnosti… <em className="not-italic text-primary font-bold">(zvyšujeme priemerne o 2 % ročne)</em></div>
             </div>
           </div>
         </div>
@@ -496,7 +501,7 @@ const InvesticnyBytCalculator = () => {
             Ten istý byt v <em className="not-italic text-primary">každom krajskom meste</em>
           </h2>
           <p className="text-[16.5px] text-muted-foreground font-[500] mt-[14px]">
-            {typ === "X" ? "Vlastné zadanie" : (TYPY[typ]?.name ?? "2-izbový")} · horizont {Y} rokov · historické tempo každého mesta
+            {typ === "X" ? "Vlastné zadanie" : TYPY[typ].name} · horizont {Y} rokov · historické tempo každého mesta
           </p>
 
           <div className="overflow-x-auto mt-[30px]">
@@ -539,7 +544,7 @@ const InvesticnyBytCalculator = () => {
 
       {/* ===== FOOTER DISCLAIMER (dark) ===== */}
       <div className="rounded-2xl px-5 py-[40px] md:px-8" style={{ background: "#111210", color: "#B8B2A4", borderTop: "1px solid rgba(245,237,224,.14)" }}>
-        <p className="max-w-[760px] mx-auto text-[11.5px] leading-[1.7] text-center font-semibold">
+        <p className="max-w-[760px] mx-auto text-[12.5px] md:text-[14px] leading-[1.8] text-center font-semibold">
           Zdroje a metodika: Ceny bytov = priemer krajského mesta, kalibrovaný na aktuálne ponukové ceny (nehnutelnosti.sk, topreality.sk, Q1 2026) a dáta NBS/Bencont (Bratislava staršie byty 4 222 €/m², Q4 2025). Nájmy: Deloitte Rent Index Q4 2025 (priemer SR 749 €/mes., Bratislava 969 €, Trenčín 551 €), orientačná mesačná suma vrátane bežných energií. Model: nájom rastie priemerne o 3 % ročne, náklady o 2 % ročne, obsadenosť 11 mesiacov v roku. Historické miery rastu sú približné 10-ročné CAGR. Nezohľadňuje daň z príjmu z prenájmu, rekonštrukcie ani neobsadenosť nad rámec modelu. Modelový prepočet — historické výnosy nie sú zárukou budúcich. Nejde o investičné odporúčanie.
         </p>
       </div>
