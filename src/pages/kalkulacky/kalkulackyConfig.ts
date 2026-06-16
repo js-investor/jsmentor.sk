@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { BarChart3, FileDown, House, Percent, Receipt, Wallet, MapPin, TrendingUp } from "lucide-react";
+import { BarChart3, FileDown, House, Percent, Receipt, Wallet, MapPin, TrendingUp, ScanLine } from "lucide-react";
 
 export const BONUSY_BASE_PATH = "/bonusy";
 
@@ -68,6 +68,14 @@ export const KALKULACKY_CALCULATORS: KalkulackaCalculatorMeta[] = [
     description:
       "15 otázok, 3 minúty. Zisti, či investuješ správne — stratégia, poplatky, dane a chyby, ktoré ťa potichu stoja peniaze.",
     Icon: TrendingUp,
+  },
+  {
+    slug: "poplatkovy-rontgen",
+    title: "Poplatkový röntgen 💸",
+    menuLabel: "Poplatkový röntgen",
+    description:
+      "Tri kliky a uvidíš, koľko z tvojho budúceho majetku potichu zmizne v poplatkoch. V eurách, nie v percentách.",
+    Icon: ScanLine,
   },
 ];
 
