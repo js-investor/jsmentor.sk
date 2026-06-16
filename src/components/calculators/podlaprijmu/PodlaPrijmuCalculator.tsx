@@ -40,14 +40,14 @@ const PodlaPrijmuCalculator = () => {
       <div className="calc-body-shell">
         <div className="max-w-6xl mx-auto">
         <div className="mb-10 text-center md:mb-12">
-          <h1 className="text-4xl md:text-5xl mb-4 font-serif text-foreground leading-tight">Úverová kalkulačka (DTI & DSTI)</h1>
+          <h1 className="text-4xl md:text-5xl mb-4 font-serif font-bold text-foreground leading-tight">Úverová kalkulačka (DTI & DSTI)</h1>
           <p className="text-lg text-muted-foreground leading-relaxed">Zistite svoju maximálnu úverovú kapacitu podľa pravidiel NBS.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-white p-6 md:p-6 rounded-xl border border-border">
-              <h2 className="headline-serif mb-6 border-b border-cream pb-4">Vaše financie</h2>
+              <h2 className="text-lg font-serif font-semibold mb-6 border-b border-cream pb-4">Vaše financie</h2>
               <div className="mb-6 space-y-4">
                 <div>
                   <label className="block text-[15px] font-bold uppercase tracking-wide text-muted-foreground mb-2">Váš čistý mesačný príjem</label>
@@ -110,7 +110,7 @@ const PodlaPrijmuCalculator = () => {
               <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                 <div>
                   <h3 className="text-cream text-[15px] uppercase tracking-widest font-medium mb-2">Váš úverový potenciál</h3>
-                  <div className="text-4xl md:text-5xl font-serif leading-none" id="dti-max-mortgage">
+                  <div className="text-4xl md:text-5xl font-serif font-bold leading-none" id="dti-max-mortgage">
                     0 €
                   </div>
                   <div className="mt-2 text-[14px] text-white/80" id="dti-limit-reason" />
@@ -144,9 +144,9 @@ const PodlaPrijmuCalculator = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white p-6 rounded-xl border border-border flex flex-col items-center">
-                <h4 className="font-serif text-lg mb-1">DTI Indikátor</h4>
-                <p className="text-[14px] text-muted-foreground uppercase tracking-wider mb-4">Celkový dlh vs. ročný príjem</p>
+              <div className="bg-black p-6 rounded-xl border border-white/10 flex flex-col items-center">
+                <h4 className="font-serif text-lg mb-1 text-white">DTI Indikátor</h4>
+                <p className="text-[14px] text-white/50 uppercase tracking-wider mb-4">Celkový dlh vs. ročný príjem</p>
                 <div className="relative w-48 h-24">
                   <canvas id="chart-dti" />
                   <div className="absolute inset-0 flex items-end justify-center pb-0">
@@ -155,13 +155,13 @@ const PodlaPrijmuCalculator = () => {
                     </span>
                   </div>
                 </div>
-                <p className="text-[15px] text-center mt-4" id="dti-status-msg">
+                <p className="text-[15px] text-center mt-4 text-white/80" id="dti-status-msg">
                   V bezpečnej zóne
                 </p>
               </div>
-              <div className="bg-white p-6 rounded-xl border border-border flex flex-col items-center">
-                <h4 className="font-serif text-lg mb-1">DSTI Indikátor</h4>
-                <p className="text-[14px] text-muted-foreground uppercase tracking-wider mb-4">Splátky vs. mesačný príjem</p>
+              <div className="bg-black p-6 rounded-xl border border-white/10 flex flex-col items-center">
+                <h4 className="font-serif text-lg mb-1 text-white">DSTI Indikátor</h4>
+                <p className="text-[14px] text-white/50 uppercase tracking-wider mb-4">Splátky vs. mesačný príjem</p>
                 <div className="relative w-48 h-24">
                   <canvas id="chart-dsti" />
                   <div className="absolute inset-0 flex items-end justify-center pb-0">
@@ -170,7 +170,7 @@ const PodlaPrijmuCalculator = () => {
                     </span>
                   </div>
                 </div>
-                <p className="text-[15px] text-center mt-4" id="dsti-status-msg">
+                <p className="text-[15px] text-center mt-4 text-white/80" id="dsti-status-msg">
                   V bezpečnej zóne
                 </p>
               </div>

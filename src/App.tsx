@@ -24,6 +24,7 @@ import RentovaCalculator from "./components/calculators/rentova/RentovaCalculato
 import InvesticnyBytCalculator from "./components/calculators/investicny-byt/InvesticnyBytCalculator.tsx";
 import EtfSemaforCalculator from "./components/calculators/etf-semafor/EtfSemaforCalculator.tsx";
 import PoplatkovyRontgenCalculator from "./components/calculators/poplatkovy-rontgen/PoplatkovyRontgenCalculator.tsx";
+import BytovySemaforCalculator from "./components/calculators/bytovy-semafor/BytovySemaforCalculator.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import type { ReactNode } from "react";
 
@@ -36,6 +37,7 @@ const calculatorBySlug: Record<string, ReactNode> = {
   "investicny-byt": <InvesticnyBytCalculator />,
   "etf-semafor":         <EtfSemaforCalculator />,
   "poplatkovy-rontgen":  <PoplatkovyRontgenCalculator />,
+  "bytovy-semafor":      <BytovySemaforCalculator />,
 };
 
 const App = () => (

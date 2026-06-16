@@ -40,14 +40,14 @@ const RentovaCalculator = () => {
       <div className="calc-body-shell">
         <div className="max-w-6xl mx-auto">
         <div className="mb-10 text-center max-w-2xl mx-auto md:mb-12">
-          <h1 className="text-4xl md:text-5xl mb-4 font-serif text-foreground leading-tight">Rentová kalkulačka</h1>
+          <h1 className="text-4xl md:text-5xl mb-4 font-serif font-bold text-foreground leading-tight">Rentová kalkulačka</h1>
           <p className="text-lg text-muted-foreground leading-relaxed">Zistite, aký kapitál potrebujete na dosiahnutie vašej vysnívanej renty.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-4 space-y-6">
             <div className="bg-white p-6 md:p-6 rounded-xl border border-border">
-              <h2 className="headline-serif mb-6 border-b border-cream pb-4">Vaše parametre</h2>
+              <h2 className="text-lg font-serif font-semibold mb-6 border-b border-cream pb-4">Vaše parametre</h2>
               <div className="mb-6 grid grid-cols-2 gap-4">
                 <div>
                   <label className="text-[15px] font-bold text-muted-foreground block mb-1">Súčasný vek</label>
@@ -104,9 +104,9 @@ const RentovaCalculator = () => {
           <div className="lg:col-span-8 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="bg-primary text-primary-foreground p-6 rounded-xl relative overflow-hidden min-h-[160px]">
-                <h3 className="text-cream text-[15px] uppercase tracking-widest mb-1">Cieľová suma</h3>
+                <h3 className="text-cream text-[15px] font-semibold uppercase tracking-widest mb-1">Cieľová suma</h3>
                 <p className="text-[14px] text-white/80 mb-4">Kapitál potrebný pri odchode do dôchodku</p>
-                <div className="text-3xl md:text-4xl font-serif" id="ml-requiredCapital">
+                <div className="text-3xl md:text-4xl font-serif font-bold" id="ml-requiredCapital">
                   0 €
                 </div>
                 <img
@@ -122,12 +122,12 @@ const RentovaCalculator = () => {
                 />
               </div>
               <div className="bg-[#FFF9F5] p-6 rounded-xl border border-border min-h-[160px] relative overflow-hidden">
-                <h3 className="text-muted-foreground text-[15px] uppercase tracking-widest mb-1 relative z-10">Chýbajúca investícia</h3>
-                <div className="text-3xl md:text-4xl font-serif text-foreground relative z-10" id="ml-monthlyGap">
-                  0 €
-                </div>
-                <div className="mt-2 text-[14px] text-foreground relative z-10">
+                <h3 className="text-muted-foreground text-[15px] font-semibold uppercase tracking-widest mb-1 relative z-10">Chýbajúca investícia</h3>
+                <div className="text-[14px] text-foreground/80 mb-4 relative z-10">
                   Pri <span id="ml-roiDisplay">7%</span> zhodnotení.
+                </div>
+                <div className="text-3xl md:text-4xl font-serif font-bold text-foreground relative z-10" id="ml-monthlyGap">
+                  0 €
                 </div>
                 <img
                   src={brandPattern}
@@ -143,25 +143,25 @@ const RentovaCalculator = () => {
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-xl border border-border">
+            <div className="bg-[#111111] p-6 rounded-xl border border-black">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
-                <h3 className="text-xl font-serif text-foreground">Vývoj majetku</h3>
+                <h3 className="text-xl font-serif text-white">Vývoj majetku</h3>
               </div>
               <div className="relative h-64 w-full">
                 <canvas id="ml-rentChart" />
               </div>
-              <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center border-t border-cream pt-4">
-                <div className="rounded-lg p-4" style={{ backgroundColor: "#F0ECE6" }}>
-                  <span className="block text-[15px] font-bold text-muted-foreground uppercase">Inflačná renta</span>
-                  <span className="block text-3xl font-serif font-normal text-foreground mt-1" id="ml-inflatedRentVal">0 €</span>
+              <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center border-t border-white/10 pt-4">
+                <div className="rounded-lg p-4" style={{ backgroundColor: "rgba(255,255,255,0.07)" }}>
+                  <span className="block text-[15px] font-semibold text-white/60 uppercase">Inflačná renta</span>
+                  <span className="block text-3xl text-white mt-1" style={{ fontWeight: 900 }} id="ml-inflatedRentVal">0 €</span>
                 </div>
-                <div className="rounded-lg p-4" style={{ backgroundColor: "#F0ECE6" }}>
-                  <span className="block text-[15px] font-bold text-muted-foreground uppercase">Váš kapitál</span>
-                  <span className="block text-3xl font-serif font-normal text-foreground mt-1" id="ml-projectedCapital">0 €</span>
+                <div className="rounded-lg p-4" style={{ backgroundColor: "rgba(255,255,255,0.07)" }}>
+                  <span className="block text-[15px] font-semibold text-white/60 uppercase">Váš kapitál</span>
+                  <span className="block text-3xl text-white mt-1" style={{ fontWeight: 900 }} id="ml-projectedCapital">0 €</span>
                 </div>
-                <div className="rounded-lg p-4" style={{ backgroundColor: "#F0ECE6" }}>
-                  <span className="block text-[15px] font-bold text-muted-foreground uppercase">Stav cieľa</span>
-                  <span className="block text-3xl font-serif font-normal text-foreground mt-1" id="ml-goalStatus">0%</span>
+                <div className="rounded-lg p-4" style={{ backgroundColor: "rgba(255,255,255,0.07)" }}>
+                  <span className="block text-[15px] font-semibold text-white/60 uppercase">Stav cieľa</span>
+                  <span className="block text-3xl text-white mt-1" style={{ fontWeight: 900 }} id="ml-goalStatus">0%</span>
                 </div>
               </div>
             </div>

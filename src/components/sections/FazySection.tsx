@@ -57,18 +57,18 @@ const FazySection = () => (
         </div>
       </AnimatedSection>
 
-      <div className="mx-auto max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 md:gap-x-10 md:gap-y-20 lg:gap-x-12 lg:gap-y-24">
+      <div className="mx-auto max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
         {items.map((item, i) => {
           const Icon = item.icon;
           return (
             <AnimatedSection key={item.title} delay={i * 0.05}>
-              <div className="text-left">
+              <div className="text-left bg-[#FFF9F5] rounded-2xl border border-[#D9D2C8] p-7 h-full">
                 <Icon
                   className="mb-5 h-9 w-9 md:h-10 md:w-10 text-primary"
                   strokeWidth={1.5}
                   aria-hidden
                 />
-                <p className="font-sans h6 text-foreground mb-2">
+                <p className="[font-family:var(--font-serif)] h6 text-foreground mb-2">
                   {item.title}
                 </p>
                 <p className="font-sans text-small text-muted-foreground">

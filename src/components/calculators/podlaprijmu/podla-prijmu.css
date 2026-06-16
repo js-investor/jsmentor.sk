@@ -21,6 +21,22 @@
   font-family: var(--font-serif);
 }
 
+/* Title = bold */
+#dti-calc-root h1 {
+  font-weight: 700 !important;
+}
+
+/* Section headings = smaller */
+#dti-calc-root h2.text-lg {
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+}
+
+/* Result number = bold */
+#dti-calc-root #dti-max-mortgage {
+  font-weight: 700 !important;
+}
+
 #dti-calc-root .input-field {
   transition: border-color 0.25s ease, background-color 0.25s ease;
   border: 1px solid hsl(var(--border));

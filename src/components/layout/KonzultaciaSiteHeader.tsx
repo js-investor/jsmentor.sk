@@ -1,6 +1,6 @@
 import brandLogo from "@/assets/images/js-mentor-logo.png";
-import { Menu, X } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { ChevronDown, Menu, X } from "lucide-react";
+import { useState, useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type HeaderItem = {
@@ -9,8 +9,17 @@ type HeaderItem = {
   onClick?: () => void;
 };
 
+export type HeaderGroup = {
+  label: string;
+  items: { label: string; href: string }[];
+};
+
 type KonzultaciaSiteHeaderProps = {
   items?: HeaderItem[];
+  /** Nahradí flat `items` — zobrazí sa ako dropdown skupiny. */
+  groups?: HeaderGroup[];
+  /** Jednoduché priame linky zobrazené pred skupinami. */
+  leadingLinks?: { label: string; href: string }[];
   ctaLabel?: string;
   ctaMobileLabel?: string;
   ctaHref?: string;
@@ -27,6 +36,8 @@ const navLinkClass =
 
 const KonzultaciaSiteHeader = ({
   items = [],
+  groups,
+  leadingLinks,
   ctaLabel = "Chcem začať teraz",
   ctaMobileLabel,
   ctaHref,
@@ -38,6 +49,17 @@ const KonzultaciaSiteHeader = ({
   logoOnly = false,
 }: KonzultaciaSiteHeaderProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hoverGroup, setHoverGroup] = useState<number | null>(null);
+  const [mobileOpenGroup, setMobileOpenGroup] = useState<number | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const openDropdown = (gi: number) => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setHoverGroup(gi);
+  };
+  const scheduleClose = () => {
+    closeTimer.current = setTimeout(() => setHoverGroup(null), 160);
+  };
 
   const handleItemClick = (item: HeaderItem) => {
     item.onClick?.();
@@ -133,17 +155,74 @@ const KonzultaciaSiteHeader = ({
         {logo}
 
         <nav className="konzultacia-header-nav hidden min-w-0 xl:flex" aria-label="Navigácia stránky">
-          {items.map((item) =>
-            item.href ? (
-              <a key={item.label} href={item.href} className={navLinkClass}>
-                {item.label}
-              </a>
-            ) : (
-              <button key={item.label} type="button" onClick={() => item.onClick?.()} className={navLinkClass}>
-                {item.label}
-              </button>
-            )
-          )}
+          {leadingLinks?.map((link) => (
+            <a key={link.href} href={link.href} className={navLinkClass}>
+              {link.label}
+            </a>
+          ))}
+          {groups
+            ? groups.map((group, gi) => (
+                <div
+                  key={group.label}
+                  className="relative"
+                  onMouseEnter={() => openDropdown(gi)}
+                  onMouseLeave={scheduleClose}
+                >
+                  <button
+                    type="button"
+                    className={cn(navLinkClass, "inline-flex items-center gap-1")}
+                    aria-expanded={hoverGroup === gi}
+                    aria-haspopup="true"
+                  >
+                    {group.label}
+                    <ChevronDown
+                      className={cn(
+                        "h-3.5 w-3.5 transition-transform duration-200",
+                        hoverGroup === gi && "rotate-180"
+                      )}
+                    />
+                  </button>
+
+                  {/* pt-2 = transparent bridge that closes the gap between trigger and panel */}
+                  <div
+                    className={cn(
+                      "absolute left-0 top-full z-50 pt-2 min-w-[220px]",
+                      hoverGroup === gi ? "block" : "hidden"
+                    )}
+                    onMouseEnter={() => openDropdown(gi)}
+                    onMouseLeave={scheduleClose}
+                  >
+                    <div className="overflow-hidden rounded-xl border border-border/50 bg-white py-1.5 shadow-xl">
+                      {group.items.length === 0 ? (
+                        <span className="block px-4 py-3 text-xs font-semibold text-foreground/40">
+                          Pripravujeme…
+                        </span>
+                      ) : (
+                        group.items.map((item) => (
+                          <a
+                            key={item.label}
+                            href={item.href}
+                            className="block px-4 py-3 text-sm font-medium text-foreground/75 transition-colors hover:bg-primary/[0.07] hover:text-primary"
+                          >
+                            {item.label}
+                          </a>
+                        ))
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))
+            : items.map((item) =>
+                item.href ? (
+                  <a key={item.label} href={item.href} className={navLinkClass}>
+                    {item.label}
+                  </a>
+                ) : (
+                  <button key={item.label} type="button" onClick={() => item.onClick?.()} className={navLinkClass}>
+                    {item.label}
+                  </button>
+                )
+              )}
         </nav>
 
         <div className="konzultacia-header-mobile-cta xl:hidden">{ctaMobileButton}</div>
@@ -168,27 +247,77 @@ const KonzultaciaSiteHeader = ({
         {mobileMenuOpen ? (
           <div className="konzultacia-header-mobile-panel xl:hidden">
             <nav className="flex flex-col gap-0.5" aria-label="Mobilná navigácia">
-              {items.map((item) =>
-                item.href ? (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="konzultacia-header-mobile-link"
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <button
-                    key={item.label}
-                    type="button"
-                    onClick={() => handleItemClick(item)}
-                    className="konzultacia-header-mobile-link"
-                  >
-                    {item.label}
-                  </button>
-                )
-              )}
+              {leadingLinks?.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="konzultacia-header-mobile-link"
+                >
+                  {link.label}
+                </a>
+              ))}
+              {groups
+                ? groups.map((group, gi) => (
+                    <div key={group.label}>
+                      <button
+                        type="button"
+                        className="konzultacia-header-mobile-link w-full justify-between"
+                        onClick={() =>
+                          setMobileOpenGroup(mobileOpenGroup === gi ? null : gi)
+                        }
+                      >
+                        <span>{group.label}</span>
+                        <ChevronDown
+                          className={cn(
+                            "h-4 w-4 transition-transform duration-200",
+                            mobileOpenGroup === gi && "rotate-180"
+                          )}
+                        />
+                      </button>
+                      {mobileOpenGroup === gi && (
+                        <div className="flex flex-col gap-0.5 pb-1 pl-4">
+                          {group.items.length === 0 ? (
+                            <span className="px-3 py-2 text-xs font-semibold text-foreground/40">
+                              Pripravujeme…
+                            </span>
+                          ) : (
+                            group.items.map((item) => (
+                              <a
+                                key={item.label}
+                                href={item.href}
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="konzultacia-header-mobile-link"
+                              >
+                                {item.label}
+                              </a>
+                            ))
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ))
+                : items.map((item) =>
+                    item.href ? (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="konzultacia-header-mobile-link"
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <button
+                        key={item.label}
+                        type="button"
+                        onClick={() => handleItemClick(item)}
+                        className="konzultacia-header-mobile-link"
+                      >
+                        {item.label}
+                      </button>
+                    )
+                  )}
             </nav>
             {secondaryCtaLabel ? (
               <div className="mt-2">{renderSecondaryCta("konzultacia-header-mobile-link font-semibold text-primary")}</div>

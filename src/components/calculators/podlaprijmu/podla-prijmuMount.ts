@@ -233,13 +233,13 @@ export function mountPodlaPrijmuCalculator(): () => void {
     }
     if (instance) {
       instance.data.datasets[0].data = [displayValue, remaining];
-      instance.data.datasets[0].backgroundColor = [color, "#e5e7eb"];
+      instance.data.datasets[0].backgroundColor = [color, "rgba(255,255,255,0.12)"];
       instance.update();
       return;
     }
     const created = new Chart(canvas, {
       type: "doughnut",
-      data: { labels: ["Hodnota", "Zvyšok"], datasets: [{ data: [displayValue, remaining], backgroundColor: [color, "#e5e7eb"], borderWidth: 0, circumference: 180, rotation: 270 }] },
+      data: { labels: ["Hodnota", "Zvyšok"], datasets: [{ data: [displayValue, remaining], backgroundColor: [color, "rgba(255,255,255,0.12)"], borderWidth: 0, circumference: 180, rotation: 270 }] },
       options: { cutout: "75%", responsive: true, maintainAspectRatio: false, plugins: { tooltip: { enabled: false }, legend: { display: false } } },
     });
     set(created);

@@ -26,9 +26,9 @@
   padding: 56px 22px;
 }
 .pr-sec--cream {
-  background: var(--pr-cream);
+  /* transparent = blends with page background (#FFF9F5) above */
+  background: transparent;
   color: var(--pr-ink);
-  /* top padding is small — parent shell already adds 9rem for header clearance */
   padding-top: 20px;
   padding-bottom: 40px;
 }

@@ -10,7 +10,7 @@ const MzdovaCalculator = () => {
     <div id="mzv3-w" className="mzv3-root py-12 px-4 sm:px-6 bg-cream">
       <div className="max-w-5xl mx-auto mzv3-shell">
         <div className="mb-10 text-center max-w-2xl mx-auto mzv3-heading">
-          <h1 className="mzv3-title text-4xl md:text-5xl mb-4 font-serif text-foreground leading-tight">Mzdová kalkulačka</h1>
+          <h1 className="mzv3-title text-3xl md:text-4xl mb-4 font-serif text-foreground leading-tight">Mzdová kalkulačka</h1>
           <p className="text-lg text-muted-foreground leading-relaxed">
             Výpočet čistej mzdy podľa platnej legislatívy SR 2026. Platí pre zamestnancov aj SZČO.
           </p>
@@ -145,7 +145,7 @@ const MzdovaCalculator = () => {
                   <h3 id="mzv3-hero-label" className="text-cream text-[15px] uppercase tracking-widest font-medium mb-1">
                     Čistá mzda
                   </h3>
-                  <div className="text-3xl md:text-4xl font-serif mt-2" id="mzv3-net">
+                  <div className="text-3xl md:text-4xl font-serif font-bold mt-2" id="mzv3-net">
                     0 €
                   </div>
                   <div className="text-[14px] text-white/80 mt-2" id="mzv3-net-sub" />
@@ -166,7 +166,7 @@ const MzdovaCalculator = () => {
                 <h3 id="mzv3-second-label" className="text-muted-foreground text-[15px] uppercase tracking-widest font-medium mb-1 relative z-10">
                   Náklady zamestnávateľa
                 </h3>
-                <div className="text-3xl font-serif text-foreground relative z-10" id="mzv3-super">
+                <div className="text-3xl font-serif font-bold text-foreground relative z-10" id="mzv3-super">
                   0 €
                 </div>
                 <div className="text-[14px] text-muted-foreground mt-2 relative z-10" id="mzv3-super-sub">

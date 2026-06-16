@@ -497,11 +497,11 @@ export function mountHypotekarnaCalculator(): () => void {
     chartInstance = null;
 
     const gM = ctx.createLinearGradient(0, 0, 0, 400);
-    gM.addColorStop(0, "rgba(41,106,82,0.12)");
-    gM.addColorStop(1, "rgba(255,255,255,0)");
+    gM.addColorStop(0, "rgba(74,222,128,0.18)");
+    gM.addColorStop(1, "rgba(74,222,128,0)");
     const gI = ctx.createLinearGradient(0, 0, 0, 400);
-    gI.addColorStop(0, "rgba(41,106,82,0.18)");
-    gI.addColorStop(1, "rgba(255,255,255,0)");
+    gI.addColorStop(0, "rgba(41,212,130,0.25)");
+    gI.addColorStop(1, "rgba(41,212,130,0)");
 
     const datasets: Array<{
       type: "line";
@@ -513,8 +513,8 @@ export function mountHypotekarnaCalculator(): () => void {
       tension: number;
       pointRadius: number;
     }> = [];
-    const lineDark = "#1a4033";
-    const lineAccent = "#296A52";
+    const lineDark = "#4ade80";
+    const lineAccent = "#29d482";
 
     if (mEnabled)
       datasets.push({
@@ -547,10 +547,14 @@ export function mountHypotekarnaCalculator(): () => void {
         maintainAspectRatio: false,
         interaction: { mode: "index", intersect: false },
         plugins: {
-          legend: { position: "top", align: "end" },
+          legend: { display: false },
           tooltip: {
             enabled: !isStatic,
-            backgroundColor: "rgba(26,64,51,0.95)",
+            backgroundColor: "rgba(255,255,255,0.12)",
+            titleColor: "#fff",
+            bodyColor: "rgba(255,255,255,0.8)",
+            borderColor: "rgba(255,255,255,0.2)",
+            borderWidth: 1,
             padding: 12,
             callbacks: {
               label: (c) => (c.dataset.label ?? "") + ": " + fmtCur(c.parsed.y as number),
@@ -560,10 +564,16 @@ export function mountHypotekarnaCalculator(): () => void {
         scales: {
           y: {
             beginAtZero: true,
-            grid: { color: "hsl(36 25% 92%)" },
-            ticks: { callback: (v) => fmtNum(Number(v) / 1000) + "k €" },
+            grid: { color: "rgba(255,255,255,0.08)" },
+            ticks: {
+              color: "rgba(255,255,255,0.6)",
+              callback: (v) => fmtNum(Number(v) / 1000) + "k €",
+            },
           },
-          x: { grid: { display: false } },
+          x: {
+            grid: { display: false },
+            ticks: { color: "rgba(255,255,255,0.6)" },
+          },
         },
       },
     });

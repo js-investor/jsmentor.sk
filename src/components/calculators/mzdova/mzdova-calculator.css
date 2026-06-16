@@ -23,7 +23,24 @@
 #mzv3-w h3,
 #mzv3-w .mzv3-title {
   font-family: var(--font-serif) !important;
-  font-weight: 400 !important;
+}
+
+/* Title = bold */
+#mzv3-w .mzv3-title {
+  font-weight: 700 !important;
+}
+
+/* "Vstupné údaje" and other section headings = smaller */
+#mzv3-w h2.headline-serif {
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
+}
+
+/* Result numbers = bold */
+#mzv3-w #mzv3-net,
+#mzv3-w #mzv3-super {
+  font-weight: 700 !important;
 }
 
 #mzv3-w .mzv3-shell {

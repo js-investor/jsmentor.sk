@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { BarChart3, FileDown, House, Percent, Receipt, Wallet, MapPin, TrendingUp, ScanLine } from "lucide-react";
+import { BarChart3, FileDown, House, Percent, Receipt, Wallet, MapPin, TrendingUp, ScanLine, TrafficCone } from "lucide-react";
 
 export const BONUSY_BASE_PATH = "/bonusy";
 
@@ -80,6 +80,15 @@ export const KALKULACKY_CALCULATORS: KalkulackaCalculatorMeta[] = [
     Icon: ScanLine,
     fullBleed: true,
   },
+  {
+    slug: "bytovy-semafor",
+    title: "Bytový semafor 🚦",
+    menuLabel: "Bytový semafor",
+    description:
+      "15 otázok, 3 minúty. Oplatí sa ti ten byt kúpiť? Lokalita, čísla, banka, dane, zmluvy — odpovede pred tým, ako zaplatíš zálohu.",
+    Icon: TrafficCone,
+    fullBleed: true,
+  },
 ];
 
 /** Položka menu — doplniť `href`, keď bude PDF pripravené. */
@@ -128,6 +137,38 @@ export const KALKULACKY_WHATSAPP_HREF = makeWhatsAppHref(
 export const ETF_SEMAFOR_WHATSAPP_HREF = makeWhatsAppHref(
   "Ahoj Ivan, mám otázku."
 );
+
+/** Skupiny pre dropdown navigáciu v headeri. */
+export type NavGroup = {
+  label: string;
+  items: { label: string; href: string }[];
+};
+
+export const KALKULACKY_HEADER_GROUPS: NavGroup[] = [
+  {
+    label: "Kalkulačky",
+    items: [
+      { label: "Hypotéka vs. investovanie", href: `${BONUSY_BASE_PATH}/hypo-kalkulacka` },
+      { label: "Investičná kalkulačka",     href: `${BONUSY_BASE_PATH}/investicna-kalkulacka` },
+      { label: "Mzdová kalkulačka",         href: `${BONUSY_BASE_PATH}/mzdova-kalkulacka` },
+      { label: "Úverová kalkulačka",        href: `${BONUSY_BASE_PATH}/uverova-kalkulacka` },
+      { label: "Rentová kalkulačka",        href: `${BONUSY_BASE_PATH}/rentova-kalkulacka` },
+    ],
+  },
+  {
+    label: "Nástroje",
+    items: [
+      { label: "Investičný byt",     href: `${BONUSY_BASE_PATH}/investicny-byt` },
+      { label: "ETF semafor",        href: `${BONUSY_BASE_PATH}/etf-semafor` },
+      { label: "Poplatkový röntgen", href: `${BONUSY_BASE_PATH}/poplatkovy-rontgen` },
+      { label: "Bytový semafor",     href: `${BONUSY_BASE_PATH}/bytovy-semafor` },
+    ],
+  },
+  {
+    label: "PDF",
+    items: [],
+  },
+];
 
 export const KALKULACKY_KONZULTACIA_CARD = {
   title: "Mám otázku k výsledku",

@@ -52,14 +52,18 @@ const BonusCardContent = ({ Icon, title, description }: BonusCardContentProps) =
 
 const BonusGridCard = ({
   href,
+  bgColor,
   children,
 }: {
   href?: string;
+  bgColor?: string;
   children: ReactNode;
 }) => {
+  const style = bgColor ? { backgroundColor: bgColor } : undefined;
+
   if (href) {
     return (
-      <Link to={href} className={calculatorCardClass}>
+      <Link to={href} className={calculatorCardClass} style={style}>
         {children}
       </Link>
     );
@@ -68,6 +72,7 @@ const BonusGridCard = ({
   return (
     <div
       className={cn(calculatorCardClass, "cursor-default")}
+      style={style}
       aria-disabled="true"
     >
       {children}
@@ -83,10 +88,11 @@ const KalkulackyCategoryPage = () => {
       <div className="section-container px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-8 max-w-3xl text-center md:mb-12">
           <h1 className="headline-serif">
-            <span className="text-primary">Vyber si kalkulačku</span> pre svoje finančné rozhodnutia
+            Rozhoduj sa s istotou,{" "}
+            <span className="text-primary">nie pocitom</span>
           </h1>
-          <p className="mt-3 font-sans text-[15px] leading-relaxed text-muted-foreground md:text-base">
-            Zisti, čo sa oplatí viac, nastav si jasný plán a urob ďalší krok s istotou.
+          <p className="mt-3 font-sans text-[18px] leading-relaxed text-muted-foreground md:text-xl">
+            Zisti presné čísla skôr, než podpíšeš, investuješ alebo zaplatíš. Každý nástroj tu existuje preto, aby si videl, čo ťa rozhodnutie skutočne stojí a čo ti môže zarobiť.
           </p>
         </div>
 
@@ -100,7 +106,7 @@ const KalkulackyCategoryPage = () => {
           ))}
 
           <li className="h-full">
-            <BonusGridCard href={BONUSY_PDF_CARD.href || undefined}>
+            <BonusGridCard href={BONUSY_PDF_CARD.href || undefined} bgColor="#F0ECE6">
               <BonusCardContent
                 Icon={PdfIcon}
                 title={BONUSY_PDF_CARD.title}

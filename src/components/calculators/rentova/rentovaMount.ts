@@ -154,18 +154,40 @@ export function mountRentovaCalculator(): () => void {
           {
             label: "Majetok",
             data: s.dataCapital,
-            borderColor: "#111111",
-            backgroundColor: "rgba(17,17,17,0.05)",
-            borderWidth: 2,
-            pointBackgroundColor: "#7f735a",
+            borderColor: "#4ade80",
+            backgroundColor: "rgba(74,222,128,0.12)",
+            borderWidth: 2.5,
+            pointBackgroundColor: "#4ade80",
             pointRadius: 0,
             pointHoverRadius: 5,
+            pointHoverBackgroundColor: "#4ade80",
             fill: true,
             tension: 0.4,
           },
         ],
       },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: {
+            grid: { color: "rgba(255,255,255,0.1)" },
+            ticks: { color: "rgba(255,255,255,0.7)", font: { size: 12 } },
+            border: { color: "rgba(255,255,255,0.2)" },
+          },
+          y: {
+            grid: { color: "rgba(255,255,255,0.1)" },
+            ticks: {
+              color: "rgba(255,255,255,0.7)",
+              font: { size: 12 },
+              callback: (v: number | string) =>
+                new Intl.NumberFormat("sk-SK", { notation: "compact", maximumFractionDigits: 0 }).format(Number(v)) + " €",
+            },
+            border: { color: "rgba(255,255,255,0.2)" },
+          },
+        },
+      },
     });
   };
 

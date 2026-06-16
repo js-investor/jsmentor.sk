@@ -18,6 +18,23 @@
   font-family: var(--font-serif);
 }
 
+/* Title = bold */
+#rentova-calc-root h1 {
+  font-weight: 700 !important;
+}
+
+/* Section headings = smaller */
+#rentova-calc-root h2.text-lg {
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+}
+
+/* Result numbers = bold */
+#rentova-calc-root #ml-requiredCapital,
+#rentova-calc-root #ml-monthlyGap {
+  font-weight: 700 !important;
+}
+
 #rentova-calc-root .input-field {
   transition: all 0.25s ease;
   border: 1px solid hsl(var(--border));

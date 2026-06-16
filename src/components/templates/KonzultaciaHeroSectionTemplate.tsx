@@ -77,7 +77,7 @@ const HeroSectionTemplate = ({
       secondaryCtaOnClick={headerSecondaryCtaOnClick}
     />
 
-    <div className="relative z-10 px-5 md:px-10 lg:px-16 pb-[4rem] pt-[8rem] max-w-[1400px] mx-auto">
+    <div className="relative z-10 px-5 md:px-10 lg:px-16 pb-[4rem] pt-[8rem] md:pt-[9.6rem] max-w-[1400px] mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}

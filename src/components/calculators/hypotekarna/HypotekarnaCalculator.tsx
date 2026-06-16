@@ -258,16 +258,16 @@ const HypotekarnaCalculator = () => {
 
           <div
             id="hypo-chart-card"
-            className="bg-card p-6 md:p-7 rounded-xl border border-border mb-7 shadow-[0_10px_30px_-10px_rgba(41,106,82,0.1)]"
+            className="bg-black p-6 md:p-7 rounded-xl border border-white/10 mb-7 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.4)]"
           >
             <div className="flex justify-between items-center mb-5 flex-wrap gap-2">
-              <h3 className="hypo-heading text-xl md:text-2xl m-0">Vývoj v čase</h3>
-              <div className="flex gap-3.5 text-[15px] font-medium" id="ml-chart-legend">
+              <h3 className="hypo-heading text-xl md:text-2xl m-0 text-white">Vývoj v čase</h3>
+              <div className="flex gap-3.5 text-[15px] font-medium text-white/80" id="ml-chart-legend">
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#1a4033] inline-block" aria-hidden /> Zostatok hypotéky
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#4ade80] inline-block" aria-hidden /> Zostatok hypotéky
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-primary inline-block" aria-hidden /> Hodnota investície
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#29d482] inline-block" aria-hidden /> Hodnota investície
                 </div>
               </div>
             </div>
@@ -277,10 +277,10 @@ const HypotekarnaCalculator = () => {
             <div
               id="hypo-crossover-info"
               style={{ display: "none" }}
-              className="mt-5 text-center text-[15px] text-muted-foreground bg-cream p-3.5 rounded-lg border border-border"
+              className="mt-5 text-center text-[15px] text-white/60 bg-white/10 p-3.5 rounded-lg border border-white/20"
             >
-              <span className="hypo-heading text-[1.25rem] text-foreground block mb-1">Bod zlomu dosiahnutý</span>
-              <span className="text-[1rem]">Investícia presiahne zostatok hypotéky v <span id="crossover-year" className="font-bold text-foreground" />.</span>
+              <span className="hypo-heading text-[1.25rem] text-white block mb-1">Bod zlomu dosiahnutý</span>
+              <span className="text-[1rem]">Investícia presiahne zostatok hypotéky v <span id="crossover-year" className="font-bold text-white" />.</span>
             </div>
           </div>
 
@@ -290,7 +290,7 @@ const HypotekarnaCalculator = () => {
                 <p className="text-[1rem] text-muted-foreground uppercase tracking-wide font-bold m-0 mb-2 opacity-95">
                   Celkové náklady úveru
                 </p>
-                <div className="hypo-heading text-[2.25rem] md:text-[2.75rem] leading-none text-foreground" id="res-mortgage-total">
+                <div className="hypo-heading text-[2.25rem] md:text-[2.75rem] leading-none text-foreground font-bold" id="res-mortgage-total">
                   0 €
                 </div>
                 <p className="text-[1.0625rem] text-muted-foreground mt-1.5 mb-0">Istina + úroky</p>
@@ -301,7 +301,7 @@ const HypotekarnaCalculator = () => {
                 <p className="text-[1rem] text-muted-foreground uppercase tracking-wide font-bold m-0 mb-2 opacity-95">
                   Vložené do investície
                 </p>
-                <div className="hypo-heading text-[2.25rem] md:text-[2.75rem] leading-none text-foreground" id="res-invest-principal">
+                <div className="hypo-heading text-[2.25rem] md:text-[2.75rem] leading-none text-foreground font-bold" id="res-invest-principal">
                   0 €
                 </div>
                 <p className="text-[1.0625rem] text-muted-foreground mt-1.5 mb-0">Vaše vklady</p>
@@ -323,7 +323,7 @@ const HypotekarnaCalculator = () => {
                 <p className="text-[0.875rem] text-cream uppercase tracking-wide font-bold m-0 mb-2 opacity-95">
                   Čistý majetok na konci
                 </p>
-                <div className="hypo-heading text-[2.25rem] md:text-[2.75rem] leading-none text-white" id="res-net-worth">
+                <div className="hypo-heading text-[2.25rem] md:text-[2.75rem] leading-none text-white font-bold" id="res-net-worth">
                   0 €
                 </div>
                 <p className="text-[1.0625rem] text-white/80 mt-1.5 mb-0">Investícia − zostatok hypotéky</p>
