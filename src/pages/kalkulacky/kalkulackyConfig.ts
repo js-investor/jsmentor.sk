@@ -68,7 +68,7 @@ export const KALKULACKY_CALCULATORS: KalkulackaCalculatorMeta[] = [
     title: "ETF semafor 🚦",
     menuLabel: "ETF semafor",
     description:
-      "15 otázok, 3 minúty. Zisti, či investuješ správne — stratégia, poplatky, dane a chyby, ktoré ťa potichu stoja peniaze.",
+      "15 otázok za 3 minúty. Zisti, či investuješ správne. Od stratégie až po poplatky a chyby, ktoré ťa potichu stoja peniaze.",
     Icon: TrendingUp,
   },
   {
@@ -85,7 +85,7 @@ export const KALKULACKY_CALCULATORS: KalkulackaCalculatorMeta[] = [
     title: "Bytový semafor 🚦",
     menuLabel: "Bytový semafor",
     description:
-      "15 otázok, 3 minúty. Oplatí sa ti ten byt kúpiť? Lokalita, čísla, banka, dane, zmluvy — odpovede pred tým, ako zaplatíš zálohu.",
+      "Oplatí sa ti ten byt kúpiť? Lokalita, čísla, banka, dane, zmluvy. Získaš odpovede ešte pred tým, ako zaplatíš zálohu.",
     Icon: TrafficCone,
     fullBleed: true,
   },

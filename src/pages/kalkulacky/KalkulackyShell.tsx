@@ -16,11 +16,13 @@ type KalkulackyShellProps = {
 const KalkulackyShell = ({ children, fullBleed = false }: KalkulackyShellProps) => (
   <PageWrapper>
     <KonzultaciaSiteHeader
+      logoHref="/bonusy"
       leadingLinks={[{ label: "Všetky bonusy", href: "/bonusy" }]}
       groups={KALKULACKY_HEADER_GROUPS}
       ctaLabel="Napíš mi na WhatsApp"
       ctaMobileLabel="Napíš mi"
       ctaHref={KALKULACKY_WHATSAPP_HREF}
+      ctaUmamiEvent="click_whatsapp"
       ctaIcon={<WhatsAppIcon className="h-[1.05rem] w-[1.05rem] shrink-0 md:h-[1.125rem] md:w-[1.125rem]" />}
     />
     {fullBleed ? (

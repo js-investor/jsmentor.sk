@@ -417,6 +417,7 @@ const EtfSemaforCalculator = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary inline-block mt-[30px] text-body"
+                data-umami-event="click_whatsapp"
               >
                 Chcem AUDIT svojho portfólia 🚀
               </a>

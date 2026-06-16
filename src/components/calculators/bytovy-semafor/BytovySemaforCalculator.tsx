@@ -526,6 +526,7 @@ export default function BytovySemaforCalculator() {
               href={WA_HREF}
               target="_blank"
               rel="noopener noreferrer"
+              data-umami-event="click_whatsapp"
             >
               Využiť konzultáciu zadarmo s Ivanom 🚀
             </a>

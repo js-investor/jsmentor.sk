@@ -21,6 +21,8 @@ type KonzultaciaSiteHeaderProps = {
   /** Jednoduché priame linky zobrazené pred skupinami. */
   leadingLinks?: { label: string; href: string }[];
   ctaLabel?: string;
+  ctaUmamiEvent?: string;
+  logoHref?: string;
   ctaMobileLabel?: string;
   ctaHref?: string;
   ctaIcon?: ReactNode;
@@ -39,6 +41,8 @@ const KonzultaciaSiteHeader = ({
   groups,
   leadingLinks,
   ctaLabel = "Chcem začať teraz",
+  ctaUmamiEvent,
+  logoHref = "/konzultacia",
   ctaMobileLabel,
   ctaHref,
   ctaIcon,
@@ -79,6 +83,7 @@ const KonzultaciaSiteHeader = ({
       {...(ctaOpensNewTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className={ctaClassName}
       onClick={() => setMobileMenuOpen(false)}
+      {...(ctaUmamiEvent ? { "data-umami-event": ctaUmamiEvent } : {})}
     >
       {ctaIcon}
       {ctaLabel}
@@ -102,6 +107,7 @@ const KonzultaciaSiteHeader = ({
       {...(ctaOpensNewTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className={ctaClassName}
       onClick={() => setMobileMenuOpen(false)}
+      {...(ctaUmamiEvent ? { "data-umami-event": ctaUmamiEvent } : {})}
     >
       {ctaIcon}
       {mobileLabel}
@@ -132,7 +138,7 @@ const KonzultaciaSiteHeader = ({
   };
 
   const logo = (
-    <a href="/konzultacia" className="flex shrink-0 items-center">
+    <a href={logoHref} className="flex shrink-0 items-center">
       <img
         src={brandLogo}
         alt="JS Mentor logo"

@@ -274,6 +274,7 @@ const BookingSection = ({
                     rel="noopener noreferrer"
                     aria-label="Kontaktovať cez WhatsApp"
                     className="inline-flex text-[#D4DFDB] transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4DFDB]/80 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm"
+                    data-umami-event="click_whatsapp"
                   >
                     <WhatsAppIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                   </a>

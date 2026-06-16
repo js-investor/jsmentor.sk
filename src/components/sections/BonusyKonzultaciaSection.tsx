@@ -45,6 +45,7 @@ const BonusyKonzultaciaSection = () => (
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary btn-primary-site-header mt-1 inline-flex items-center gap-2 text-body"
+            data-umami-event="click_whatsapp"
           >
             <WhatsAppIcon className="h-[1.05rem] w-[1.05rem] shrink-0 md:h-[1.125rem] md:w-[1.125rem]" />
             Napíš mi na WhatsApp

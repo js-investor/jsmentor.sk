@@ -420,6 +420,7 @@ export default function PoplatkovyRontgenCalculator() {
             href={RONTGEN_WA_HREF}
             target="_blank"
             rel="noopener noreferrer"
+            data-umami-event="click_whatsapp"
           >
             Chcem AUDIT svojho portfólia 🚀
           </a>

@@ -143,7 +143,7 @@ const InvesticnyBytCalculator = () => {
   const [equity, setEquity] = useState(20);
   const [mortRate, setMortRate] = useState(3.8);
   const [hoverYear, setHoverYear] = useState<number | null>(null);
-  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0, flip: false });
+  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0, flip: false, containerW: 0 });
   const chartWrapRef = useRef<HTMLDivElement>(null);
 
   const K = KRAJE[kraj];
@@ -163,7 +163,7 @@ const InvesticnyBytCalculator = () => {
 
   // Chart
   const W = 1100, HC = 400;
-  const P = { l: 95, r: 95, t: 18, b: 46 };
+  const P = { l: 130, r: 130, t: 18, b: 60 };
 
   const chartData = useMemo(() =>
     Array.from({ length: Y + 1 }, (_, t) => ({
@@ -199,7 +199,7 @@ const InvesticnyBytCalculator = () => {
     let t = Math.round((sx - P.l) / (W - P.l - P.r) * Y);
     t = Math.max(0, Math.min(Y, t));
     setHoverYear(t);
-    setTooltipPos({ x: clientX - rect.left, y: clientY - rect.top, flip: (clientX - rect.left) > rect.width * 0.65 });
+    setTooltipPos({ x: clientX - rect.left, y: clientY - rect.top, flip: (clientX - rect.left) > rect.width * 0.55, containerW: rect.width });
   }, [Y]);
 
   // Matches original: Math.min(12, Math.round((hist-1)*2)/2)
@@ -254,7 +254,7 @@ const InvesticnyBytCalculator = () => {
 
       {/* ===== KROK 1: MAPA (dark) ===== */}
       <section className="rounded-2xl mb-5 overflow-hidden" style={{ background: "#111210", color: "#F5EDE0" }}>
-        <div className="px-5 py-[70px] md:px-8">
+        <div className="px-2 py-[30px] md:px-8 md:py-[70px]">
           <div className="text-center mb-8 max-w-[980px] mx-auto">
             <Pill>Krok 1</Pill>
             <h2 className="[font-family:var(--font-serif)] font-black text-[clamp(1.5rem,4.4vw,2.25rem)] leading-[1.15] tracking-[-0.015em] mb-3">
@@ -262,7 +262,7 @@ const InvesticnyBytCalculator = () => {
             </h2>
           </div>
           <div className="max-w-[980px] mx-auto">
-            <div className="bg-[#1A1B18] border border-[rgba(245,237,224,.14)] rounded-[14px] p-[26px_20px_18px] mt-[34px]">
+            <div className="bg-[#1A1B18] border border-[rgba(245,237,224,.14)] rounded-[14px] p-[10px_4px_10px] md:p-[26px_20px_18px] mt-[34px]">
               <svg viewBox="0 0 1000 498" className="w-full h-auto block" role="img" aria-label="Mapa krajov Slovenska">
                 {Object.entries(MAP_PATHS).map(([k, d]) => (
                   <path
@@ -367,7 +367,7 @@ const InvesticnyBytCalculator = () => {
 
       {/* ===== KROK 3: NASTAVENIE + VÝSLEDKY (dark) ===== */}
       <section className="rounded-2xl mb-5 overflow-hidden" style={{ background: "#111210", color: "#F5EDE0" }}>
-        <div className="px-5 py-[70px] md:px-8">
+        <div className="px-2 py-[30px] md:px-8 md:py-[70px]">
           <div className="max-w-[760px] mx-auto">
             <div className="text-center mb-8">
               <Pill>Krok 3</Pill>
@@ -427,20 +427,19 @@ const InvesticnyBytCalculator = () => {
             {/* CHART */}
             <div className="relative mt-[24px]" ref={chartWrapRef} onMouseLeave={() => setHoverYear(null)}>
               <svg
-                viewBox={`0 0 ${W} ${HC}`} className="w-full h-auto block"
-                style={{ touchAction: "none" }}
+                viewBox={`0 0 ${W} ${HC}`} className="w-full block" style={{ minHeight: "260px", touchAction: "none" }}
                 onMouseMove={e => handleChartMove(e.clientX, e.clientY)}
                 onTouchMove={e => { e.preventDefault(); handleChartMove(e.touches[0].clientX, e.touches[0].clientY); }}
               >
                 {gridLines.map(({ vl, vr, yy }, i) => (
                   <g key={i}>
                     <line x1={P.l} x2={W - P.r} y1={yy} y2={yy} stroke="rgba(245,237,224,.08)" strokeWidth={1} />
-                    <text x={P.l - 10} y={yy + 5} textAnchor="end" fontSize={14} fontWeight={600} fill="rgba(245,237,224,.4)" fontFamily="inherit">{Math.round(vl / 1000)}k €</text>
-                    <text x={W - P.r + 10} y={yy + 5} textAnchor="start" fontSize={14} fontWeight={600} fill="#D9A441" fontFamily="inherit">{(vr / 1000).toLocaleString("sk-SK", { maximumFractionDigits: 1 })}k €/r</text>
+                    <text x={P.l - 14} y={yy + 6} textAnchor="end" fontSize={32} fontWeight={700} fill="rgba(245,237,224,.5)" fontFamily="inherit">{Math.round(vl / 1000)}k €</text>
+                    <text x={W - P.r + 14} y={yy + 6} textAnchor="start" fontSize={32} fontWeight={700} fill="#D9A441" fontFamily="inherit">{(vr / 1000).toLocaleString("sk-SK", { maximumFractionDigits: 1 })}k €/r</text>
                   </g>
                 ))}
                 {xTicks.map(t => (
-                  <text key={t} x={xFn(t)} y={HC - 14} textAnchor="middle" fontSize={14} fontWeight={600} fill="rgba(245,237,224,.4)" fontFamily="inherit">{2026 + t}</text>
+                  <text key={t} x={xFn(t)} y={HC - 10} textAnchor="middle" fontSize={32} fontWeight={700} fill="rgba(245,237,224,.5)" fontFamily="inherit">{2026 + t}</text>
                 ))}
                 <path d={vPath} fill="none" stroke="#5BC78A" strokeWidth={3} strokeLinejoin="round" />
                 {useMort && <path d={hPath} fill="none" stroke="rgba(245,237,244,.45)" strokeWidth={3} strokeLinejoin="round" strokeDasharray="7 7" />}
@@ -458,7 +457,13 @@ const InvesticnyBytCalculator = () => {
               </svg>
 
               {hd && (
-                <div className="iby-tooltip" style={{ left: tooltipPos.flip ? tooltipPos.x - 230 : tooltipPos.x + 16, top: Math.max(6, tooltipPos.y - 30) }}>
+                <div className="iby-tooltip" style={{
+                  left: Math.min(
+                    Math.max(4, tooltipPos.flip ? tooltipPos.x - 234 : tooltipPos.x + 16),
+                    tooltipPos.containerW > 0 ? tooltipPos.containerW - 238 : tooltipPos.x + 16
+                  ),
+                  top: Math.max(6, tooltipPos.y - 30),
+                }}>
                   <div className="text-[10px] tracking-[0.12em] uppercase opacity-60 mb-1.5">rok {2026 + hd.t} · +{hd.t} r.</div>
                   {([
                     { c: "#5BC78A", l: "Hodnota bytu", v: fmt(hd.V) },
@@ -476,7 +481,7 @@ const InvesticnyBytCalculator = () => {
               )}
             </div>
 
-            <div className="flex flex-wrap justify-center gap-5 mt-[14px] text-[12.5px] text-[#B8B2A4] font-semibold">
+            <div className="flex flex-wrap justify-center gap-3 md:gap-5 mt-[14px] text-[11px] md:text-[12.5px] text-[#B8B2A4] font-semibold">
               {[
                 { c: "#5BC78A", l: `Hodnota bytu (${pctFmt(grow)}/rok)` },
                 ...(useMort ? [{ c: "rgba(245,237,224,.5)", l: "Zostatok hypotéky ↓" }] : []),
@@ -535,6 +540,7 @@ const InvesticnyBytCalculator = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary inline-block mt-[30px] text-body"
+            data-umami-event="click_whatsapp"
           >
             Chcem to prebrať na konzultácii 🚀
           </a>
