@@ -9,11 +9,13 @@ type KalkulackyProductPageProps = {
   title: string;
   /** Skryť názov nad obsahom (napr. plná vstavaná kalkulačka má vlastný nadpis). */
   hideTitle?: boolean;
+  /** Kalkulačka manažuje vlastné sekcie na celú šírku — obsah nie je zabalený do section-container. */
+  fullBleed?: boolean;
   children?: ReactNode;
 };
 
-const KalkulackyProductPage = ({ title, hideTitle = false, children }: KalkulackyProductPageProps) => (
-  <KalkulackyShell>
+const KalkulackyProductPage = ({ title, hideTitle = false, fullBleed = false, children }: KalkulackyProductPageProps) => (
+  <KalkulackyShell fullBleed={fullBleed}>
     <div className="section-container">
       <div className="mb-6 flex justify-center md:mb-8">
         <Link
@@ -25,8 +27,9 @@ const KalkulackyProductPage = ({ title, hideTitle = false, children }: Kalkulack
         </Link>
       </div>
       {!hideTitle ? <KalkulackaPage title={title} /> : null}
-      {children}
+      {!fullBleed ? children : null}
     </div>
+    {fullBleed ? children : null}
   </KalkulackyShell>
 );
 

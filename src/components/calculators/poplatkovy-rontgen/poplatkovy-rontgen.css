@@ -28,6 +28,8 @@
 .pr-sec--cream {
   background: var(--pr-cream);
   color: var(--pr-ink);
+  /* top padding is small — parent shell already adds 9rem for header clearance */
+  padding-top: 20px;
   padding-bottom: 40px;
 }
 .pr-sec--dark {

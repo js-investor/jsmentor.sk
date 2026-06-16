@@ -54,7 +54,7 @@ const App = () => (
             path={`${BONUSY_BASE_PATH}/${c.slug}`}
             element={
               calculator ? (
-                <KalkulackyProductPage title={c.title} hideTitle>
+                <KalkulackyProductPage title={c.title} hideTitle fullBleed={c.fullBleed}>
                   {calculator}
                 </KalkulackyProductPage>
               ) : (

@@ -11,9 +11,11 @@ import type { ReactNode } from "react";
 
 type KalkulackyShellProps = {
   children: ReactNode;
+  /** Full-bleed mode: sekcie kalkulačky samy manažujú šírku aj pozadie. */
+  fullBleed?: boolean;
 };
 
-const KalkulackyShell = ({ children }: KalkulackyShellProps) => (
+const KalkulackyShell = ({ children, fullBleed = false }: KalkulackyShellProps) => (
   <PageWrapper>
     <KonzultaciaSiteHeader
       items={[
@@ -31,9 +33,15 @@ const KalkulackyShell = ({ children }: KalkulackyShellProps) => (
       ctaHref={KALKULACKY_WHATSAPP_HREF}
       ctaIcon={<WhatsAppIcon className="h-[1.05rem] w-[1.05rem] shrink-0 md:h-[1.125rem] md:w-[1.125rem]" />}
     />
-    <section className="page-home section-white min-h-[50vh] pt-[9rem] pb-20 md:pt-[11rem] md:pb-28 lg:pt-[12rem] lg:pb-32">
-      {children}
-    </section>
+    {fullBleed ? (
+      <div className="page-home bg-background pt-[9rem] md:pt-[11rem] lg:pt-[12rem]">
+        {children}
+      </div>
+    ) : (
+      <section className="page-home section-white min-h-[50vh] pt-[9rem] pb-20 md:pt-[11rem] md:pb-28 lg:pt-[12rem] lg:pb-32">
+        {children}
+      </section>
+    )}
   </PageWrapper>
 );
 

@@ -9,6 +9,8 @@ export type KalkulackaCalculatorMeta = {
   menuLabel: string;
   description: string;
   Icon: LucideIcon;
+  /** Kalkulačka manažuje vlastné sekcie na celú šírku stránky. */
+  fullBleed?: boolean;
 };
 
 /** Zodpovedá súborom: Hypo Smart, Investičná, Mzdová kalkulačka, Podľa príjmu, Rentová kalkulačka. */
@@ -76,6 +78,7 @@ export const KALKULACKY_CALCULATORS: KalkulackaCalculatorMeta[] = [
     description:
       "Tri kliky a uvidíš, koľko z tvojho budúceho majetku potichu zmizne v poplatkoch. V eurách, nie v percentách.",
     Icon: ScanLine,
+    fullBleed: true,
   },
 ];
 
