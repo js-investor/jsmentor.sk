@@ -12,6 +12,34 @@ import {
 } from "lucide-react";
 import type { ReactNode } from "react";
 
+type PraktiskyNastrojItem = {
+  num: string;
+  title: ReactNode;
+  description: string;
+};
+
+const praktickyNastroje: PraktiskyNastrojItem[] = [
+  {
+    num: "Č.1",
+    title: (
+      <>
+        Interaktívna mapa investičných bytov: vyberieš kraj, typ nehnuteľnosti a uvidíš čísla, ktoré musíš poznať pred kúpou.
+      </>
+    ),
+    description: "Odhad nájmu, náklady, ceny, potenciál lokality a základné čísla, ktoré ti ukážu, či sa na byt oplatí pozrieť hlbšie — alebo ho rovno vyradiť.",
+  },
+  {
+    num: "Č.2",
+    title: <span style={{ fontWeight: 400 }}>Naprogramoval som systém, ktorý ti presne vypočíta efekt poplatkov</span>,
+    description: "",
+  },
+  {
+    num: "Č.3",
+    title: <span style={{ fontWeight: 400 }}>Krátky test, ktorý ti ukáže, či kúpe bytu alebo investovaniu do ETF rozumieš dosť na to, aby si spravil rozhodnutie.</span>,
+    description: "",
+  },
+];
+
 type CalculatorItem = {
   id: string;
   title: ReactNode;
@@ -143,8 +171,37 @@ const HeroHeroKalkulackySection = () => (
         </h2>
       </AnimatedSection>
 
+      <div className="mx-auto mt-12 flex w-full max-w-3xl flex-col gap-16 md:mt-16 md:gap-20">
+        {praktickyNastroje.map((item) => (
+          <AnimatedSection key={item.num}>
+            <div className="flex flex-col gap-5">
+              <div className="flex justify-center">
+                <span className="inline-block rounded-full bg-primary px-5 py-2 text-[13px] font-extrabold uppercase tracking-[0.14em] text-white md:text-[14px]">
+                  Praktický nástroj {item.num}
+                </span>
+              </div>
+              <h3 className="[font-family:var(--font-serif)] text-center text-[1.5rem] font-bold leading-[1.2] text-foreground md:text-[2rem] lg:text-[2.25rem]">
+                {item.title}
+              </h3>
+              {item.description && (
+                <p className="mx-auto max-w-xl text-center font-sans text-[1.125rem] leading-relaxed text-muted-foreground md:text-[1.25rem] lg:text-[1.375rem]">
+                  {item.description}
+                </p>
+              )}
+              <div className="mt-2 grid grid-cols-2 gap-3 sm:gap-4">
+                <div className="aspect-[4/3] rounded-2xl bg-border/40 border border-border/60" aria-label="Miesto pre obrázok" />
+                <div className="aspect-[4/3] rounded-2xl bg-border/40 border border-border/60" aria-label="Miesto pre obrázok" />
+              </div>
+            </div>
+          </AnimatedSection>
+        ))}
+      </div>
+
       <AnimatedSection delay={0.08}>
-        <div className="mx-auto mt-12 flex w-full max-w-xl items-stretch gap-1.5 sm:gap-2 md:mt-14 md:w-max md:max-w-full md:gap-3 lg:mt-16">
+        <h3 className="mx-auto mt-16 max-w-3xl text-center [font-family:var(--font-serif)] text-[1.5rem] leading-[1.2] text-foreground md:text-[2rem] lg:text-[2.25rem]">
+          <span style={{ fontWeight: 400 }}>A aby nebolo málo,</span> <strong style={{ fontWeight: 700 }}>dostaneš aj tieto kalkulačky</strong>
+        </h3>
+        <div className="mx-auto mt-10 flex w-full max-w-xl items-stretch gap-1.5 sm:gap-2 md:w-max md:max-w-full md:gap-3">
           <KalkulackyBracketLabel />
 
           <ul className="flex min-w-0 flex-1 list-none flex-col gap-2.5 p-0 sm:gap-3 md:w-max md:flex-none md:gap-4">
@@ -169,29 +226,6 @@ const HeroHeroKalkulackySection = () => (
       </AnimatedSection>
 
       <AnimatedSection delay={0.12} className="w-full text-center">
-        <p className="mx-auto mt-6 max-w-xl text-center font-sans text-[1.125rem] leading-snug text-foreground/90 md:mt-8 md:max-w-lg md:text-[1.0625rem] lg:max-w-xl lg:text-[1.125rem]">
-          <span className="font-serif font-bold text-foreground">+ 3 stručné dokumenty,</span> kde hovorím o
-          poplatkoch v investovaní, Porovnávam Akcie vs Nehnuteľnosti a spravil som Check List pred kúpou prvého
-          investičného bytu
-        </p>
-
-        <div className="mx-auto mt-8 grid max-w-2xl grid-cols-3 gap-2 sm:mt-10 sm:gap-3 md:max-w-3xl md:gap-4">
-          {bonusDocumentCards.map(({ id, alt, imageSrc }) => (
-            <div
-              key={id}
-              className="overflow-hidden rounded-2xl shadow-[0_8px_24px_-16px_rgba(28,22,18,0.2)]"
-            >
-              <img
-                src={imageSrc}
-                alt={alt}
-                className="block h-auto w-full"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          ))}
-        </div>
-
         <a href="https://herohero.co/jsmentor" target="_blank" rel="noopener noreferrer" className="btn-primary mt-8 inline-flex text-body sm:mt-10" data-umami-event="click_herohero" data-umami-event-section="kalkulacky">
           Chcem tieto bonusy 🎁
         </a>

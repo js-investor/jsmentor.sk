@@ -117,7 +117,6 @@ const HeroSectionTemplate = ({
               : "mb-8 md:mb-10"
           }`}
         >
-          <div className="absolute -inset-x-12 -inset-y-6 bg-gradient-to-r from-primary/10 via-primary/25 to-primary/10 blur-3xl rounded-full animate-glow-pulse pointer-events-none" />
           <h1 className="headline-hero relative z-10">
             {title}
           </h1>

@@ -277,11 +277,11 @@
   }
 
   .hero-trust-stats-value {
-    @apply [font-family:var(--font-serif)] text-[1.75rem] font-bold leading-[1.1] text-foreground sm:text-[1.875rem] md:text-[2.125rem];
+    @apply [font-family:var(--font-serif)] text-[2rem] font-bold leading-[1.1] text-foreground sm:text-[2.125rem] md:text-[2.5rem];
   }
 
   .hero-trust-stats-label {
-    @apply font-sans text-[0.9375rem] font-medium leading-snug text-muted-foreground md:text-base;
+    @apply font-sans text-[1rem] font-medium leading-snug text-muted-foreground md:text-[1.0625rem];
   }
 
   .text-small {

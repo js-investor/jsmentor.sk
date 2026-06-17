@@ -7,11 +7,11 @@ const HomeDesignHeaderSection = () => {
       compactBottom
       preheaderClassName="rounded-full bg-[#7A1F1F] px-4 py-1.5 text-small font-sans font-medium normal-case tracking-normal text-white"
       subtitleClassName="hero-subheadline"
-      descriptionClassName="hero-description"
+      descriptionClassName="hero-description !text-[1rem] md:!text-[1.125rem] lg:!text-[1.1875rem]"
       headerCtaLabel="Chcem sa pridať ZADARMO 🚀"
       headerCtaHref="https://herohero.co/jsmentor"
       headerCtaTarget="_blank"
-      preheader={<>Toto nie sú finančné rozprávky</>}
+      preheader={<>Miesto, kde konečne pochopíš, ako fungujú peniaze</>}
       title={
         <>
           Toto je cesta

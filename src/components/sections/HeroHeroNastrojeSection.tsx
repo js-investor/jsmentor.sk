@@ -30,7 +30,7 @@ const BenefitTabIcon = ({ Icon }: { Icon: LucideIcon }) => (
 );
 
 const benefitTabs: { Icon: LucideIcon; label: string }[] = [
-  { Icon: TrendingUp, label: "Investovanie bez rozprávok" },
+  { Icon: TrendingUp, label: "Investičné myslenie" },
   { Icon: BarChart3, label: "Analýzy slovenských produktov" },
   { Icon: Users, label: "Reálne prípady ľudí" },
   { Icon: Home, label: "Hypotéky, byty, renta" },
@@ -49,27 +49,17 @@ const HeroHeroNastrojeSection = () => (
     <div className="absolute inset-0 bg-dot-grid opacity-20 pointer-events-none" />
 
     <div className="section-container relative z-10">
-      <AnimatedSection>
-        <div className="mx-auto flex justify-center">
-          <img
-            src={heroHeroTemyImage}
-            alt="Témy Hero Hero komunity"
-            className="block h-auto w-full max-w-[min(100%,620px)]"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-      </AnimatedSection>
-
       <AnimatedSection delay={0.06}>
-        <h2 className="headline-landing-section mx-auto mt-10 max-w-4xl text-balance text-center leading-[1.12] text-foreground md:mt-12 lg:mt-14">
-          Keď sa pridáš, dostaneš konkrétne nástroje,
-          <br className="hidden sm:block" /> nie ďalšie prázdne rady.
+        <h2 className="headline-landing-section mx-auto max-w-4xl text-balance text-center leading-[1.12] text-foreground">
+          Čo všetko získaš?
         </h2>
+        <p className="mx-auto mt-5 mb-2 max-w-3xl text-center font-sans text-[1.25rem] leading-relaxed text-muted-foreground md:text-[1.5rem] lg:text-[1.75rem]">
+          Získaš pravidelný obsah, ktorý ti pomôže robiť lepšie finančné rozhodnutia.
+        </p>
       </AnimatedSection>
 
       <AnimatedSection delay={0.1}>
-        <div className="mt-12 flex justify-center md:mt-16 lg:mt-20">
+        <div className="mt-6 flex justify-center md:mt-8">
           <ul className="flex flex-col items-center gap-6 md:gap-7">
             {benefitTabs.map(({ Icon, label }) => (
               <li
@@ -83,7 +73,7 @@ const HeroHeroNastrojeSection = () => (
             ))}
             <li className="flex justify-center pt-2 md:pt-3">
               <a href="https://herohero.co/jsmentor" target="_blank" rel="noopener noreferrer" className="btn-primary text-body" data-umami-event="click_herohero" data-umami-event-section="nastroje">
-                Chcem sa pridať ZADARMO 🚀
+                Vstúpiť na 15 dní zadarmo 🚀
               </a>
             </li>
           </ul>

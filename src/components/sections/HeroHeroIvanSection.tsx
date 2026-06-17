@@ -10,31 +10,9 @@ const HeroHeroIvanSection = () => (
 
     <div className="relative z-10 mx-auto max-w-[980px]">
       <AnimatedSection>
-        <div className="mx-auto w-full max-w-[775px] space-y-10 text-left md:w-[68%] md:space-y-8">
-          <p className="font-sans text-[1.125rem] leading-relaxed text-foreground/90 md:text-body">
-            Volám sa Ivan a už viac ako 8 rokov zdieľam obsah o peniazoch a raste na Instagrame. Nie som špekulant,
-            som odborník{" "}
-            <strong className="font-bold text-foreground">s licenciou v Národnej banke Slovenska</strong>
-            {" "}a som absolventom{" "}
-            <strong className="font-bold text-foreground">EFA (najväčší finančný titul v EÚ)</strong>.
-          </p>
-
-          <p className="headline-serif text-[2rem] text-balance leading-[1.15] text-foreground md:text-[2.125rem] lg:text-[2.5rem]">
-            Keď mi Meta druhýkrát vypla jsInvestor, pochopil som jednu vec.
-          </p>
-
-          <p className="font-sans text-[1.25rem] font-bold leading-relaxed text-foreground md:text-[1.375rem]">
-            Najcennejšie finančné know-how nemôže visieť len na Instagrame.
-          </p>
-
-          <p className="font-sans text-[1.125rem] leading-relaxed text-foreground/90 md:text-body">
-            Nešlo o krypto signály. Nešlo o trading skupinu. Nešlo o rýchle zbohatnutie.
-          </p>
-
-          <p className="font-sans text-[1.125rem] leading-relaxed text-foreground/90 md:text-body">
-            <strong className="font-bold text-foreground">Riešil som bežné témy,</strong>{" "}
-            ktoré Slováci riešia každý deň: hypotéky, investovanie, fondy, ETF,
-            nehnuteľnosti, rentu, poplatky a rozhodnutia, ktoré môžu človeka stáť tisíce eur.
+        <div className="mx-auto w-full max-w-[900px] text-center">
+          <p style={{ fontFamily: "var(--font-serif)", fontWeight: 400 }} className="text-[1.875rem] leading-[1.3] text-foreground md:text-[2.5rem] lg:text-[3rem]">
+            <span style={{ color: "#ada8a3" }}>Táto komunita</span> je pre ľudí, ktorí chcú finančne rásť. Ktorí chcú počuť odborné praktické rady a nie prázdne teórie.
           </p>
         </div>
       </AnimatedSection>
