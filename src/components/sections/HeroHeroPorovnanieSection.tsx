@@ -82,7 +82,7 @@ const HeroHeroPorovnanieSection = () => (
                   <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FDECEA]">
                     <X className="h-3.5 w-3.5 text-[#C0392B]" strokeWidth={2.8} />
                   </span>
-                  <p className="font-sans text-[1.1875rem] leading-[1.6] text-foreground font-[500]">
+                  <p className="font-sans text-[1.1875rem] leading-[1.6] text-foreground font-[600]">
                     {chaos}
                   </p>
                 </motion.li>
@@ -105,7 +105,7 @@ const HeroHeroPorovnanieSection = () => (
                   <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#DCFCE7]">
                     <Check className="h-3.5 w-3.5 text-[#16a34a]" strokeWidth={2.8} />
                   </span>
-                  <p className="font-sans text-[1.1875rem] leading-[1.6] text-foreground font-[500]">
+                  <p className="font-sans text-[1.1875rem] leading-[1.6] text-foreground font-[600]">
                     {knowHow}
                   </p>
                 </motion.li>
@@ -135,7 +135,7 @@ const HeroHeroPorovnanieSection = () => (
               <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FDECEA]">
                 <X className="h-3.5 w-3.5 text-[#C0392B]" strokeWidth={2.8} />
               </span>
-              <p className="font-sans text-[1.0625rem] leading-[1.6] text-foreground/70">{chaos}</p>
+              <p className="font-sans text-[1.0625rem] leading-[1.6] text-foreground/80 font-[600]">{chaos}</p>
             </motion.li>
           ))}
         </ul>
@@ -163,7 +163,7 @@ const HeroHeroPorovnanieSection = () => (
               <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#DCFCE7]">
                 <Check className="h-3.5 w-3.5 text-[#16a34a]" strokeWidth={2.8} />
               </span>
-              <p className="font-sans text-[1.0625rem] leading-[1.6] text-foreground">{knowHow}</p>
+              <p className="font-sans text-[1.0625rem] leading-[1.6] text-foreground font-[600]">{knowHow}</p>
             </motion.li>
           ))}
         </ul>

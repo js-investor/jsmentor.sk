@@ -27,14 +27,16 @@ const HeroHeroCennikSection = () => (
 
     <div className="section-container relative z-10">
       <AnimatedSection>
-        <header className="mx-auto mb-12 max-w-3xl text-center md:mb-16">
+        <header className="mx-auto mb-7 max-w-3xl text-center md:mb-9">
           <h2
             id="cennik-heading"
             className="headline-landing-section text-balance leading-[1.1] text-foreground"
           >
-            Tvoja investícia do doživotnej
-            <br className="hidden sm:block" /> časovej slobody
+            15 dní zadarmo, potom len 7 € mesačne
           </h2>
+          <p className="mt-4 [font-family:var(--font-serif)] text-[1.375rem] font-normal text-foreground/60 md:text-[1.5rem]">
+            Menej ako jeden obed v meste
+          </p>
         </header>
       </AnimatedSection>
 
@@ -75,9 +77,6 @@ const HeroHeroCennikSection = () => (
               </span>
               <span className="mb-2 font-sans text-[1.5rem] text-white">/mesačne</span>
             </div>
-            <p className="mb-9 text-center font-sans text-[1.3125rem] text-white/60">
-              menej ako cena dvoch káv alebo jedného obeda v meste
-            </p>
 
             {/* Bullets — centered container, left-aligned items */}
             <div className="mb-9 flex justify-center">
@@ -87,14 +86,14 @@ const HeroHeroCennikSection = () => (
                     <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[#4ade80]/40 bg-[#4ade80]/20">
                       <Check className="h-3.5 w-3.5 text-[#6ee7a0]" strokeWidth={2.8} />
                     </span>
-                    <span className="font-sans text-[1.3125rem] text-white/90">{b}</span>
+                    <span className="font-sans text-[1.0625rem] text-white/90">{b}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
             {/* CTA */}
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center gap-3">
               <a
                 href={heroheroUrl}
                 target="_blank"
@@ -103,8 +102,9 @@ const HeroHeroCennikSection = () => (
                 data-umami-event="click_herohero"
                 data-umami-event-section="cennik"
               >
-                Vyskúšať na 15 dní ZADARMO 🚀
+                Chcem sa pridať 🚀
               </a>
+              <p className="font-sans text-[1rem] text-white/60 md:text-[1.0625rem]">Kedykoľvek môžeš zrušiť</p>
             </div>
           </div>
         </motion.div>

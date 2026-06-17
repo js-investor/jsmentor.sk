@@ -1,30 +1,68 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import { ChevronDown } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
-const faqs = [
+const faqs: { question: string; answer: ReactNode[] }[] = [
   {
-    question: "Mám vo financiách úplný chaos a vôbec im nerozumiem. Je táto komunita pre mňa?",
-    answer:
-      "Presne pre teba je najdôležitejšia. Celý obsah tvorím ľudskou rečou, bez zložitého a nudného finančného žargónu. Zameriame sa na úplne bežné, praktické situácie, ktoré trápia väčšinu Slovákov: ako si konečne vytvoriť nepriestrelnú rezervu, ako skrotiť hypotéku, kedy sa oplatí mimoriadna splátka a ako nenechať peniaze hniť na bežnom účte. Začneme od absolútnej nuly a vnesieme do tvojich peňazí systém.",
+    question: "Mám vo financiách chaos a vôbec im nerozumiem. Je táto komunita pre mňa?",
+    answer: [
+      "Áno. Práve preto som túto komunitu vytvoril.",
+      <><strong className="font-semibold text-foreground">Nemusíš byť finančný expert.</strong> Nepotrebuješ rozumieť všetkým grafom, fondom, ETF, hypotékam a poplatkom. Potrebuješ pochopiť základné rozhodnutia, ktoré robíš celý život: čo robiť s výplatou, ako si vytvoriť rezervu, ako začať investovať, ako rozmýšľať nad hypotékou, fondmi, bývaním, rentou a finančnou slobodou.</>,
+      <><strong className="font-semibold text-foreground">V komunite veci vysvetľujem ľudskou rečou, na konkrétnych príkladoch a cez čísla.</strong></>,
+    ],
   },
   {
-    question: "Prečo by som mal platiť, keď je internet a Instagram plný finančných rád zadarmo?",
-    answer:
-      'Pretože tie „rady zadarmo“ sú v 95% prípadov len povrchné motivačné frázy a marketingový balast. Algoritmy sociálnych sietí ma neustále blokujú a cenzurujú zakaždým, keď chcem ukázať tvrdú realitu slovenského trhu. V tejto komunite rozoberám konkrétne slovenské produkty, fondy a platformy na drobné – vrátane ich skrytých poplatkov a nevýhod. Toto ti žiadny influencer na Instagrame otvorene nepovie, pretože by riskoval stratu spoluprác.',
+    question: "Čo ak zistím, že to pre mňa nie je? Musím sa viazať?",
+    answer: [
+      "Nie. Nemusíš sa viazať.",
+      <><strong className="font-semibold text-foreground">Prvých 15 dní máš zadarmo.</strong> Vojdeš dnu, pozrieš si videá, vyskúšaš nástroje, stiahneš si bonusy a rozhodneš sa podľa seba.</>,
+      <><strong className="font-semibold text-foreground">Ak zistíš, že ti to nedáva hodnotu, členstvo jednoducho zrušíš.</strong> Bez viazanosti, bez telefonátov, bez presviedčania.</>,
+    ],
   },
   {
-    question: "Čo presne za cenu predplatného každý mesiac dostanem?",
-    answer:
-      "Každý jeden týždeň ti odomknem jedno nové, praktické video. Žiadna odtrhnutá teória. Uvidíš analýzy reálnych finančných situácií bežných ľudí, na ktorých pochopíš presné kroky. K tomu získaš hotové interaktívne kalkulačky pre tvoje vlastné rozhodovanie, pravidelné novinky zo sveta peňazí a rozhovory s odborníkmi z praxe.",
+    question: "Čo presne za 7 € mesačne dostanem?",
+    answer: [
+      "Dostaneš prístup do mojej komunity na HeroHero, kde každý týždeň pribudne nový praktický finančný obsah.",
+      <>Nájdeš tam videá <strong className="font-semibold text-foreground">o investovaní, hypotékach, ETF, fondoch, investičných bytoch, rente, poplatkoch a produktoch na slovenskom trhu.</strong></>,
+      <>Okrem videí dostaneš aj <strong className="font-semibold text-foreground">praktické nástroje a bonusy: kalkulačky, checklisty, PDF dokumenty, poplatkový röntgen, bytový a ETF semafor, interaktívnu mapu investičných bytov a ďalšie materiály,</strong> ktoré ti pomôžu robiť lepšie rozhodnutia s peniazmi.</>,
+      "Nie je to len ďalší obsah. Je to systém, podľa ktorého sa vieš rozhodovať.",
+    ],
   },
   {
-    question: "Čo ak zistím, že to pre mňa nie je? Musím sa zaviazať na dlhú dobu?",
-    answer:
-      "Vôbec nie. Nenávidím skryté háčiky a nezmyselné viazanosti presne tak isto ako ty. Preto máš prvých 15 dní na vyskúšanie úplne zadarmo. Vojdi dnu, stiahni si bonusy, pozri si videá. Ak zistíš, že ti to neprináša hodnotu, členstvo jedným klikom zrušíš priamo vo svojom profile a nestiahne ti to ani cent.",
+    question: "Prečo by som mal platiť, keď je internet plný finančných rád zadarmo?",
+    answer: [
+      <><strong className="font-semibold text-foreground">Lebo internet je plný rád bez kontextu.</strong></>,
+      "Jeden človek ti povie: splať hypotéku. Druhý ti povie: investuj. Tretí ti povie: kúp byt. Štvrtý ti ukáže fond. Piaty ti povie úplne opačný názor.",
+      "A ty máš z toho spraviť rozhodnutie za tisíce eur.",
+      "V komunite nejde o ďalší názor z internetu. Ide o systém, slovenský kontext, výpočty, poplatky, produkty a rozhodnutia, ktoré si vieš konečne prepočítať.",
+    ],
   },
-] as const;
+  {
+    question: "Je toto investičné poradenstvo?",
+    answer: [
+      "Nie. Obsah v komunite má vzdelávací a informačný charakter.",
+      "Ukazujem princípy, výpočty, porovnania, konkrétne produkty, riziká, poplatky a môj spôsob uvažovania. Cieľom je, aby si lepšie rozumel peniazom a vedel robiť rozumnejšie rozhodnutia.",
+      <><strong className="font-semibold text-foreground">Individuálne odporúčanie pre tvoju konkrétnu situáciu patrí na{" "}<a href="/konzultacia" className="underline underline-offset-2 hover:text-primary transition-colors">osobnú konzultáciu</a>.</strong></>,
+    ],
+  },
+  {
+    question: "Budeš rozoberať aj konkrétne produkty na Slovensku?",
+    answer: [
+      "Áno. Práve to bude jedna z najväčších hodnôt komunity.",
+      <>Budem rozoberať fondy, investičné produkty, platformy, hypotéky, poplatky a <strong className="font-semibold text-foreground">riešenia, ktoré ľudia na Slovensku bežne kupujú bez toho, aby im úplne rozumeli.</strong></>,
+      'Nebude to štýlom „toto si kúp". Bude to cez čísla, poplatky, riziká, výhody, nevýhody a alternatívy. Aby si konečne vedel, čo vlastne vlastníš alebo čo sa ti niekto snaží predať.',
+    ],
+  },
+  {
+    question: "Je to aj pre mňa, keď už investujem?",
+    answer: [
+      "Áno. Možno práve vtedy ešte viac.",
+      "Ak už investuješ, komunita ti pomôže skontrolovať, čo vlastníš, koľko platíš, aké riziko podstupuješ a či by si si daný produkt kúpil znova, keby si sa dnes rozhodoval od nuly.",
+      <>Ak ešte neinvestuješ, začneš od základov. <strong className="font-semibold text-foreground">Ak už investuješ, pôjdeme viac do optimalizácie, poplatkov, portfólia, hypotéky, nehnuteľností a rozhodnutí, ktoré môžu mať veľký dopad na tvoj majetok.</strong></>,
+    ],
+  },
+];
 
 const FaqItem = ({
   question,
@@ -34,7 +72,7 @@ const FaqItem = ({
   onToggle,
 }: {
   question: string;
-  answer: string;
+  answer: ReactNode[];
   index: number;
   isOpen: boolean;
   onToggle: () => void;
@@ -44,7 +82,7 @@ const FaqItem = ({
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-32px" }}
     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.06 * index }}
-    className="border-b border-white/10"
+    className="border-b border-border/50"
   >
     <button
       type="button"
@@ -53,8 +91,8 @@ const FaqItem = ({
       className="group flex w-full items-start justify-between gap-5 py-7 text-left"
     >
       <span
-        className={`[font-family:var(--font-serif)] text-[1.4375rem] font-[700] leading-snug transition-colors duration-200 md:text-[1.6875rem] ${
-          isOpen ? "text-[#a8d5b5]" : "text-white group-hover:text-[#a8d5b5]"
+        className={`[font-family:var(--font-serif)] text-[1.25rem] font-[700] leading-snug transition-colors duration-200 md:text-[1.6875rem] ${
+          isOpen ? "text-primary" : "text-foreground group-hover:text-primary"
         }`}
       >
         {question}
@@ -62,8 +100,8 @@ const FaqItem = ({
       <span
         className={`mt-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
           isOpen
-            ? "border-white/30 bg-white/10 text-white"
-            : "border-white/20 bg-transparent text-white/40 group-hover:border-white/40 group-hover:text-white/70"
+            ? "border-primary/40 bg-primary/10 text-primary"
+            : "border-border bg-transparent text-foreground/40 group-hover:border-primary/40 group-hover:text-primary/70"
         }`}
         aria-hidden
       >
@@ -84,9 +122,13 @@ const FaqItem = ({
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           style={{ overflow: "hidden" }}
         >
-          <p className="pb-7 pr-12 font-sans text-[1.125rem] leading-relaxed text-white/65">
-            {answer}
-          </p>
+          <div className="flex flex-col gap-3 pb-7 pr-12">
+            {answer.map((paragraph, i) => (
+              <p key={i} className="font-sans text-[1.0625rem] md:text-[1.125rem] leading-relaxed text-muted-foreground">
+                {paragraph}
+              </p>
+            ))}
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
@@ -102,7 +144,7 @@ const HeroHeroCasteFaqSection = () => {
     <section
       id="faq"
       className="relative scroll-mt-24 overflow-hidden px-5 md:px-8 pt-[72px] pb-[96px] md:pt-[100px] md:pb-[120px]"
-      style={{ backgroundColor: "#111111" }}
+      style={{ backgroundColor: "#F5EFEA" }}
       aria-labelledby="faq-heading"
     >
       <div className="absolute inset-0 bg-dot-grid opacity-[0.18] pointer-events-none" />
@@ -112,14 +154,14 @@ const HeroHeroCasteFaqSection = () => {
           <header className="mx-auto mb-14 max-w-3xl text-center md:mb-16">
             <h2
               id="faq-heading"
-              className="headline-landing-section text-balance leading-[1.1] text-white"
+              className="headline-landing-section text-balance leading-[1.1] text-foreground"
             >
               Časté otázky
             </h2>
           </header>
         </AnimatedSection>
 
-        <div className="mx-auto max-w-3xl border-t border-white/10">
+        <div className="mx-auto max-w-3xl border-t border-border/50">
           {faqs.map((faq, i) => (
             <FaqItem
               key={faq.question}

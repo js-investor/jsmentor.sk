@@ -73,7 +73,7 @@ const HeroHeroNastrojeSection = () => (
             ))}
             <li className="flex justify-center pt-2 md:pt-3">
               <a href="https://herohero.co/jsmentor" target="_blank" rel="noopener noreferrer" className="btn-primary text-body" data-umami-event="click_herohero" data-umami-event-section="nastroje">
-                Vstúpiť na 15 dní zadarmo 🚀
+                Vyskúšať na 15 dní zadarmo 🚀
               </a>
             </li>
           </ul>

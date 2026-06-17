@@ -281,7 +281,7 @@
   }
 
   .hero-trust-stats-label {
-    @apply font-sans text-[1rem] font-medium leading-snug text-muted-foreground md:text-[1.0625rem];
+    @apply font-sans text-[1.0625rem] font-medium leading-snug text-muted-foreground md:text-[1.0625rem];
   }
 
   .text-small {
@@ -585,7 +585,7 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center px-8 py-4 text-primary-foreground font-sans font-semibold text-base rounded-full transition-all duration-300 cursor-pointer relative overflow-hidden;
+    @apply inline-flex items-center justify-center px-8 py-4 text-primary-foreground font-sans font-semibold text-[1.125rem] rounded-full transition-all duration-300 cursor-pointer relative overflow-hidden;
     background: var(--btn-primary-gradient);
   }
 

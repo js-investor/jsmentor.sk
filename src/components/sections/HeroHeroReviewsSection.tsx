@@ -1,190 +1,216 @@
 import AnimatedSection from "@/components/AnimatedSection";
-import { cn } from "@/lib/utils";
-import { Star } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import imgVanecko from "@/assets/images/MuDr.-Martin-Vanecko.png";
+import imgLatkoczy from "@/assets/images/Simon-Latkoczy.png";
+import imgPapik from "@/assets/images/Ladislav-Papik.png";
+import { useLayoutEffect, useRef, useState } from "react";
 
-const reviewsBg = "#0c0c0c";
-
-/** Jemný viacstupňový fade do pozadia sekcie */
-const reviewsEdgeFadeLeft = `linear-gradient(to right, ${reviewsBg} 0%, ${reviewsBg} 6%, rgba(12,12,12,0.98) 14%, rgba(12,12,12,0.9) 26%, rgba(12,12,12,0.72) 42%, rgba(12,12,12,0.48) 58%, rgba(12,12,12,0.26) 72%, rgba(12,12,12,0.1) 84%, rgba(12,12,12,0.03) 92%, transparent 100%)`;
-const reviewsEdgeFadeRight = `linear-gradient(to left, ${reviewsBg} 0%, ${reviewsBg} 6%, rgba(12,12,12,0.98) 14%, rgba(12,12,12,0.9) 26%, rgba(12,12,12,0.72) 42%, rgba(12,12,12,0.48) 58%, rgba(12,12,12,0.26) 72%, rgba(12,12,12,0.1) 84%, rgba(12,12,12,0.03) 92%, transparent 100%)`;
-
-const reviewStarClass = "h-4 w-4 fill-[#F5A623] text-[#FBBF24]";
-
-/** Texty prevzaté zo screenshotov recenzia-1 … recenzia-9 */
-const reviewsRowTop = [
-  "Spolupráca s tebou sa mi veľmi páči, až vďaka tebe som pochopila, prečo má investovanie zmysel a že najdôležitejšia je dlhodobá stratégia. Všetko bolo vysvetlené zrozumiteľne a prakticky. Pomohol si mi nastaviť jasný plán, vďaka čomu mám istotu a viem, čo robím.",
-  "Veľká spokojnosť. Ivan je odborník, ktorý vie presne, čo robí. Všetko mi detailne vysvetlil a pomohol mi nastaviť financie oveľa lepšie. Konečne mám pocit, že moje peniaze pracujú pre mňa. Určite odporúčam!",
-  "S pánom Jašíkom investujem vyše pol roka. Portfólio bolo zložené na mieru, berúc do úvahy všetky podstatné faktory (vek, cieľ, iné investičné produkty). Vždy ústretová a férová konverzácia a kvalitné pravidelné reporty. Vrelo odporúčam.",
-  "S Ivanom spolupracujem necelý rok. Za ten rok som sa posunul ohľadne investícií a peňazí ako takých na vyššiu úroveň. Na začiatku mi objasnil veci ohľadne investícií, ukázal rôzne stratégie a vybrali sme spoločne tú najvhodnejšiu, keďže som investoval už dlhšie, ale nemal som dostatočné informácie. Jeho prístup je ľudský a profesionálny. Vždy mi vie vyhovieť ohľadne callov a vysvetliť nové informácie. Mladí ľudia majú jedinečnú možnosť vďaka zloženému úroku sa zabezpečiť na dôchodok — preto som mu vďačný, že mi ukázal možnosti a pripojil som sa k nemu za spoločným cieľom.",
-  "Veľmi veľká spokojnosť. Pred pár mesiacmi som sa mu ozval, že by som chcel poradiť s investíciami, do pár dní sa mi ozval, dohodli sme si konzultáciu a prebrali potrebné veci. Všetko, čo sa týka investícií, poradí, naplánuje, spraví stratégiu — plán na mieru podľa veku, príjmov a výdavkov. Žiadne prehnané výnosy ani nenaplniteľné plány. Vo svete investícií ma to posunulo dopredu, lebo viem, že mám po boku človeka, čo sa vyzná lepšie ako ja. Vidno, že prácu ho baví a má dlhoročné skúsenosti.",
-] as const;
-
-const reviewsRowBottom = [
-  "Ivu môžem len odporučiť. Sledovala som jeho profil na Instagrame dlhší čas a po nejakom čase som sa mu ozvala, že by som mala záujem o investovanie — dohodli sme sa na call, kde mi všetko vysvetlil, aké sú možnosti, a potom mi pomohol aj so založením. Môžem len odporučiť, má skvelý profesionálny prístup ku svojim klientom.",
-  "Mal som s Ivanom online konzultácie a musím povedať, že celý prístup bol veľmi profesionálny a hlavne zrozumiteľný. Všetko mi detailne vysvetlil, ukázal prezentáciu, možnosti investovania aj rozdiely oproti iným online platformám. Páčilo sa mi, že netlačil nasilu predaj, ale normálne ma previedol celým procesom a odpovedal na všetky otázky, aj na tie, na ktoré som sa hneď nenapadol. Za mňa veľmi dobrá skúsenosť — ak chce človek investovaniu naozaj rozumieť a nie len slepo klikať v aplikácii.",
-  "Na Ivana som natrafila v podstate náhodne na IG, zaujal ma jeho profil a informácie, ktoré zdieľal. Začala som sa ešte len orientovať vo veciach ohľadom investovania a keď som ho oslovila, bol mi veľmi nápomocný — všetko vysvetlil, nastavil po individuálnom zhodnotení investovanie a stratégiu, venuje sa mi, keď aktuálne treba. Som nadšená, ako sa dá budovať majetok rozumne a s primeraným rizikom. Individuálne sme aj prednedávnom nastavovali investičné portfólio, s čím som nadmieru spokojná.",
-  "Si prvý človek, ktorému verím natoľko, že som ti zveril naplánovanie svojich investícií. Preto by som ti rád touto cestou poďakoval za tvoj priateľský, ľudský a zároveň odborný prístup. Oceňujem tiež tvoju trpezlivosť a snahu vysvetliť mi vo svete financií veci, ktoré mi neboli jasné. S tvojou podporou má nastavené investovanie celá moja rodina. Si veľmi príjemný človek a kedykoľvek si s tebou rád pokecám aj mimo financií. Prajem ti veľa osobných aj pracovných úspechov a komukoľvek rád spoluprácu s tebou odporučím.",
-] as const;
-
-/** Karta pre marquee (desktop) */
-const ReviewCard = ({ quote }: { quote: string }) => (
-  <article className="flex w-[18rem] shrink-0 flex-col rounded-2xl border border-[#E8E0D8] bg-white p-4 sm:w-[18.75rem] md:w-[20rem] lg:w-[21.5rem] md:p-5">
-    <div className="mb-3 flex items-start gap-0.5" aria-label="Hodnotenie 5 z 5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className={reviewStarClass} strokeWidth={0} aria-hidden />
-      ))}
-    </div>
-    <p className="font-sans text-[0.8125rem] leading-relaxed text-foreground/85 md:text-[0.875rem]">
-      {quote}
-    </p>
-  </article>
-);
-
-/** Karta pre mobile marquee */
-const MobileReviewCard = ({ quote }: { quote: string }) => (
-  <article className="flex w-[78vw] max-w-[320px] shrink-0 flex-col rounded-2xl border border-[#E8E0D8] bg-white p-5">
-    <div className="mb-3 flex items-start gap-0.5" aria-label="Hodnotenie 5 z 5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className={reviewStarClass} strokeWidth={0} aria-hidden />
-      ))}
-    </div>
-    <p className="font-sans text-[0.9375rem] leading-relaxed text-foreground/85">
-      {quote}
-    </p>
-  </article>
-);
-
-type ReviewMarqueeRowProps = {
-  items: readonly string[];
-  direction: "left" | "right";
-  className?: string;
+type StatCard = {
+  number: string;
+  label: string;
+  boldWord: string;
+  bg: string;
+  border?: boolean;
 };
 
-const ReviewMarqueeRow = ({ items, direction, className }: ReviewMarqueeRowProps) => {
-  const loopItems = [...items, ...items];
-  const [isPaused, setIsPaused] = useState(false);
+type TestimonialCard = {
+  quote: string;
+  name: string;
+  role: string;
+  avatar: string;
+};
 
-  const pause = useCallback(() => setIsPaused(true), []);
-  const resume = useCallback(() => setIsPaused(false), []);
+const stats: StatCard[] = [
+  { number: "2000+", label: "ľudí si pozrelo môj kurz", boldWord: "investičný", bg: "#1A1A1A", border: true },
+  { number: "1100+", label: "ľudí si pozrelo môj kurz", boldWord: "rentový", bg: "#1B4332" },
+  { number: "900+", label: "Som individuálne nastavil plán", boldWord: "", bg: "#6B5744" },
+];
 
-  return (
-    <div
-      className={cn("relative overflow-hidden", className)}
-      onMouseEnter={pause}
-      onMouseLeave={resume}
-      onTouchStart={pause}
-      onTouchEnd={resume}
-      onTouchCancel={resume}
-    >
-      <div
-        className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 sm:w-28 md:w-36 lg:w-44"
-        style={{ background: reviewsEdgeFadeLeft }}
-        aria-hidden
+const testimonials: TestimonialCard[] = [
+  {
+    quote: "Ivan mi za dva týždne ukázal plán, podľa ktorého investujem dodnes.",
+    name: "MuDr. Martin Vanečko",
+    role: "Doktor pôsobiaci vo Švajčiarsku",
+    avatar: imgVanecko,
+  },
+  {
+    quote: "Ivan je profesionál. Spolupracujeme 5 rokov. Každý rok môj majetok rastie.",
+    name: "Šimon Latkoczy",
+    role: "Slovenský hokejový reprezentant",
+    avatar: imgLatkoczy,
+  },
+  {
+    quote: "Ivan presne vie, ako z firemného zisku spraviť osobný majetok.",
+    name: "Ladislav Papik",
+    role: "Konateľ PAPIK ENTERPRISE s.r.o.",
+    avatar: imgPapik,
+  },
+];
+
+// Desktop rows: alternating layout with statRight for row 2
+const desktopRows = [
+  { stat: stats[0], testimonial: testimonials[0], statRight: false },
+  { stat: stats[1], testimonial: testimonials[1], statRight: true },
+  { stat: stats[2], testimonial: testimonials[2], statRight: false },
+];
+
+// Mobile flat order: stat → testimonial × 3
+type MobileItem =
+  | { type: "stat"; data: StatCard }
+  | { type: "testimonial"; data: TestimonialCard };
+
+const mobileItems: MobileItem[] = [
+  { type: "stat", data: stats[0] },
+  { type: "testimonial", data: testimonials[0] },
+  { type: "stat", data: stats[1] },
+  { type: "testimonial", data: testimonials[1] },
+  { type: "stat", data: stats[2] },
+  { type: "testimonial", data: testimonials[2] },
+];
+
+const StatCardEl = ({ data }: { data: StatCard }) => (
+  <div
+    className="flex h-full flex-col justify-end rounded-2xl p-6 md:p-8"
+    style={{ backgroundColor: data.bg, border: data.border ? "1px solid rgba(255,255,255,0.15)" : undefined }}
+  >
+    <span className="[font-family:var(--font-serif)] text-[3.5rem] font-bold leading-none text-white md:text-[4rem]">
+      {data.number}
+    </span>
+    <p className="mt-4 font-sans text-[1.25rem] leading-snug text-white/80 md:text-[1.375rem]">
+      {data.boldWord ? (
+        <>
+          {data.label.replace(data.boldWord, "").split("kurz")[0]}
+          <strong className="font-bold text-white">{data.boldWord}</strong>
+          {" kurz"}
+        </>
+      ) : (
+        data.label
+      )}
+    </p>
+  </div>
+);
+
+const TestimonialCardEl = ({ data }: { data: TestimonialCard }) => (
+  <div className="flex h-full flex-col justify-between rounded-2xl border border-border/60 bg-white p-6 md:p-8">
+    <p className="[font-family:var(--font-serif)] text-[1.375rem] font-normal leading-[1.4] text-foreground md:text-[1.5rem]">
+      {data.quote}
+    </p>
+    <div className="mt-5 flex items-center gap-3">
+      <img
+        src={data.avatar}
+        alt={data.name}
+        className="h-14 w-14 shrink-0 rounded-full object-cover"
+        loading="lazy"
+        decoding="async"
       />
-      <div
-        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 sm:w-28 md:w-36 lg:w-44"
-        style={{ background: reviewsEdgeFadeRight }}
-        aria-hidden
-      />
-      <div
-        className={cn(
-          "reviews-marquee-track flex w-max gap-3 md:gap-4",
-          direction === "left" ? "animate-reviews-marquee-left" : "animate-reviews-marquee-right",
-          isPaused && "[animation-play-state:paused]"
-        )}
-      >
-        {loopItems.map((quote, index) => (
-          <ReviewCard key={`${index}-${quote.slice(0, 24)}`} quote={quote} />
-        ))}
+      <div>
+        <p className="font-sans text-[1rem] font-bold leading-tight text-foreground md:text-[0.9375rem]">{data.name}</p>
+        <p className="font-sans text-[0.9375rem] leading-tight text-muted-foreground md:text-[0.8125rem]">{data.role}</p>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
-const allReviews = [...reviewsRowTop, ...reviewsRowBottom];
+const HeroHeroReviewsSection = () => {
+  const mobileRef = useRef<HTMLDivElement>(null);
+  const [cardH, setCardH] = useState<number | undefined>(undefined);
 
-const MobileReviewMarquee = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const timerRef = useRef<number | null>(null);
-  const isTouchingRef = useRef(false);
-  // Duplikujeme pre nekonečný loop
-  const loopItems = [...allReviews, ...allReviews, ...allReviews];
+  useLayoutEffect(() => {
+    const measure = () => {
+      const container = mobileRef.current;
+      if (!container) return;
+      const items = container.querySelectorAll<HTMLElement>("[data-mobile-card]");
+      // Reset heights so we measure each card's natural size
+      items.forEach(el => { el.style.height = ""; });
+      let max = 0;
+      items.forEach(el => { if (el.offsetHeight > max) max = el.offsetHeight; });
+      if (max > 0) setCardH(max);
+    };
 
-  const startAutoScroll = useCallback(() => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = window.setInterval(() => {
-      const el = scrollRef.current;
-      if (!el || isTouchingRef.current) return;
-      el.scrollLeft += 1;
-      // Keď dôjdeme do 2/3 dĺžky, skočíme späť na 1/3 (seamless loop)
-      const third = el.scrollWidth / 3;
-      if (el.scrollLeft >= third * 2) {
-        el.scrollLeft = third;
+    // Initial measure (text layout)
+    measure();
+
+    // Re-measure after all images (avatars) have fully loaded
+    const imgs = mobileRef.current?.querySelectorAll<HTMLImageElement>("img") ?? [];
+    let pending = 0;
+    imgs.forEach(img => {
+      if (!img.complete) {
+        pending++;
+        img.addEventListener("load", () => { pending--; if (pending === 0) measure(); }, { once: true });
+        img.addEventListener("error", () => { pending--; if (pending === 0) measure(); }, { once: true });
       }
-    }, 16);
+    });
   }, []);
 
-  useEffect(() => {
-    // Nastav počiatočnú pozíciu na 1/3 (stred duplikovaného obsahu)
-    const el = scrollRef.current;
-    if (el) el.scrollLeft = el.scrollWidth / 3;
-    startAutoScroll();
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [startAutoScroll]);
-
-  const onTouchStart = useCallback(() => { isTouchingRef.current = true; }, []);
-  const onTouchEnd = useCallback(() => { isTouchingRef.current = false; }, []);
-
   return (
-    <div
-      ref={scrollRef}
-      className="flex gap-3 overflow-x-auto md:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      style={{ paddingLeft: "1.25rem", paddingRight: "1.25rem" }}
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
-      onTouchCancel={onTouchEnd}
-    >
-      {loopItems.map((quote, i) => (
-        <MobileReviewCard key={i} quote={quote} />
-      ))}
-    </div>
-  );
-};
-
-const HeroHeroReviewsSection = () => (
   <section
     id="recenzie"
-    className="hero-section-pad relative scroll-mt-24 bg-[#0c0c0c] md:overflow-hidden pt-[72px] pb-[72px] text-white md:pt-[96px] md:pb-[96px]"
-    aria-labelledby="recenzie-heading"
+    className="scroll-mt-24 overflow-hidden px-5 py-[72px] md:px-8 md:py-[96px]"
+    style={{ backgroundColor: "#000000" }}
   >
-    <div className="section-container relative z-10 px-5 md:px-8">
+    <div className="section-container">
       <AnimatedSection>
-        <header className="mx-auto mb-[54px] max-w-3xl text-center">
-          <h2 id="recenzie-heading" className="headline-landing-section text-white">
-            Takto to vyzerá v praxi
-          </h2>
-        </header>
+        <h2 className="headline-landing-section mx-auto mb-10 max-w-3xl text-balance text-center text-white md:mb-14">
+          Ľudia potrebujú o peniazoch počuť ľudskou rečou{" "}
+          <span aria-hidden>🙌</span>
+        </h2>
+      </AnimatedSection>
+
+      {/* ── MOBILE: 6 flat equal cards, consistent gap ── */}
+      <div ref={mobileRef} className="mx-auto flex max-w-3xl flex-col gap-4 sm:hidden">
+        {mobileItems.map((item, i) => (
+          <AnimatedSection key={i} delay={i * 0.07}>
+            {/* data-mobile-card lets the hook measure natural heights */}
+            <div
+              data-mobile-card
+              style={cardH ? { height: cardH } : undefined}
+            >
+              {item.type === "stat" ? (
+                <StatCardEl data={item.data} />
+              ) : (
+                <TestimonialCardEl data={item.data} />
+              )}
+            </div>
+          </AnimatedSection>
+        ))}
+      </div>
+
+      {/* ── DESKTOP: 3 rows, alternating 35% stat / 65% testimonial ── */}
+      <div className="mx-auto hidden max-w-3xl flex-col gap-4 sm:flex md:gap-5">
+        {desktopRows.map((row, i) => (
+          <AnimatedSection key={i} delay={i * 0.1}>
+            <div
+              className={`flex min-h-[220px] flex-row gap-4 md:gap-5 ${
+                row.statRight ? "flex-row-reverse" : ""
+              }`}
+            >
+              <div className="w-[35%] shrink-0">
+                <StatCardEl data={row.stat} />
+              </div>
+              <div className="flex-1">
+                <TestimonialCardEl data={row.testimonial} />
+              </div>
+            </div>
+          </AnimatedSection>
+        ))}
+      </div>
+
+      <AnimatedSection delay={0.35}>
+        <div className="mt-12 flex justify-center md:mt-16">
+          <a
+            href="https://herohero.co/jsmentor"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary text-body"
+            data-umami-event="click_herohero"
+            data-umami-event-section="recenzie"
+          >
+            Vyskúšať na 15 dní zadarmo 🚀
+          </a>
+        </div>
       </AnimatedSection>
     </div>
-
-    {/* Desktop — dva marquee riadky */}
-    <div className="relative z-10 mx-auto hidden w-full max-w-[1180px] space-y-3 px-4 md:block md:max-w-[1280px] md:space-y-4 md:px-6 lg:max-w-[1360px] lg:px-8">
-      <ReviewMarqueeRow items={reviewsRowTop} direction="left" />
-      <ReviewMarqueeRow items={reviewsRowBottom} direction="right" />
-    </div>
-
-    {/* Mobile — infinity marquee, pauza pri dotyku */}
-    <div className="relative z-10">
-      <MobileReviewMarquee />
-    </div>
-
-    <div className="section-container relative z-10 mt-[54px] px-5 text-center md:px-8">
-      <a href="https://herohero.co/jsmentor" target="_blank" rel="noopener noreferrer" className="btn-primary text-body inline-flex" data-umami-event="click_herohero" data-umami-event-section="reviews">
-        Chcem sa pridať ZADARMO 🚀
-      </a>
-    </div>
   </section>
-);
+  );
+};
 
 export default HeroHeroReviewsSection;

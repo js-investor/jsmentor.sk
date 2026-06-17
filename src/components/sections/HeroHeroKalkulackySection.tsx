@@ -2,6 +2,12 @@ import AnimatedSection from "@/components/AnimatedSection";
 import bonusAkcieReality from "@/assets/images/js-bonus-akcie-reality.png";
 import bonusChecklist from "@/assets/images/js-bonus-checklist.png";
 import bonusInvestovaniePoplatky from "@/assets/images/js-bonus-investovanie-poplatky.png";
+import imgBytLeft from "@/assets/images/spoznaj-cisla-investicneho-bytu.webp";
+import imgBytRight from "@/assets/images/spoznaj-cisla-investicneho-bytu-ukazka.webp";
+import imgPoplatkyLeft from "@/assets/images/investovanie-a-poplatky.webp";
+import imgPoplatkyRight from "@/assets/images/investovanie-a-poplatky-ukazka.webp";
+import imgSemaforLeft from "@/assets/images/etf-a-bytovy-semafor.webp";
+import imgSemaforRight from "@/assets/images/etf-a-bytovy-semafor-ukazka.webp";
 import {
   Banknote,
   BarChart3,
@@ -16,6 +22,8 @@ type PraktiskyNastrojItem = {
   num: string;
   title: ReactNode;
   description: string;
+  imgLeft: string;
+  imgRight: string;
 };
 
 const praktickyNastroje: PraktiskyNastrojItem[] = [
@@ -26,17 +34,23 @@ const praktickyNastroje: PraktiskyNastrojItem[] = [
         Interaktívna mapa investičných bytov: vyberieš kraj, typ nehnuteľnosti a uvidíš čísla, ktoré musíš poznať pred kúpou.
       </>
     ),
-    description: "Odhad nájmu, náklady, ceny, potenciál lokality a základné čísla, ktoré ti ukážu, či sa na byt oplatí pozrieť hlbšie — alebo ho rovno vyradiť.",
+    description: "Odhad nájmu, náklady, ceny, potenciál lokality a základné čísla, ktoré ti ukážu, či sa na byt oplatí pozrieť hlbšie, alebo ho rovno vyradiť.",
+    imgLeft: imgBytLeft,
+    imgRight: imgBytRight,
   },
   {
     num: "Č.2",
     title: <span style={{ fontWeight: 400 }}>Naprogramoval som systém, ktorý ti presne vypočíta efekt poplatkov</span>,
     description: "",
+    imgLeft: imgPoplatkyLeft,
+    imgRight: imgPoplatkyRight,
   },
   {
     num: "Č.3",
     title: <span style={{ fontWeight: 400 }}>Krátky test, ktorý ti ukáže, či kúpe bytu alebo investovaniu do ETF rozumieš dosť na to, aby si spravil rozhodnutie.</span>,
     description: "",
+    imgLeft: imgSemaforLeft,
+    imgRight: imgSemaforRight,
   },
 ];
 
@@ -188,9 +202,26 @@ const HeroHeroKalkulackySection = () => (
                   {item.description}
                 </p>
               )}
-              <div className="mt-2 grid grid-cols-2 gap-3 sm:gap-4">
-                <div className="aspect-[4/3] rounded-2xl bg-border/40 border border-border/60" aria-label="Miesto pre obrázok" />
-                <div className="aspect-[4/3] rounded-2xl bg-border/40 border border-border/60" aria-label="Miesto pre obrázok" />
+              {/* Mobile: stacked full-width. Desktop: side by side equal height. */}
+              <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row sm:items-stretch sm:gap-4">
+                <div className="w-[60%] sm:w-auto sm:shrink-0">
+                  <img
+                    src={item.imgLeft}
+                    alt=""
+                    className="block w-full sm:h-full sm:w-auto"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div className="w-full sm:min-w-0 sm:flex-1">
+                  <img
+                    src={item.imgRight}
+                    alt=""
+                    className="block w-full"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
               </div>
             </div>
           </AnimatedSection>
@@ -198,7 +229,12 @@ const HeroHeroKalkulackySection = () => (
       </div>
 
       <AnimatedSection delay={0.08}>
-        <h3 className="mx-auto mt-16 max-w-3xl text-center [font-family:var(--font-serif)] text-[1.5rem] leading-[1.2] text-foreground md:text-[2rem] lg:text-[2.25rem]">
+        <div className="mt-16 flex justify-center">
+          <span className="inline-block rounded-full bg-primary px-5 py-2 text-[13px] font-extrabold uppercase tracking-[0.14em] text-white md:text-[14px]">
+            + Extra bonus
+          </span>
+        </div>
+        <h3 className="mx-auto mt-5 max-w-3xl text-center [font-family:var(--font-serif)] text-[1.5rem] leading-[1.2] text-foreground md:text-[2rem] lg:text-[2.25rem]">
           <span style={{ fontWeight: 400 }}>A aby nebolo málo,</span> <strong style={{ fontWeight: 700 }}>dostaneš aj tieto kalkulačky</strong>
         </h3>
         <div className="mx-auto mt-10 flex w-full max-w-xl items-stretch gap-1.5 sm:gap-2 md:w-max md:max-w-full md:gap-3">
@@ -214,7 +250,7 @@ const HeroHeroKalkulackySection = () => (
                   />
                   <div className="min-w-0 text-left">
                     {title}
-                    <p className="mt-1.5 font-sans text-[0.9375rem] leading-relaxed text-muted-foreground sm:text-[0.875rem] md:text-[0.9375rem]">
+                    <p className="mt-1.5 font-sans text-[1rem] leading-relaxed text-muted-foreground md:text-[0.9375rem]">
                       {description}
                     </p>
                   </div>
