@@ -36,8 +36,8 @@ const CoVsetkoZiskasSection = () => (
         <ul className="mx-auto grid w-fit grid-cols-1 gap-x-16 gap-y-4 sm:grid-cols-2 md:gap-y-5">
           {items.map((item) => (
             <li key={item} className="flex items-start gap-3.5">
-              <CircleCheck className="mt-1 h-7 w-7 shrink-0 text-primary" strokeWidth={2} />
-              <span className="whitespace-nowrap font-sans text-[1.25rem] leading-snug text-foreground md:text-[1.5rem]">
+              <CircleCheck className="mt-0.5 h-5 w-5 shrink-0 text-primary sm:h-6 sm:w-6 md:h-7 md:w-7" strokeWidth={2} />
+              <span className="whitespace-nowrap font-sans text-[1rem] leading-snug text-foreground sm:text-[1.125rem] md:text-[1.375rem] lg:text-[1.5rem]">
                 {item}
               </span>
             </li>

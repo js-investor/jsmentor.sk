@@ -5,7 +5,7 @@ const HomeDesignHeaderSection = () => {
   return (
     <HeroSectionTemplate
       compactBottom
-      preheaderClassName="rounded-full bg-[#7A1F1F] px-4 py-1.5 text-small font-sans font-medium normal-case tracking-normal text-white"
+      preheaderClassName="rounded-full bg-[#7A1F1F] px-3 py-1 text-[0.8125rem] md:px-4 md:py-1.5 md:text-[1rem] font-sans font-medium normal-case tracking-normal text-white whitespace-nowrap"
       subtitleClassName="hero-subheadline"
       descriptionClassName="hero-description !text-[1.0625rem] md:!text-[1.125rem] lg:!text-[1.1875rem]"
       headerCtaLabel="Chcem sa pridať ZADARMO 🚀"
