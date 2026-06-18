@@ -122,7 +122,7 @@ const FaqItem = ({
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           style={{ overflow: "hidden" }}
         >
-          <div className="flex flex-col gap-3 pb-7 pr-12">
+          <div className="flex flex-col gap-3 pb-7">
             {answer.map((paragraph, i) => (
               <p key={i} className="font-sans text-[1.0625rem] md:text-[1.125rem] leading-relaxed text-muted-foreground">
                 {paragraph}
