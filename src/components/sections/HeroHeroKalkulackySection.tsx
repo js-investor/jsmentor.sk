@@ -1,13 +1,10 @@
 import AnimatedSection from "@/components/AnimatedSection";
-import bonusAkcieReality from "@/assets/images/js-bonus-akcie-reality.png";
-import bonusChecklist from "@/assets/images/js-bonus-checklist.png";
-import bonusInvestovaniePoplatky from "@/assets/images/js-bonus-investovanie-poplatky.png";
-import imgBytLeft from "@/assets/images/spoznaj-cisla-investicneho-bytu.webp";
-import imgBytRight from "@/assets/images/spoznaj-cisla-investicneho-bytu-ukazka.webp";
-import imgPoplatkyLeft from "@/assets/images/investovanie-a-poplatky.webp";
-import imgPoplatkyRight from "@/assets/images/investovanie-a-poplatky-ukazka.webp";
-import imgSemaforLeft from "@/assets/images/etf-a-bytovy-semafor.webp";
-import imgSemaforRight from "@/assets/images/etf-a-bytovy-semafor-ukazka.webp";
+import imgBytLeft from "@/assets/images/spoznaj-cisla-investicneho-bytu.png";
+import imgBytRight from "@/assets/images/spoznaj-cisla-investicneho-bytu-ukazka.png";
+import imgPoplatkyLeft from "@/assets/images/investovanie-a-poplatky.png";
+import imgPoplatkyRight from "@/assets/images/investovanie-a-poplatky-ukazka.png";
+import imgSemaforLeft from "@/assets/images/etf-a-bytovy-semafor.png";
+import imgSemaforRight from "@/assets/images/etf-a-bytovy-semafor-ukazka.png";
 import {
   Banknote,
   BarChart3,
@@ -108,24 +105,6 @@ const calculators: CalculatorItem[] = [
 const calculatorCardClass =
   "flex items-center gap-3.5 rounded-[1.125rem] border border-foreground/80 bg-white px-3.5 py-4 sm:gap-4 sm:rounded-[1.25rem] sm:px-4 sm:py-4 md:gap-5 md:px-5 md:py-[1.125rem]";
 
-const bonusDocumentCards = [
-  {
-    id: "investovanie-poplatky",
-    alt: "Investovanie a poplatky",
-    imageSrc: bonusInvestovaniePoplatky,
-  },
-  {
-    id: "akcie-reality",
-    alt: "Akcie alebo reality?",
-    imageSrc: bonusAkcieReality,
-  },
-  {
-    id: "checklist-byt",
-    alt: "Check LIST pred prvým bytom",
-    imageSrc: bonusChecklist,
-  },
-] as const;
-
 const KalkulackyBracketLabel = () => (
   <div className="relative w-10 shrink-0 self-stretch sm:w-11 md:w-14" aria-hidden>
     <svg
@@ -202,26 +181,21 @@ const HeroHeroKalkulackySection = () => (
                   {item.description}
                 </p>
               )}
-              {/* Mobile: stacked full-width. Desktop: side by side equal height. */}
-              <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row sm:items-stretch sm:gap-4">
-                <div className="w-[60%] sm:w-auto sm:shrink-0">
-                  <img
-                    src={item.imgLeft}
-                    alt=""
-                    className="block w-full sm:h-full sm:w-auto"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div className="w-full sm:min-w-0 sm:flex-1">
-                  <img
-                    src={item.imgRight}
-                    alt=""
-                    className="block w-full"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
+              <div className="mx-auto mt-2 flex w-full max-w-4xl flex-col items-center gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-4">
+                <img
+                  src={item.imgLeft}
+                  alt=""
+                  className="block h-auto w-full max-w-[280px] sm:h-[clamp(220px,36vw,531px)] sm:w-auto sm:max-w-none sm:shrink"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <img
+                  src={item.imgRight}
+                  alt=""
+                  className="block h-auto w-full sm:h-[clamp(220px,36vw,531px)] sm:w-auto sm:shrink-0"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
           </AnimatedSection>

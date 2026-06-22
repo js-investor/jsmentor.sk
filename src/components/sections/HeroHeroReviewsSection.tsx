@@ -1,7 +1,7 @@
 import AnimatedSection from "@/components/AnimatedSection";
-import imgVanecko from "@/assets/images/MuDr.-Martin-Vanecko.png";
-import imgLatkoczy from "@/assets/images/Simon-Latkoczy.png";
-import imgPapik from "@/assets/images/Ladislav-Papik.png";
+import imgVanecko from "@/assets/images/vanecko.webp";
+import imgLatkoczy from "@/assets/images/Latkoczy.webp";
+import imgPapik from "@/assets/images/papik.webp";
 import { useLayoutEffect, useRef, useState } from "react";
 
 type StatCard = {
