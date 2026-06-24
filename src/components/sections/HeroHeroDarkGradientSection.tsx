@@ -2,6 +2,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import imgInvestovat from "@/assets/images/Ako by som začal investovať v roku 2026, keby som dnes začínal od nuly.webp";
 import imgByt from "@/assets/images/Investicny byt.webp";
 import imgHypoteka from "@/assets/images/Mimoriadna splátka hypotéky.webp";
+import { scrollToAnchorId } from "@/lib/scrollToFormular";
 
 /** Radiálny prechod — tmavší stred, rýchlejší prechod do čiernej. */
 const sectionBackground =
@@ -57,12 +58,11 @@ const HeroHeroDarkGradientSection = () => (
             >
               <h3 className={videoTitleClass}>{item.title}</h3>
 
-              <a
-                href="https://herohero.co/jsmentor"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative block w-full rounded-xl shadow-[0_12px_40px_-16px_rgba(0,0,0,0.55)] transition-transform duration-300 hover:scale-[1.03]"
-                data-umami-event="click_video_herohero"
+              <button
+                type="button"
+                onClick={() => scrollToAnchorId("cennik-start")}
+                className="relative block w-full cursor-pointer rounded-xl border-0 bg-transparent p-0 text-left shadow-[0_12px_40px_-16px_rgba(0,0,0,0.55)] transition-transform duration-300 hover:scale-[1.03]"
+                data-umami-event="click_video_cennik"
                 data-umami-event-section="ukazky-play"
               >
                 <img
@@ -78,7 +78,7 @@ const HeroHeroDarkGradientSection = () => (
                     </svg>
                   </div>
                 </div>
-              </a>
+              </button>
 
               <span className={durationBadgeClass}>{item.duration}</span>
             </article>

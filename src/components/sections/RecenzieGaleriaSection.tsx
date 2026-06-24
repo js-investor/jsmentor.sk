@@ -1,20 +1,24 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import recenzia1 from "@/assets/images/recenzia-1.png";
+import recenzia2 from "@/assets/images/recenzia-2.png";
 import recenzia3 from "@/assets/images/recenzia-3.png";
 import recenzia4 from "@/assets/images/recenzia-4.png";
 import recenzia5 from "@/assets/images/recenzia-5.png";
+import recenzia6 from "@/assets/images/recenzia-6.png";
 import recenzia7 from "@/assets/images/recenzia-7.png";
 import recenzia8 from "@/assets/images/recenzia-8.png";
 import recenzia9 from "@/assets/images/recenzia-9.png";
 
 const images = [
-  { src: recenzia1, alt: "Recenzia 1" },
-  { src: recenzia3, alt: "Recenzia 2" },
-  { src: recenzia4, alt: "Recenzia 3" },
-  { src: recenzia5, alt: "Recenzia 4" },
-  { src: recenzia7, alt: "Recenzia 5" },
-  { src: recenzia8, alt: "Recenzia 6" },
-  { src: recenzia9, alt: "Recenzia 7" },
+  { src: recenzia1, alt: "Recenzia klienta 1" },
+  { src: recenzia2, alt: "Recenzia klienta 2" },
+  { src: recenzia3, alt: "Recenzia klienta 3" },
+  { src: recenzia4, alt: "Recenzia klienta 4" },
+  { src: recenzia5, alt: "Recenzia klienta 5" },
+  { src: recenzia6, alt: "Recenzia klienta 6" },
+  { src: recenzia7, alt: "Recenzia klienta 7" },
+  { src: recenzia8, alt: "Recenzia klienta 8" },
+  { src: recenzia9, alt: "Recenzia klienta 9" },
 ];
 
 const RecenzieGaleriaSection = () => (

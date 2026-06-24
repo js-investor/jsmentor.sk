@@ -18,7 +18,7 @@ const bullets = [
 const HeroHeroCennikSection = () => (
   <section
     id="cennik"
-    className="relative scroll-mt-24 overflow-hidden px-5 md:px-8 pt-[72px] pb-[96px] md:pt-[100px] md:pb-[120px]"
+    className="relative scroll-mt-24 overflow-hidden px-5 md:px-8 pt-[72px] pb-10 md:pt-[100px] md:pb-12"
     style={{ backgroundColor: "#FFF9F5" }}
     aria-labelledby="cennik-heading"
   >
@@ -27,7 +27,7 @@ const HeroHeroCennikSection = () => (
 
     <div className="section-container relative z-10">
       <AnimatedSection>
-        <header className="mx-auto mb-7 max-w-3xl text-center md:mb-9">
+        <header id="cennik-start" className="mx-auto mb-7 max-w-3xl scroll-mt-24 text-center md:mb-9">
           <h2
             id="cennik-heading"
             className="headline-landing-section text-balance leading-[1.1] text-foreground"
@@ -46,7 +46,7 @@ const HeroHeroCennikSection = () => (
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto max-w-2xl overflow-hidden rounded-[1.75rem] shadow-[0_32px_80px_-20px_rgba(2,60,46,0.42)]"
+          className="relative mx-auto max-w-3xl overflow-hidden rounded-[1.75rem] shadow-[0_32px_80px_-20px_rgba(2,60,46,0.42)] lg:max-w-4xl"
           style={{
             background: `linear-gradient(160deg, ${forest} 0%, ${forestMid} 52%, ${forestEnd} 100%)`,
           }}
@@ -69,9 +69,9 @@ const HeroHeroCennikSection = () => (
           />
           <div className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full bg-white/10 blur-3xl" />
 
-          <div className="relative z-10 px-7 py-10 md:px-10 md:py-12">
+          <div className="relative z-10 px-8 py-10 md:px-12 md:py-12 lg:px-14">
             {/* Price */}
-            <div className="mb-2 flex items-end justify-center gap-3">
+            <div className="mb-6 flex items-end justify-center gap-3 md:mb-8">
               <span className="[font-family:var(--font-serif)] text-[4rem] font-[900] leading-none text-white md:text-[4.5rem]">
                 7 €
               </span>
@@ -80,13 +80,13 @@ const HeroHeroCennikSection = () => (
 
             {/* Bullets — centered container, left-aligned items */}
             <div className="mb-9 flex justify-center">
-              <ul className="flex flex-col gap-4">
+              <ul className="flex flex-col gap-5">
                 {bullets.map((b) => (
                   <li key={b} className="flex items-center gap-4">
-                    <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[#4ade80]/40 bg-[#4ade80]/20">
-                      <Check className="h-3.5 w-3.5 text-[#6ee7a0]" strokeWidth={2.8} />
+                    <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#4ade80]/40 bg-[#4ade80]/20">
+                      <Check className="h-4 w-4 text-[#6ee7a0]" strokeWidth={2.8} />
                     </span>
-                    <span className="font-sans text-[1.0625rem] text-white/90">{b}</span>
+                    <span className="font-sans text-[1.1875rem] leading-snug text-white/95 md:text-[1.25rem] lg:text-[1.3125rem]">{b}</span>
                   </li>
                 ))}
               </ul>
@@ -104,7 +104,7 @@ const HeroHeroCennikSection = () => (
               >
                 Chcem sa pridať 🚀
               </a>
-              <p className="font-sans text-[1rem] text-white/60 md:text-[1.0625rem]">Kedykoľvek môžeš zrušiť</p>
+              <p className="font-sans text-[1.125rem] text-white/75 md:text-[1.1875rem] lg:text-[1.25rem]">Kedykoľvek môžeš zrušiť</p>
             </div>
           </div>
         </motion.div>

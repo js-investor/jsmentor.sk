@@ -22,12 +22,12 @@ const items = [
 const CoVsetkoZiskasSection = () => (
   <section
     id="co-vstetko-ziskas"
-    className="scroll-mt-24 overflow-hidden px-5 py-[72px] md:px-8 md:py-[96px]"
+    className="scroll-mt-24 overflow-hidden px-5 pb-[72px] pt-8 md:px-8 md:pb-[96px] md:pt-10"
     style={{ backgroundColor: "#FFF9F5" }}
   >
     <div className="section-container">
       <AnimatedSection>
-        <h2 className="headline-landing-section mx-auto mb-10 max-w-3xl text-balance text-center text-foreground md:mb-14">
+        <h2 className="mx-auto mb-10 max-w-3xl text-balance text-center [font-family:var(--font-serif)] text-[1.75rem] font-extrabold leading-[1.15] text-foreground md:mb-12 md:text-[2.625rem] lg:text-[2.875rem]">
           Čo všetko získaš
         </h2>
       </AnimatedSection>
