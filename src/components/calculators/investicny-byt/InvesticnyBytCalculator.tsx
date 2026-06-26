@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useCallback } from "react";
 import "./investicny-byt.css";
-import { KALKULACKY_WHATSAPP_HREF } from "@/pages/kalkulacky/kalkulackyConfig";
+import { BONUSY_CTA_LABEL, KONZULTACIA_URL } from "@/pages/kalkulacky/kalkulackyConfig";
 
 // ===== TYPES & DATA =====
 interface KrajData { name: string; m2: number; hist: number; rent2i: number; }
@@ -536,13 +536,13 @@ const InvesticnyBytCalculator = () => {
 
           {/* CTA button — matches original */}
           <a
-            href={KALKULACKY_WHATSAPP_HREF}
+            href={KONZULTACIA_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary inline-block mt-[30px] text-body"
-            data-umami-event="click_whatsapp"
+            data-umami-event="click_konzultacia"
           >
-            Chcem to prebrať na konzultácii 🚀
+            {BONUSY_CTA_LABEL}
           </a>
           <span className="block mt-3 text-[13px] font-semibold text-muted-foreground">45 minút · zadarmo · online</span>
         </div>

@@ -1,10 +1,6 @@
 import { useState, useMemo, useRef, useCallback } from "react";
 import "./poplatkovy-rontgen.css";
-import { makeWhatsAppHref } from "@/pages/kalkulacky/kalkulackyConfig";
-
-const RONTGEN_WA_HREF = makeWhatsAppHref(
-  "Ahoj Ivan, mám záujem o audit portfólia — chcem vedieť, koľko ma stoja poplatky."
-);
+import { BONUSY_CTA_LABEL, KONZULTACIA_URL } from "@/pages/kalkulacky/kalkulackyConfig";
 
 /* ── constants ── */
 const G = 10;
@@ -417,12 +413,12 @@ export default function PoplatkovyRontgenCalculator() {
 
           <a
             className="pr-btn"
-            href={RONTGEN_WA_HREF}
+            href={KONZULTACIA_URL}
             target="_blank"
             rel="noopener noreferrer"
-            data-umami-event="click_whatsapp"
+            data-umami-event="click_konzultacia"
           >
-            Chcem AUDIT svojho portfólia 🚀
+            {BONUSY_CTA_LABEL}
           </a>
           <span className="pr-micro">Priprav si svoje portfólio — audit dostaneš zadarmo</span>
         </div>

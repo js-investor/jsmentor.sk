@@ -1,10 +1,6 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import "./bytovy-semafor.css";
-import { makeWhatsAppHref } from "@/pages/kalkulacky/kalkulackyConfig";
-
-const WA_HREF = makeWhatsAppHref(
-  "Ahoj Ivan, chcel by som využiť konzultáciu zadarmo — mám záujem o kúpu bytu a práve som prešiel Bytový semafor."
-);
+import { BONUSY_CTA_LABEL, KONZULTACIA_URL } from "@/pages/kalkulacky/kalkulackyConfig";
 
 // ── types ──
 interface Answer {
@@ -523,12 +519,12 @@ export default function BytovySemaforCalculator() {
             {/* CTA */}
             <a
               className="bys-btn"
-              href={WA_HREF}
+              href={KONZULTACIA_URL}
               target="_blank"
               rel="noopener noreferrer"
-              data-umami-event="click_whatsapp"
+              data-umami-event="click_konzultacia"
             >
-              Využiť konzultáciu zadarmo s Ivanom 🚀
+              {BONUSY_CTA_LABEL}
             </a>
             <span className="bys-micro bys-micro--light">
               45 minút · zadarmo · online

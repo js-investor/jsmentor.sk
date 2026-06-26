@@ -3,6 +3,9 @@ import { BarChart3, FileDown, House, Percent, Receipt, Wallet, MapPin, TrendingU
 
 export const BONUSY_BASE_PATH = "/bonusy";
 
+export const KONZULTACIA_URL = "http://konzultacia.jsmentor.sk/";
+export const BONUSY_CTA_LABEL = "Rezervovať konzultáciu s Ivanom";
+
 export type KalkulackaCalculatorMeta = {
   slug: string;
   title: string;
@@ -99,8 +102,8 @@ export const BONUSY_PDF_MENU_ITEM = {
 
 /** Šiesta karta na /bonusy — doplniť `href`, keď budú PDF súbory pripravené. */
 export const BONUSY_PDF_CARD = {
-  title: "Stiahni si PDF",
-  description: "PDF materiály a ťaháky pripravené na okamžité použitie v Hero Hero.",
+  title: "Pripravujem PDF materiály",
+  description: "",
   href: "",
   Icon: FileDown,
 } as const;
@@ -174,5 +177,5 @@ export const KALKULACKY_KONZULTACIA_CARD = {
   title: "Mám otázku k výsledku",
   description:
     "Napíš mi na WhatsApp a preberieme tvoje čísla z kalkulačky a ďalší krok v Hero Hero.",
-  href: KALKULACKY_WHATSAPP_HREF,
+  href: KONZULTACIA_URL,
 } as const;

@@ -26,7 +26,7 @@ const calculatorCardClass = cn(
 type BonusCardContentProps = {
   Icon: LucideIcon;
   title: string;
-  description: string;
+  description?: string;
 };
 
 const BonusCardContent = ({ Icon, title, description }: BonusCardContentProps) => (
@@ -46,7 +46,9 @@ const BonusCardContent = ({ Icon, title, description }: BonusCardContentProps) =
       />
     </div>
     <span className={cn("mt-7 block md:mt-8", cardTitleClass)}>{title}</span>
-    <span className={cn("mt-3.5 block md:mt-4", cardDescriptionClass)}>{description}</span>
+    {description ? (
+      <span className={cn("mt-3.5 block md:mt-4", cardDescriptionClass)}>{description}</span>
+    ) : null}
   </>
 );
 

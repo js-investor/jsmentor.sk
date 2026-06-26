@@ -1,7 +1,6 @@
-import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
-import brandPatternDark from "@/assets/logo/js-brand-pattern-black.svg";
 import ivanKnihaJsMentor from "@/assets/images/ivan-jasik-js-mentor-kniha.png";
-import { KALKULACKY_KONZULTACIA_CARD } from "@/pages/kalkulacky/kalkulackyConfig";
+import brandPatternDark from "@/assets/logo/js-brand-pattern-black.svg";
+import { BONUSY_CTA_LABEL, KALKULACKY_KONZULTACIA_CARD } from "@/pages/kalkulacky/kalkulackyConfig";
 
 const BonusyKonzultaciaSection = () => (
   <section className="mx-auto mt-12 max-w-5xl md:mt-16" aria-labelledby="bonusy-konzultacia-heading">
@@ -45,10 +44,9 @@ const BonusyKonzultaciaSection = () => (
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary btn-primary-site-header mt-1 inline-flex items-center gap-2 text-body"
-            data-umami-event="click_whatsapp"
+            data-umami-event="click_konzultacia"
           >
-            <WhatsAppIcon className="h-[1.05rem] w-[1.05rem] shrink-0 md:h-[1.125rem] md:w-[1.125rem]" />
-            Napíš mi na WhatsApp
+            {BONUSY_CTA_LABEL}
           </a>
         </div>
 

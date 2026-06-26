@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import "./etf-semafor.css";
-import { ETF_SEMAFOR_WHATSAPP_HREF } from "@/pages/kalkulacky/kalkulackyConfig";
+import { BONUSY_CTA_LABEL, KONZULTACIA_URL } from "@/pages/kalkulacky/kalkulackyConfig";
 
 // ===== TYPES =====
 interface Answer {
@@ -413,13 +413,13 @@ const EtfSemaforCalculator = () => {
 
               {/* CTA */}
               <a
-                href={ETF_SEMAFOR_WHATSAPP_HREF}
+                href={KONZULTACIA_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary inline-block mt-[30px] text-body"
-                data-umami-event="click_whatsapp"
+                data-umami-event="click_konzultacia"
               >
-                Chcem AUDIT svojho portfólia 🚀
+                {BONUSY_CTA_LABEL}
               </a>
               <span className="block mt-3 text-[13px] font-semibold" style={{ color: "#B8B2A4" }}>
                 Priprav si svoje portfólio — audit dostaneš zadarmo
