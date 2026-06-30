@@ -414,8 +414,6 @@ export default function PoplatkovyRontgenCalculator() {
           <a
             className="pr-btn"
             href={KONZULTACIA_URL}
-            target="_blank"
-            rel="noopener noreferrer"
             data-umami-event="click_konzultacia"
           >
             {BONUSY_CTA_LABEL}

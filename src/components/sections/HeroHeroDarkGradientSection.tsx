@@ -3,6 +3,7 @@ import imgInvestovat from "@/assets/images/Ako by som začal investovať v roku 
 import imgByt from "@/assets/images/Investicny byt.webp";
 import imgHypoteka from "@/assets/images/Mimoriadna splátka hypotéky.webp";
 import { scrollToAnchorId } from "@/lib/scrollToFormular";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 
 /** Radiálny prechod — tmavší stred, rýchlejší prechod do čiernej. */
 const sectionBackground =
@@ -89,11 +90,9 @@ const HeroHeroDarkGradientSection = () => (
       <AnimatedSection delay={0.2}>
         <div className="mt-14 w-full text-center md:mt-16 lg:mt-20">
           <a
-            href="https://herohero.co/jsmentor"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={CENNIK_SECTION_HREF}
             className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 font-sans text-body font-semibold text-[#023c2e] shadow-sm transition-colors hover:bg-white/90"
-            data-umami-event="click_herohero"
+            data-umami-event="click_cennik"
             data-umami-event-section="ukazky-cta"
           >
             Chcem si to pozrieť 👀

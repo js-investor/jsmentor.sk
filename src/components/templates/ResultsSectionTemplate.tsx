@@ -9,6 +9,7 @@ import vysledokGrafSamuel from "@/assets/images/vysledok-graf-samuel.png";
 import { LineChart } from "lucide-react";
 import { useState } from "react";
 import type { ReactNode } from "react";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 
 const StoryChartIcon = () => (
   <LineChart className="h-5 w-5 text-white" strokeWidth={2.2} aria-hidden />
@@ -62,7 +63,7 @@ const ResultsSectionTemplate = ({
   title,
   subtitle,
   ctaLabel,
-  ctaHref = "#formular",
+  ctaHref = CENNIK_SECTION_HREF,
   onCtaClick,
   sectionClassName = "relative overflow-hidden py-12 md:py-24 lg:py-28 scroll-mt-24",
 }: ResultsSectionTemplateProps) => {

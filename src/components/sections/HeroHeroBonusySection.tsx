@@ -1,5 +1,6 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import brandPattern from "@/assets/logo/js-brand-pattern.svg";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 import {
   BookOpen,
   FileText,
@@ -174,7 +175,7 @@ const HeroHeroBonusySection = () => (
       </motion.div>
 
       <AnimatedSection className="mt-10 text-center md:mt-12" delay={0.1}>
-        <a href="#formular" className="btn-primary inline-flex text-body">
+        <a href={CENNIK_SECTION_HREF} className="btn-primary inline-flex text-body">
           🚀 Vyskúšať na 15 dní ZADARMO
         </a>
       </AnimatedSection>

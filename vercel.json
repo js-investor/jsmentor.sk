@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/konzultacia-s-ivanom",
+      "destination": "/konzultacia-s-ivanom/index.html"
+    },
+    {
+      "source": "/konzultacia-s-ivanom/",
+      "destination": "/konzultacia-s-ivanom/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

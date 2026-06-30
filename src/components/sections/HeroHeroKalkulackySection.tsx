@@ -1,4 +1,5 @@
 import AnimatedSection from "@/components/AnimatedSection";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 import imgBytLeft from "@/assets/images/spoznaj-cisla-investicneho-bytu.png";
 import imgBytRight from "@/assets/images/spoznaj-cisla-investicneho-bytu-ukazka.png";
 import imgPoplatkyLeft from "@/assets/images/investovanie-a-poplatky.png";
@@ -236,7 +237,7 @@ const HeroHeroKalkulackySection = () => (
       </AnimatedSection>
 
       <AnimatedSection delay={0.12} className="w-full text-center">
-        <a href="https://herohero.co/jsmentor" target="_blank" rel="noopener noreferrer" className="btn-primary mt-8 inline-flex text-body sm:mt-10" data-umami-event="click_herohero" data-umami-event-section="kalkulacky">
+        <a href={CENNIK_SECTION_HREF} className="btn-primary mt-8 inline-flex text-body sm:mt-10" data-umami-event="click_cennik" data-umami-event-section="kalkulacky">
           Chcem tieto bonusy 🎁
         </a>
       </AnimatedSection>

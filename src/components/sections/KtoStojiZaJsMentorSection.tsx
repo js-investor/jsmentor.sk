@@ -1,5 +1,6 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import ivanPortrait from "@/assets/images/jsmentor-ivan-obleku-cita-dokumenty-financie.jpg";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 
 const facts = [
   "531+ klientov",
@@ -63,7 +64,7 @@ const KtoStojiZaJsMentorSection = () => (
             </p>
 
             <a
-              href="#formular"
+              href={CENNIK_SECTION_HREF}
               className="btn-primary-light mt-7 inline-flex self-start text-body"
             >
               Chcem spolupracovať s Ivanom

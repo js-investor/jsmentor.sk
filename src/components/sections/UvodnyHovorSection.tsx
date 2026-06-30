@@ -1,9 +1,9 @@
 import AnimatedSection from "@/components/AnimatedSection";
 
-import { scrollToFormular } from "@/lib/scrollToFormular";
+import { navigateToCennik } from "@/lib/cennikCta";
 
 const scrollToBooking = () => {
-  scrollToFormular();
+  navigateToCennik();
 };
 
 const steps = [

@@ -1,6 +1,7 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import { CheckCircle2, XCircle } from "lucide-react";
 import type { ReactNode } from "react";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 
 const forYouItems: ReactNode[] = [
   <>
@@ -114,7 +115,7 @@ const PreKohoSection = () => (
             zavolať."
           </p>
           <div className="mt-8">
-            <a href="#formular" className="btn-primary text-body">
+            <a href={CENNIK_SECTION_HREF} className="btn-primary text-body">
               Získať Wealth Map
             </a>
           </div>

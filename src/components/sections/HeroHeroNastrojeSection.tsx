@@ -1,6 +1,7 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import brandPattern from "@/assets/logo/js-brand-pattern.svg";
 import heroHeroTemyImage from "@/assets/images/Ivan-Jašík-HeroHero-temy.png";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 import {
   BarChart3,
   Home,
@@ -72,7 +73,7 @@ const HeroHeroNastrojeSection = () => (
               </li>
             ))}
             <li className="flex justify-center pt-2 md:pt-3">
-              <a href="https://herohero.co/jsmentor" target="_blank" rel="noopener noreferrer" className="btn-primary text-body" data-umami-event="click_herohero" data-umami-event-section="nastroje">
+              <a href={CENNIK_SECTION_HREF} className="btn-primary text-body" data-umami-event="click_cennik" data-umami-event-section="nastroje">
                 Vyskúšať na 15 dní zadarmo 🚀
               </a>
             </li>

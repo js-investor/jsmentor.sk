@@ -16,7 +16,7 @@ const SiteHeader = ({
   const ctaClassName = "btn-primary btn-primary-site-header text-body";
 
   const ctaButton = ctaHref ? (
-    <a href={ctaHref} target={ctaTarget} rel={ctaTarget === "_blank" ? "noopener noreferrer" : undefined} className={ctaClassName} data-umami-event="click_herohero" data-umami-event-section="header">
+    <a href={ctaHref} target={ctaTarget} rel={ctaTarget === "_blank" ? "noopener noreferrer" : undefined} className={ctaClassName} data-umami-event="click_cennik" data-umami-event-section="header">
       {ctaLabel}
     </a>
   ) : (

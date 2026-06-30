@@ -259,8 +259,8 @@ export function mountInvesticnaCalculator(): () => void {
     if (!ctx || !s || disposed) return;
 
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, "rgba(74, 222, 128, 0.22)");
-    gradient.addColorStop(1, "rgba(74, 222, 128, 0)");
+    gradient.addColorStop(0, "rgba(22, 163, 74, 0.2)");
+    gradient.addColorStop(1, "rgba(22, 163, 74, 0)");
 
     chartInstance = new Chart(ctx, {
       type: "line",
@@ -271,14 +271,14 @@ export function mountInvesticnaCalculator(): () => void {
             type: "line",
             label: "Hodnota portfólia",
             data: s.dataTotal,
-            borderColor: "#4ade80",
+            borderColor: "#16a34a",
             backgroundColor: gradient,
             borderWidth: 2,
             fill: true,
             tension: 0.4,
             pointRadius: 0,
             pointHoverRadius: 5,
-            pointBackgroundColor: "#4ade80",
+            pointBackgroundColor: "#16a34a",
           },
           {
             type: "line",
@@ -301,10 +301,10 @@ export function mountInvesticnaCalculator(): () => void {
         plugins: {
           legend: { display: false },
           tooltip: {
-            backgroundColor: "rgba(255,255,255,0.12)",
-            titleColor: "#fff",
-            bodyColor: "rgba(255,255,255,0.8)",
-            borderColor: "rgba(255,255,255,0.2)",
+            backgroundColor: "rgba(255,255,255,0.95)",
+            titleColor: "#1a1a1a",
+            bodyColor: "rgba(0,0,0,0.65)",
+            borderColor: "rgba(0,0,0,0.1)",
             borderWidth: 1,
             titleFont: { family: "Recoleta, Georgia, serif" },
             bodyFont: { family: "system-ui, sans-serif" },
@@ -321,9 +321,9 @@ export function mountInvesticnaCalculator(): () => void {
         scales: {
           y: {
             beginAtZero: true,
-            grid: { color: "rgba(255,255,255,0.08)" },
+            grid: { color: "rgba(0,0,0,0.06)" },
             ticks: {
-              color: "rgba(255,255,255,0.6)",
+              color: "rgba(0,0,0,0.45)",
               callback(value) {
                 const v = Number(value);
                 return v >= 1_000_000 ? (v / 1_000_000).toFixed(1) + "M" : (v / 1000).toFixed(0) + "k";
@@ -332,7 +332,7 @@ export function mountInvesticnaCalculator(): () => void {
           },
           x: {
             grid: { display: false },
-            ticks: { maxTicksLimit: 8, color: "rgba(255,255,255,0.6)" },
+            ticks: { maxTicksLimit: 8, color: "rgba(0,0,0,0.45)" },
           },
         },
       },

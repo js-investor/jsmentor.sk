@@ -258,16 +258,16 @@ const HypotekarnaCalculator = () => {
 
           <div
             id="hypo-chart-card"
-            className="bg-black p-6 md:p-7 rounded-xl border border-white/10 mb-7 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.4)]"
+            className="bg-[#FFF9F5] p-6 md:p-7 rounded-xl border border-border mb-7 shadow-[0_10px_30px_-10px_rgba(41,106,82,0.1)]"
           >
             <div className="flex justify-between items-center mb-5 flex-wrap gap-2">
-              <h3 className="hypo-heading text-xl md:text-2xl m-0 text-white">Vývoj v čase</h3>
-              <div className="flex gap-3.5 text-[15px] font-medium text-white/80" id="ml-chart-legend">
+              <h3 className="hypo-heading text-xl md:text-2xl m-0 text-foreground">Vývoj v čase</h3>
+              <div className="flex gap-3.5 text-[15px] font-medium text-muted-foreground" id="ml-chart-legend">
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#4ade80] inline-block" aria-hidden /> Zostatok hypotéky
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#ef4444] inline-block" aria-hidden /> Zostatok hypotéky
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#29d482] inline-block" aria-hidden /> Hodnota investície
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#16a34a] inline-block" aria-hidden /> Hodnota investície
                 </div>
               </div>
             </div>
@@ -277,10 +277,10 @@ const HypotekarnaCalculator = () => {
             <div
               id="hypo-crossover-info"
               style={{ display: "none" }}
-              className="mt-5 text-center text-[15px] text-white/60 bg-white/10 p-3.5 rounded-lg border border-white/20"
+              className="mt-5 text-center text-[15px] text-muted-foreground bg-black/5 p-3.5 rounded-lg border border-border"
             >
-              <span className="hypo-heading text-[1.25rem] text-white block mb-1">Bod zlomu dosiahnutý</span>
-              <span className="text-[1rem]">Investícia presiahne zostatok hypotéky v <span id="crossover-year" className="font-bold text-white" />.</span>
+              <span className="hypo-heading text-[1.25rem] text-foreground block mb-1">Bod zlomu dosiahnutý</span>
+              <span className="text-[1rem]">Investícia presiahne zostatok hypotéky v <span id="crossover-year" className="font-bold text-foreground" />.</span>
             </div>
           </div>
 

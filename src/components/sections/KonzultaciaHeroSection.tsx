@@ -1,8 +1,9 @@
 import KonzultaciaHeroSectionTemplate from "@/components/templates/KonzultaciaHeroSectionTemplate";
-import { scrollToAnchorId, scrollToFormular } from "@/lib/scrollToFormular";
+import { scrollToAnchorId } from "@/lib/scrollToFormular";
+import { navigateToCennik } from "@/lib/cennikCta";
 
 const scrollToBooking = () => {
-  scrollToFormular();
+  navigateToCennik();
 };
 
 const scrollToSection = (id: string) => {

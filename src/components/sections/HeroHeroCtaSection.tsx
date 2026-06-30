@@ -1,5 +1,6 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import brandPattern from "@/assets/logo/js-brand-pattern.svg";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 
 const forest = "#023c2e";
 const forestLight = "#065f4a";
@@ -73,7 +74,7 @@ const HeroHeroCtaSection = () => (
 
                 <div className="mt-10 md:mt-12">
                   <a
-                    href="#formular"
+                    href={CENNIK_SECTION_HREF}
                     className="btn-primary-light text-body inline-flex min-h-[3.25rem] px-8 py-4 text-[1.0625rem] md:min-h-[3.5rem] md:px-10 md:text-[1.125rem]"
                   >
                     🚀 Vyskúšať na 15 dní ZADARMO

@@ -193,15 +193,15 @@ const InvesticnaCalculator = () => {
               </div>
             </div>
 
-            <div className="bg-black p-6 rounded-xl inv-card-shadow border border-white/10">
+            <div className="bg-[#FFF9F5] p-6 rounded-xl inv-card-shadow border border-border">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
-                <h3 className="text-xl inv-heading-serif text-white font-normal">Vývoj v čase</h3>
-                <div className="flex gap-4 mt-2 sm:mt-0 text-[15px] text-white/70">
+                <h3 className="text-xl inv-heading-serif text-foreground font-normal">Vývoj v čase</h3>
+                <div className="flex gap-4 mt-2 sm:mt-0 text-[15px] text-muted-foreground">
                   <div className="flex items-center gap-1">
                     <span className="w-3 h-3 rounded-full bg-[#a8956e] inline-block" aria-hidden /> Vklady
                   </div>
                   <div className="flex items-center gap-1">
-                    <span className="w-3 h-3 rounded-full bg-[#4ade80] inline-block" aria-hidden /> Zhodnotenie
+                    <span className="w-3 h-3 rounded-full bg-[#16a34a] inline-block" aria-hidden /> Zhodnotenie
                   </div>
                 </div>
               </div>
@@ -210,26 +210,26 @@ const InvesticnaCalculator = () => {
                 <canvas id="inv-chart" />
               </div>
 
-              <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center border-t border-white/10 pt-4">
-                <div className="rounded-lg p-4 bg-white/5">
-                  <span className="block text-[15px] font-bold text-white/50 uppercase">Celkový vklad</span>
-                  <span className="block text-3xl inv-heading-serif font-bold text-white mt-1" id="inv-totalInvested">
+              <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center border-t border-border pt-4">
+                <div className="rounded-lg p-4 bg-black/5">
+                  <span className="block text-[15px] font-bold text-muted-foreground uppercase">Celkový vklad</span>
+                  <span className="block text-3xl inv-heading-serif font-bold text-foreground mt-1" id="inv-totalInvested">
                     0 €
                   </span>
                 </div>
-                <div className="rounded-lg p-4 bg-white/5">
-                  <span className="block text-[15px] font-bold text-white/50 uppercase">Reálna hodnota</span>
-                  <span className="block text-3xl inv-heading-serif font-bold text-white mt-1" id="inv-realValue">
+                <div className="rounded-lg p-4 bg-black/5">
+                  <span className="block text-[15px] font-bold text-muted-foreground uppercase">Reálna hodnota</span>
+                  <span className="block text-3xl inv-heading-serif font-bold text-foreground mt-1" id="inv-realValue">
                     0 €
                   </span>
-                  <span className="text-[15px] text-white/40">Očistené o infláciu</span>
+                  <span className="text-[15px] text-muted-foreground">Očistené o infláciu</span>
                 </div>
-                <div className="rounded-lg p-4 bg-white/5">
-                  <span className="block text-[15px] font-bold text-white/50 uppercase">Návratnosť</span>
-                  <span className="block text-3xl inv-heading-serif font-bold text-white mt-1" id="inv-roi">
+                <div className="rounded-lg p-4 bg-black/5">
+                  <span className="block text-[15px] font-bold text-muted-foreground uppercase">Návratnosť</span>
+                  <span className="block text-3xl inv-heading-serif font-bold text-foreground mt-1" id="inv-roi">
                     0x
                   </span>
-                  <span className="text-[15px] text-white/40">Násobok vkladu</span>
+                  <span className="text-[15px] text-muted-foreground">Násobok vkladu</span>
                 </div>
               </div>
             </div>

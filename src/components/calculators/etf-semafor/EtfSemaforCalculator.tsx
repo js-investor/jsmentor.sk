@@ -414,8 +414,6 @@ const EtfSemaforCalculator = () => {
               {/* CTA */}
               <a
                 href={KONZULTACIA_URL}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="btn-primary inline-block mt-[30px] text-body"
                 data-umami-event="click_konzultacia"
               >

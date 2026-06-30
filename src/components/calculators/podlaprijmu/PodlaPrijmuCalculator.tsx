@@ -144,33 +144,33 @@ const PodlaPrijmuCalculator = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-black p-6 rounded-xl border border-white/10 flex flex-col items-center">
-                <h4 className="font-serif text-lg mb-1 text-white">DTI Indikátor</h4>
-                <p className="text-[14px] text-white/50 uppercase tracking-wider mb-4">Celkový dlh vs. ročný príjem</p>
+              <div className="bg-[#FFF9F5] p-6 rounded-xl border border-border shadow-[0_10px_30px_-10px_rgba(41,106,82,0.1)] flex flex-col items-center">
+                <h4 className="font-serif text-lg mb-1 text-foreground">DTI Indikátor</h4>
+                <p className="text-[14px] text-muted-foreground uppercase tracking-wider mb-4">Celkový dlh vs. ročný príjem</p>
                 <div className="relative w-48 h-24">
                   <canvas id="chart-dti" />
                   <div className="absolute inset-0 flex items-end justify-center pb-0">
-                    <span className="text-2xl font-serif" id="dti-value-text">
+                    <span className="text-2xl font-serif text-foreground" id="dti-value-text">
                       0x
                     </span>
                   </div>
                 </div>
-                <p className="text-[15px] text-center mt-4 text-white/80" id="dti-status-msg">
+                <p className="text-[15px] text-center mt-4 text-muted-foreground" id="dti-status-msg">
                   V bezpečnej zóne
                 </p>
               </div>
-              <div className="bg-black p-6 rounded-xl border border-white/10 flex flex-col items-center">
-                <h4 className="font-serif text-lg mb-1 text-white">DSTI Indikátor</h4>
-                <p className="text-[14px] text-white/50 uppercase tracking-wider mb-4">Splátky vs. mesačný príjem</p>
+              <div className="bg-[#FFF9F5] p-6 rounded-xl border border-border shadow-[0_10px_30px_-10px_rgba(41,106,82,0.1)] flex flex-col items-center">
+                <h4 className="font-serif text-lg mb-1 text-foreground">DSTI Indikátor</h4>
+                <p className="text-[14px] text-muted-foreground uppercase tracking-wider mb-4">Splátky vs. mesačný príjem</p>
                 <div className="relative w-48 h-24">
                   <canvas id="chart-dsti" />
                   <div className="absolute inset-0 flex items-end justify-center pb-0">
-                    <span className="text-2xl font-serif" id="dsti-value-text">
+                    <span className="text-2xl font-serif text-foreground" id="dsti-value-text">
                       0%
                     </span>
                   </div>
                 </div>
-                <p className="text-[15px] text-center mt-4 text-white/80" id="dsti-status-msg">
+                <p className="text-[15px] text-center mt-4 text-muted-foreground" id="dsti-status-msg">
                   V bezpečnej zóne
                 </p>
               </div>

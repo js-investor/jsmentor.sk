@@ -22,6 +22,7 @@ import brandPattern from "@/assets/logo/js-brand-pattern.svg";
 import jsMentorHeroHeroScreen from "@/assets/images/js-mentor-hero-hero.png";
 import { useMemo, useState } from "react";
 import type { ReactNode } from "react";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 
 const benefitBold = (text: string) => (
   <strong className="font-bold text-white">{text}</strong>
@@ -268,7 +269,7 @@ const CoDostanesHeroHeroSection = () => {
                   ))}
                 </ul>
                 <div className="mt-8 flex justify-center sm:justify-start">
-                  <a href="#formular" className="btn-primary text-body inline-flex">
+                  <a href={CENNIK_SECTION_HREF} className="btn-primary text-body inline-flex">
                     🚀 Vyskúšať na 15 dní ZADARMO
                   </a>
                 </div>

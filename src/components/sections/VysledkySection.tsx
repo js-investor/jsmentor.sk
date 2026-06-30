@@ -1,5 +1,5 @@
 import ResultsSectionTemplate from "@/components/templates/ResultsSectionTemplate";
-import { scrollToFormular } from "@/lib/scrollToFormular";
+import { navigateToCennik } from "@/lib/cennikCta";
 import type { ReactNode } from "react";
 
 type VysledkySectionProps = {
@@ -28,7 +28,7 @@ const VysledkySection = ({
       subtitle={subtitle}
       ctaLabel={ctaLabel}
       ctaHref=""
-      onCtaClick={scrollToFormular}
+      onCtaClick={navigateToCennik}
     />
   );
 };

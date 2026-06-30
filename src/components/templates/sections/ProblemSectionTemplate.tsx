@@ -2,6 +2,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import brandPattern from "@/assets/logo/js-brand-pattern.svg";
 import { Clock3, Percent, PiggyBank, Wallet } from "lucide-react";
 import type { ReactNode } from "react";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 
 type ProblemItem = {
   icon: ReactNode;
@@ -54,7 +55,7 @@ const ProblemSectionTemplate = ({
     </>
   ),
   ctaLabel = "Lorem ipsum",
-  ctaHref = "#formular",
+  ctaHref = CENNIK_SECTION_HREF,
   onCtaClick,
 }: ProblemSectionTemplateProps) => (
   <section id="problem" className="section-cream section-padding relative overflow-hidden scroll-mt-24">

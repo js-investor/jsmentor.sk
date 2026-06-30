@@ -1,5 +1,6 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import { CalendarDays, PiggyBank, TrendingUp } from "lucide-react";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 
 const RozdielPoplatkovSection = () => (
   <section className="section-white section-padding relative overflow-hidden">
@@ -87,7 +88,7 @@ const RozdielPoplatkovSection = () => (
           <p className="font-sans text-body text-foreground/90">
             Neplaťte zbytočné poplatky a <span className="font-semibold text-primary">chráňte svoj čistý výnos.</span>
           </p>
-          <a href="#formular" className="btn-primary mt-5 inline-flex">
+          <a href={CENNIK_SECTION_HREF} className="btn-primary mt-5 inline-flex">
             Získať Wealth Map
           </a>
         </div>

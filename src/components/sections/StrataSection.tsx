@@ -3,9 +3,10 @@ import SectionHeader from "@/components/SectionHeader";
 import brandPattern from "@/assets/logo/js-brand-pattern.svg";
 import { TrendingDown, Percent, Compass } from "lucide-react";
 import { ReactNode } from "react";
+import { navigateToCennik } from "@/lib/cennikCta";
 
 const scrollToBooking = () => {
-  document.getElementById("formular")?.scrollIntoView({ behavior: "smooth" });
+  navigateToCennik();
 };
 
 const cards: { icon: ReactNode; stat: string; title: string; body: string }[] = [

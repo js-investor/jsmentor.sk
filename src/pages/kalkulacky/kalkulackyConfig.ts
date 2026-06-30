@@ -1,9 +1,11 @@
 import type { LucideIcon } from "lucide-react";
 import { BarChart3, FileDown, House, Percent, Receipt, Wallet, MapPin, TrendingUp, ScanLine, TrafficCone } from "lucide-react";
 
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
+
 export const BONUSY_BASE_PATH = "/bonusy";
 
-export const KONZULTACIA_URL = "http://konzultacia.jsmentor.sk/";
+export const KONZULTACIA_URL = CENNIK_SECTION_HREF;
 export const BONUSY_CTA_LABEL = "Rezervovať konzultáciu s Ivanom";
 
 export type KalkulackaCalculatorMeta = {

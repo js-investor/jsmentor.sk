@@ -66,7 +66,7 @@ const HeroSectionTemplate = ({
   const heroCta = heroCtaLabel ? (
     <div className="flex justify-center mb-10 md:mb-12">
       {heroCtaHref ? (
-        <a href={heroCtaHref} target={heroCtaTarget} rel={heroCtaTarget === "_blank" ? "noopener noreferrer" : undefined} className="btn-primary text-body" data-umami-event="click_herohero" data-umami-event-section="hero">
+        <a href={heroCtaHref} target={heroCtaTarget} rel={heroCtaTarget === "_blank" ? "noopener noreferrer" : undefined} className="btn-primary text-body" data-umami-event="click_cennik" data-umami-event-section="hero">
           {heroCtaLabel}
         </a>
       ) : (

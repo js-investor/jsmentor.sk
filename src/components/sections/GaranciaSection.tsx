@@ -1,8 +1,9 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import { CheckCircle2 } from "lucide-react";
+import { navigateToCennik } from "@/lib/cennikCta";
 
 const scrollToBooking = () => {
-  document.getElementById("formular")?.scrollIntoView({ behavior: "smooth" });
+  navigateToCennik();
 };
 
 const garancie = [

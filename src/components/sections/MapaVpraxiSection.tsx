@@ -1,4 +1,5 @@
 import AnimatedSection from "@/components/AnimatedSection";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 const MapaVpraxiSection = () => (
   <section id="mapa-v-praxi" className="section-white section-padding relative overflow-hidden scroll-mt-24">
     <div className="absolute inset-0 bg-dot-grid opacity-20" />
@@ -11,7 +12,7 @@ const MapaVpraxiSection = () => (
               Pozrite si reálny príklad vo videu, kde presne uvidíte, čo získate.
             </p>
             <div className="mt-7">
-              <a href="#formular" className="btn-primary text-body">
+              <a href={CENNIK_SECTION_HREF} className="btn-primary text-body">
                 Získať Wealth Map
               </a>
             </div>

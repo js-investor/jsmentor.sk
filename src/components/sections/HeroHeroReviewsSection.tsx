@@ -1,4 +1,5 @@
 import AnimatedSection from "@/components/AnimatedSection";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 import imgVanecko from "@/assets/images/vanecko.webp";
 import imgLatkoczy from "@/assets/images/Latkoczy.webp";
 import imgPapik from "@/assets/images/papik.webp";
@@ -197,11 +198,9 @@ const HeroHeroReviewsSection = () => {
       <AnimatedSection delay={0.35}>
         <div className="mt-12 flex justify-center md:mt-16">
           <a
-            href="https://herohero.co/jsmentor"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={CENNIK_SECTION_HREF}
             className="btn-primary text-body"
-            data-umami-event="click_herohero"
+            data-umami-event="click_cennik"
             data-umami-event-section="recenzie"
           >
             Vyskúšať na 15 dní zadarmo 🚀

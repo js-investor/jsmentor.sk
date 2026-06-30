@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import imgLatkoczy from "@/assets/images/Latkoczy.webp";
 import imgPapik from "@/assets/images/papik.webp";
 import imgVanecko from "@/assets/images/vanecko.webp";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 
 const testimonials = [
   {
@@ -38,7 +39,7 @@ const RecenzieKlientovSection = ({
   heading = <>Lorem ipsum dolor sit amet</>,
   subheading,
   ctaLabel = "Lorem ipsum",
-  ctaHref = "#formular",
+  ctaHref = CENNIK_SECTION_HREF,
 }: RecenzieKlientovSectionProps) => (
   <section id="recenzie" className="bg-footer-bg section-padding relative overflow-hidden scroll-mt-24">
     <div className="absolute inset-0 bg-dot-grid opacity-20" />

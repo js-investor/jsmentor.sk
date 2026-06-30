@@ -12,7 +12,7 @@ import recenzia9 from "@/assets/images/recenzia-9.png";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useMemo } from "react";
 import { cn } from "@/lib/utils";
-import { scrollToFormular } from "@/lib/scrollToFormular";
+import { navigateToCennik } from "@/lib/cennikCta";
 
 type ReviewImage = { src: string; alt: string };
 
@@ -34,7 +34,7 @@ const KONZULTACIA_EXTRA_REVIEW_IMAGES: ReviewImage[] = [
 ];
 
 const scrollToBooking = () => {
-  scrollToFormular();
+  navigateToCennik();
 };
 
 function ReviewsLightbox({

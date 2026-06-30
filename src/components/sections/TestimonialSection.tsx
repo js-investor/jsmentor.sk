@@ -4,10 +4,10 @@ import imgLatkoczy from "@/assets/images/Latkoczy.webp";
 import imgPapik from "@/assets/images/papik.webp";
 import imgVanecko from "@/assets/images/vanecko.webp";
 
-import { scrollToFormular } from "@/lib/scrollToFormular";
+import { navigateToCennik } from "@/lib/cennikCta";
 
 const scrollToBooking = () => {
-  scrollToFormular();
+  navigateToCennik();
 };
 
 const testimonials = [

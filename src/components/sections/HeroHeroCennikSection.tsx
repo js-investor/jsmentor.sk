@@ -2,12 +2,11 @@ import AnimatedSection from "@/components/AnimatedSection";
 import brandPattern from "@/assets/logo/js-brand-pattern.svg";
 import { Check } from "lucide-react";
 import { motion } from "framer-motion";
+import { HEROHERO_JOIN_URL } from "@/lib/cennikCta";
 
 const forest = "#023c2e";
 const forestMid = "#065f4a";
 const forestEnd = "#0a5a47";
-
-const heroheroUrl = "https://herohero.co/jsmentor";
 
 const bullets = [
   "Prvých 15 dní úplne zadarmo",
@@ -95,7 +94,7 @@ const HeroHeroCennikSection = () => (
             {/* CTA */}
             <div className="flex flex-col items-center gap-3">
               <a
-                href={heroheroUrl}
+                href={HEROHERO_JOIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 font-sans text-[1.125rem] font-semibold text-[#023c2e] shadow-[0_4px_20px_rgba(0,0,0,0.22)] transition-all duration-200 hover:bg-white/92 hover:shadow-[0_10px_32px_rgba(0,0,0,0.28)]"

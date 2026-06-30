@@ -1,8 +1,8 @@
 import zlozenyUrokTable from "@/assets/images/js-tabulka-porovnanie-zlozeny-urok.png";
-import { scrollToFormular } from "@/lib/scrollToFormular";
+import { navigateToCennik } from "@/lib/cennikCta";
 
 const scrollToBooking = () => {
-  scrollToFormular();
+  navigateToCennik();
 };
 
 const KonzultaciaZlozenyUrokSection = () => (

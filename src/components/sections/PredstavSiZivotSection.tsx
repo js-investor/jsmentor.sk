@@ -1,6 +1,7 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 
 const bold = (text: string) => (
   <strong className="font-bold text-foreground">{text}</strong>
@@ -86,7 +87,7 @@ const PredstavSiZivotSection = () => (
               A presne preto vznikla JS komunita na HeroHero.
             </p>
             <div className="pt-4 md:pt-6">
-              <a href="#formular" className="btn-primary text-body">
+              <a href={CENNIK_SECTION_HREF} className="btn-primary text-body">
                 🚀 Vyskúšať na 15 dní ZADARMO
               </a>
             </div>

@@ -1,5 +1,6 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import ivanHeroHeroImage from "@/assets/images/Ivan-Jašík-HeroHero.webp";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 import type { ReactNode } from "react";
 
 const bold = (text: string) => <strong className="font-bold text-foreground">{text}</strong>;
@@ -66,7 +67,7 @@ const HeroHeroChybySection = () => (
               </li>
             ))}
             <li className="flex justify-center pt-2 md:pt-3">
-              <a href="https://herohero.co/jsmentor" target="_blank" rel="noopener noreferrer" className="btn-primary text-body" data-umami-event="click_herohero" data-umami-event-section="chyby">
+              <a href={CENNIK_SECTION_HREF} className="btn-primary text-body" data-umami-event="click_cennik" data-umami-event-section="chyby">
                 Chcem sa pridať ZADARMO 🚀
               </a>
             </li>

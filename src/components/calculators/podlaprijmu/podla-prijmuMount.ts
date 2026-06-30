@@ -218,6 +218,7 @@ export function mountPodlaPrijmuCalculator(): () => void {
     const safeValue = Number.isFinite(Number(value)) ? Number(value) : 0;
     const displayValue = Math.min(Math.max(0, safeValue), max);
     const remaining = Math.max(0, max - displayValue);
+    const gaugeTrack = "rgba(0,0,0,0.08)";
     let color = "#10b981";
     if (unit === "x") {
       if (safeValue > 6) color = "#f59e0b";
@@ -233,13 +234,13 @@ export function mountPodlaPrijmuCalculator(): () => void {
     }
     if (instance) {
       instance.data.datasets[0].data = [displayValue, remaining];
-      instance.data.datasets[0].backgroundColor = [color, "rgba(255,255,255,0.12)"];
+      instance.data.datasets[0].backgroundColor = [color, gaugeTrack];
       instance.update();
       return;
     }
     const created = new Chart(canvas, {
       type: "doughnut",
-      data: { labels: ["Hodnota", "Zvyšok"], datasets: [{ data: [displayValue, remaining], backgroundColor: [color, "rgba(255,255,255,0.12)"], borderWidth: 0, circumference: 180, rotation: 270 }] },
+      data: { labels: ["Hodnota", "Zvyšok"], datasets: [{ data: [displayValue, remaining], backgroundColor: [color, gaugeTrack], borderWidth: 0, circumference: 180, rotation: 270 }] },
       options: { cutout: "75%", responsive: true, maintainAspectRatio: false, plugins: { tooltip: { enabled: false }, legend: { display: false } } },
     });
     set(created);

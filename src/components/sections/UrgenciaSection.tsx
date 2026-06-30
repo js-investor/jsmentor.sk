@@ -1,7 +1,8 @@
 import AnimatedSection from "@/components/AnimatedSection";
+import { navigateToCennik } from "@/lib/cennikCta";
 
 const scrollToBooking = () => {
-  document.getElementById("formular")?.scrollIntoView({ behavior: "smooth" });
+  navigateToCennik();
 };
 
 const UrgenciaSection = () => (

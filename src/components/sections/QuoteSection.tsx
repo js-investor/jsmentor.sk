@@ -2,7 +2,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 
 const QuoteSection = () => (
   <section
-    className="overflow-hidden px-5 py-[72px] md:px-8 md:py-[96px]"
+    className="overflow-hidden px-5 pb-[72px] pt-[36px] md:px-8 md:pb-[96px] md:pt-[48px]"
     style={{ backgroundColor: "#FFF9F5" }}
   >
     <div className="section-container">

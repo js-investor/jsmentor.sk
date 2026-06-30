@@ -1,5 +1,6 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import { CheckCircle2, XCircle } from "lucide-react";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 
 const beforeItems = [
   <>
@@ -84,7 +85,7 @@ const PredPoSection = () => (
 
       <AnimatedSection>
         <div className="mt-10 text-center">
-          <a href="#formular" className="btn-primary text-body">
+          <a href={CENNIK_SECTION_HREF} className="btn-primary text-body">
             Získať Wealth Map
           </a>
         </div>

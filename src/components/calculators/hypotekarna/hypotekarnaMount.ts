@@ -497,11 +497,11 @@ export function mountHypotekarnaCalculator(): () => void {
     chartInstance = null;
 
     const gM = ctx.createLinearGradient(0, 0, 0, 400);
-    gM.addColorStop(0, "rgba(74,222,128,0.18)");
-    gM.addColorStop(1, "rgba(74,222,128,0)");
+    gM.addColorStop(0, "rgba(239,68,68,0.15)");
+    gM.addColorStop(1, "rgba(239,68,68,0)");
     const gI = ctx.createLinearGradient(0, 0, 0, 400);
-    gI.addColorStop(0, "rgba(41,212,130,0.25)");
-    gI.addColorStop(1, "rgba(41,212,130,0)");
+    gI.addColorStop(0, "rgba(22,163,74,0.2)");
+    gI.addColorStop(1, "rgba(22,163,74,0)");
 
     const datasets: Array<{
       type: "line";
@@ -513,8 +513,8 @@ export function mountHypotekarnaCalculator(): () => void {
       tension: number;
       pointRadius: number;
     }> = [];
-    const lineDark = "#4ade80";
-    const lineAccent = "#29d482";
+    const lineDark = "#ef4444";
+    const lineAccent = "#16a34a";
 
     if (mEnabled)
       datasets.push({
@@ -550,10 +550,10 @@ export function mountHypotekarnaCalculator(): () => void {
           legend: { display: false },
           tooltip: {
             enabled: !isStatic,
-            backgroundColor: "rgba(255,255,255,0.12)",
-            titleColor: "#fff",
-            bodyColor: "rgba(255,255,255,0.8)",
-            borderColor: "rgba(255,255,255,0.2)",
+            backgroundColor: "rgba(255,255,255,0.95)",
+            titleColor: "#1a1a1a",
+            bodyColor: "rgba(0,0,0,0.65)",
+            borderColor: "rgba(0,0,0,0.1)",
             borderWidth: 1,
             padding: 12,
             callbacks: {
@@ -564,15 +564,15 @@ export function mountHypotekarnaCalculator(): () => void {
         scales: {
           y: {
             beginAtZero: true,
-            grid: { color: "rgba(255,255,255,0.08)" },
+            grid: { color: "rgba(0,0,0,0.06)" },
             ticks: {
-              color: "rgba(255,255,255,0.6)",
+              color: "rgba(0,0,0,0.45)",
               callback: (v) => fmtNum(Number(v) / 1000) + "k €",
             },
           },
           x: {
             grid: { display: false },
-            ticks: { color: "rgba(255,255,255,0.6)" },
+            ticks: { color: "rgba(0,0,0,0.45)" },
           },
         },
       },

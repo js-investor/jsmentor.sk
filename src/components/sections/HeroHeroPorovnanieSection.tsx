@@ -1,6 +1,7 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import { motion } from "framer-motion";
 import { Check, X } from "lucide-react";
+import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 
 const comparisonItems = [
   {
@@ -173,7 +174,7 @@ const HeroHeroPorovnanieSection = () => (
       {/* CTA */}
       <AnimatedSection delay={0.22}>
         <div className="mt-14 flex flex-col items-center text-center md:mt-16">
-          <a href="https://herohero.co/jsmentor" target="_blank" rel="noopener noreferrer" className="btn-primary text-body">
+          <a href={CENNIK_SECTION_HREF} className="btn-primary text-body" data-umami-event="click_cennik">
             Chcem sa pridať ZADARMO 🚀
           </a>
         </div>

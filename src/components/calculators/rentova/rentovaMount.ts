@@ -143,9 +143,15 @@ export function mountRentovaCalculator(): () => void {
   const updateChart = (s: ReturnType<typeof calcScenario>) => {
     const canvas = document.getElementById("ml-rentChart") as HTMLCanvasElement | null;
     if (!canvas) return;
+    const ctx = canvas.getContext("2d");
     chartInstance?.destroy();
     chartInstance = null;
-    if (!s.valid) return;
+    if (!s.valid || !ctx) return;
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "rgba(22, 163, 74, 0.2)");
+    gradient.addColorStop(1, "rgba(22, 163, 74, 0)");
+
     chartInstance = new Chart(canvas, {
       type: "line",
       data: {
@@ -154,13 +160,13 @@ export function mountRentovaCalculator(): () => void {
           {
             label: "Majetok",
             data: s.dataCapital,
-            borderColor: "#4ade80",
-            backgroundColor: "rgba(74,222,128,0.12)",
+            borderColor: "#16a34a",
+            backgroundColor: gradient,
             borderWidth: 2.5,
-            pointBackgroundColor: "#4ade80",
+            pointBackgroundColor: "#16a34a",
             pointRadius: 0,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "#4ade80",
+            pointHoverBackgroundColor: "#16a34a",
             fill: true,
             tension: 0.4,
           },
@@ -169,22 +175,31 @@ export function mountRentovaCalculator(): () => void {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: "rgba(255,255,255,0.95)",
+            titleColor: "#1a1a1a",
+            bodyColor: "rgba(0,0,0,0.65)",
+            borderColor: "rgba(0,0,0,0.1)",
+            borderWidth: 1,
+          },
+        },
         scales: {
           x: {
-            grid: { color: "rgba(255,255,255,0.1)" },
-            ticks: { color: "rgba(255,255,255,0.7)", font: { size: 12 } },
-            border: { color: "rgba(255,255,255,0.2)" },
+            grid: { color: "rgba(0,0,0,0.06)" },
+            ticks: { color: "rgba(0,0,0,0.45)", font: { size: 12 } },
+            border: { color: "rgba(0,0,0,0.08)" },
           },
           y: {
-            grid: { color: "rgba(255,255,255,0.1)" },
+            grid: { color: "rgba(0,0,0,0.06)" },
             ticks: {
-              color: "rgba(255,255,255,0.7)",
+              color: "rgba(0,0,0,0.45)",
               font: { size: 12 },
               callback: (v: number | string) =>
                 new Intl.NumberFormat("sk-SK", { notation: "compact", maximumFractionDigits: 0 }).format(Number(v)) + " €",
             },
-            border: { color: "rgba(255,255,255,0.2)" },
+            border: { color: "rgba(0,0,0,0.08)" },
           },
         },
       },
