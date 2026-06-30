@@ -41,8 +41,11 @@ const BonusyKonzultaciaSection = () => (
           </p>
           <a
             href={KALKULACKY_KONZULTACIA_CARD.href}
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-primary btn-primary-site-header mt-1 inline-flex items-center gap-2 text-body"
-            data-umami-event="click_cennik"
+            data-umami-event="click_konzultacia"
+            data-umami-event-section="bonusy-konzultacia"
           >
             {BONUSY_CTA_LABEL}
           </a>

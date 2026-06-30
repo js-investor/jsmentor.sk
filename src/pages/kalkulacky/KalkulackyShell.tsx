@@ -23,6 +23,7 @@ const KalkulackyShell = ({ children, fullBleed = false }: KalkulackyShellProps) 
       ctaMobileLabel="Rezervovať konzultáciu"
       ctaHref={KONZULTACIA_URL}
       ctaUmamiEvent="click_konzultacia"
+      ctaUmamiEventSection="bonusy-header"
     />
     {fullBleed ? (
       <div className="page-home bg-background pt-[9rem] md:pt-[11rem] lg:pt-[12rem]">

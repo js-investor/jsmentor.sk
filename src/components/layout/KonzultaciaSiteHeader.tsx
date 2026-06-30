@@ -22,6 +22,7 @@ type KonzultaciaSiteHeaderProps = {
   leadingLinks?: { label: string; href: string }[];
   ctaLabel?: string;
   ctaUmamiEvent?: string;
+  ctaUmamiEventSection?: string;
   logoHref?: string;
   ctaMobileLabel?: string;
   ctaHref?: string;
@@ -42,6 +43,7 @@ const KonzultaciaSiteHeader = ({
   leadingLinks,
   ctaLabel = "Chcem začať teraz",
   ctaUmamiEvent,
+  ctaUmamiEventSection,
   logoHref = "/konzultacia",
   ctaMobileLabel,
   ctaHref,
@@ -84,6 +86,7 @@ const KonzultaciaSiteHeader = ({
       className={ctaClassName}
       onClick={() => setMobileMenuOpen(false)}
       {...(ctaUmamiEvent ? { "data-umami-event": ctaUmamiEvent } : {})}
+      {...(ctaUmamiEventSection ? { "data-umami-event-section": ctaUmamiEventSection } : {})}
     >
       {ctaIcon}
       {ctaLabel}
@@ -108,6 +111,7 @@ const KonzultaciaSiteHeader = ({
       className={ctaClassName}
       onClick={() => setMobileMenuOpen(false)}
       {...(ctaUmamiEvent ? { "data-umami-event": ctaUmamiEvent } : {})}
+      {...(ctaUmamiEventSection ? { "data-umami-event-section": ctaUmamiEventSection } : {})}
     >
       {ctaIcon}
       {mobileLabel}

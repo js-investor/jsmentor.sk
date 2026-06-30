@@ -520,7 +520,10 @@ export default function BytovySemaforCalculator() {
             <a
               className="bys-btn"
               href={KONZULTACIA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               data-umami-event="click_konzultacia"
+              data-umami-event-section="bytovy-semafor"
             >
               {BONUSY_CTA_LABEL}
             </a>

@@ -1,11 +1,10 @@
 import type { LucideIcon } from "lucide-react";
 import { BarChart3, FileDown, House, Percent, Receipt, Wallet, MapPin, TrendingUp, ScanLine, TrafficCone } from "lucide-react";
 
-import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
-
 export const BONUSY_BASE_PATH = "/bonusy";
 
-export const KONZULTACIA_URL = CENNIK_SECTION_HREF;
+/** Externá stránka rezervácie konzultácie — používa sa na /bonusy a podstránkach nástrojov. */
+export const KONZULTACIA_URL = "https://konzultacia.jsmentor.sk/";
 export const BONUSY_CTA_LABEL = "Rezervovať konzultáciu s Ivanom";
 
 export type KalkulackaCalculatorMeta = {
@@ -122,27 +121,6 @@ export const KALKULACKY_LEGACY_PATH_REDIRECTS: { from: string; to: string }[] = 
   { from: "/kalkulacky/uvery-dti-dsti", to: `${BONUSY_BASE_PATH}/uverova-kalkulacka` },
 ];
 
-/**
- * Odkaz na chat (predvyplnená správa). Používame api.whatsapp.com — v niektorých prehliadačoch
- * spoľahlivejšie otvorí Web WhatsApp / aplikáciu ako krátke wa.me v novom tabe.
- */
-const MENTOR_WHATSAPP_E164 = "421902519328";
-
-export function makeWhatsAppHref(message: string): string {
-  return `https://api.whatsapp.com/send?${new URLSearchParams({
-    phone: MENTOR_WHATSAPP_E164,
-    text: message,
-  }).toString()}`;
-}
-
-export const KALKULACKY_WHATSAPP_HREF = makeWhatsAppHref(
-  "Ahoj, mám otázku ku kalkulačkám z JS Mentor."
-);
-
-export const ETF_SEMAFOR_WHATSAPP_HREF = makeWhatsAppHref(
-  "Ahoj Ivan, mám otázku."
-);
-
 /** Skupiny pre dropdown navigáciu v headeri. */
 export type NavGroup = {
   label: string;
@@ -154,19 +132,19 @@ export const KALKULACKY_HEADER_GROUPS: NavGroup[] = [
     label: "Kalkulačky",
     items: [
       { label: "Hypotéka vs. investovanie", href: `${BONUSY_BASE_PATH}/hypo-kalkulacka` },
-      { label: "Investičná kalkulačka",     href: `${BONUSY_BASE_PATH}/investicna-kalkulacka` },
-      { label: "Mzdová kalkulačka",         href: `${BONUSY_BASE_PATH}/mzdova-kalkulacka` },
-      { label: "Úverová kalkulačka",        href: `${BONUSY_BASE_PATH}/uverova-kalkulacka` },
-      { label: "Rentová kalkulačka",        href: `${BONUSY_BASE_PATH}/rentova-kalkulacka` },
+      { label: "Investičná kalkulačka", href: `${BONUSY_BASE_PATH}/investicna-kalkulacka` },
+      { label: "Mzdová kalkulačka", href: `${BONUSY_BASE_PATH}/mzdova-kalkulacka` },
+      { label: "Úverová kalkulačka", href: `${BONUSY_BASE_PATH}/uverova-kalkulacka` },
+      { label: "Rentová kalkulačka", href: `${BONUSY_BASE_PATH}/rentova-kalkulacka` },
     ],
   },
   {
     label: "Nástroje",
     items: [
-      { label: "Investičný byt",     href: `${BONUSY_BASE_PATH}/investicny-byt` },
-      { label: "ETF semafor",        href: `${BONUSY_BASE_PATH}/etf-semafor` },
+      { label: "Investičný byt", href: `${BONUSY_BASE_PATH}/investicny-byt` },
+      { label: "ETF semafor", href: `${BONUSY_BASE_PATH}/etf-semafor` },
       { label: "Poplatkový röntgen", href: `${BONUSY_BASE_PATH}/poplatkovy-rontgen` },
-      { label: "Bytový semafor",     href: `${BONUSY_BASE_PATH}/bytovy-semafor` },
+      { label: "Bytový semafor", href: `${BONUSY_BASE_PATH}/bytovy-semafor` },
     ],
   },
   {
@@ -178,6 +156,6 @@ export const KALKULACKY_HEADER_GROUPS: NavGroup[] = [
 export const KALKULACKY_KONZULTACIA_CARD = {
   title: "Mám otázku k výsledku",
   description:
-    "Napíš mi na WhatsApp a preberieme tvoje čísla z kalkulačky a ďalší krok v Hero Hero.",
+    "Rezervuj si konzultáciu a preberieme tvoje čísla z kalkulačky a ďalší krok.",
   href: KONZULTACIA_URL,
 } as const;
