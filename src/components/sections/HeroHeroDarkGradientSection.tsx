@@ -3,7 +3,7 @@ import imgInvestovat from "@/assets/images/Ako by som začal investovať v roku 
 import imgByt from "@/assets/images/Investicny byt.webp";
 import imgHypoteka from "@/assets/images/Mimoriadna splátka hypotéky.webp";
 import { scrollToAnchorId } from "@/lib/scrollToFormular";
-import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
+import { CENNIK_SECTION_HREF, CENNIK_SECTION_ID } from "@/lib/cennikCta";
 
 /** Radiálny prechod — tmavší stred, rýchlejší prechod do čiernej. */
 const sectionBackground =
@@ -61,7 +61,7 @@ const HeroHeroDarkGradientSection = () => (
 
               <button
                 type="button"
-                onClick={() => scrollToAnchorId("cennik-start")}
+                onClick={() => scrollToAnchorId(CENNIK_SECTION_ID)}
                 className="relative block w-full cursor-pointer rounded-xl border-0 bg-transparent p-0 text-left shadow-[0_12px_40px_-16px_rgba(0,0,0,0.55)] transition-transform duration-300 hover:scale-[1.03]"
                 data-umami-event="click_video_cennik"
                 data-umami-event-section="ukazky-play"
@@ -98,7 +98,7 @@ const HeroHeroDarkGradientSection = () => (
             Chcem si to pozrieť 👀
           </a>
           <p className="mt-4 w-full font-sans font-[500] text-[1.0625rem] leading-relaxed text-white/70 md:text-[1.25rem]">
-            15 dní zadarmo. Potom <strong className="[font-family:var(--font-serif)] font-[900] text-white">7 €</strong> mesačne. Zrušíš kedykoľvek.
+            15 dní zadarmo. Potom <strong className="[font-family:var(--font-serif)] font-[900] text-white">5 €</strong> mesačne. Zrušíš kedykoľvek.
           </p>
         </div>
       </AnimatedSection>

@@ -203,7 +203,7 @@ const HeroHeroBezCenzurySection = () => (
             Za{" "}
             <span className="relative mx-0.5 inline-flex translate-y-[-0.05em] align-middle">
               <span className="rounded-full border border-[#A52821]/35 bg-[#A52821]/[0.09] px-3 py-1 font-extrabold tabular-nums text-[#A52821] shadow-sm shadow-[#A52821]/10 md:px-3.5 md:py-1">
-                7 € mesačne
+                5 € mesačne
               </span>
             </span>{" "}
             máš{" "}

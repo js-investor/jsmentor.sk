@@ -21,7 +21,7 @@ const faqs: { question: string; answer: ReactNode[] }[] = [
     ],
   },
   {
-    question: "Čo presne za 7 € mesačne dostanem?",
+    question: "Čo presne za 5 € mesačne dostanem?",
     answer: [
       "Dostaneš prístup do mojej komunity na HeroHero, kde každý týždeň pribudne nový praktický finančný obsah.",
       <>Nájdeš tam videá <strong className="font-semibold text-foreground">o investovaní, hypotékach, ETF, fondoch, investičných bytoch, rente, poplatkoch a produktoch na slovenskom trhu.</strong></>,

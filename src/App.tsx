@@ -1,16 +1,53 @@
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { scrollToAnchorId } from "@/lib/scrollToFormular";
+import { scrollToAnchorId, isScrolledNearAnchor } from "@/lib/scrollToFormular";
+
+/** Zachytí klik na same-page anchor linky — zabráni dvojitému scrollu (browser + ScrollToTop). */
+const SamePageHashLinkHandler = () => {
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      const anchor = (event.target as Element | null)?.closest("a[href]") as HTMLAnchorElement | null;
+      if (!anchor) return;
+
+      const { pathname, hash } = new URL(anchor.href, window.location.href);
+      if (pathname !== window.location.pathname || !hash) return;
+
+      const id = hash.slice(1);
+      if (!id) return;
+
+      event.preventDefault();
+      scrollToAnchorId(id);
+    };
+
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
+
+  return null;
+};
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
   useEffect(() => {
     if (hash) {
       const id = hash.replace(/^#/, "");
+      if (isScrolledNearAnchor(id)) return;
+
       const timer = window.setTimeout(() => scrollToAnchorId(id), 0);
       return () => window.clearTimeout(timer);
     }
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [pathname, hash]);
   return null;
 };
@@ -50,6 +87,7 @@ const calculatorBySlug: Record<string, ReactNode> = {
 
 const App = () => (
   <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <SamePageHashLinkHandler />
     <ScrollToTop />
     <Routes>
       <Route path="/" element={<Index />} />

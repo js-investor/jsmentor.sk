@@ -2,6 +2,8 @@ const HEADER_SELECTOR = "[data-js-site-header]";
 const HEADER_FALLBACK_PX = 88;
 const GAP_PX = 16;
 
+let anchorScrollGeneration = 0;
+
 function getSiteHeaderHeightPx(): number {
   const header = document.querySelector<HTMLElement>(HEADER_SELECTOR);
   if (!header) return HEADER_FALLBACK_PX;
@@ -19,29 +21,71 @@ function scrollWindowToElement(el: HTMLElement, behavior: ScrollBehavior): void 
   window.scrollTo({ top, left: 0, behavior });
 }
 
+function beginAnchorScrollSession(): number {
+  anchorScrollGeneration += 1;
+  return anchorScrollGeneration;
+}
+
+function isAnchorScrollSessionActive(session: number): boolean {
+  return session === anchorScrollGeneration;
+}
+
+/** Zruší pending anchor korekciu, keď používateľ sám scrolluje. */
+function cancelAnchorScrollOnUserInput(session: number): void {
+  const markCancelled = () => {
+    if (isAnchorScrollSessionActive(session)) {
+      anchorScrollGeneration += 1;
+    }
+  };
+
+  window.addEventListener("wheel", markCancelled, { passive: true, once: true });
+  window.addEventListener("touchmove", markCancelled, { passive: true, once: true });
+  window.addEventListener("keydown", (event) => {
+    if (["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(event.key)) {
+      markCancelled();
+    }
+  }, { once: true });
+}
+
+function settleAnchorScroll(
+  resolveTarget: () => HTMLElement | null,
+  session: number,
+  delayMs: number,
+): void {
+  window.setTimeout(() => {
+    if (!isAnchorScrollSessionActive(session)) return;
+
+    const target = resolveTarget();
+    if (!(target instanceof HTMLElement)) return;
+
+    const targetY = Math.max(0, scrollTopForElementUnderHeader(target));
+    if (Math.abs(window.scrollY - targetY) > 12) {
+      window.scrollTo({ top: targetY, left: 0, behavior: "auto" });
+    }
+  }, delayMs);
+}
+
+export function isScrolledNearAnchor(elementId: string, tolerancePx = 24): boolean {
+  const el = document.getElementById(elementId);
+  if (!(el instanceof HTMLElement)) return false;
+  const targetY = Math.max(0, scrollTopForElementUnderHeader(el));
+  return Math.abs(window.scrollY - targetY) <= tolerancePx;
+}
+
 /**
  * Scroll to an in-page anchor, accounting for the fixed site header (use `[data-js-site-header]`, not `header` — third-party scripts may inject other `<header>` elements).
  */
 export function scrollToAnchorId(elementId: string): void {
-  const el =
-    elementId === "formular"
-      ? resolveFormularScrollTarget()
-      : document.getElementById(elementId);
+  const resolveTarget = () =>
+    elementId === "formular" ? resolveFormularScrollTarget() : document.getElementById(elementId);
+
+  const el = resolveTarget();
   if (!(el instanceof HTMLElement)) return;
 
+  const session = beginAnchorScrollSession();
+  cancelAnchorScrollOnUserInput(session);
   scrollWindowToElement(el, "smooth");
-
-  window.setTimeout(() => {
-    const again =
-      elementId === "formular"
-        ? resolveFormularScrollTarget()
-        : document.getElementById(elementId);
-    if (!(again instanceof HTMLElement)) return;
-    const targetY = Math.max(0, scrollTopForElementUnderHeader(again));
-    if (Math.abs(window.scrollY - targetY) > 12) {
-      window.scrollTo({ top: targetY, left: 0, behavior: "auto" });
-    }
-  }, 520);
+  settleAnchorScroll(resolveTarget, session, 520);
 }
 
 function resolveFormularScrollTarget(): HTMLElement | null {
@@ -53,23 +97,16 @@ function resolveFormularScrollTarget(): HTMLElement | null {
 }
 
 function scrollToFormularElement(behavior: ScrollBehavior): void {
-  const el = resolveFormularScrollTarget();
+  const resolveTarget = resolveFormularScrollTarget;
+  const el = resolveTarget();
   if (!(el instanceof HTMLElement)) return;
 
+  const session = beginAnchorScrollSession();
+  cancelAnchorScrollOnUserInput(session);
   scrollWindowToElement(el, behavior);
 
-  const settle = () => {
-    const target = resolveFormularScrollTarget();
-    if (!(target instanceof HTMLElement)) return;
-    const y = Math.max(0, scrollTopForElementUnderHeader(target));
-    if (Math.abs(window.scrollY - y) > 12) {
-      window.scrollTo({ top: y, left: 0, behavior: "auto" });
-    }
-  };
-
-  requestAnimationFrame(() => requestAnimationFrame(settle));
-  window.setTimeout(settle, 120);
-  window.setTimeout(settle, 520);
+  settleAnchorScroll(resolveTarget, session, 120);
+  settleAnchorScroll(resolveTarget, session, 520);
 }
 
 /** Scroll na začiatok sekcie `#formular` (pod fixný header). */

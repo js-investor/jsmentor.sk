@@ -3,7 +3,6 @@ import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 import imgVanecko from "@/assets/images/vanecko.webp";
 import imgLatkoczy from "@/assets/images/Latkoczy.webp";
 import imgPapik from "@/assets/images/papik.webp";
-import { useLayoutEffect, useRef, useState } from "react";
 
 type StatCard = {
   number: string;
@@ -111,38 +110,7 @@ const TestimonialCardEl = ({ data }: { data: TestimonialCard }) => (
   </div>
 );
 
-const HeroHeroReviewsSection = () => {
-  const mobileRef = useRef<HTMLDivElement>(null);
-  const [cardH, setCardH] = useState<number | undefined>(undefined);
-
-  useLayoutEffect(() => {
-    const measure = () => {
-      const container = mobileRef.current;
-      if (!container) return;
-      const items = container.querySelectorAll<HTMLElement>("[data-mobile-card]");
-      // Reset heights so we measure each card's natural size
-      items.forEach(el => { el.style.height = ""; });
-      let max = 0;
-      items.forEach(el => { if (el.offsetHeight > max) max = el.offsetHeight; });
-      if (max > 0) setCardH(max);
-    };
-
-    // Initial measure (text layout)
-    measure();
-
-    // Re-measure after all images (avatars) have fully loaded
-    const imgs = mobileRef.current?.querySelectorAll<HTMLImageElement>("img") ?? [];
-    let pending = 0;
-    imgs.forEach(img => {
-      if (!img.complete) {
-        pending++;
-        img.addEventListener("load", () => { pending--; if (pending === 0) measure(); }, { once: true });
-        img.addEventListener("error", () => { pending--; if (pending === 0) measure(); }, { once: true });
-      }
-    });
-  }, []);
-
-  return (
+const HeroHeroReviewsSection = () => (
   <section
     id="recenzie"
     className="scroll-mt-24 overflow-hidden px-5 py-[72px] md:px-8 md:py-[96px]"
@@ -157,14 +125,10 @@ const HeroHeroReviewsSection = () => {
       </AnimatedSection>
 
       {/* ── MOBILE: 6 flat equal cards, consistent gap ── */}
-      <div ref={mobileRef} className="mx-auto flex max-w-3xl flex-col gap-4 sm:hidden">
+      <div className="mx-auto flex max-w-3xl flex-col gap-4 sm:hidden">
         {mobileItems.map((item, i) => (
           <AnimatedSection key={i} delay={i * 0.07}>
-            {/* data-mobile-card lets the hook measure natural heights */}
-            <div
-              data-mobile-card
-              style={cardH ? { height: cardH } : undefined}
-            >
+            <div className="min-h-[11.5rem]">
               {item.type === "stat" ? (
                 <StatCardEl data={item.data} />
               ) : (
@@ -209,7 +173,6 @@ const HeroHeroReviewsSection = () => {
       </AnimatedSection>
     </div>
   </section>
-  );
-};
+);
 
 export default HeroHeroReviewsSection;

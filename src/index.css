@@ -172,7 +172,8 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    /* Smooth scroll len cez JS (scrollTo), nie globálne — inak scroll anchoring pri layout shiftoch „bojuje“ s wheel scrollom. */
+    scroll-behavior: auto;
     /* Vyhradí miesto pre zvislý scrollbar → obsah sa neposúva a okraje pôsobia rovnomerne. */
     scrollbar-gutter: stable;
   }

@@ -26,12 +26,12 @@ const HeroHeroCennikSection = () => (
 
     <div className="section-container relative z-10">
       <AnimatedSection>
-        <header id="cennik-start" className="mx-auto mb-7 max-w-3xl scroll-mt-24 text-center md:mb-9">
+        <header className="mx-auto mb-7 max-w-3xl scroll-mt-24 text-center md:mb-9">
           <h2
             id="cennik-heading"
             className="headline-landing-section text-balance leading-[1.1] text-foreground"
           >
-            15 dní zadarmo, potom len 7 € mesačne
+            15 dní zadarmo, potom len 5 € mesačne
           </h2>
           <p className="mt-4 [font-family:var(--font-serif)] text-[1.375rem] font-normal text-foreground/60 md:text-[1.5rem]">
             Menej ako jeden obed v meste
@@ -72,7 +72,7 @@ const HeroHeroCennikSection = () => (
             {/* Price */}
             <div className="mb-6 flex items-end justify-center gap-3 md:mb-8">
               <span className="[font-family:var(--font-serif)] text-[4rem] font-[900] leading-none text-white md:text-[4.5rem]">
-                7 €
+                5 €
               </span>
               <span className="mb-2 font-sans text-[1.5rem] text-white">/mesačne</span>
             </div>
