@@ -2,7 +2,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import brandPattern from "@/assets/logo/js-brand-pattern.svg";
 import { Check } from "lucide-react";
 import { motion } from "framer-motion";
-import { HEROHERO_JOIN_URL } from "@/lib/cennikCta";
+import { CENNIK_SECTION_ID, HEROHERO_JOIN_URL } from "@/lib/cennikCta";
 
 const forest = "#023c2e";
 const forestMid = "#065f4a";
@@ -26,7 +26,7 @@ const HeroHeroCennikSection = () => (
 
     <div className="section-container relative z-10">
       <AnimatedSection>
-        <header className="mx-auto mb-7 max-w-3xl scroll-mt-24 text-center md:mb-9">
+        <header id={CENNIK_SECTION_ID} className="mx-auto mb-7 max-w-3xl scroll-mt-24 text-center md:mb-9">
           <h2
             id="cennik-heading"
             className="headline-landing-section text-balance leading-[1.1] text-foreground"

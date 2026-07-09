@@ -1,11 +1,11 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import brandPattern from "@/assets/logo/js-brand-pattern.svg";
-import heroHeroTemyImage from "@/assets/images/Ivan-Jašík-HeroHero-temy.png";
 import { CENNIK_SECTION_HREF } from "@/lib/cennikCta";
 import {
   BarChart3,
-  Home,
-  Scale,
+  Calculator,
+  FileCheck,
+  PlayCircle,
   TrendingUp,
   Users,
   type LucideIcon,
@@ -30,16 +30,17 @@ const BenefitTabIcon = ({ Icon }: { Icon: LucideIcon }) => (
   </span>
 );
 
-const benefitTabs: { Icon: LucideIcon; label: string }[] = [
-  { Icon: TrendingUp, label: "Investičné myslenie" },
-  { Icon: BarChart3, label: "Analýzy slovenských produktov" },
-  { Icon: Users, label: "Reálne prípady ľudí" },
-  { Icon: Home, label: "Hypotéky, byty, renta" },
-  { Icon: Scale, label: "Dôležité finančné rozhodnutia" },
+const benefitTabs: { Icon: LucideIcon; line1: string; line2: string }[] = [
+  { Icon: PlayCircle, line1: "Týždenné rozbory", line2: "videá hneď po vstupe" },
+  { Icon: BarChart3, line1: "Analýzy slovenských produktov", line2: "hypotéky, byty, renta" },
+  { Icon: Users, line1: "Reálne prípady ľudí", line2: "konkrétne finančné rozhodnutia" },
+  { Icon: Calculator, line1: "Kalkulačky a mapa bytov", line2: "röntgen, semafor, nástroje" },
+  { Icon: FileCheck, line1: "Checklisty a PDF", line2: "materiály na stiahnutie" },
+  { Icon: TrendingUp, line1: "Investičné myslenie", line2: "bez rozprávok" },
 ];
 
 const tabTextClass =
-  "font-sans text-[1.1875rem] font-bold leading-snug text-white md:text-[1.375rem] lg:text-[1.5rem]";
+  "font-sans text-[0.9375rem] font-bold leading-snug text-white sm:text-[1rem] md:text-[1.0625rem] lg:text-[1.125rem]";
 
 const HeroHeroNastrojeSection = () => (
   <section
@@ -55,29 +56,33 @@ const HeroHeroNastrojeSection = () => (
           Čo všetko získaš?
         </h2>
         <p className="mx-auto mt-5 mb-2 max-w-3xl text-center font-sans text-[1.25rem] leading-relaxed text-muted-foreground md:text-[1.5rem] lg:text-[1.75rem]">
-          Získaš pravidelný obsah, ktorý ti pomôže robiť lepšie finančné rozhodnutia.
+          Získaš pravidelný obsah, praktické nástroje a konkrétne rozhodnutia pre lepšie financie.
         </p>
       </AnimatedSection>
 
       <AnimatedSection delay={0.1}>
-        <div className="mt-6 flex justify-center md:mt-8">
-          <ul className="flex flex-col items-center gap-6 md:gap-7">
-            {benefitTabs.map(({ Icon, label }) => (
+        <div className="mx-auto mt-6 max-w-6xl md:mt-8">
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-5 lg:gap-6">
+            {benefitTabs.map(({ Icon, line1, line2 }) => (
               <li
-                key={label}
-                className={`flex w-fit max-w-[min(100%,969px)] items-center gap-3.5 rounded-2xl px-4 py-4 shadow-[0_8px_24px_-16px_rgba(0,0,0,0.35)] sm:gap-4 sm:px-5 sm:py-4 ${tabTextClass}`}
+                key={line1}
+                className={`flex h-full items-center gap-3 rounded-2xl px-4 py-4 shadow-[0_8px_24px_-16px_rgba(0,0,0,0.35)] sm:gap-3.5 sm:px-4 sm:py-4 ${tabTextClass}`}
                 style={{ backgroundColor: "#1A1A1A" }}
               >
                 <BenefitTabIcon Icon={Icon} />
-                <span>{label}</span>
+                <span className="flex min-w-0 flex-col gap-0.5">
+                  <span>{line1}</span>
+                  <span className="font-semibold text-white/85">{line2}</span>
+                </span>
               </li>
             ))}
-            <li className="flex justify-center pt-2 md:pt-3">
-              <a href={CENNIK_SECTION_HREF} className="btn-primary text-body" data-umami-event="click_cennik" data-umami-event-section="nastroje">
-                Vyskúšať na 15 dní zadarmo 🚀
-              </a>
-            </li>
           </ul>
+
+          <div className="mt-8 flex justify-center md:mt-10">
+            <a href={CENNIK_SECTION_HREF} className="btn-primary text-body" data-umami-event="click_cennik" data-umami-event-section="nastroje">
+              Vyskúšať na 15 dní zadarmo 🚀
+            </a>
+          </div>
         </div>
       </AnimatedSection>
     </div>

@@ -1,6 +1,6 @@
 import HeroHeroCasteFaqSection from "@/components/sections/HeroHeroCasteFaqSection";
 import HeroHeroCennikSection from "@/components/sections/HeroHeroCennikSection";
-import CoVsetkoZiskasSection from "@/components/sections/CoVsetkoZiskasSection";
+import HeroHeroHodnotaSection from "@/components/sections/HeroHeroHodnotaSection";
 import QuoteSection from "@/components/sections/QuoteSection";
 import IvanJasikSection from "@/components/sections/IvanJasikSection";
 import RecenzieGaleriaSection from "@/components/sections/RecenzieGaleriaSection";
@@ -27,8 +27,8 @@ const Index = () => {
       <HeroHeroDarkGradientSection />
       <HeroHeroKalkulackySection />
       <HeroHeroReviewsSection />
+      <HeroHeroHodnotaSection />
       <HeroHeroCennikSection />
-      <CoVsetkoZiskasSection />
       <QuoteSection />
       <IvanJasikSection />
       <HeroHeroCasteFaqSection />
