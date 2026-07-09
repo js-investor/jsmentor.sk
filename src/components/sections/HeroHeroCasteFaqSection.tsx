@@ -82,13 +82,13 @@ const FaqItem = ({
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-32px" }}
     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.06 * index }}
-    className="border-b border-border/50"
+    className="border-b border-foreground/20"
   >
     <button
       type="button"
       onClick={onToggle}
       aria-expanded={isOpen}
-      className="group flex w-full items-start justify-between gap-5 py-7 text-left"
+      className="group flex w-full items-start justify-between gap-5 py-9 text-left md:py-10"
     >
       <span
         className={`[font-family:var(--font-serif)] text-[1.25rem] font-[700] leading-snug transition-colors duration-200 md:text-[1.6875rem] ${
@@ -122,7 +122,7 @@ const FaqItem = ({
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           style={{ overflow: "hidden" }}
         >
-          <div className="flex flex-col gap-3 pb-7">
+          <div className="flex flex-col gap-3 pb-9 md:pb-10">
             {answer.map((paragraph, i) => (
               <p key={i} className="font-sans text-[1.0625rem] md:text-[1.125rem] leading-relaxed text-muted-foreground">
                 {paragraph}
@@ -161,7 +161,7 @@ const HeroHeroCasteFaqSection = () => {
           </header>
         </AnimatedSection>
 
-        <div className="mx-auto max-w-3xl border-t border-border/50">
+        <div className="mx-auto max-w-3xl border-t border-foreground/20">
           {faqs.map((faq, i) => (
             <FaqItem
               key={faq.question}
