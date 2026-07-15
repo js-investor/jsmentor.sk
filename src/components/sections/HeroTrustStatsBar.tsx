@@ -4,7 +4,7 @@ type HeroTrustStat = {
 };
 
 const STATS: HeroTrustStat[] = [
-  { value: "121 000+", label: "sledovateľov na IG" },
+  { value: "123 000+", label: "sledovateľov na IG" },
   { value: "8 rokov", label: "skúsenosti" },
   { value: "3,5 mil. €+", label: "v starostlivosti" },
 ];
