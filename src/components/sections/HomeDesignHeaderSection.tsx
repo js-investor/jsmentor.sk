@@ -24,7 +24,7 @@ const HomeDesignHeaderSection = () => {
       trustStatsPanel={<HeroTrustStatsBar />}
       heroCtaLabel="Chcem sa pridať ZADARMO 🚀"
       heroCtaHref={CENNIK_SECTION_HREF}
-      videoSrc="https://player.vimeo.com/video/1198650601"
+      videoSrc="https://www.youtube.com/embed/Ql1DTb3N4oY"
       videoTitle="JS Mentor hero video"
     />
   );

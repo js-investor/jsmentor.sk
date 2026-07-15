@@ -1,5 +1,5 @@
 import AnimatedSection from "@/components/AnimatedSection";
-import imgInvestovat from "@/assets/images/Ako by som začal investovať v roku 2026, keby som dnes začínal od nuly.webp";
+import imgInvestovat from "@/assets/images/Ako by som zacal investovat.webp";
 import imgByt from "@/assets/images/Investicny byt.webp";
 import imgHypoteka from "@/assets/images/Mimoriadna splátka hypotéky.webp";
 import { scrollToAnchorId } from "@/lib/scrollToFormular";
@@ -12,7 +12,7 @@ const sectionBackground =
 const showcaseItems = [
   {
     title: "Ako by som začal investovať v roku 2026, keby som dnes začínal od nuly",
-    duration: "14 minút",
+    duration: "16 minút",
     img: imgInvestovat,
     tiltClass: "-rotate-[2.5deg]",
   },
@@ -24,7 +24,7 @@ const showcaseItems = [
   },
   {
     title: "Mimoriadna splátka hypotéky: kedy dáva zmysel a kedy je to drahá chyba",
-    duration: "11 minút",
+    duration: "12 minút",
     img: imgHypoteka,
     tiltClass: "-rotate-[2.5deg]",
   },
