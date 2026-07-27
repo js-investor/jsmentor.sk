@@ -27,8 +27,12 @@ const Index = () => {
       <HeroHeroDarkGradientSection />
       <HeroHeroKalkulackySection />
       <HeroHeroReviewsSection />
+      {/* CTA1 — hlavná konverzná sekcia (hodnota + cena) */}
       <HeroHeroHodnotaSection />
-      <HeroHeroCennikSection />
+      {/* CTA2 — skryté, nemazať */}
+      <div className="hidden" aria-hidden="true" data-section="CTA2">
+        <HeroHeroCennikSection />
+      </div>
       <QuoteSection />
       <IvanJasikSection />
       <HeroHeroCasteFaqSection />

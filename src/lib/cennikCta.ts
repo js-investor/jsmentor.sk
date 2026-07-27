@@ -1,6 +1,6 @@
 import { scrollToAnchorId } from "@/lib/scrollToFormular";
 
-export const CENNIK_SECTION_ID = "start";
+export const CENNIK_SECTION_ID = "CTA1";
 export const CENNIK_SECTION_HASH = `#${CENNIK_SECTION_ID}`;
 export const CENNIK_SECTION_HREF = `/${CENNIK_SECTION_HASH}`;
 export const HEROHERO_JOIN_URL = "https://herohero.co/jsmentor";
@@ -14,7 +14,7 @@ export function scrollToCennik(): void {
   scrollToAnchorId(CENNIK_SECTION_ID);
 }
 
-/** Na homepage scrolluje na cenník, inde presmeruje na /#start. */
+/** Na homepage scrolluje na CTA1, inde presmeruje na /#CTA1. */
 export function navigateToCennik(): void {
   if (isHomePage()) {
     scrollToCennik();

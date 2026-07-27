@@ -55,7 +55,7 @@ const RecenzieGaleriaSection = () => (
             data-umami-event="click_cennik"
             data-umami-event-section="recenzie-galeria"
           >
-            Vyskúšať na 15 dní zadarmo 🚀
+            Vyskúšať prvé 2 týždne zadarmo 🚀
           </a>
         </div>
       </AnimatedSection>

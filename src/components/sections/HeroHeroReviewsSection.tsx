@@ -167,7 +167,7 @@ const HeroHeroReviewsSection = () => (
             data-umami-event="click_cennik"
             data-umami-event-section="recenzie"
           >
-            Vyskúšať na 15 dní zadarmo 🚀
+            Vyskúšať prvé 2 týždne zadarmo 🚀
           </a>
         </div>
       </AnimatedSection>

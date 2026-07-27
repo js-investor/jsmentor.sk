@@ -80,7 +80,7 @@ const HeroHeroNastrojeSection = () => (
 
           <div className="mt-8 flex justify-center md:mt-10">
             <a href={CENNIK_SECTION_HREF} className="btn-primary text-body" data-umami-event="click_cennik" data-umami-event-section="nastroje">
-              Vyskúšať na 15 dní zadarmo 🚀
+              Vyskúšať prvé 2 týždne zadarmo 🚀
             </a>
           </div>
         </div>

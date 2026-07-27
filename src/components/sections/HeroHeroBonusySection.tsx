@@ -176,7 +176,7 @@ const HeroHeroBonusySection = () => (
 
       <AnimatedSection className="mt-10 text-center md:mt-12" delay={0.1}>
         <a href={CENNIK_SECTION_HREF} className="btn-primary inline-flex text-body">
-          🚀 Vyskúšať na 15 dní ZADARMO
+          🚀 Vyskúšať prvé 2 týždne ZADARMO
         </a>
       </AnimatedSection>
     </div>

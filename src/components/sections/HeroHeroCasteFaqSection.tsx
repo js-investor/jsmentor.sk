@@ -16,7 +16,7 @@ const faqs: { question: string; answer: ReactNode[] }[] = [
     question: "Čo ak zistím, že to pre mňa nie je? Musím sa viazať?",
     answer: [
       "Nie. Nemusíš sa viazať.",
-      <><strong className="font-semibold text-foreground">Prvých 15 dní máš zadarmo.</strong> Vojdeš dnu, pozrieš si videá, vyskúšaš nástroje, stiahneš si bonusy a rozhodneš sa podľa seba.</>,
+      <><strong className="font-semibold text-foreground">Prvé 2 týždne máš zadarmo.</strong> Vojdeš dnu, pozrieš si videá, vyskúšaš nástroje, stiahneš si bonusy a rozhodneš sa podľa seba.</>,
       <><strong className="font-semibold text-foreground">Ak zistíš, že ti to nedáva hodnotu, členstvo jednoducho zrušíš.</strong> Bez viazanosti, bez telefonátov, bez presviedčania.</>,
     ],
   },

@@ -12,7 +12,7 @@ const faqs = [
   {
     question: "Čo ak zistím, že to pre mňa nie je? Musím sa zaviazať na dlhšiu dobu?",
     answer:
-      "Vôbec nie. Osobne nenávidím skryté poplatky a nezmyselné viazanosti presne tak ako ty. Preto si môžeš celú komunitu vyskúšať na prvých 15 dní úplne zadarmo. Vojdi dnu, pozri si videá, získaj prístup ku všetkým benefitom a ak zistíš, že ti to nedáva hodnotu, členstvo jedným klikom zrušíš. Rozhodnutie je len na tebe.",
+      "Vôbec nie. Osobne nenávidím skryté poplatky a nezmyselné viazanosti presne tak ako ty. Preto si môžeš celú komunitu vyskúšať prvé 2 týždne úplne zadarmo. Vojdi dnu, pozri si videá, získaj prístup ku všetkým benefitom a ak zistíš, že ti to nedáva hodnotu, členstvo jedným klikom zrušíš. Rozhodnutie je len na tebe.",
   },
   {
     question: "Prečo by som mal platiť, keď je internet a Instagram plný finančných rád zadarmo?",

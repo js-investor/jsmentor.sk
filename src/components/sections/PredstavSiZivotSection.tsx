@@ -88,7 +88,7 @@ const PredstavSiZivotSection = () => (
             </p>
             <div className="pt-4 md:pt-6">
               <a href={CENNIK_SECTION_HREF} className="btn-primary text-body">
-                🚀 Vyskúšať na 15 dní ZADARMO
+                🚀 Vyskúšať prvé 2 týždne ZADARMO
               </a>
             </div>
           </div>

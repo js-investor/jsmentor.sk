@@ -16,7 +16,7 @@ const SECTIONS: { id: string; label: string }[] = [
   { id: "ukazky-videi",    label: "Ukážky videi" },
   { id: "bonusy-kalkulacky", label: "Bonusy a kalkulačky" },
   { id: "recenzie",        label: "Recenzie" },
-  { id: "cennik",          label: "Cenník" },
+  { id: "CTA1",            label: "CTA1" },
   { id: "faq",             label: "FAQ" },
 ];
 

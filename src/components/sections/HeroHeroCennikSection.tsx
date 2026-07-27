@@ -2,36 +2,37 @@ import AnimatedSection from "@/components/AnimatedSection";
 import brandPattern from "@/assets/logo/js-brand-pattern.svg";
 import { Check } from "lucide-react";
 import { motion } from "framer-motion";
-import { CENNIK_SECTION_ID, HEROHERO_JOIN_URL } from "@/lib/cennikCta";
+import { HEROHERO_JOIN_URL } from "@/lib/cennikCta";
 
 const forest = "#023c2e";
 const forestMid = "#065f4a";
 const forestEnd = "#0a5a47";
 
 const bullets = [
-  "Prvých 15 dní úplne zadarmo",
+  "Prvé 2 týždne úplne zadarmo",
   "Absolútne žiadne záväzky",
   "Zrušenie kedykoľvek jedným klikom",
 ] as const;
 
 const HeroHeroCennikSection = () => (
   <section
-    id="cennik"
+    id="CTA2"
     className="relative scroll-mt-24 overflow-hidden px-5 md:px-8 pt-[72px] pb-10 md:pt-[100px] md:pb-12"
     style={{ backgroundColor: "#FFF9F5" }}
     aria-labelledby="cennik-heading"
+    data-section="CTA2"
   >
     <div className="absolute inset-0 bg-dot-grid opacity-[0.18] pointer-events-none" />
     <div className="pointer-events-none absolute left-[15%] top-0 h-[380px] w-[380px] -translate-y-1/3 rounded-full bg-primary/[0.05] blur-[100px]" />
 
     <div className="section-container relative z-10">
       <AnimatedSection>
-        <header id={CENNIK_SECTION_ID} className="mx-auto mb-7 max-w-3xl scroll-mt-24 text-center md:mb-9">
+        <header className="mx-auto mb-7 max-w-3xl scroll-mt-24 text-center md:mb-9">
           <h2
             id="cennik-heading"
             className="headline-landing-section text-balance leading-[1.1] text-foreground"
           >
-            15 dní zadarmo, potom len 5 € mesačne
+            Prvé 2 týždne zadarmo, potom len 5 € mesačne
           </h2>
           <p className="mt-4 [font-family:var(--font-serif)] text-[1.375rem] font-normal text-foreground/60 md:text-[1.5rem]">
             Menej ako jeden obed v meste

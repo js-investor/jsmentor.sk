@@ -270,7 +270,7 @@ const CoDostanesHeroHeroSection = () => {
                 </ul>
                 <div className="mt-8 flex justify-center sm:justify-start">
                   <a href={CENNIK_SECTION_HREF} className="btn-primary text-body inline-flex">
-                    🚀 Vyskúšať na 15 dní ZADARMO
+                    🚀 Vyskúšať prvé 2 týždne ZADARMO
                   </a>
                 </div>
               </div>

@@ -69,7 +69,7 @@ const HeroHeroCtaSection = () => (
                   Nemáš čo stratiť.
                 </p>
                 <p className="mt-2 font-sans text-[1.0625rem] leading-relaxed text-emerald-100/85 md:text-[1.1875rem]">
-                  Máš 15 dní úplne zadarmo.
+                  Máš prvé 2 týždne úplne zadarmo.
                 </p>
 
                 <div className="mt-10 md:mt-12">
@@ -77,7 +77,7 @@ const HeroHeroCtaSection = () => (
                     href={CENNIK_SECTION_HREF}
                     className="btn-primary-light text-body inline-flex min-h-[3.25rem] px-8 py-4 text-[1.0625rem] md:min-h-[3.5rem] md:px-10 md:text-[1.125rem]"
                   >
-                    🚀 Vyskúšať na 15 dní ZADARMO
+                    🚀 Vyskúšať prvé 2 týždne ZADARMO
                   </a>
                 </div>
               </div>
