@@ -17,7 +17,7 @@ const forestMid = "#065f4a";
 const forestEnd = "#0a5a47";
 
 const brandIconMaskStyle = {
-  backgroundColor: "#d4dfdb",
+  backgroundColor: "#FFF9F5",
   WebkitMaskImage: `url(${brandPattern})`,
   maskImage: `url(${brandPattern})`,
   WebkitMaskRepeat: "no-repeat",
