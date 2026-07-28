@@ -17,7 +17,7 @@ const forestMid = "#065f4a";
 const forestEnd = "#0a5a47";
 
 const brandIconMaskStyle = {
-  backgroundColor: "#0a4d3d",
+  backgroundColor: "#d4dfdb",
   WebkitMaskImage: `url(${brandPattern})`,
   maskImage: `url(${brandPattern})`,
   WebkitMaskRepeat: "no-repeat",
@@ -31,7 +31,7 @@ const brandIconMaskStyle = {
 const CardIcon = ({ Icon }: { Icon: LucideIcon }) => (
   <span className="relative inline-flex h-12 w-12 shrink-0 items-center justify-center md:h-14 md:w-14" aria-hidden>
     <span className="absolute inset-0" style={brandIconMaskStyle} />
-    <Icon className="relative z-10 h-5 w-5 -translate-x-[3px] text-white md:h-6 md:w-6" strokeWidth={2} />
+    <Icon className="relative z-10 h-5 w-5 -translate-x-[3px] text-primary md:h-6 md:w-6" strokeWidth={2} />
   </span>
 );
 
