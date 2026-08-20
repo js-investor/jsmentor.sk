@@ -276,6 +276,7 @@ export function mountHypotekarnaCalculator(): () => void {
     const isClosed = window.getComputedStyle(c).display === "none";
     c.style.display = isClosed ? "block" : "none";
     icon.style.transform = isClosed ? "rotate(180deg)" : "rotate(0deg)";
+    evtToggle?.setAttribute("aria-expanded", String(isClosed));
   };
   evtToggle?.addEventListener("click", accordionHandler);
 
@@ -497,11 +498,11 @@ export function mountHypotekarnaCalculator(): () => void {
     chartInstance = null;
 
     const gM = ctx.createLinearGradient(0, 0, 0, 400);
-    gM.addColorStop(0, "rgba(239,68,68,0.15)");
-    gM.addColorStop(1, "rgba(239,68,68,0)");
+    gM.addColorStop(0, "rgba(193,83,60,0.12)");
+    gM.addColorStop(1, "rgba(193,83,60,0)");
     const gI = ctx.createLinearGradient(0, 0, 0, 400);
-    gI.addColorStop(0, "rgba(22,163,74,0.2)");
-    gI.addColorStop(1, "rgba(22,163,74,0)");
+    gI.addColorStop(0, "rgba(41,97,74,0.18)");
+    gI.addColorStop(1, "rgba(41,97,74,0)");
 
     const datasets: Array<{
       type: "line";
@@ -513,8 +514,8 @@ export function mountHypotekarnaCalculator(): () => void {
       tension: number;
       pointRadius: number;
     }> = [];
-    const lineDark = "#ef4444";
-    const lineAccent = "#16a34a";
+    const lineDark = "#C1533C";
+    const lineAccent = "#29614A";
 
     if (mEnabled)
       datasets.push({
@@ -650,7 +651,7 @@ export function mountHypotekarnaCalculator(): () => void {
     html += '<tr class="highlight"><td>Čistý majetok</td>';
     snapshots.forEach(({ v, r }) => {
       const net = (v.investEnabled ? r.curI : 0) - (v.mortgageEnabled ? r.curM : 0);
-      html += `<td style="color:${net >= 0 ? "#10b981" : "#ef4444"}">${fmtCur(net)}</td>`;
+      html += `<td style="color:${net >= 0 ? "#29614A" : "#C1533C"}">${fmtCur(net)}</td>`;
     });
     html += "</tr></tbody>";
     table.innerHTML = html;

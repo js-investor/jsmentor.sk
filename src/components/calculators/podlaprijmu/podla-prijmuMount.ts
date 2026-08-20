@@ -219,13 +219,13 @@ export function mountPodlaPrijmuCalculator(): () => void {
     const displayValue = Math.min(Math.max(0, safeValue), max);
     const remaining = Math.max(0, max - displayValue);
     const gaugeTrack = "rgba(0,0,0,0.08)";
-    let color = "#10b981";
+    let color = "#29614A";
     if (unit === "x") {
-      if (safeValue > 6) color = "#f59e0b";
-      if (safeValue > 8) color = "#ef4444";
+      if (safeValue > 6) color = "#A8956E";
+      if (safeValue > 8) color = "#C1533C";
     } else {
-      if (safeValue > 50) color = "#f59e0b";
-      if (safeValue > 60) color = "#ef4444";
+      if (safeValue > 50) color = "#A8956E";
+      if (safeValue > 60) color = "#C1533C";
     }
     const valueEl = document.getElementById(canvasId === "chart-dti" ? "dti-value-text" : "dsti-value-text");
     if (valueEl) {
@@ -251,13 +251,13 @@ export function mountPodlaPrijmuCalculator(): () => void {
     if (!el) return;
     if (val > limit) {
       el.textContent = "Prekročený limit NBS!";
-      (el as HTMLElement).style.color = "#ef4444";
+      (el as HTMLElement).style.color = "#C1533C";
     } else if (val > limit * 0.85) {
       el.textContent = "Blížite sa k limitu";
-      (el as HTMLElement).style.color = "#f59e0b";
+      (el as HTMLElement).style.color = "#A8956E";
     } else {
       el.textContent = "V bezpečnej zóne";
-      (el as HTMLElement).style.color = "#10b981";
+      (el as HTMLElement).style.color = "#29614A";
     }
   };
 

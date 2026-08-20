@@ -1,6 +1,7 @@
 import ivanKnihaJsMentor from "@/assets/images/ivan-jasik-js-mentor-kniha.png";
 import brandPatternDark from "@/assets/logo/js-brand-pattern-black.svg";
 import { BONUSY_CTA_LABEL, KALKULACKY_KONZULTACIA_CARD } from "@/pages/kalkulacky/kalkulackyConfig";
+import { NOISE_TEXTURE } from "@/lib/noiseTexture";
 
 const BonusyKonzultaciaSection = () => (
   <section className="mx-auto mt-12 max-w-5xl md:mt-16" aria-labelledby="bonusy-konzultacia-heading">
@@ -22,8 +23,7 @@ const BonusyKonzultaciaSection = () => (
       <div
         className="pointer-events-none absolute inset-0 rounded-2xl opacity-[0.14] mix-blend-soft-light"
         style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E\")",
+          backgroundImage: NOISE_TEXTURE,
         }}
       />
       <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[#c4a882]/15 mix-blend-multiply" />

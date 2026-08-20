@@ -1,4 +1,5 @@
-#rentova-calc-root,
+/** Rentová kalkulačka — scoped pod #rentova-calc-root, tokeny zjednotené so sitom */
+
 #rentova-calc-root *,
 #rentova-calc-root *::before,
 #rentova-calc-root *::after {
@@ -8,43 +9,8 @@
 #rentova-calc-root {
   font-family: var(--font-sans);
   color: hsl(var(--foreground));
-}
-
-#rentova-calc-root h1,
-#rentova-calc-root h2,
-#rentova-calc-root h3,
-#rentova-calc-root h4,
-#rentova-calc-root .font-serif {
-  font-family: var(--font-serif);
-}
-
-/* Title = bold */
-#rentova-calc-root h1 {
-  font-weight: 700 !important;
-}
-
-/* Section headings = smaller */
-#rentova-calc-root h2.text-lg {
-  font-size: 1.125rem !important;
-  font-weight: 600 !important;
-}
-
-/* Result numbers = bold */
-#rentova-calc-root #ml-requiredCapital,
-#rentova-calc-root #ml-monthlyGap {
-  font-weight: 700 !important;
-}
-
-#rentova-calc-root .input-field {
-  transition: all 0.25s ease;
-  border: 1px solid hsl(var(--border));
   width: 100%;
-}
-
-#rentova-calc-root .input-field:focus {
-  outline: none;
-  border-color: hsl(var(--primary));
-  background-color: hsl(var(--cream));
+  max-width: 100%;
 }
 
 #rentova-calc-root .hidden {
@@ -54,21 +20,25 @@
 #rentova-calc-root .mylife-btn-email,
 #rentova-calc-root .mylife-btn-pdf {
   padding: 12px 20px;
-  border-radius: 8px;
+  border-radius: calc(var(--radius) - 4px);
   font-weight: 500;
-  font-size: 15px;
+  font-size: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   cursor: pointer;
-  border: 1px solid transparent;
+  font-family: var(--font-sans);
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    opacity 0.2s;
 }
 
 #rentova-calc-root .mylife-btn-email {
   background: hsl(var(--cream));
-  border-color: #111;
-  color: #111;
+  border: 1px solid hsl(var(--charcoal));
+  color: hsl(var(--charcoal));
 }
 
 #rentova-calc-root .mylife-btn-email:hover {
@@ -77,8 +47,12 @@
 
 #rentova-calc-root .mylife-btn-pdf {
   background: hsl(var(--primary));
-  border-color: hsl(var(--primary));
-  color: #fff;
+  border: 1px solid hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+#rentova-calc-root .mylife-btn-pdf:hover {
+  filter: brightness(0.92);
 }
 
 #rentova-calc-root .ml-dropdown {
@@ -89,10 +63,9 @@
   position: absolute;
   top: calc(100% + 6px);
   left: 0;
-  background: #fff;
+  background: hsl(var(--card));
   border: 1px solid hsl(var(--border));
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-radius: calc(var(--radius) - 4px);
   z-index: 1000;
   min-width: 170px;
   padding: 4px;
@@ -108,6 +81,8 @@
   font-size: 15px;
   cursor: pointer;
   border-radius: 6px;
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans);
   white-space: nowrap;
 }
 
@@ -119,11 +94,15 @@
   color: hsl(var(--destructive));
 }
 
+#rentova-calc-root .ml-dropdown-item.danger:hover {
+  background: hsl(0 93% 94%);
+}
+
 #rentova-calc-root .ml-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(17, 17, 17, 0.55);
-  z-index: 9999;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2147483647;
   display: none;
   align-items: center;
   justify-content: center;
@@ -135,8 +114,8 @@
 }
 
 #rentova-calc-root .ml-modal-box {
-  background: #fff;
-  border-radius: 16px;
+  background: hsl(var(--card));
+  border-radius: var(--radius);
   width: 100%;
   max-width: 900px;
   max-height: 90vh;
@@ -152,11 +131,13 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  flex-shrink: 0;
 }
 
 #rentova-calc-root .ml-modal-body {
   overflow-y: auto;
   padding: 24px;
+  flex: 1;
 }
 
 #rentova-calc-root .ml-compare-table {
@@ -175,9 +156,41 @@
   font-weight: 700;
   border-bottom: 2px solid hsl(var(--border));
   background: hsl(var(--cream));
+  position: sticky;
+  top: 0;
 }
 
 #rentova-calc-root .ml-compare-table td {
   padding: 12px 16px;
   border-bottom: 1px solid hsl(var(--muted));
+  vertical-align: top;
+}
+
+@media (max-width: 640px) {
+  #rentova-calc-root .mylife-btn-email,
+  #rentova-calc-root .mylife-btn-pdf {
+    flex: 1;
+    min-width: 0;
+  }
+
+  #rentova-calc-root .ml-modal-overlay.open {
+    padding: 72px 0 0;
+    align-items: stretch;
+  }
+
+  #rentova-calc-root .ml-modal-box {
+    max-width: none;
+    width: 100%;
+    height: calc(100dvh - 72px);
+    max-height: calc(100dvh - 72px);
+    border-radius: 0;
+  }
+
+  #rentova-calc-root .ml-modal-header {
+    padding: 14px 16px;
+  }
+
+  #rentova-calc-root .ml-modal-body {
+    padding: 16px;
+  }
 }

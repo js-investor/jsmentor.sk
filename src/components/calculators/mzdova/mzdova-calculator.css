@@ -1,4 +1,5 @@
-#mzv3-w,
+/** Mzdová kalkulačka — scoped pod #mzv3-w, postavené na calc-ui dizajnovom systéme */
+
 #mzv3-w *,
 #mzv3-w *::before,
 #mzv3-w *::after {
@@ -6,170 +7,134 @@
 }
 
 #mzv3-w {
-  --midnight-blue: #111111;
-  --dim-grey: hsl(var(--border));
-  --sienna: hsl(var(--muted-foreground));
-  --misty-rose: hsl(var(--cream));
-  --seashell: hsl(var(--secondary));
-  --rosy-brown: hsl(var(--border));
-  --floral-white: hsl(var(--cream));
   font-family: var(--font-sans);
   color: hsl(var(--foreground));
   width: 100%;
+  max-width: 100%;
 }
 
-#mzv3-w h1,
-#mzv3-w h2,
-#mzv3-w h3,
-#mzv3-w .mzv3-title {
-  font-family: var(--font-serif) !important;
-}
-
-/* Title = bold */
-#mzv3-w .mzv3-title {
-  font-weight: 700 !important;
-}
-
-/* "Vstupné údaje" and other section headings = smaller */
-#mzv3-w h2.headline-serif {
-  font-size: 1.125rem !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.01em;
-}
-
-/* Result numbers = bold */
-#mzv3-w #mzv3-net,
-#mzv3-w #mzv3-super {
-  font-weight: 700 !important;
-}
-
-#mzv3-w .mzv3-shell {
-  border: 1px solid var(--dim-grey);
-  border-radius: 24px;
-  padding: clamp(16px, 2.6vw, 30px);
-  background: linear-gradient(180deg, var(--floral-white) 0%, #fff 24%, #fff 100%);
-  box-shadow: 0 18px 44px -28px rgba(17, 17, 17, 0.45);
-}
-
+/* Mount prepína triedu .hidden na wrapperoch (emp/szco režimy) */
 #mzv3-w .hidden {
   display: none !important;
 }
 
-#mzv3-w .mylife-btn-row {
-  max-width: 100%;
-  padding: 4px 0 14px;
+/* ------------------------- Segmented — aktívny stav ------------------------ */
+/* Mount prepína triedu .sel — mapujeme ju na aktívny vzhľad .calc-segment */
+
+#mzv3-w .calc-segment > button.sel {
+  background: #fff;
+  border-color: hsl(var(--primary) / 0.3);
+  color: hsl(var(--primary));
+}
+
+/* Prepínač Zamestnanec / SZČO nad layoutom */
+#mzv3-w .mzv3-type-switch-row {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-#mzv3-w .mylife-btn-email,
-#mzv3-w .mylife-btn-pdf {
-  padding: 12px 20px;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  cursor: pointer;
-  min-height: 46px;
-  transition: all 0.2s ease;
-  border: 1px solid transparent;
-}
-
-#mzv3-w .mylife-btn-email {
-  background: hsl(var(--cream));
-  border-color: #111;
-  color: #111;
-}
-
-#mzv3-w .mylife-btn-email:hover {
-  background: hsl(var(--border));
-}
-
-#mzv3-w .mylife-btn-pdf {
-  background: hsl(var(--primary));
-  border-color: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
+  margin-bottom: 1.5rem;
 }
 
 #mzv3-w .mzv3-type-switch {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  width: min(100%, 430px);
-  border: 1px solid var(--dim-grey);
-  border-radius: 12px;
-  background: #fff;
-  padding: 6px;
+  width: min(100%, 27rem);
 }
 
-#mzv3-w .mzv3-switch-btn,
-#mzv3-w .mzv3-seg-btn,
-#mzv3-w .seg-btn {
-  flex: 1;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 12px;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 600;
-  background: transparent;
-  color: var(--sienna);
+/* ----------------------------- Checkbox riadky ----------------------------- */
+
+#mzv3-w .mzv3-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+}
+
+#mzv3-w .mzv3-check input[type="checkbox"] {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.15rem;
+  accent-color: hsl(var(--primary));
   cursor: pointer;
+  flex: none;
 }
 
-#mzv3-w .mzv3-seg-btn,
-#mzv3-w .seg-btn {
-  font-size: 15px;
-  padding: 8px 12px;
+#mzv3-w .mzv3-check label {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  line-height: 1.4;
 }
 
-#mzv3-w .mzv3-switch-btn.sel,
-#mzv3-w .mzv3-seg-btn.sel,
-#mzv3-w .seg-btn.sel {
-  background: hsl(var(--primary));
-  color: #fff;
+#mzv3-w .mzv3-check-hint {
+  display: block;
+  margin-top: 0.125rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: hsl(var(--muted-foreground));
 }
 
-#mzv3-w .seg,
-#mzv3-w .mzv3-seg-wrap {
-  display: inline-flex;
-  align-items: center;
-  background: var(--floral-white);
-  border-radius: 8px;
-  padding: 4px;
-  border: 1px solid var(--dim-grey);
-  width: 100%;
+/* Menší label pre podpolia (bonus na deti) */
+#mzv3-w .calc-label--sub {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
 }
 
-#mzv3-w .input-field {
-  transition: all 0.2s ease;
-  border: 1px solid var(--rosy-brown) !important;
-  width: 100% !important;
-  min-height: 52px !important;
-  padding: 12px 14px !important;
-  border-radius: 8px !important;
-  background: #fff !important;
-  color: var(--midnight-blue) !important;
+/* ------------------------------- Infobox SZČO ------------------------------ */
+
+#mzv3-w .mzv3-infobox {
+  border: 1px solid hsl(var(--border) / 0.7);
+  border-radius: 0.875rem;
+  background: hsl(var(--cream) / 0.6);
+  padding: 0.875rem 1.125rem;
 }
 
-#mzv3-w .input-field:focus {
-  outline: none !important;
-  border-color: var(--midnight-blue) !important;
-  background-color: var(--floral-white) !important;
+#mzv3-w .mzv3-infobox-title {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin: 0 0 0.25rem;
 }
+
+#mzv3-w .mzv3-infobox-text {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+
+/* ---------------------- Hero — prázdny podtitulok skryť -------------------- */
+
+#mzv3-w .calc-hero-sub:empty {
+  display: none;
+}
+
+/* -------------------------------- Graf (donut) ----------------------------- */
+
+#mzv3-w .mzv3-chart-body {
+  height: 13rem;
+}
+
+@media (min-width: 768px) {
+  #mzv3-w .mzv3-chart-body {
+    height: 14rem;
+  }
+}
+
+/* ------------------------- Rozklad výpočtu (injektované) ------------------- */
+/* Mount vkladá vlastné .bd-* riadky — štýlujeme ich na vzhľad .calc-row */
 
 #mzv3-w .bd-row {
   display: flex;
-  justify-content: space-between;
   align-items: baseline;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--dim-grey);
-  gap: 12px;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid hsl(var(--border) / 0.5);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: hsl(var(--foreground));
 }
 
 #mzv3-w .bd-row:last-child {
@@ -177,33 +142,61 @@
 }
 
 #mzv3-w .bd-label {
-  font-size: 15px;
-  color: var(--sienna);
   flex: 1;
+  color: hsl(var(--muted-foreground));
 }
 
 #mzv3-w .bd-val {
-  font-size: 16px;
   font-weight: 600;
-  color: var(--midnight-blue);
-  text-align: right;
+  font-variant-numeric: tabular-nums;
   white-space: nowrap;
+  text-align: right;
+  color: hsl(var(--foreground));
 }
 
 #mzv3-w .bd-sep {
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--sienna);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
   font-weight: 700;
-  padding: 16px 0 6px;
-  border-bottom: 1px solid var(--dim-grey);
-  margin-top: 8px;
+  text-transform: uppercase;
+  color: hsl(var(--primary));
+  padding: 1rem 0 0.375rem;
+  border-bottom: 1px solid hsl(var(--border) / 0.7);
 }
 
 #mzv3-w .bd-total {
-  margin-top: 8px;
-  padding-top: 16px;
-  border-top: 2px solid var(--dim-grey);
+  margin-top: 0.5rem;
+  border-top: 2px solid hsl(var(--foreground) / 0.85);
   border-bottom: none;
+}
+
+#mzv3-w .bd-total .bd-label,
+#mzv3-w .bd-total .bd-val {
+  font-weight: 700;
+  color: hsl(var(--foreground));
+}
+
+#mzv3-w .bd-neg {
+  color: hsl(var(--accent));
+}
+
+#mzv3-w .bd-pos {
+  color: hsl(var(--primary));
+}
+
+/* ------------------------------ Ročný prehľad ------------------------------ */
+
+#mzv3-w .mzv3-year-stats {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+  #mzv3-w .mzv3-year-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+#mzv3-w .mzv3-year-stats .calc-stat-value {
+  font-size: 1.1875rem;
 }

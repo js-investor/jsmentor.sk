@@ -1,7 +1,10 @@
 import { useLayoutEffect } from "react";
-import brandPattern from "@/assets/logo/js-brand-pattern.svg";
+import brandPatternDark from "@/assets/logo/js-brand-pattern-black.svg";
+import { NOISE_TEXTURE } from "@/lib/noiseTexture";
 import "../shared/calculator-toolbar.css";
+import "../shared/calc-ui.css";
 import "./investicna-calculator.css";
+import { initCalcHeroPulse, initCalcSliders } from "../shared/calcUi";
 import { mountInvesticnaCalculator } from "./investicnaMount";
 
 const CompareIcon = () => (
@@ -13,11 +16,20 @@ const CompareIcon = () => (
 );
 
 const InvesticnaCalculator = () => {
-  useLayoutEffect(() => mountInvesticnaCalculator(), []);
+  useLayoutEffect(() => {
+    const unmountCalc = mountInvesticnaCalculator();
+    const unmountSliders = initCalcSliders("inv-calc-root");
+    const unmountPulse = initCalcHeroPulse("inv-finalValue");
+    return () => {
+      unmountPulse();
+      unmountSliders();
+      unmountCalc?.();
+    };
+  }, []);
 
   return (
-    <div id="inv-calc-root" className="w-full font-sans text-foreground">
-      <div className="calc-variant-toolbar inv-no-export rounded-2xl border border-border/60 overflow-hidden mx-[-0.125rem] sm:mx-0">
+    <div id="inv-calc-root" className="calc-ui w-full font-sans text-foreground">
+      <div className="calc-variant-toolbar inv-no-export rounded-2xl border border-border/60 mx-[-0.125rem] sm:mx-0">
         <div className="calc-variant-toolbar-variants">
           <div id="inv-variant-tabs" className="calc-variant-tabs" />
           <button
@@ -43,206 +55,249 @@ const InvesticnaCalculator = () => {
       </div>
 
       <div className="calc-body-shell">
-        <div className="max-w-6xl mx-auto">
-        <div className="mb-10 text-center max-w-2xl mx-auto md:mb-12">
-          <h1 className="text-[clamp(1.75rem,4vw,3rem)] mb-4 inv-heading-serif text-foreground leading-tight font-bold">
-            Investičná kalkulačka
-          </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Simulujte silu zloženého úročenia a sledujte rast vášho majetku v čase.
-          </p>
-        </div>
+        <div className="calc-page">
+          <header className="calc-header">
+            <span className="calc-eyebrow">Kalkulačka</span>
+            <h1 className="calc-title">Investičná kalkulačka</h1>
+            <p className="calc-subtitle">
+              Simuluj silu zloženého úročenia a sleduj rast svojho majetku v čase.
+            </p>
+          </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-4 space-y-6">
-            <div className="bg-card p-6 md:p-6 rounded-xl inv-card-shadow border border-border">
-              <h2 className="headline-serif mb-6 border-b border-cream pb-4">
-                Parametre investície
-              </h2>
+          <div className="calc-layout">
+            {/* ------------------------------ Vstupy ------------------------------ */}
+            <div className="calc-col">
+              <section className="calc-panel" aria-label="Parametre investície">
+                <h2 className="calc-panel-title">Parametre investície</h2>
+                <p className="calc-panel-sub">Výsledky sa prepočítavajú okamžite.</p>
 
-              <div className="mb-6">
-                <label className="block text-[15px] font-bold uppercase tracking-wide text-muted-foreground mb-2">
-                  Počiatočný vklad
-                </label>
-                <div className="relative">
-                  <input
-                    type="number"
-                    id="inv-initial"
-                    defaultValue={5000}
-                    step={100}
-                    className="inv-input-field p-3 rounded-md bg-cream text-lg font-medium pr-8"
-                  />
-                  <span className="absolute right-4 top-3.5 text-muted-foreground">€</span>
-                </div>
-              </div>
-
-              <div className="mb-6">
-                <label className="block text-[15px] font-bold uppercase tracking-wide text-muted-foreground mb-2">
-                  Pravidelný mesačný vklad
-                </label>
-                <div className="relative">
-                  <input
-                    type="number"
-                    id="inv-monthly"
-                    defaultValue={200}
-                    step={10}
-                    className="inv-input-field p-3 rounded-md bg-cream text-lg font-medium pr-8"
-                  />
-                  <span className="absolute right-4 top-3.5 text-muted-foreground">€</span>
-                </div>
-              </div>
-
-              <div className="mb-8">
-                <div className="flex justify-between mb-2">
-                  <label className="text-[15px] font-bold uppercase tracking-wide text-muted-foreground">Doba investovania</label>
-                  <span id="inv-durationVal" className="text-[15px] font-bold text-foreground">
-                    20 rokov
-                  </span>
-                </div>
-                <input type="range" id="inv-duration" min={1} max={50} defaultValue={20} />
-              </div>
-
-              <div className="mb-8">
-                <div className="flex justify-between mb-2 items-center">
-                  <label className="text-[15px] font-bold uppercase tracking-wide text-muted-foreground">Očakávaný ročný výnos</label>
-                  <div className="flex items-center border-b border-border focus-within:border-primary transition-colors pb-0.5">
+                <div className="calc-field">
+                  <label className="calc-label" htmlFor="inv-initial">
+                    Počiatočný vklad
+                  </label>
+                  <div className="calc-input-wrap calc-input-wrap--stepper">
                     <input
                       type="number"
-                      id="inv-rate"
-                      defaultValue={8}
-                      step={0.1}
+                      id="inv-initial"
+                      defaultValue={5000}
+                      step={100}
                       min={0}
-                      max={100}
-                      className="w-16 text-right font-bold bg-transparent border-none focus:ring-0 focus:outline-none p-0 text-lg appearance-none m-0"
+                      className="calc-input"
                     />
-                    <span className="text-lg font-bold ml-1">%</span>
+                    <span className="calc-stepper">
+                      <span className="calc-stepper-unit" aria-hidden>€</span>
+                      <button
+                        type="button"
+                        aria-label="Znížiť o 100 €"
+                        onClick={() => {
+                          const el = document.getElementById("inv-initial") as HTMLInputElement | null;
+                          if (!el) return;
+                          el.stepDown();
+                          el.dispatchEvent(new Event("input", { bubbles: true }));
+                        }}
+                      >
+                        −
+                      </button>
+                      <button
+                        type="button"
+                        aria-label="Zvýšiť o 100 €"
+                        onClick={() => {
+                          const el = document.getElementById("inv-initial") as HTMLInputElement | null;
+                          if (!el) return;
+                          el.stepUp();
+                          el.dispatchEvent(new Event("input", { bubbles: true }));
+                        }}
+                      >
+                        +
+                      </button>
+                    </span>
                   </div>
                 </div>
-                <input type="range" id="inv-rate-slider" min={1} max={15} step={0.1} defaultValue={8} />
-                <div className="flex justify-between text-[13px] text-muted-foreground mt-1">
-                  <span>Konzervatívny (3%)</span>
-                  <span>Dynamický (8%+)</span>
-                </div>
-              </div>
 
-              <div className="border-t border-cream pt-4">
-                <div id="inv-advanced-toggle" className="flex justify-between items-center font-medium text-foreground">
-                  <span className="text-[15px] uppercase tracking-wide">Inflácia a poplatky</span>
-                  <span id="inv-arrow-icon" className="transition-transform duration-300 text-muted-foreground inline-block">
-                    ▼
-                  </span>
+                <div className="calc-field">
+                  <label className="calc-label" htmlFor="inv-monthly">
+                    Pravidelný mesačný vklad
+                  </label>
+                  <div className="calc-input-wrap calc-input-wrap--stepper">
+                    <input
+                      type="number"
+                      id="inv-monthly"
+                      defaultValue={200}
+                      step={10}
+                      min={0}
+                      className="calc-input"
+                    />
+                    <span className="calc-stepper">
+                      <span className="calc-stepper-unit" aria-hidden>€</span>
+                      <button
+                        type="button"
+                        aria-label="Znížiť o 10 €"
+                        onClick={() => {
+                          const el = document.getElementById("inv-monthly") as HTMLInputElement | null;
+                          if (!el) return;
+                          el.stepDown();
+                          el.dispatchEvent(new Event("input", { bubbles: true }));
+                        }}
+                      >
+                        −
+                      </button>
+                      <button
+                        type="button"
+                        aria-label="Zvýšiť o 10 €"
+                        onClick={() => {
+                          const el = document.getElementById("inv-monthly") as HTMLInputElement | null;
+                          if (!el) return;
+                          el.stepUp();
+                          el.dispatchEvent(new Event("input", { bubbles: true }));
+                        }}
+                      >
+                        +
+                      </button>
+                    </span>
+                  </div>
+                </div>
+
+                <div className="calc-field">
+                  <div className="calc-label">
+                    <label htmlFor="inv-duration">Doba investovania</label>
+                    <span id="inv-durationVal" className="calc-label-value">20 rokov</span>
+                  </div>
+                  <input type="range" id="inv-duration" className="calc-slider" min={1} max={50} defaultValue={20} />
+                  <div className="calc-slider-scale" aria-hidden>
+                    <span>1 rok</span>
+                    <span>50 rokov</span>
+                  </div>
+                </div>
+
+                <div className="calc-field">
+                  <div className="calc-label">
+                    <label htmlFor="inv-rate">Očakávaný ročný výnos</label>
+                    <span className="calc-input-inline">
+                      <input
+                        type="number"
+                        id="inv-rate"
+                        defaultValue={8}
+                        step={0.1}
+                        min={0}
+                        max={100}
+                      />
+                      <span className="calc-inline-unit" aria-hidden>%</span>
+                    </span>
+                  </div>
+                  <input type="range" id="inv-rate-slider" aria-label="Očakávaný ročný výnos" className="calc-slider" min={1} max={15} step={0.1} defaultValue={8} />
+                  <div className="calc-slider-scale" aria-hidden>
+                    <span>Konzervatívny (3 %)</span>
+                    <span>Dynamický (8 %+)</span>
+                  </div>
+                </div>
+
+                <div
+                  id="inv-advanced-toggle"
+                  className="calc-collapse-toggle"
+                  role="button"
+                  aria-expanded={false}
+                  aria-controls="inv-advanced-content"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      e.currentTarget.click();
+                    }
+                  }}
+                >
+                  <span>Inflácia a poplatky</span>
+                  <span id="inv-arrow-icon" className="calc-collapse-chevron" aria-hidden>▼</span>
                 </div>
                 <div id="inv-advanced-content" className="mt-4 space-y-4" style={{ display: "none" }}>
-                  <div>
-                    <label className="text-[15px] text-muted-foreground block mb-1">Odhadovaná inflácia (%)</label>
-                    <input type="number" id="inv-inflation" defaultValue={2} step={0.1} className="inv-input-field p-2 rounded-md text-sm" />
-                    <p className="text-[15px] text-muted-foreground mt-1">
-                      Prepočíta výslednú sumu na dnešnú hodnotu peňazí.
-                    </p>
+                  <div className="calc-field">
+                    <label className="calc-label" htmlFor="inv-inflation">
+                      Odhadovaná inflácia
+                      <span className="calc-label-hint">% ročne</span>
+                    </label>
+                    <div className="calc-input-wrap">
+                      <input type="number" id="inv-inflation" defaultValue={2} step={0.1} className="calc-input calc-input--unit" />
+                      <span className="calc-input-unit" aria-hidden>%</span>
+                    </div>
+                    <p className="calc-stat-sub mt-2">Prepočíta výslednú sumu na dnešnú hodnotu peňazí.</p>
                   </div>
                 </div>
-              </div>
+              </section>
+
+              <p className="calc-note">
+                Kalkulačka je orientačná — počíta s konštantným ročným výnosom a nezohľadňuje
+                dane ani poplatky konkrétnych produktov.
+              </p>
             </div>
-          </div>
 
-          <div className="lg:col-span-8 space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-primary text-primary-foreground p-6 rounded-xl inv-card-shadow flex flex-col justify-between relative overflow-hidden min-h-[160px]">
-                <div className="relative z-10">
-                  <h3 className="text-cream text-[15px] uppercase tracking-widest font-medium mb-1 opacity-95">Hodnota portfólia</h3>
-                  <p className="text-[15px] text-white/80 mb-4">Celková predpokladaná suma na konci</p>
-                  <div className="text-3xl md:text-4xl inv-heading-serif font-bold" id="inv-finalValue">
-                    0 €
-                  </div>
-                </div>
-                <img
-                  src={brandPattern}
-                  alt=""
+            {/* ----------------------------- Výsledky ----------------------------- */}
+            <div className="calc-col">
+              <div className="calc-hero-wrap">
+              <section className="calc-hero calc-hero--glow" aria-label="Výsledok">
+                <div
+                  className="calc-hero-noise"
+                  style={{ backgroundImage: NOISE_TEXTURE }}
                   aria-hidden
-                  className="absolute -right-8 -bottom-10 w-[min(55%,200px)] max-h-[160px] object-contain object-right-bottom opacity-[0.35] pointer-events-none select-none"
-                  style={{
-                    filter:
-                      "brightness(0) saturate(100%) invert(97%) sepia(54%) saturate(1200%) hue-rotate(80deg) brightness(110%) contrast(85%)",
-                    mixBlendMode: "soft-light",
-                  }}
                 />
+                <img src={brandPatternDark} alt="" aria-hidden className="calc-hero-pattern" />
+                <p className="calc-hero-label">Hodnota portfólia na konci</p>
+                <p className="calc-hero-value" id="inv-finalValue">0 €</p>
+                <div className="calc-hero-meta">
+                  <span className="calc-hero-chip">
+                    Čistý výnos&nbsp;<strong id="inv-totalInterest">0 €</strong>
+                  </span>
+                  <span className="calc-hero-sub">
+                    Zložené úročenie zarobilo <strong id="inv-interestPercent">0 %</strong> zo sumy.
+                  </span>
+                </div>
+              </section>
               </div>
 
-              <div className="bg-[#FFF9F5] p-6 rounded-xl inv-card-shadow flex flex-col justify-between border border-border min-h-[160px] relative overflow-hidden">
+              <div className="calc-statbar" role="group" aria-label="Súhrn">
                 <div>
-                  <h3 className="text-primary text-[15px] uppercase tracking-widest font-medium mb-1">Čistý výnos</h3>
-                  <p className="text-[15px] text-muted-foreground mb-4">Iba úroky a zhodnotenie</p>
-                  <div className="text-3xl md:text-4xl inv-heading-serif text-foreground font-bold" id="inv-totalInterest">
-                    0 €
-                  </div>
+                  <p className="calc-stat-label">Celkový vklad</p>
+                  <p className="calc-stat-value" id="inv-totalInvested">0 €</p>
+                  <p className="calc-stat-sub">Tvoje vlastné peniaze</p>
                 </div>
-                <div className="mt-2 text-[15px] text-foreground">
-                  Zložené úročenie vám zarobilo <span id="inv-interestPercent" className="font-bold">0%</span> zo sumy.
+                <div>
+                  <p className="calc-stat-label">Reálna hodnota</p>
+                  <p className="calc-stat-value" id="inv-realValue">0 €</p>
+                  <p className="calc-stat-sub">Očistené o infláciu</p>
                 </div>
-                <img
-                  src={brandPattern}
-                  alt=""
-                  aria-hidden
-                  className="absolute -right-8 -bottom-10 w-[min(55%,200px)] max-h-[160px] object-contain object-right-bottom opacity-[0.10] pointer-events-none select-none"
-                  style={{
-                    filter:
-                      "brightness(0) saturate(100%) invert(96%) sepia(45%) saturate(800%) hue-rotate(80deg) brightness(114%) contrast(84%)",
-                    mixBlendMode: "multiply",
-                  }}
-                />
-              </div>
-            </div>
-
-            <div className="bg-[#FFF9F5] p-6 rounded-xl inv-card-shadow border border-border">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
-                <h3 className="text-xl inv-heading-serif text-foreground font-normal">Vývoj v čase</h3>
-                <div className="flex gap-4 mt-2 sm:mt-0 text-[15px] text-muted-foreground">
-                  <div className="flex items-center gap-1">
-                    <span className="w-3 h-3 rounded-full bg-[#a8956e] inline-block" aria-hidden /> Vklady
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <span className="w-3 h-3 rounded-full bg-[#16a34a] inline-block" aria-hidden /> Zhodnotenie
-                  </div>
+                <div>
+                  <p className="calc-stat-label">Návratnosť</p>
+                  <p className="calc-stat-value" id="inv-roi">0×</p>
+                  <p className="calc-stat-sub">Násobok vkladu</p>
                 </div>
               </div>
 
-              <div className="relative h-72 w-full">
-                <canvas id="inv-chart" />
-              </div>
-
-              <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center border-t border-border pt-4">
-                <div className="rounded-lg p-4 bg-black/5">
-                  <span className="block text-[15px] font-bold text-muted-foreground uppercase">Celkový vklad</span>
-                  <span className="block text-3xl inv-heading-serif font-bold text-foreground mt-1" id="inv-totalInvested">
-                    0 €
-                  </span>
+              <section className="calc-panel" aria-label="Vývoj v čase">
+                <div className="calc-chart-head">
+                  <h3 className="calc-panel-title">Vývoj v čase</h3>
+                  <div className="calc-legend">
+                    <span className="calc-legend-item">
+                      <span className="calc-legend-dot" style={{ background: "#A8956E" }} aria-hidden />
+                      Vklady
+                    </span>
+                    <span className="calc-legend-item">
+                      <span className="calc-legend-dot" style={{ background: "#29614A" }} aria-hidden />
+                      Zhodnotenie
+                    </span>
+                  </div>
                 </div>
-                <div className="rounded-lg p-4 bg-black/5">
-                  <span className="block text-[15px] font-bold text-muted-foreground uppercase">Reálna hodnota</span>
-                  <span className="block text-3xl inv-heading-serif font-bold text-foreground mt-1" id="inv-realValue">
-                    0 €
-                  </span>
-                  <span className="text-[15px] text-muted-foreground">Očistené o infláciu</span>
+                <div className="calc-chart-body">
+                  <canvas id="inv-chart" />
                 </div>
-                <div className="rounded-lg p-4 bg-black/5">
-                  <span className="block text-[15px] font-bold text-muted-foreground uppercase">Návratnosť</span>
-                  <span className="block text-3xl inv-heading-serif font-bold text-foreground mt-1" id="inv-roi">
-                    0x
-                  </span>
-                  <span className="text-[15px] text-muted-foreground">Násobok vkladu</span>
-                </div>
-              </div>
+              </section>
             </div>
           </div>
-        </div>
         </div>
       </div>
 
       <div id="inv-comparison-modal" className="inv-modal-overlay">
-        <div className="inv-modal-box">
+        <div className="inv-modal-box" role="dialog" aria-modal="true" aria-labelledby="inv-modal-title">
           <div className="inv-modal-header">
             <div>
-              <h3 className="text-xl inv-heading-serif text-foreground m-0 font-normal">Porovnanie variantov</h3>
+              <h3 id="inv-modal-title" className="text-xl inv-heading-serif text-foreground m-0 font-normal">Porovnanie variantov</h3>
               <p className="text-[15px] text-muted-foreground mt-1 mb-0">Prehľad vstupov a výsledkov investičných scenárov.</p>
             </div>
             <button type="button" className="inv-btn-email shrink-0" onClick={() => window.invCloseComparison?.()}>

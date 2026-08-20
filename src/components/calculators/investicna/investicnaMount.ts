@@ -68,6 +68,7 @@ export function mountInvesticnaCalculator(): () => void {
     const isHidden = window.getComputedStyle(contentDiv).display === "none";
     contentDiv.style.display = isHidden ? "block" : "none";
     arrowIcon.style.transform = isHidden ? "rotate(180deg)" : "rotate(0deg)";
+    toggleBtn?.setAttribute("aria-expanded", String(isHidden));
   };
   toggleBtn?.addEventListener("click", advancedToggleHandler);
 
@@ -259,8 +260,8 @@ export function mountInvesticnaCalculator(): () => void {
     if (!ctx || !s || disposed) return;
 
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, "rgba(22, 163, 74, 0.2)");
-    gradient.addColorStop(1, "rgba(22, 163, 74, 0)");
+    gradient.addColorStop(0, "rgba(41, 97, 74, 0.18)");
+    gradient.addColorStop(1, "rgba(41, 97, 74, 0)");
 
     chartInstance = new Chart(ctx, {
       type: "line",
@@ -271,14 +272,14 @@ export function mountInvesticnaCalculator(): () => void {
             type: "line",
             label: "Hodnota portfólia",
             data: s.dataTotal,
-            borderColor: "#16a34a",
+            borderColor: "#29614A",
             backgroundColor: gradient,
             borderWidth: 2,
             fill: true,
             tension: 0.4,
             pointRadius: 0,
             pointHoverRadius: 5,
-            pointBackgroundColor: "#16a34a",
+            pointBackgroundColor: "#29614A",
           },
           {
             type: "line",

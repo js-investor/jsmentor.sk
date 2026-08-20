@@ -149,8 +149,8 @@ export function mountRentovaCalculator(): () => void {
     if (!s.valid || !ctx) return;
 
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, "rgba(22, 163, 74, 0.2)");
-    gradient.addColorStop(1, "rgba(22, 163, 74, 0)");
+    gradient.addColorStop(0, "rgba(41, 97, 74, 0.18)");
+    gradient.addColorStop(1, "rgba(41, 97, 74, 0)");
 
     chartInstance = new Chart(canvas, {
       type: "line",
@@ -160,13 +160,13 @@ export function mountRentovaCalculator(): () => void {
           {
             label: "Majetok",
             data: s.dataCapital,
-            borderColor: "#16a34a",
+            borderColor: "#29614A",
             backgroundColor: gradient,
             borderWidth: 2.5,
-            pointBackgroundColor: "#16a34a",
+            pointBackgroundColor: "#29614A",
             pointRadius: 0,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "#16a34a",
+            pointHoverBackgroundColor: "#29614A",
             fill: true,
             tension: 0.4,
           },
@@ -413,6 +413,7 @@ export function mountRentovaCalculator(): () => void {
     const isHidden = contentDiv.classList.contains("hidden");
     contentDiv.classList.toggle("hidden", !isHidden);
     (arrowIcon as HTMLElement).style.transform = isHidden ? "rotate(180deg)" : "rotate(0deg)";
+    document.getElementById("ml-advanced-toggle")?.setAttribute("aria-expanded", String(isHidden));
   };
   document.getElementById("ml-advanced-toggle")?.addEventListener("click", onAdvancedClick);
 

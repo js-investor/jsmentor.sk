@@ -101,10 +101,10 @@ export const BONUSY_PDF_MENU_ITEM = {
   href: "",
 } as const;
 
-/** Šiesta karta na /bonusy — doplniť `href`, keď budú PDF súbory pripravené. */
+/** PDF banner na /bonusy — doplniť `href`, keď budú PDF súbory pripravené (banner sa stane klikateľným a zmizne badge „Už čoskoro“). */
 export const BONUSY_PDF_CARD = {
-  title: "Pripravujem PDF materiály",
-  description: "",
+  title: "PDF materiály",
+  description: "Pripravujem prehľadné PDF materiály na stiahnutie — pribudnú medzi bonusy čoskoro.",
   href: "",
   Icon: FileDown,
 } as const;

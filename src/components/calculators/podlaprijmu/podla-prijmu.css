@@ -1,4 +1,5 @@
-#dti-calc-root,
+/** Úverová kalkulačka (DTI & DSTI) — scoped pod #dti-calc-root, tokeny zjednotené so sitom */
+
 #dti-calc-root *,
 #dti-calc-root *::before,
 #dti-calc-root *::after {
@@ -6,90 +7,171 @@
 }
 
 #dti-calc-root {
-  --safe-green: #10b981;
-  --warning-orange: #f59e0b;
-  --alert-red: #ef4444;
   font-family: var(--font-sans);
   color: hsl(var(--foreground));
+  width: 100%;
+  max-width: 100%;
 }
 
-#dti-calc-root h1,
-#dti-calc-root h2,
-#dti-calc-root h3,
-#dti-calc-root h4,
-#dti-calc-root .font-serif {
+#dti-calc-root .dti-heading-serif {
   font-family: var(--font-serif);
 }
 
-/* Title = bold */
-#dti-calc-root h1 {
-  font-weight: 700 !important;
-}
+/* --------------------------- Checkbox riadky ------------------------------ */
 
-/* Section headings = smaller */
-#dti-calc-root h2.text-lg {
-  font-size: 1.125rem !important;
-  font-weight: 600 !important;
-}
-
-/* Result number = bold */
-#dti-calc-root #dti-max-mortgage {
-  font-weight: 700 !important;
-}
-
-#dti-calc-root .input-field {
-  transition: border-color 0.25s ease, background-color 0.25s ease;
-  border: 1px solid hsl(var(--border));
+#dti-calc-root .dti-check-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.875rem;
   width: 100%;
-}
-
-#dti-calc-root .input-field:focus {
-  outline: none;
-  border-color: hsl(var(--primary));
-  background-color: hsl(var(--cream));
-}
-
-#dti-calc-root input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  background: transparent;
-  width: 100%;
-}
-
-#dti-calc-root input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 20px;
-  width: 20px;
-  border-radius: 999px;
-  background: #111;
+  padding: 0.75rem 0.875rem;
+  border: 1px solid hsl(var(--border) / 0.7);
+  border-radius: 0.75rem;
+  background: hsl(var(--cream) / 0.6);
   cursor: pointer;
-  margin-top: -8px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
-#dti-calc-root input[type="range"]::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 4px;
-  background: hsl(var(--border));
-  border-radius: 2px;
+#dti-calc-root .dti-check-row:hover {
+  border-color: hsl(var(--primary) / 0.35);
 }
+
+#dti-calc-root .dti-check-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+#dti-calc-root .dti-check-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+#dti-calc-root .dti-check-sub {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: hsl(var(--muted-foreground));
+}
+
+#dti-calc-root .dti-check-input {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  accent-color: hsl(var(--primary));
+  cursor: pointer;
+}
+
+/* ------------------------------ Gauge karty ------------------------------- */
+
+#dti-calc-root .dti-gauges {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0.75rem;
+}
+
+#dti-calc-root .dti-gauge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 0.875rem;
+  border: 1px solid hsl(var(--border) / 0.7);
+  border-radius: 0.875rem;
+  background: hsl(var(--cream) / 0.5);
+}
+
+#dti-calc-root .dti-gauge-sub {
+  margin: 0.125rem 0 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: hsl(var(--muted-foreground));
+}
+
+#dti-calc-root .dti-gauge-canvas {
+  position: relative;
+  width: 100%;
+  max-width: 12rem;
+  height: 6rem;
+}
+
+#dti-calc-root .dti-gauge-value {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: hsl(var(--foreground));
+  pointer-events: none;
+}
+
+#dti-calc-root .dti-gauge-status {
+  margin: 0.75rem 0 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: hsl(var(--muted-foreground));
+}
+
+/* -------------------------- Rozloženie príjmu ----------------------------- */
+
+#dti-calc-root .dti-income-bar {
+  display: flex;
+  width: 100%;
+  height: 2.75rem;
+  border-radius: 9999px;
+  overflow: hidden;
+  background: hsl(var(--cream));
+}
+
+#dti-calc-root .dti-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-width: 0;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #fdf8f2;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: width 0.5s ease;
+}
+
+#dti-calc-root .dti-bar--debts { background: #c1533c; }
+#dti-calc-root .dti-bar--reserve { background: #a8956e; }
+#dti-calc-root .dti-bar--free { background: #29614a; }
+
+/* --------------------------- Tlačidlá (modal) ----------------------------- */
 
 #dti-calc-root .mylife-btn-email,
 #dti-calc-root .mylife-btn-pdf {
+  padding: 12px 20px;
+  border-radius: calc(var(--radius) - 4px);
+  font-weight: 500;
+  font-size: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-size: 15px;
-  font-weight: 600;
-  border: 1px solid hsl(var(--border));
   cursor: pointer;
+  font-family: var(--font-sans);
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    opacity 0.2s;
 }
 
 #dti-calc-root .mylife-btn-email {
   background: hsl(var(--cream));
-  color: #111;
+  border: 1px solid hsl(var(--charcoal));
+  color: hsl(var(--charcoal));
 }
 
 #dti-calc-root .mylife-btn-email:hover {
@@ -98,9 +180,15 @@
 
 #dti-calc-root .mylife-btn-pdf {
   background: hsl(var(--primary));
-  color: #fff;
-  border-color: hsl(var(--primary));
+  border: 1px solid hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
 }
+
+#dti-calc-root .mylife-btn-pdf:hover {
+  filter: brightness(0.92);
+}
+
+/* ------------------------------ Dropdowny --------------------------------- */
 
 #dti-calc-root .ml-dropdown {
   position: relative;
@@ -110,10 +198,9 @@
   position: absolute;
   top: calc(100% + 6px);
   left: 0;
-  background: #fff;
+  background: hsl(var(--card));
   border: 1px solid hsl(var(--border));
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-radius: calc(var(--radius) - 4px);
   z-index: 1000;
   min-width: 170px;
   padding: 4px;
@@ -129,6 +216,9 @@
   font-size: 15px;
   cursor: pointer;
   border-radius: 6px;
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans);
+  white-space: nowrap;
 }
 
 #dti-calc-root .ml-dropdown-item:hover {
@@ -136,14 +226,20 @@
 }
 
 #dti-calc-root .ml-dropdown-item.danger {
-  color: var(--alert-red);
+  color: hsl(var(--destructive));
 }
+
+#dti-calc-root .ml-dropdown-item.danger:hover {
+  background: hsl(0 93% 94%);
+}
+
+/* -------------------------------- Modal ----------------------------------- */
 
 #dti-calc-root .ml-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(17, 17, 17, 0.55);
-  z-index: 9999;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2147483647;
   display: none;
   align-items: center;
   justify-content: center;
@@ -155,8 +251,8 @@
 }
 
 #dti-calc-root .ml-modal-box {
-  background: #fff;
-  border-radius: 16px;
+  background: hsl(var(--card));
+  border-radius: var(--radius);
   width: 100%;
   max-width: 900px;
   max-height: 90vh;
@@ -171,11 +267,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
 #dti-calc-root .ml-modal-body {
   overflow-y: auto;
   padding: 24px;
+  flex: 1;
 }
 
 #dti-calc-root .ml-compare-table {
@@ -194,10 +293,41 @@
   font-weight: 700;
   border-bottom: 2px solid hsl(var(--border));
   background: hsl(var(--cream));
+  position: sticky;
+  top: 0;
 }
 
 #dti-calc-root .ml-compare-table td {
-  padding: 10px 16px;
+  padding: 12px 16px;
   border-bottom: 1px solid hsl(var(--muted));
+  vertical-align: top;
 }
 
+@media (max-width: 640px) {
+  #dti-calc-root .mylife-btn-email,
+  #dti-calc-root .mylife-btn-pdf {
+    flex: 1;
+    min-width: 0;
+  }
+
+  #dti-calc-root .ml-modal-overlay.open {
+    padding: 72px 0 0;
+    align-items: stretch;
+  }
+
+  #dti-calc-root .ml-modal-box {
+    max-width: none;
+    width: 100%;
+    height: calc(100dvh - 72px);
+    max-height: calc(100dvh - 72px);
+    border-radius: 0;
+  }
+
+  #dti-calc-root .ml-modal-header {
+    padding: 14px 16px;
+  }
+
+  #dti-calc-root .ml-modal-body {
+    padding: 16px;
+  }
+}

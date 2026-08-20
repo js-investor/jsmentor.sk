@@ -1,7 +1,10 @@
 import { useLayoutEffect } from "react";
-import brandPattern from "@/assets/logo/js-brand-pattern.svg";
+import brandPatternDark from "@/assets/logo/js-brand-pattern-black.svg";
+import { NOISE_TEXTURE } from "@/lib/noiseTexture";
 import "../shared/calculator-toolbar.css";
+import "../shared/calc-ui.css";
 import "./podla-prijmu.css";
+import { initCalcSliders } from "../shared/calcUi";
 import { mountPodlaPrijmuCalculator } from "./podla-prijmuMount";
 
 const CompareIcon = () => (
@@ -13,11 +16,18 @@ const CompareIcon = () => (
 );
 
 const PodlaPrijmuCalculator = () => {
-  useLayoutEffect(() => mountPodlaPrijmuCalculator(), []);
+  useLayoutEffect(() => {
+    const unmountCalc = mountPodlaPrijmuCalculator();
+    const unmountSliders = initCalcSliders("dti-calc-root");
+    return () => {
+      unmountSliders();
+      unmountCalc?.();
+    };
+  }, []);
 
   return (
-    <div id="dti-calc-root" className="w-full font-sans text-foreground">
-      <div className="calc-variant-toolbar ml-no-export rounded-2xl border border-border/60 overflow-hidden mx-[-0.125rem] sm:mx-0">
+    <div id="dti-calc-root" className="calc-ui w-full font-sans text-foreground">
+      <div className="calc-variant-toolbar ml-no-export rounded-2xl border border-border/60 mx-[-0.125rem] sm:mx-0">
         <div className="calc-variant-toolbar-variants">
           <div id="dti-variant-tabs" className="calc-variant-tabs" />
           <button
@@ -38,171 +48,278 @@ const PodlaPrijmuCalculator = () => {
       </div>
 
       <div className="calc-body-shell">
-        <div className="max-w-6xl mx-auto">
-        <div className="mb-10 text-center md:mb-12">
-          <h1 className="text-4xl md:text-5xl mb-4 font-serif font-bold text-foreground leading-tight">Úverová kalkulačka (DTI & DSTI)</h1>
-          <p className="text-lg text-muted-foreground leading-relaxed">Zistite svoju maximálnu úverovú kapacitu podľa pravidiel NBS.</p>
-        </div>
+        <div className="calc-page">
+          <header className="calc-header">
+            <span className="calc-eyebrow">Kalkulačka</span>
+            <h1 className="calc-title">Úverová kalkulačka</h1>
+            <p className="calc-subtitle">
+              Zisti, akú maximálnu hypotéku ti banka schváli podľa pravidiel NBS (DTI a DSTI).
+            </p>
+          </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-5 space-y-6">
-            <div className="bg-white p-6 md:p-6 rounded-xl border border-border">
-              <h2 className="text-lg font-serif font-semibold mb-6 border-b border-cream pb-4">Vaše financie</h2>
-              <div className="mb-6 space-y-4">
-                <div>
-                  <label className="block text-[15px] font-bold uppercase tracking-wide text-muted-foreground mb-2">Váš čistý mesačný príjem</label>
-                  <div className="relative">
-                    <input type="number" id="dti-income" defaultValue={1500} step={50} className="input-field p-3 rounded text-lg font-medium pr-8" />
-                    <span className="absolute right-4 top-3.5 text-muted-foreground">€</span>
+          <div className="calc-layout">
+            {/* ------------------------------ Vstupy ------------------------------ */}
+            <div className="calc-col">
+              <section className="calc-panel" aria-label="Tvoje financie">
+                <h2 className="calc-panel-title">Tvoje financie</h2>
+                <p className="calc-panel-sub">Výsledky sa prepočítavajú okamžite.</p>
+
+                <div className="calc-field">
+                  <label className="calc-label" htmlFor="dti-income">
+                    Čistý mesačný príjem
+                  </label>
+                  <div className="calc-input-wrap">
+                    <input
+                      type="number"
+                      id="dti-income"
+                      defaultValue={1500}
+                      step={50}
+                      min={0}
+                      className="calc-input calc-input--unit"
+                    />
+                    <span className="calc-input-unit" aria-hidden>€</span>
                   </div>
                 </div>
-                <div className="flex items-center justify-between py-2">
-                  <label className="text-[15px] font-bold">Spolužiadateľ / Partner</label>
-                  <input type="checkbox" id="dti-partner-toggle" className="w-5 h-5 accent-black" />
+
+                <div className="calc-field">
+                  <label className="dti-check-row" htmlFor="dti-partner-toggle">
+                    <span className="dti-check-text">
+                      <span className="dti-check-title">Spolužiadateľ / partner</span>
+                      <span className="dti-check-sub">Spoločný príjem zvýši úverovú kapacitu.</span>
+                    </span>
+                    <input type="checkbox" id="dti-partner-toggle" className="dti-check-input" />
+                  </label>
                 </div>
-                <div id="dti-partner-input-group" className="hidden">
-                  <label className="block text-[15px] font-bold uppercase tracking-wide text-muted-foreground mb-2">Príjem partnera</label>
-                  <div className="relative">
-                    <input type="number" id="dti-partner-income" defaultValue={0} step={50} className="input-field p-3 rounded text-lg font-medium pr-8" />
-                    <span className="absolute right-4 top-3.5 text-muted-foreground">€</span>
+
+                <div id="dti-partner-input-group" className="calc-field hidden">
+                  <label className="calc-label" htmlFor="dti-partner-income">
+                    Príjem partnera
+                  </label>
+                  <div className="calc-input-wrap">
+                    <input
+                      type="number"
+                      id="dti-partner-income"
+                      defaultValue={0}
+                      step={50}
+                      min={0}
+                      className="calc-input calc-input--unit"
+                    />
+                    <span className="calc-input-unit" aria-hidden>€</span>
                   </div>
+                </div>
+              </section>
+
+              <section className="calc-panel" aria-label="Existujúce záväzky">
+                <h2 className="calc-panel-title">Existujúce záväzky</h2>
+
+                <div className="calc-field">
+                  <label className="calc-label" htmlFor="dti-monthly-debt">
+                    Mesačné splátky úverov
+                  </label>
+                  <div className="calc-input-wrap">
+                    <input
+                      type="number"
+                      id="dti-monthly-debt"
+                      defaultValue={0}
+                      step={10}
+                      min={0}
+                      className="calc-input calc-input--unit"
+                    />
+                    <span className="calc-input-unit" aria-hidden>€</span>
+                  </div>
+                </div>
+
+                <div className="calc-field">
+                  <label className="calc-label" htmlFor="dti-total-debt">
+                    Celkový zostatok dlhov
+                  </label>
+                  <div className="calc-input-wrap">
+                    <input
+                      type="number"
+                      id="dti-total-debt"
+                      defaultValue={0}
+                      step={1000}
+                      min={0}
+                      className="calc-input calc-input--unit"
+                    />
+                    <span className="calc-input-unit" aria-hidden>€</span>
+                  </div>
+                </div>
+
+                <div className="calc-field">
+                  <label className="calc-label" htmlFor="dti-credit-limits">
+                    Limity na kreditných kartách
+                    <span className="calc-label-hint">3 % z limitu sa ráta ako splátka</span>
+                  </label>
+                  <div className="calc-input-wrap">
+                    <input
+                      type="number"
+                      id="dti-credit-limits"
+                      defaultValue={0}
+                      step={100}
+                      min={0}
+                      className="calc-input calc-input--unit"
+                    />
+                    <span className="calc-input-unit" aria-hidden>€</span>
+                  </div>
+                </div>
+              </section>
+
+              <section className="calc-panel" aria-label="Parametre hypotéky">
+                <h2 className="calc-panel-title">Parametre hypotéky</h2>
+
+                <div className="calc-fieldrow">
+                  <div className="calc-field">
+                    <label className="calc-label" htmlFor="dti-rate">
+                      Úroková sadzba
+                    </label>
+                    <div className="calc-input-wrap">
+                      <input
+                        type="number"
+                        id="dti-rate"
+                        defaultValue={4.2}
+                        step={0.1}
+                        min={0}
+                        className="calc-input calc-input--unit"
+                      />
+                      <span className="calc-input-unit" aria-hidden>%</span>
+                    </div>
+                  </div>
+                  <div className="calc-field">
+                    <label className="calc-label" htmlFor="dti-years">
+                      Splatnosť
+                    </label>
+                    <div className="calc-input-wrap">
+                      <input
+                        type="number"
+                        id="dti-years"
+                        defaultValue={30}
+                        min={1}
+                        max={40}
+                        className="calc-input calc-input--unit"
+                      />
+                      <span className="calc-input-unit" aria-hidden>rokov</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="calc-field">
+                  <label className="dti-check-row" htmlFor="dti-stress-toggle">
+                    <span className="dti-check-text">
+                      <span className="dti-check-title">Stress test (+2 %)</span>
+                      <span className="dti-check-sub">Banka počíta splátku so sadzbou vyššou o 2 %.</span>
+                    </span>
+                    <input type="checkbox" id="dti-stress-toggle" className="dti-check-input" />
+                  </label>
+                </div>
+              </section>
+
+              <p className="calc-note">
+                Kalkulačka je orientačná — vychádza z limitov NBS (DTI 8-násobok ročného príjmu,
+                DSTI 60 % s povinnou rezervou 40 %). Konečné posúdenie závisí od konkrétnej banky.
+              </p>
+            </div>
+
+            {/* ----------------------------- Výsledky ----------------------------- */}
+            <div className="calc-col">
+              <section className="calc-hero" aria-label="Výsledok">
+                <div
+                  className="calc-hero-noise"
+                  style={{ backgroundImage: NOISE_TEXTURE }}
+                  aria-hidden
+                />
+                <img src={brandPatternDark} alt="" aria-hidden className="calc-hero-pattern" />
+                <p className="calc-hero-label">Maximálna výška hypotéky</p>
+                <p className="calc-hero-value" id="dti-max-mortgage">0 €</p>
+                <div className="calc-hero-meta">
+                  <span className="calc-hero-chip">
+                    Max. mesačná splátka&nbsp;<strong id="dti-max-payment">0 €</strong>
+                  </span>
+                  <span className="calc-hero-sub" id="dti-limit-reason" />
+                </div>
+              </section>
+
+              <div className="calc-stats">
+                <div className="calc-stat">
+                  <p className="calc-stat-label">Povinná rezerva</p>
+                  <p className="calc-stat-value" id="dti-reserve">0 €</p>
+                  <p className="calc-stat-sub">40 % z čistého príjmu</p>
+                </div>
+                <div className="calc-stat">
+                  <p className="calc-stat-label">Limit DTI</p>
+                  <p className="calc-stat-value">8×</p>
+                  <p className="calc-stat-sub">Celkový dlh vs. ročný príjem</p>
+                </div>
+                <div className="calc-stat">
+                  <p className="calc-stat-label">Limit DSTI</p>
+                  <p className="calc-stat-value">60 %</p>
+                  <p className="calc-stat-sub">Splátky vs. mesačný príjem</p>
                 </div>
               </div>
 
-              <div className="mb-6 border-t border-cream pt-6 space-y-4">
-                <div>
-                  <label className="text-[15px] font-bold text-muted-foreground block mb-1">Mesačné splátky úverov</label>
-                  <input type="number" id="dti-monthly-debt" defaultValue={0} step={10} className="input-field p-2 rounded text-sm bg-cream" />
+              <section className="calc-panel" aria-label="Ukazovatele DTI a DSTI">
+                <div className="calc-chart-head">
+                  <h3 className="calc-panel-title">Ako si na tom s limitmi</h3>
                 </div>
-                <div>
-                  <label className="text-[15px] font-bold text-muted-foreground block mb-1">Celkový zostatok dlhov</label>
-                  <input type="number" id="dti-total-debt" defaultValue={0} step={1000} className="input-field p-2 rounded text-sm bg-cream" />
+                <div className="dti-gauges">
+                  <div className="dti-gauge">
+                    <p className="calc-stat-label">DTI</p>
+                    <p className="dti-gauge-sub">Celkový dlh vs. ročný príjem</p>
+                    <div className="dti-gauge-canvas">
+                      <canvas id="chart-dti" />
+                      <span className="dti-gauge-value" id="dti-value-text">0x</span>
+                    </div>
+                    <p className="dti-gauge-status" id="dti-status-msg">V bezpečnej zóne</p>
+                  </div>
+                  <div className="dti-gauge">
+                    <p className="calc-stat-label">DSTI</p>
+                    <p className="dti-gauge-sub">Splátky vs. mesačný príjem</p>
+                    <div className="dti-gauge-canvas">
+                      <canvas id="chart-dsti" />
+                      <span className="dti-gauge-value" id="dsti-value-text">0%</span>
+                    </div>
+                    <p className="dti-gauge-status" id="dsti-status-msg">V bezpečnej zóne</p>
+                  </div>
                 </div>
-                <div>
-                  <label className="text-[15px] font-bold text-muted-foreground block mb-1">Limity na kreditných kartách</label>
-                  <input type="number" id="dti-credit-limits" defaultValue={0} step={100} className="input-field p-2 rounded text-sm bg-cream" />
-                </div>
-              </div>
+              </section>
 
-              <div className="border-t border-cream pt-6">
-                <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <label className="text-[15px] font-bold text-muted-foreground block mb-1">Úrok (%)</label>
-                    <input type="number" id="dti-rate" defaultValue={4.2} step={0.1} className="input-field p-2 rounded text-sm text-center font-bold" />
-                  </div>
-                  <div>
-                    <label className="text-[15px] font-bold text-muted-foreground block mb-1">Splatnosť (roky)</label>
-                    <input type="number" id="dti-years" defaultValue={30} max={40} className="input-field p-2 rounded text-sm text-center font-bold" />
+              <section className="calc-panel" aria-label="Rozloženie príjmu">
+                <div className="calc-chart-head">
+                  <h3 className="calc-panel-title">Rozloženie tvojho príjmu</h3>
+                  <div className="calc-legend">
+                    <span className="calc-legend-item">
+                      <span className="calc-legend-dot" style={{ background: "#C1533C" }} aria-hidden />
+                      Dlhy
+                    </span>
+                    <span className="calc-legend-item">
+                      <span className="calc-legend-dot" style={{ background: "#A8956E" }} aria-hidden />
+                      Rezerva
+                    </span>
+                    <span className="calc-legend-item">
+                      <span className="calc-legend-dot" style={{ background: "#29614A" }} aria-hidden />
+                      Voľné
+                    </span>
                   </div>
                 </div>
-                <div className="flex items-center justify-between bg-secondary p-3 rounded-lg border border-border">
-                  <div>
-                    <span className="text-[15px] font-bold block">Stress Test (+2%)</span>
-                  </div>
-                  <input type="checkbox" id="dti-stress-toggle" className="w-5 h-5 accent-black" />
+                <div className="dti-income-bar" role="img" aria-label="Rozloženie príjmu na dlhy, rezervu a voľné prostriedky">
+                  <div id="bar-debts" className="dti-bar dti-bar--debts" style={{ width: "20%" }} />
+                  <div id="bar-reserve" className="dti-bar dti-bar--reserve" style={{ width: "40%" }} />
+                  <div id="bar-free" className="dti-bar dti-bar--free" style={{ width: "40%" }} />
                 </div>
-              </div>
+              </section>
             </div>
           </div>
-
-          <div className="lg:col-span-7 space-y-6">
-            <div className="bg-primary text-primary-foreground p-6 md:p-6 rounded-xl relative overflow-hidden">
-              <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                <div>
-                  <h3 className="text-cream text-[15px] uppercase tracking-widest font-medium mb-2">Váš úverový potenciál</h3>
-                  <div className="text-4xl md:text-5xl font-serif font-bold leading-none" id="dti-max-mortgage">
-                    0 €
-                  </div>
-                  <div className="mt-2 text-[14px] text-white/80" id="dti-limit-reason" />
-                </div>
-                <div className="border-t md:border-t-0 md:border-l border-white/20 pt-4 md:pt-0 md:pl-6">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-[14px] uppercase text-white/80">Max. mesačná splátka</span>
-                    <span className="font-serif text-xl" id="dti-max-payment">
-                      0 €
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-[14px] uppercase text-white/80">Povinná rezerva (40%)</span>
-                    <span className="font-serif text-xl text-amber-200" id="dti-reserve">
-                      0 €
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <img
-                src={brandPattern}
-                alt=""
-                aria-hidden
-                className="absolute -right-10 -bottom-12 w-[min(60%,240px)] max-h-[190px] object-contain object-right-bottom opacity-[0.35] pointer-events-none select-none"
-                style={{
-                  filter:
-                    "brightness(0) saturate(100%) invert(97%) sepia(54%) saturate(1200%) hue-rotate(80deg) brightness(110%) contrast(85%)",
-                  mixBlendMode: "soft-light",
-                }}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-[#FFF9F5] p-6 rounded-xl border border-border shadow-[0_10px_30px_-10px_rgba(41,106,82,0.1)] flex flex-col items-center">
-                <h4 className="font-serif text-lg mb-1 text-foreground">DTI Indikátor</h4>
-                <p className="text-[14px] text-muted-foreground uppercase tracking-wider mb-4">Celkový dlh vs. ročný príjem</p>
-                <div className="relative w-48 h-24">
-                  <canvas id="chart-dti" />
-                  <div className="absolute inset-0 flex items-end justify-center pb-0">
-                    <span className="text-2xl font-serif text-foreground" id="dti-value-text">
-                      0x
-                    </span>
-                  </div>
-                </div>
-                <p className="text-[15px] text-center mt-4 text-muted-foreground" id="dti-status-msg">
-                  V bezpečnej zóne
-                </p>
-              </div>
-              <div className="bg-[#FFF9F5] p-6 rounded-xl border border-border shadow-[0_10px_30px_-10px_rgba(41,106,82,0.1)] flex flex-col items-center">
-                <h4 className="font-serif text-lg mb-1 text-foreground">DSTI Indikátor</h4>
-                <p className="text-[14px] text-muted-foreground uppercase tracking-wider mb-4">Splátky vs. mesačný príjem</p>
-                <div className="relative w-48 h-24">
-                  <canvas id="chart-dsti" />
-                  <div className="absolute inset-0 flex items-end justify-center pb-0">
-                    <span className="text-2xl font-serif text-foreground" id="dsti-value-text">
-                      0%
-                    </span>
-                  </div>
-                </div>
-                <p className="text-[15px] text-center mt-4 text-muted-foreground" id="dsti-status-msg">
-                  V bezpečnej zóne
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl border border-border">
-              <h3 className="text-lg font-serif mb-4">Rozloženie vášho príjmu</h3>
-              <div className="relative h-12 w-full bg-cream rounded-full overflow-hidden flex text-[13px] font-bold text-white uppercase tracking-wider leading-none">
-                <div id="bar-debts" className="h-full bg-primary flex items-center justify-center transition-all duration-500" style={{ width: "20%" }}>
-                  Dlhy
-                </div>
-                <div id="bar-reserve" className="h-full bg-[#d5c098] flex items-center justify-center transition-all duration-500" style={{ width: "40%" }}>
-                  Rezerva
-                </div>
-                <div id="bar-free" className="h-full bg-emerald-500 flex items-center justify-center transition-all duration-500" style={{ width: "40%" }}>
-                  Voľné
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         </div>
       </div>
 
       <div id="dti-compare-modal" className="ml-modal-overlay">
-        <div className="ml-modal-box">
+        <div className="ml-modal-box" role="dialog" aria-modal="true" aria-labelledby="dti-modal-title">
           <div className="ml-modal-header">
             <div>
-              <h3 className="text-xl font-serif">Porovnanie variantov</h3>
-              <p className="text-[15px] text-muted-foreground">Prehľad vstupov a výsledkov DTI / DSTI.</p>
+              <h3 id="dti-modal-title" className="text-xl dti-heading-serif text-foreground m-0 font-normal">Porovnanie variantov</h3>
+              <p className="text-[15px] text-muted-foreground mt-1 mb-0">Prehľad vstupov a výsledkov DTI / DSTI.</p>
             </div>
-            <button type="button" className="mylife-btn-email" onClick={() => window.dtiCloseComparison?.()}>
+            <button type="button" className="mylife-btn-email shrink-0" onClick={() => window.dtiCloseComparison?.()}>
               Zavrieť
             </button>
           </div>
@@ -216,4 +333,3 @@ const PodlaPrijmuCalculator = () => {
 };
 
 export default PodlaPrijmuCalculator;
-

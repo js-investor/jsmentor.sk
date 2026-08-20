@@ -213,7 +213,7 @@ export function mountMzdovaCalculator(): () => void {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { position: "right", labels: { font: { size: 11 }, padding: 10, boxWidth: 12 } },
+          legend: { position: "right", labels: { font: { size: 11 }, padding: 10, boxWidth: 8, usePointStyle: true } },
           tooltip: {
             callbacks: {
               label: (c) => {
@@ -321,7 +321,7 @@ export function mountMzdovaCalculator(): () => void {
       renderChart(
         ["Čistá mzda", "Zdravotné", "Sociálne", "Daň", "Odvody zamestnávateľa"],
         [Math.max(0, r.net), r.empHealth, r.empSoc, r.taxAfterBonus, r.emprTotal],
-        ["#29614A", "#D5C098", "#E2DCCF", "#EEE8DD", "#FDE1AF"],
+        ["#29614A", "#A8956E", "#D5C098", "#C1533C", "#E7E0D2"],
       );
       setText("mzv3-gross-yr", fmt0(r.gross * 12));
       setText("mzv3-net-yr", fmt0(r.net * 12));
@@ -341,7 +341,7 @@ export function mountMzdovaCalculator(): () => void {
       renderChart(
         ["Čistý príjem", "Sociálne odvody", "Zdravotné odvody", "Daň"],
         [Math.max(0, r.net), r.socOdvod, r.healthOdvod, r.dan],
-        ["#29614A", "#E2DCCF", "#D5C098", "#EEE8DD"],
+        ["#29614A", "#D5C098", "#A8956E", "#C1533C"],
       );
       setText("mzv3-gross-yr", fmt0(salary * 12));
       setText("mzv3-net-yr", fmt0(r.net * 12));
@@ -353,7 +353,9 @@ export function mountMzdovaCalculator(): () => void {
   window.mzv3SetType = (t) => {
     empType = t;
     $("mzv3-t-emp")?.classList.toggle("sel", t === "emp");
+    $("mzv3-t-emp")?.setAttribute("aria-pressed", String(t === "emp"));
     $("mzv3-t-szco")?.classList.toggle("sel", t === "szco");
+    $("mzv3-t-szco")?.setAttribute("aria-pressed", String(t === "szco"));
     $("mzv3-dir-wrap")?.classList.toggle("hidden", t === "szco");
     $("mzv3-emp-opts")?.classList.toggle("hidden", t === "szco");
     $("mzv3-szco-opts")?.classList.toggle("hidden", t === "emp");
@@ -367,7 +369,9 @@ export function mountMzdovaCalculator(): () => void {
   window.mzv3SetDir = (d) => {
     dir = d;
     $("mzv3-d-gross")?.classList.toggle("sel", d === "gross");
+    $("mzv3-d-gross")?.setAttribute("aria-pressed", String(d === "gross"));
     $("mzv3-d-net")?.classList.toggle("sel", d === "net");
+    $("mzv3-d-net")?.setAttribute("aria-pressed", String(d === "net"));
     const label = $("mzv3-salary-label");
     if (label) label.textContent = empType === "emp" ? (d === "gross" ? "Hrubá mesačná mzda" : "Požadovaná čistá mzda") : "Hrubý mesačný príjem (pred odvodmi)";
     calc();
@@ -376,7 +380,9 @@ export function mountMzdovaCalculator(): () => void {
   window.mzv3SetNczd = (v) => {
     useNczd = v;
     $("mzv3-nczd-yes")?.classList.toggle("sel", v);
+    $("mzv3-nczd-yes")?.setAttribute("aria-pressed", String(v));
     $("mzv3-nczd-no")?.classList.toggle("sel", !v);
+    $("mzv3-nczd-no")?.setAttribute("aria-pressed", String(!v));
     calc();
   };
 

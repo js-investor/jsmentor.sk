@@ -89,22 +89,19 @@
   transition:
     background-color 0.2s,
     border-color 0.2s,
-    color 0.2s,
-    box-shadow 0.2s;
+    color 0.2s;
 }
 
 .ml-variant-tab.active {
   background: hsl(var(--card)) !important;
   color: hsl(var(--foreground)) !important;
   border-color: hsl(var(--foreground) / 0.22) !important;
-  box-shadow: 0 1px 3px rgba(28, 22, 18, 0.06);
 }
 
 .ml-variant-tab.inactive {
   background: hsl(var(--muted)) !important;
   color: hsl(var(--muted-foreground)) !important;
   border-color: transparent !important;
-  box-shadow: none;
 }
 
 .ml-variant-tab.inactive:hover {
