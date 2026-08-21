@@ -1,4 +1,5 @@
 import Chart from "chart.js/auto";
+import type { Plugin, ScriptableContext } from "chart.js";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
@@ -140,19 +141,55 @@ export function mountRentovaCalculator(): () => void {
     return { input, valid, labels, dataCapital, requiredCapital, projectedCapital, futureMonthlyRent, capitalGap, monthlyGap, percentage };
   };
 
+  /** Zvislá vodiaca čiara pod kurzorom (crosshair). */
+  const hoverLinePlugin: Plugin<"line"> = {
+    id: "mlHoverLine",
+    afterDatasetsDraw(chart) {
+      const activeEls = chart.tooltip?.getActiveElements();
+      if (!activeEls || activeEls.length === 0) return;
+      const x = activeEls[0].element.x;
+      const { top, bottom } = chart.chartArea;
+      const c = chart.ctx;
+      c.save();
+      c.beginPath();
+      c.moveTo(x, top);
+      c.lineTo(x, bottom);
+      c.lineWidth = 1;
+      c.setLineDash([4, 4]);
+      c.strokeStyle = "rgba(41, 97, 74, 0.35)";
+      c.stroke();
+      c.restore();
+    },
+  };
+
+  /** Koncový bod série zvýrazníme — posledná hodnota je pointa grafu. */
+  const lastPointRadius = (ctx: ScriptableContext<"line">) =>
+    ctx.dataIndex === ctx.dataset.data.length - 1 ? 5 : 0;
+
   const updateChart = (s: ReturnType<typeof calcScenario>) => {
     const canvas = document.getElementById("ml-rentChart") as HTMLCanvasElement | null;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
-    chartInstance?.destroy();
-    chartInstance = null;
-    if (!s.valid || !ctx) return;
+    if (!s.valid || !ctx) {
+      chartInstance?.destroy();
+      chartInstance = null;
+      return;
+    }
 
-    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, "rgba(41, 97, 74, 0.18)");
+    // Plynulé morfovanie existujúceho grafu namiesto zničenia a prekreslenia
+    if (chartInstance) {
+      chartInstance.data.labels = s.labels;
+      chartInstance.data.datasets[0].data = s.dataCapital;
+      chartInstance.update();
+      return;
+    }
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.clientHeight || 400);
+    gradient.addColorStop(0, "rgba(41, 97, 74, 0.28)");
+    gradient.addColorStop(0.65, "rgba(41, 97, 74, 0.08)");
     gradient.addColorStop(1, "rgba(41, 97, 74, 0)");
 
-    chartInstance = new Chart(canvas, {
+    chartInstance = new Chart(ctx, {
       type: "line",
       data: {
         labels: s.labels,
@@ -163,43 +200,71 @@ export function mountRentovaCalculator(): () => void {
             borderColor: "#29614A",
             backgroundColor: gradient,
             borderWidth: 2.5,
-            pointBackgroundColor: "#29614A",
-            pointRadius: 0,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "#29614A",
             fill: true,
             tension: 0.4,
+            pointRadius: lastPointRadius,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "#29614A",
+            pointBorderColor: "#FFF9F5",
+            pointBorderWidth: 2,
           },
         ],
       },
+      plugins: [hoverLinePlugin],
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        animation: { duration: 500, easing: "easeOutQuart" },
+        interaction: { mode: "index", intersect: false },
         plugins: {
           legend: { display: false },
           tooltip: {
-            backgroundColor: "rgba(255,255,255,0.95)",
-            titleColor: "#1a1a1a",
-            bodyColor: "rgba(0,0,0,0.65)",
-            borderColor: "rgba(0,0,0,0.1)",
+            backgroundColor: "rgba(2, 44, 34, 0.96)",
+            titleColor: "#fdf8f2",
+            bodyColor: "rgba(240, 235, 227, 0.92)",
+            borderColor: "rgba(253, 248, 242, 0.15)",
             borderWidth: 1,
+            padding: 14,
+            cornerRadius: 12,
+            caretSize: 6,
+            usePointStyle: true,
+            boxPadding: 5,
+            titleFont: { family: "Recoleta, Georgia, serif", size: 14, weight: "bold" },
+            bodyFont: { family: "Gilroy, sans-serif", size: 13 },
+            callbacks: {
+              title: (items) => (items.length ? `Vek ${items[0].label}` : ""),
+              label: (context) => {
+                let label = context.dataset.label || "";
+                if (label) label += ": ";
+                if (context.parsed.y !== null) label += fmt(context.parsed.y);
+                return label;
+              },
+            },
           },
         },
         scales: {
-          x: {
-            grid: { color: "rgba(0,0,0,0.06)" },
-            ticks: { color: "rgba(0,0,0,0.45)", font: { size: 12 } },
-            border: { color: "rgba(0,0,0,0.08)" },
-          },
           y: {
-            grid: { color: "rgba(0,0,0,0.06)" },
+            beginAtZero: true,
+            border: { display: false },
+            grid: { color: "rgba(0, 0, 0, 0.05)" },
             ticks: {
-              color: "rgba(0,0,0,0.45)",
-              font: { size: 12 },
-              callback: (v: number | string) =>
-                new Intl.NumberFormat("sk-SK", { notation: "compact", maximumFractionDigits: 0 }).format(Number(v)) + " €",
+              maxTicksLimit: 5,
+              color: "rgba(0, 0, 0, 0.4)",
+              font: { family: "Gilroy, sans-serif", size: 12 },
+              callback(value) {
+                const v = Number(value);
+                return v >= 1_000_000 ? (v / 1_000_000).toFixed(1) + "M €" : (v / 1000).toFixed(0) + "k €";
+              },
             },
-            border: { color: "rgba(0,0,0,0.08)" },
+          },
+          x: {
+            border: { display: false },
+            grid: { display: false },
+            ticks: {
+              maxTicksLimit: 8,
+              color: "rgba(0, 0, 0, 0.4)",
+              font: { family: "Gilroy, sans-serif", size: 12 },
+            },
           },
         },
       },

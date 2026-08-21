@@ -1,10 +1,8 @@
 import { useLayoutEffect } from "react";
-import brandPatternDark from "@/assets/logo/js-brand-pattern-black.svg";
-import { NOISE_TEXTURE } from "@/lib/noiseTexture";
 import "../shared/calculator-toolbar.css";
 import "../shared/calc-ui.css";
 import "./hypotekarna-calculator.css";
-import { initCalcSliders } from "../shared/calcUi";
+import { initCalcEcho, initCalcHeroPulse, initCalcSliders } from "../shared/calcUi";
 import { mountHypotekarnaCalculator } from "./hypotekarnaMount";
 
 const CompareIcon = () => (
@@ -15,11 +13,33 @@ const CompareIcon = () => (
   </svg>
 );
 
+/** −/+ stepper pre číselný vstup; zmenu hodnoty vždy ohlási input eventom pre mount. */
+const Stepper = ({ inputId, step, unit }: { inputId: string; step: number; unit: string }) => {
+  const nudge = (dir: "up" | "down") => {
+    const el = document.getElementById(inputId) as HTMLInputElement | null;
+    if (!el) return;
+    if (dir === "up") el.stepUp();
+    else el.stepDown();
+    el.dispatchEvent(new Event("input", { bubbles: true }));
+  };
+  return (
+    <span className="calc-stepper">
+      <span className="calc-stepper-unit" aria-hidden>{unit}</span>
+      <button type="button" aria-label={`Znížiť o ${step} ${unit}`} onClick={() => nudge("down")}>−</button>
+      <button type="button" aria-label={`Zvýšiť o ${step} ${unit}`} onClick={() => nudge("up")}>+</button>
+    </span>
+  );
+};
+
 const HypotekarnaCalculator = () => {
   useLayoutEffect(() => {
     const unmountCalc = mountHypotekarnaCalculator();
     const unmountSliders = initCalcSliders("hypo-calc-root");
+    const unmountEcho = initCalcEcho("hypo-calc-root");
+    const unmountPulse = initCalcHeroPulse("res-net-worth");
     return () => {
+      unmountPulse();
+      unmountEcho();
       unmountSliders();
       unmountCalc?.();
     };
@@ -41,19 +61,40 @@ const HypotekarnaCalculator = () => {
 
       <div id="hypo-compare-wrapper" className="calc-body-shell">
         <div className="calc-page hypo-print-container">
-          <header className="calc-header">
-            <span className="calc-eyebrow">Kalkulačka</span>
-            <h1 className="calc-title">Hypotéka vs. investovanie</h1>
-            <p className="calc-subtitle">
-              Zisti, či sa ti viac oplatí splatiť dlh skôr, alebo peniaze nechať
-              pracovať v investíciách.
-            </p>
+          <header className="calc-header" style={{ marginBottom: "1.5rem" }}>
+            <span className="calc-eyebrow">Hypotéka vs. investovanie</span>
           </header>
 
-          <div className="calc-layout">
-            {/* ------------------------------ Vstupy ------------------------------ */}
-            <div className="calc-col">
-              <section className="calc-panel" aria-label="Hypotéka">
+          {/* Výsledok — hviezda stránky */}
+          <section className="calc-hero-xl" aria-label="Výsledok">
+            <p className="calc-hero-xl-label">Tvoj čistý majetok na konci obdobia</p>
+            <p className="calc-hero-xl-value" id="res-net-worth">0 €</p>
+            <div className="calc-hero-xl-chips">
+              <span className="calc-verdict-chip">
+                Mesačná splátka&nbsp;<strong id="c-monthly-payment">0 €</strong>
+              </span>
+              <span className="calc-verdict-chip">
+                Hodnota investície&nbsp;<strong id="c-invest-final">0 €</strong>
+              </span>
+            </div>
+          </section>
+
+          {/* Inline štatistiky */}
+          <div className="calc-stats-inline" role="group" aria-label="Súhrn">
+            <div>
+              <p className="calc-stat-label">Celkové náklady úveru</p>
+              <p className="calc-stat-value" id="res-mortgage-total">0 €</p>
+            </div>
+            <div>
+              <p className="calc-stat-label">Vložené do investície</p>
+              <p className="calc-stat-value" id="res-invest-principal">0 €</p>
+            </div>
+          </div>
+
+          {/* Vstupný dock — dve skupiny */}
+          <section className="calc-dock" aria-label="Parametre simulácie">
+            <div className="hypo-dock-groups">
+              <div className="hypo-dock-group">
                 <div className="hypo-panel-head">
                   <div className="hypo-panel-title-group">
                     <h2 className="calc-panel-title">Hypotéka</h2>
@@ -71,24 +112,24 @@ const HypotekarnaCalculator = () => {
                   <span className="hypo-tag">Dlh</span>
                 </div>
                 <div id="hypo-mortgage-fields">
-                  <div className="calc-field">
-                    <label className="calc-label" htmlFor="c-mortgage-amount">
-                      Výška úveru / zostatok
-                    </label>
-                    <div className="calc-input-wrap">
-                      <input
-                        type="number"
-                        id="c-mortgage-amount"
-                        defaultValue={150000}
-                        step={1000}
-                        min={0}
-                        className="calc-input calc-input--unit"
-                      />
-                      <span className="calc-input-unit" aria-hidden>€</span>
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-4">
+                    <div className="calc-dock-item col-span-2">
+                      <label className="calc-label" htmlFor="c-mortgage-amount">
+                        Výška úveru / zostatok
+                      </label>
+                      <div className="calc-input-wrap calc-input-wrap--stepper">
+                        <input
+                          type="number"
+                          id="c-mortgage-amount"
+                          defaultValue={150000}
+                          step={1000}
+                          min={0}
+                          className="calc-input"
+                        />
+                        <Stepper inputId="c-mortgage-amount" step={1000} unit="€" />
+                      </div>
                     </div>
-                  </div>
-                  <div className="calc-fieldrow">
-                    <div>
+                    <div className="calc-dock-item">
                       <label className="calc-label" htmlFor="c-mortgage-years">
                         Doba splácania
                       </label>
@@ -103,7 +144,7 @@ const HypotekarnaCalculator = () => {
                         <span className="calc-input-unit" aria-hidden>rokov</span>
                       </div>
                     </div>
-                    <div>
+                    <div className="calc-dock-item">
                       <label className="calc-label" htmlFor="c-mortgage-rate">
                         Úrok
                       </label>
@@ -125,9 +166,9 @@ const HypotekarnaCalculator = () => {
                     <span className="hypo-panel-foot-value" id="c-total-paid">0 €</span>
                   </div>
                 </div>
-              </section>
+              </div>
 
-              <section className="calc-panel" aria-label="Investícia">
+              <div className="hypo-dock-group">
                 <div className="hypo-panel-head">
                   <div className="hypo-panel-title-group">
                     <h2 className="calc-panel-title">Investícia</h2>
@@ -145,40 +186,40 @@ const HypotekarnaCalculator = () => {
                   <span className="hypo-tag hypo-tag--primary">Majetok</span>
                 </div>
                 <div id="hypo-invest-fields">
-                  <div className="calc-field">
-                    <label className="calc-label" htmlFor="c-invest-initial">
-                      Jednorazový vklad
-                    </label>
-                    <div className="calc-input-wrap">
-                      <input
-                        type="number"
-                        id="c-invest-initial"
-                        defaultValue={5000}
-                        step={500}
-                        min={0}
-                        className="calc-input calc-input--unit"
-                      />
-                      <span className="calc-input-unit" aria-hidden>€</span>
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-4">
+                    <div className="calc-dock-item col-span-2">
+                      <label className="calc-label" htmlFor="c-invest-initial">
+                        Jednorazový vklad
+                      </label>
+                      <div className="calc-input-wrap calc-input-wrap--stepper">
+                        <input
+                          type="number"
+                          id="c-invest-initial"
+                          defaultValue={5000}
+                          step={500}
+                          min={0}
+                          className="calc-input"
+                        />
+                        <Stepper inputId="c-invest-initial" step={500} unit="€" />
+                      </div>
                     </div>
-                  </div>
-                  <div className="calc-fieldrow">
-                    <div>
+                    <div className="calc-dock-item">
                       <label className="calc-label" htmlFor="c-invest-monthly">
                         Mesačná investícia
                       </label>
-                      <div className="calc-input-wrap">
+                      <div className="calc-input-wrap calc-input-wrap--stepper">
                         <input
                           type="number"
                           id="c-invest-monthly"
                           defaultValue={250}
                           step={50}
                           min={0}
-                          className="calc-input calc-input--unit"
+                          className="calc-input"
                         />
-                        <span className="calc-input-unit" aria-hidden>€</span>
+                        <Stepper inputId="c-invest-monthly" step={50} unit="€" />
                       </div>
                     </div>
-                    <div>
+                    <div className="calc-dock-item">
                       <label className="calc-label" htmlFor="c-invest-rate">
                         Zhodnotenie p.a.
                       </label>
@@ -200,154 +241,117 @@ const HypotekarnaCalculator = () => {
                     <span className="hypo-panel-foot-value" id="c-invest-profit">0 €</span>
                   </div>
                 </div>
-              </section>
+              </div>
+            </div>
 
-              <section className="calc-panel" aria-label="Udalosti na časovej osi">
-                <div
-                  id="hypo-evt-accordion-toggle"
-                  className="hypo-evt-toggle"
-                  role="button"
-                  aria-expanded={false}
-                  aria-controls="hypo-evt-accordion-content"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      e.currentTarget.click();
-                    }
-                  }}
-                >
-                  <h2 className="hypo-evt-title m-0">
-                    Udalosti na časovej osi
-                    <span
-                      id="hypo-event-count-badge"
-                      style={{ display: "none" }}
-                      className="hypo-evt-badge"
-                    >
-                      0
-                    </span>
-                  </h2>
-                  <span id="hypo-evt-accordion-icon" className="calc-collapse-chevron" aria-hidden>▼</span>
-                </div>
-                <div id="hypo-evt-accordion-content" className="hypo-evt-content" style={{ display: "none" }}>
-                  <div id="hypo-events-list" className="hypo-evt-list" />
-                  <div className="hypo-evt-form">
-                    <p className="hypo-evt-form-title">Pridať novú udalosť</p>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="col-span-2">
-                        <label className="calc-label" htmlFor="evt-type">Typ</label>
-                        <select id="evt-type" className="hypo-evt-input">
-                          <option value="hypo_extra">Hypotéka: Mimoriadna splátka</option>
-                          <option value="hypo_rate">Hypotéka: Zmena úroku</option>
-                          <option value="invest_deposit">Investícia: Mimoriadny vklad</option>
-                          <option value="invest_withdraw">Investícia: Výber</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="calc-label" htmlFor="evt-year">Rok</label>
-                        <input
-                          type="number"
-                          id="evt-year"
-                          min={1}
-                          max={40}
-                          defaultValue={5}
-                          className="hypo-evt-input"
-                        />
-                      </div>
-                      <div>
-                        <label className="calc-label" htmlFor="evt-value">Hodnota</label>
-                        <input
-                          type="number"
-                          id="evt-value"
-                          min={0}
-                          defaultValue={1000}
-                          className="hypo-evt-input"
-                        />
-                      </div>
-                      <div className="col-span-2">
-                        <button
-                          type="button"
-                          className="hypo-evt-add"
-                          onClick={() => window.addEvent?.()}
-                        >
-                          + Pridať udalosť
-                        </button>
-                      </div>
+            <div className="calc-dock-foot">
+              <div
+                id="hypo-evt-accordion-toggle"
+                className="hypo-evt-toggle"
+                role="button"
+                aria-expanded={false}
+                aria-controls="hypo-evt-accordion-content"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    e.currentTarget.click();
+                  }
+                }}
+              >
+                <h2 className="hypo-evt-title m-0">
+                  Udalosti na časovej osi
+                  <span
+                    id="hypo-event-count-badge"
+                    style={{ display: "none" }}
+                    className="hypo-evt-badge"
+                  >
+                    0
+                  </span>
+                </h2>
+                <span id="hypo-evt-accordion-icon" className="calc-collapse-chevron" aria-hidden>▼</span>
+              </div>
+              <div id="hypo-evt-accordion-content" className="hypo-evt-content" style={{ display: "none" }}>
+                <div id="hypo-events-list" className="hypo-evt-list" />
+                <div className="hypo-evt-form">
+                  <p className="hypo-evt-form-title">Pridať novú udalosť</p>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="col-span-2">
+                      <label className="calc-label" htmlFor="evt-type">Typ</label>
+                      <select id="evt-type" className="hypo-evt-input">
+                        <option value="hypo_extra">Hypotéka: Mimoriadna splátka</option>
+                        <option value="hypo_rate">Hypotéka: Zmena úroku</option>
+                        <option value="invest_deposit">Investícia: Mimoriadny vklad</option>
+                        <option value="invest_withdraw">Investícia: Výber</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="calc-label" htmlFor="evt-year">Rok</label>
+                      <input
+                        type="number"
+                        id="evt-year"
+                        min={1}
+                        max={40}
+                        defaultValue={5}
+                        className="hypo-evt-input"
+                      />
+                    </div>
+                    <div>
+                      <label className="calc-label" htmlFor="evt-value">Hodnota</label>
+                      <input
+                        type="number"
+                        id="evt-value"
+                        min={0}
+                        defaultValue={1000}
+                        className="hypo-evt-input"
+                      />
+                    </div>
+                    <div className="col-span-2">
+                      <button
+                        type="button"
+                        className="hypo-evt-add"
+                        onClick={() => window.addEvent?.()}
+                      >
+                        + Pridať udalosť
+                      </button>
                     </div>
                   </div>
                 </div>
-              </section>
-
-              <p className="calc-note">
-                Kalkulačka je orientačná — počíta s konštantným úrokom aj výnosom
-                a nezohľadňuje dane, poplatky ani infláciu.
-              </p>
-            </div>
-
-            {/* ----------------------------- Výsledky ----------------------------- */}
-            <div className="calc-col">
-              <section className="calc-hero" aria-label="Výsledok">
-                <div
-                  className="calc-hero-noise"
-                  style={{ backgroundImage: NOISE_TEXTURE }}
-                  aria-hidden
-                />
-                <img src={brandPatternDark} alt="" aria-hidden className="calc-hero-pattern" />
-                <p className="calc-hero-label">Čistý majetok na konci</p>
-                <p className="calc-hero-value" id="res-net-worth">0 €</p>
-                <p className="calc-hero-sub">Investícia − zostatok hypotéky</p>
-                <div className="calc-hero-meta">
-                  <span className="calc-hero-chip">
-                    Mesačná splátka&nbsp;<strong id="c-monthly-payment">0 €</strong>
-                  </span>
-                </div>
-              </section>
-
-              <div className="calc-stats">
-                <div className="calc-stat">
-                  <p className="calc-stat-label">Celkové náklady úveru</p>
-                  <p className="calc-stat-value" id="res-mortgage-total">0 €</p>
-                  <p className="calc-stat-sub">Istina + úroky</p>
-                </div>
-                <div className="calc-stat">
-                  <p className="calc-stat-label">Vložené do investície</p>
-                  <p className="calc-stat-value" id="res-invest-principal">0 €</p>
-                  <p className="calc-stat-sub">Tvoje vlastné vklady</p>
-                </div>
-                <div className="calc-stat">
-                  <p className="calc-stat-label">Hodnota investície</p>
-                  <p className="calc-stat-value" id="c-invest-final">0 €</p>
-                  <p className="calc-stat-sub">Na konci obdobia</p>
-                </div>
               </div>
-
-              <section className="calc-panel" aria-label="Vývoj v čase">
-                <div className="calc-chart-head">
-                  <h3 className="calc-panel-title">Vývoj v čase</h3>
-                  <div className="calc-legend" id="ml-chart-legend">
-                    <span className="calc-legend-item">
-                      <span className="calc-legend-dot" style={{ background: "#C1533C" }} aria-hidden />
-                      Zostatok hypotéky
-                    </span>
-                    <span className="calc-legend-item">
-                      <span className="calc-legend-dot" style={{ background: "#29614A" }} aria-hidden />
-                      Hodnota investície
-                    </span>
-                  </div>
-                </div>
-                <div className="calc-chart-body">
-                  <canvas id="compareChart" />
-                </div>
-                <div id="hypo-crossover-info" className="hypo-crossover" style={{ display: "none" }}>
-                  <span className="hypo-crossover-title">Bod zlomu dosiahnutý</span>
-                  <span>
-                    Investícia presiahne zostatok hypotéky v{" "}
-                    <span id="crossover-year" className="font-bold text-foreground" />.
-                  </span>
-                </div>
-              </section>
             </div>
-          </div>
+          </section>
+
+          {/* Graf */}
+          <section className="calc-panel mt-5 md:mt-6" aria-label="Vývoj v čase">
+            <div className="calc-chart-head">
+              <h2 className="calc-panel-title">Vývoj v čase</h2>
+              <div className="calc-legend" id="ml-chart-legend">
+                <span className="calc-legend-item">
+                  <span className="calc-legend-dot" style={{ background: "#C1533C" }} aria-hidden />
+                  Zostatok hypotéky
+                </span>
+                <span className="calc-legend-item">
+                  <span className="calc-legend-dot" style={{ background: "#29614A" }} aria-hidden />
+                  Hodnota investície
+                </span>
+              </div>
+            </div>
+            <div className="calc-chart-body calc-chart-body--tall">
+              <canvas id="compareChart" />
+            </div>
+            <div id="hypo-crossover-info" className="hypo-crossover" style={{ display: "none" }}>
+              <span className="hypo-crossover-title">Bod zlomu dosiahnutý</span>
+              <span>
+                Investícia presiahne zostatok hypotéky v{" "}
+                <span id="crossover-year" className="font-bold text-foreground" />.
+              </span>
+            </div>
+          </section>
+
+          <p className="calc-note calc-note--center mt-5 md:mt-6">
+            Kalkulačka je orientačná — počíta s konštantným úrokom aj výnosom
+            a nezohľadňuje dane, poplatky ani infláciu.
+          </p>
 
           <div className="hypo-print-footer">
             <p>

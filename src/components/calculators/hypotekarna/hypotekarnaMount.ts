@@ -1,4 +1,5 @@
 import Chart from "chart.js/auto";
+import type { Plugin, ScriptableContext } from "chart.js";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
@@ -74,7 +75,6 @@ export function mountHypotekarnaCalculator(): () => void {
 
   const fmtCur = (v: number) =>
     new Intl.NumberFormat("sk-SK", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(v);
-  const fmtNum = (v: number) => new Intl.NumberFormat("sk-SK").format(v);
 
   const elCurrentDate = document.getElementById("hypo-current-date");
   if (elCurrentDate) elCurrentDate.textContent = new Date().toLocaleDateString("sk-SK");
@@ -482,6 +482,31 @@ export function mountHypotekarnaCalculator(): () => void {
     updateChart(r.labels, r.dataM, r.dataI, v.mortgageEnabled, v.investEnabled, false);
   }
 
+  /** Zvislá vodiaca čiara pod kurzorom (crosshair). */
+  const hoverLinePlugin: Plugin<"line"> = {
+    id: "hypoHoverLine",
+    afterDatasetsDraw(chart) {
+      const active = chart.tooltip?.getActiveElements();
+      if (!active || active.length === 0) return;
+      const x = active[0].element.x;
+      const { top, bottom } = chart.chartArea;
+      const c = chart.ctx;
+      c.save();
+      c.beginPath();
+      c.moveTo(x, top);
+      c.lineTo(x, bottom);
+      c.lineWidth = 1;
+      c.setLineDash([4, 4]);
+      c.strokeStyle = "rgba(41, 97, 74, 0.35)";
+      c.stroke();
+      c.restore();
+    },
+  };
+
+  /** Koncový bod série zvýrazníme — posledná hodnota je pointa grafu. */
+  const lastPointRadius = (ctx: ScriptableContext<"line">) =>
+    ctx.dataIndex === ctx.dataset.data.length - 1 ? 5 : 0;
+
   function updateChart(
     labels: number[],
     dataM: (number | null)[],
@@ -493,87 +518,141 @@ export function mountHypotekarnaCalculator(): () => void {
     const canvas = document.getElementById("compareChart") as HTMLCanvasElement | null;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    chartInstance?.destroy();
-    chartInstance = null;
+    if (!ctx || disposed) {
+      chartInstance?.destroy();
+      chartInstance = null;
+      return;
+    }
 
-    const gM = ctx.createLinearGradient(0, 0, 0, 400);
-    gM.addColorStop(0, "rgba(193,83,60,0.12)");
-    gM.addColorStop(1, "rgba(193,83,60,0)");
-    const gI = ctx.createLinearGradient(0, 0, 0, 400);
-    gI.addColorStop(0, "rgba(41,97,74,0.18)");
-    gI.addColorStop(1, "rgba(41,97,74,0)");
+    const chartLabels = labels.map((y) => "Rok " + y);
 
-    const datasets: Array<{
-      type: "line";
-      label: string;
-      data: number[];
-      borderColor: string;
-      backgroundColor: CanvasGradient;
-      fill: boolean;
-      tension: number;
-      pointRadius: number;
-    }> = [];
-    const lineDark = "#C1533C";
-    const lineAccent = "#29614A";
+    // Plynulé morfovanie existujúceho grafu namiesto zničenia a prekreslenia
+    if (chartInstance) {
+      chartInstance.data.labels = chartLabels;
+      chartInstance.data.datasets[0].data = dataM;
+      chartInstance.data.datasets[1].data = dataI;
+      chartInstance.setDatasetVisibility(0, mEnabled);
+      chartInstance.setDatasetVisibility(1, iEnabled);
+      const tooltipOpts = chartInstance.options.plugins?.tooltip;
+      if (tooltipOpts) tooltipOpts.enabled = !isStatic;
+      chartInstance.update();
+      return;
+    }
 
-    if (mEnabled)
-      datasets.push({
-        type: "line",
-        label: "Zostatok hypotéky",
-        data: dataM as unknown as number[],
-        borderColor: lineDark,
-        backgroundColor: gM,
-        fill: true,
-        tension: 0.3,
-        pointRadius: 0,
-      });
-    if (iEnabled)
-      datasets.push({
-        type: "line",
-        label: "Hodnota investície",
-        data: dataI as unknown as number[],
-        borderColor: lineAccent,
-        backgroundColor: gI,
-        fill: true,
-        tension: 0.3,
-        pointRadius: 0,
-      });
+    const gradientHeight = canvas.clientHeight || 400;
+    const gM = ctx.createLinearGradient(0, 0, 0, gradientHeight);
+    gM.addColorStop(0, "rgba(193, 83, 60, 0.10)");
+    gM.addColorStop(1, "rgba(193, 83, 60, 0)");
+    const gI = ctx.createLinearGradient(0, 0, 0, gradientHeight);
+    gI.addColorStop(0, "rgba(41, 97, 74, 0.28)");
+    gI.addColorStop(0.65, "rgba(41, 97, 74, 0.08)");
+    gI.addColorStop(1, "rgba(41, 97, 74, 0)");
 
     chartInstance = new Chart(ctx, {
       type: "line",
-      data: { labels: labels.map(String), datasets },
+      data: {
+        labels: chartLabels,
+        datasets: [
+          {
+            type: "line",
+            label: "Zostatok hypotéky",
+            data: dataM,
+            borderColor: "#C1533C",
+            backgroundColor: gM,
+            borderWidth: 2.5,
+            fill: true,
+            tension: 0.4,
+            pointRadius: lastPointRadius,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "#C1533C",
+            pointBorderColor: "#FFF9F5",
+            pointBorderWidth: 2,
+            hidden: !mEnabled,
+          },
+          {
+            type: "line",
+            label: "Hodnota investície",
+            data: dataI,
+            borderColor: "#29614A",
+            backgroundColor: gI,
+            borderWidth: 2.5,
+            fill: true,
+            tension: 0.4,
+            pointRadius: lastPointRadius,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "#29614A",
+            pointBorderColor: "#FFF9F5",
+            pointBorderWidth: 2,
+            hidden: !iEnabled,
+          },
+        ],
+      },
+      plugins: [hoverLinePlugin],
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        animation: { duration: 500, easing: "easeOutQuart" },
         interaction: { mode: "index", intersect: false },
         plugins: {
           legend: { display: false },
           tooltip: {
             enabled: !isStatic,
-            backgroundColor: "rgba(255,255,255,0.95)",
-            titleColor: "#1a1a1a",
-            bodyColor: "rgba(0,0,0,0.65)",
-            borderColor: "rgba(0,0,0,0.1)",
+            backgroundColor: "rgba(2, 44, 34, 0.96)",
+            titleColor: "#fdf8f2",
+            bodyColor: "rgba(240, 235, 227, 0.92)",
+            footerColor: "#8fd4b4",
+            borderColor: "rgba(253, 248, 242, 0.15)",
             borderWidth: 1,
-            padding: 12,
+            padding: 14,
+            cornerRadius: 12,
+            caretSize: 6,
+            usePointStyle: true,
+            boxPadding: 5,
+            titleFont: { family: "Recoleta, Georgia, serif", size: 14, weight: "bold" },
+            bodyFont: { family: "Gilroy, sans-serif", size: 13 },
+            footerFont: { family: "Gilroy, sans-serif", size: 13, weight: "bold" },
             callbacks: {
-              label: (c) => (c.dataset.label ?? "") + ": " + fmtCur(c.parsed.y as number),
+              label: (context) => {
+                let label = context.dataset.label || "";
+                if (label) label += ": ";
+                if (context.parsed.y !== null) label += fmtCur(context.parsed.y);
+                return label;
+              },
+              footer: (items) => {
+                const mortgage = items.find((it) => it.datasetIndex === 0)?.parsed.y;
+                const invest = items.find((it) => it.datasetIndex === 1)?.parsed.y;
+                if (typeof mortgage !== "number" && typeof invest !== "number") return "";
+                const net =
+                  (typeof invest === "number" ? invest : 0) -
+                  (typeof mortgage === "number" ? mortgage : 0);
+                return "Čistý majetok: " + fmtCur(net);
+              },
             },
           },
         },
         scales: {
           y: {
             beginAtZero: true,
-            grid: { color: "rgba(0,0,0,0.06)" },
+            border: { display: false },
+            grid: { color: "rgba(0, 0, 0, 0.05)" },
             ticks: {
-              color: "rgba(0,0,0,0.45)",
-              callback: (v) => fmtNum(Number(v) / 1000) + "k €",
+              maxTicksLimit: 5,
+              color: "rgba(0, 0, 0, 0.4)",
+              font: { family: "Gilroy, sans-serif", size: 12 },
+              callback(value) {
+                const v = Number(value);
+                return v >= 1_000_000 ? (v / 1_000_000).toFixed(1) + "M €" : (v / 1000).toFixed(0) + "k €";
+              },
             },
           },
           x: {
+            border: { display: false },
             grid: { display: false },
-            ticks: { color: "rgba(0,0,0,0.45)" },
+            ticks: {
+              maxTicksLimit: 8,
+              color: "rgba(0, 0, 0, 0.4)",
+              font: { family: "Gilroy, sans-serif", size: 12 },
+            },
           },
         },
       },

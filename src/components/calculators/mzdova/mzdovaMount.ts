@@ -208,13 +208,38 @@ export function mountMzdovaCalculator(): () => void {
     chart?.destroy();
     chart = new Chart(ctx, {
       type: "doughnut",
-      data: { labels, datasets: [{ data: values, backgroundColor: colors, borderWidth: 0, hoverOffset: 6 }] },
+      data: {
+        labels,
+        datasets: [{ data: values, backgroundColor: colors, borderWidth: 2, borderColor: "#FFF9F5", hoverOffset: 6 }],
+      },
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        cutout: "68%",
         plugins: {
-          legend: { position: "right", labels: { font: { size: 11 }, padding: 10, boxWidth: 8, usePointStyle: true } },
+          legend: {
+            position: "right",
+            labels: {
+              font: { family: "Gilroy, sans-serif", size: 12 },
+              padding: 12,
+              boxWidth: 8,
+              boxHeight: 8,
+              usePointStyle: true,
+            },
+          },
           tooltip: {
+            backgroundColor: "rgba(2, 44, 34, 0.96)",
+            titleColor: "#fdf8f2",
+            bodyColor: "rgba(240, 235, 227, 0.92)",
+            borderColor: "rgba(253, 248, 242, 0.15)",
+            borderWidth: 1,
+            padding: 12,
+            cornerRadius: 12,
+            caretSize: 6,
+            usePointStyle: true,
+            boxPadding: 5,
+            titleFont: { family: "Recoleta, Georgia, serif", size: 13, weight: "bold" },
+            bodyFont: { family: "Gilroy, sans-serif", size: 13 },
             callbacks: {
               label: (c) => {
                 const total = (c.dataset.data as number[]).reduce((a, b) => a + b, 0);

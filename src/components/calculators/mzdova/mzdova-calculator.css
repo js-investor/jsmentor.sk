@@ -1,4 +1,4 @@
-/** Mzdová kalkulačka — scoped pod #mzv3-w, postavené na calc-ui dizajnovom systéme */
+/** Mzdová kalkulačka — scoped pod #mzv3-w, hero-XL layout na calc-ui systéme */
 
 #mzv3-w *,
 #mzv3-w *::before,
@@ -27,15 +27,93 @@
   color: hsl(var(--primary));
 }
 
-/* Prepínač Zamestnanec / SZČO nad layoutom */
+/* ------------------- Hero XL — podtitulky pod chipmi ----------------------- */
+
+#mzv3-w .mzv3-hero-sub {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: hsl(var(--foreground) / 0.75);
+  font-variant-numeric: tabular-nums;
+  margin: 0.75rem 0 0;
+}
+
+#mzv3-w .mzv3-hero-sub:empty {
+  display: none;
+}
+
+#mzv3-w .mzv3-hero-foot {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: hsl(var(--muted-foreground) / 0.85);
+  margin: 0.375rem 0 0;
+}
+
+/* -------------------- Prepínač Zamestnanec / SZČO -------------------------- */
+
 #mzv3-w .mzv3-type-switch-row {
   display: flex;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  margin-top: 1.75rem;
+}
+
+@media (min-width: 768px) {
+  #mzv3-w .mzv3-type-switch-row {
+    margin-top: 2.25rem;
+  }
 }
 
 #mzv3-w .mzv3-type-switch {
   width: min(100%, 27rem);
+}
+
+/* Dock nasleduje hneď za prepínačom — menší odstup než v referencii */
+#mzv3-w .calc-dock {
+  margin-top: 1.25rem;
+}
+
+/* ------------------------------- Dock grid --------------------------------- */
+/* Skupiny polí (emp/szco) sú display: contents — deti sa stanú grid položkami;
+   .hidden (display: none !important) prepísanie vypne celú skupinu. */
+
+#mzv3-w .mzv3-dock-group {
+  display: contents;
+}
+
+/* Zvislé oddeľovače stĺpcov aj pre položky vnútri display:contents skupín */
+@media (min-width: 1024px) {
+  #mzv3-w .calc-dock-grid > * .calc-dock-item,
+  #mzv3-w .calc-dock-item + .calc-dock-item {
+    border-left: 1px solid hsl(var(--border) / 0.6);
+    padding-left: 1.5rem;
+  }
+
+  #mzv3-w .calc-dock-grid > .calc-dock-item:first-child {
+    border-left: none;
+    padding-left: 0;
+  }
+}
+
+/* Kompaktnejšie segmenty v docku (dlhé popisky smeru výpočtu) */
+#mzv3-w .calc-dock-item .calc-segment > button {
+  padding: 0.5rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+#mzv3-w .calc-dock-item .calc-stat-sub {
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+/* Bonus na deti — dva mini vstupy vedľa seba */
+#mzv3-w .mzv3-mini-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.625rem;
+}
+
+#mzv3-w .mzv3-mini-row .calc-label {
+  margin-bottom: 0.3125rem;
 }
 
 /* ----------------------------- Checkbox riadky ----------------------------- */
@@ -72,6 +150,30 @@
   color: hsl(var(--muted-foreground));
 }
 
+/* Checkboxy v dock položkách — drobnejšie, aby sadli do stĺpca */
+#mzv3-w .calc-dock-item .mzv3-check label {
+  font-size: 0.875rem;
+}
+
+#mzv3-w .calc-dock-item .mzv3-check-hint {
+  font-size: 0.75rem;
+}
+
+/* Minimá SZČO — kompaktný textový stĺpec v docku */
+#mzv3-w .mzv3-minima-text {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+
+#mzv3-w .mzv3-minima-text strong {
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  font-variant-numeric: tabular-nums;
+}
+
 /* Menší label pre podpolia (bonus na deti) */
 #mzv3-w .calc-label--sub {
   font-size: 0.875rem;
@@ -79,9 +181,15 @@
   color: hsl(var(--muted-foreground));
 }
 
-/* ------------------------------- Infobox SZČO ------------------------------ */
+/* ------------------------------- Pätka docku ------------------------------- */
 
-#mzv3-w .mzv3-infobox {
+#mzv3-w .mzv3-dock-foot {
+  display: grid;
+  gap: 0.875rem;
+  padding: 1rem 0 0.375rem;
+}
+
+#mzv3-w .mzv3-foot-note {
   border: 1px solid hsl(var(--border) / 0.7);
   border-radius: 0.875rem;
   background: hsl(var(--cream) / 0.6);
@@ -104,21 +212,33 @@
   margin: 0;
 }
 
-/* ---------------------- Hero — prázdny podtitulok skryť -------------------- */
+/* ------------------------- Panely: rozklad + graf -------------------------- */
 
-#mzv3-w .calc-hero-sub:empty {
-  display: none;
+#mzv3-w .mzv3-panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  #mzv3-w .mzv3-panels {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
 }
 
 /* -------------------------------- Graf (donut) ----------------------------- */
 
 #mzv3-w .mzv3-chart-body {
-  height: 13rem;
+  height: 14rem;
 }
 
 @media (min-width: 768px) {
   #mzv3-w .mzv3-chart-body {
-    height: 14rem;
+    height: 17rem;
   }
 }
 
@@ -182,21 +302,4 @@
 
 #mzv3-w .bd-pos {
   color: hsl(var(--primary));
-}
-
-/* ------------------------------ Ročný prehľad ------------------------------ */
-
-#mzv3-w .mzv3-year-stats {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-top: 1rem;
-}
-
-@media (min-width: 640px) {
-  #mzv3-w .mzv3-year-stats {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-#mzv3-w .mzv3-year-stats .calc-stat-value {
-  font-size: 1.1875rem;
 }

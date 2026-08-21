@@ -82,3 +82,36 @@ export function initCalcHeroPulse(valueId: string): () => void {
     observer.disconnect();
   };
 }
+
+/**
+ * Zrkadlenie hodnôt vstupov do textových prvkov: element s data-echo-of="<inputId>"
+ * zobrazuje input.value + voliteľný data-echo-suffix. Sync na input + po klikoch
+ * (programové zmeny pri prepnutí variantu).
+ */
+export function initCalcEcho(rootId: string): () => void {
+  const root = document.getElementById(rootId);
+  if (!root) return () => {};
+
+  const sync = () => {
+    root.querySelectorAll<HTMLElement>("[data-echo-of]").forEach((el) => {
+      const src = document.getElementById(el.dataset.echoOf || "") as HTMLInputElement | null;
+      if (src) el.textContent = src.value + (el.dataset.echoSuffix || "");
+    });
+  };
+
+  let raf = 0;
+  const onEvent = () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(sync);
+  };
+
+  sync();
+  root.addEventListener("input", onEvent);
+  document.addEventListener("click", onEvent);
+
+  return () => {
+    cancelAnimationFrame(raf);
+    root.removeEventListener("input", onEvent);
+    document.removeEventListener("click", onEvent);
+  };
+}

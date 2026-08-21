@@ -24,7 +24,48 @@
   cursor: crosshair;
 }
 
-/* ------------------------- Hlavička panelu s prepínačom ------------------- */
+/* --------------------- Dock s dvoma skupinami vstupov --------------------- */
+
+#hypo-calc-root .hypo-dock-groups {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+}
+
+#hypo-calc-root .hypo-dock-group {
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  #hypo-calc-root .hypo-dock-groups {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  #hypo-calc-root .hypo-dock-group + .hypo-dock-group {
+    border-left: 1px solid hsl(var(--border) / 0.6);
+    padding-left: 2rem;
+  }
+}
+
+@media (max-width: 1023.98px) {
+  #hypo-calc-root .hypo-dock-group + .hypo-dock-group {
+    border-top: 1px solid hsl(var(--border) / 0.6);
+    padding-top: 1.5rem;
+  }
+}
+
+/* Akordeón udalostí v pätke docku */
+#hypo-calc-root .calc-dock-foot .hypo-evt-toggle {
+  padding: 0.875rem 0 0.5rem;
+}
+
+#hypo-calc-root .calc-dock-foot .hypo-evt-content {
+  margin-top: 0.625rem;
+  padding-bottom: 1rem;
+}
+
+/* ------------------- Hlavička skupiny docku s prepínačom ------------------ */
 
 #hypo-calc-root .hypo-panel-head {
   display: flex;

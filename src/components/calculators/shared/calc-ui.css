@@ -780,3 +780,185 @@
   color: hsl(var(--muted-foreground));
   margin-right: 0.375rem;
 }
+
+/* ================== Hero XL — výsledok ako hviezda stránky ================= */
+
+.calc-hero-xl {
+  position: relative;
+  isolation: isolate;
+  text-align: center;
+  padding: 0.5rem 0 0.75rem;
+}
+
+/* Svetelná aura za obrím číslom (svetlá verzia, bez filtra) */
+.calc-hero-xl::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: min(48rem, 110%);
+  height: 130%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  background: radial-gradient(
+    50% 55% at 50% 50%,
+    rgba(41, 97, 74, 0.16) 0%,
+    rgba(41, 97, 74, 0.08) 45%,
+    transparent 75%
+  );
+  pointer-events: none;
+}
+
+.calc-hero-xl-label {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .calc-hero-xl-label { font-size: 1.1875rem; }
+}
+
+.calc-hero-xl-value {
+  font-family: var(--font-serif);
+  font-size: clamp(3.25rem, 10vw, 6rem);
+  line-height: 1.05;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  margin: 0.5rem 0 0;
+  background: linear-gradient(180deg, #14503c 0%, hsl(var(--primary)) 55%, #0a5a47 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: hsl(var(--primary)); /* fallback */
+  display: inline-block;
+  transform-origin: center bottom;
+}
+
+.calc-hero-xl-value.is-updating {
+  animation: calc-hero-pulse 0.4s ease;
+}
+
+.calc-hero-xl-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 0.625rem;
+  margin-top: 1.125rem;
+}
+
+.calc-verdict-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.4375rem 0.9375rem;
+  border: 1px solid hsl(var(--primary) / 0.22);
+  border-radius: 9999px;
+  background: hsl(var(--primary) / 0.07);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-verdict-chip strong {
+  font-weight: 700;
+  color: hsl(var(--primary));
+}
+
+/* ================= Dock — vstupy v jednom kompaktnom páse ================= */
+
+.calc-dock {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border) / 0.7);
+  border-radius: 1.25rem;
+  padding: 1.25rem 1.25rem 0.875rem;
+  margin-top: 1.75rem;
+}
+
+@media (min-width: 768px) {
+  .calc-dock { padding: 1.5rem 1.75rem 1rem; margin-top: 2.25rem; }
+}
+
+.calc-dock-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .calc-dock-grid { grid-template-columns: 1fr 1fr; gap: 1.25rem 2rem; }
+}
+
+@media (min-width: 1024px) {
+  .calc-dock-grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+
+  .calc-dock-item + .calc-dock-item {
+    border-left: 1px solid hsl(var(--border) / 0.6);
+    padding-left: 1.5rem;
+  }
+}
+
+.calc-dock-item { min-width: 0; }
+
+.calc-dock-item .calc-label { margin-bottom: 0.4375rem; font-size: 0.875rem; }
+
+.calc-dock-item .calc-input { font-size: 1.0625rem; padding: 0.5625rem 0.875rem; }
+
+.calc-dock-item .calc-slider { height: 1.5rem; }
+
+/* Pätka docku — rozšírené nastavenia */
+.calc-dock-foot {
+  border-top: 1px solid hsl(var(--border) / 0.7);
+  margin-top: 1.125rem;
+}
+
+.calc-dock-foot .calc-collapse-toggle {
+  border-top: none;
+  padding-top: 0.75rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.875rem;
+}
+
+/* ===================== Inline štatistiky pod hero ======================== */
+
+.calc-stats-inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.75rem 0;
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.calc-stats-inline > div {
+  padding: 0.25rem 1.75rem;
+  min-width: 9rem;
+}
+
+.calc-stats-inline > div + div {
+  border-left: 1px solid hsl(var(--border) / 0.8);
+}
+
+.calc-stats-inline .calc-stat-label { font-size: 0.8125rem; }
+
+.calc-stats-inline .calc-stat-value { font-size: 1.375rem; margin-top: 0.125rem; }
+
+@media (max-width: 560px) {
+  .calc-stats-inline { flex-direction: column; align-items: center; gap: 0.875rem; }
+  .calc-stats-inline > div + div { border-left: none; }
+}
+
+/* Vysoký graf pre hero layout */
+.calc-chart-body--tall { height: 19rem; }
+
+@media (min-width: 768px) {
+  .calc-chart-body--tall { height: 24rem; }
+}
+
+.calc-note--center { text-align: center; }

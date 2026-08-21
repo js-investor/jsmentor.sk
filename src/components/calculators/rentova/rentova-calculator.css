@@ -17,8 +17,40 @@
   display: none !important;
 }
 
-#rentova-calc-root .mylife-btn-email,
-#rentova-calc-root .mylife-btn-pdf {
+/* Pokročilé nastavenia v pätke docku — kompaktná mriežka */
+#rentova-calc-root .ml-advanced-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem 1.5rem;
+}
+
+@media (min-width: 640px) {
+  #rentova-calc-root .ml-advanced-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  #rentova-calc-root .ml-advanced-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+#rentova-calc-root .ml-advanced-grid .calc-field {
+  margin-bottom: 0;
+}
+
+/* Stav cieľa môže niesť dlhší text — bunka smie byť širšia a zalomiť sa */
+#rentova-calc-root .calc-stats-inline .ml-stat-goal {
+  max-width: 22rem;
+}
+
+#rentova-calc-root .calc-stats-inline .ml-stat-goal .calc-stat-value {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+#rentova-calc-root .mylife-btn-email {
   padding: 12px 20px;
   border-radius: calc(var(--radius) - 4px);
   font-weight: 500;
@@ -29,30 +61,17 @@
   gap: 8px;
   cursor: pointer;
   font-family: var(--font-sans);
+  background: hsl(var(--cream));
+  border: 1px solid hsl(var(--charcoal));
+  color: hsl(var(--charcoal));
   transition:
     background-color 0.2s,
     border-color 0.2s,
     opacity 0.2s;
 }
 
-#rentova-calc-root .mylife-btn-email {
-  background: hsl(var(--cream));
-  border: 1px solid hsl(var(--charcoal));
-  color: hsl(var(--charcoal));
-}
-
 #rentova-calc-root .mylife-btn-email:hover {
   background: hsl(var(--border));
-}
-
-#rentova-calc-root .mylife-btn-pdf {
-  background: hsl(var(--primary));
-  border: 1px solid hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
-}
-
-#rentova-calc-root .mylife-btn-pdf:hover {
-  filter: brightness(0.92);
 }
 
 #rentova-calc-root .ml-dropdown {
@@ -167,8 +186,7 @@
 }
 
 @media (max-width: 640px) {
-  #rentova-calc-root .mylife-btn-email,
-  #rentova-calc-root .mylife-btn-pdf {
+  #rentova-calc-root .mylife-btn-email {
     flex: 1;
     min-width: 0;
   }

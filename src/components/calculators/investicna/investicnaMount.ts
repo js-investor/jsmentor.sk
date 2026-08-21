@@ -1,4 +1,5 @@
 import Chart from "chart.js/auto";
+import type { Plugin, ScriptableContext } from "chart.js";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
@@ -251,16 +252,53 @@ export function mountInvesticnaCalculator(): () => void {
     };
   }
 
+  /** Zvislá vodiaca čiara pod kurzorom (crosshair). */
+  const hoverLinePlugin: Plugin<"line"> = {
+    id: "invHoverLine",
+    afterDatasetsDraw(chart) {
+      const active = chart.tooltip?.getActiveElements();
+      if (!active || active.length === 0) return;
+      const x = active[0].element.x;
+      const { top, bottom } = chart.chartArea;
+      const c = chart.ctx;
+      c.save();
+      c.beginPath();
+      c.moveTo(x, top);
+      c.lineTo(x, bottom);
+      c.lineWidth = 1;
+      c.setLineDash([4, 4]);
+      c.strokeStyle = "rgba(41, 97, 74, 0.35)";
+      c.stroke();
+      c.restore();
+    },
+  };
+
+  /** Koncový bod série zvýrazníme — posledná hodnota je pointa grafu. */
+  const lastPointRadius = (ctx: ScriptableContext<"line">) =>
+    ctx.dataIndex === ctx.dataset.data.length - 1 ? 5 : 0;
+
   function updateChart(s: ScenarioResult | null): void {
     const canvas = document.getElementById("inv-chart") as HTMLCanvasElement | null;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
-    chartInstance?.destroy();
-    chartInstance = null;
-    if (!ctx || !s || disposed) return;
+    if (!ctx || !s || disposed) {
+      chartInstance?.destroy();
+      chartInstance = null;
+      return;
+    }
 
-    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, "rgba(41, 97, 74, 0.18)");
+    // Plynulé morfovanie existujúceho grafu namiesto zničenia a prekreslenia
+    if (chartInstance) {
+      chartInstance.data.labels = s.labels;
+      chartInstance.data.datasets[0].data = s.dataTotal;
+      chartInstance.data.datasets[1].data = s.dataInvested;
+      chartInstance.update();
+      return;
+    }
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.clientHeight || 400);
+    gradient.addColorStop(0, "rgba(41, 97, 74, 0.28)");
+    gradient.addColorStop(0.65, "rgba(41, 97, 74, 0.08)");
     gradient.addColorStop(1, "rgba(41, 97, 74, 0)");
 
     chartInstance = new Chart(ctx, {
@@ -274,41 +312,56 @@ export function mountInvesticnaCalculator(): () => void {
             data: s.dataTotal,
             borderColor: "#29614A",
             backgroundColor: gradient,
-            borderWidth: 2,
+            borderWidth: 2.5,
             fill: true,
             tension: 0.4,
-            pointRadius: 0,
-            pointHoverRadius: 5,
+            pointRadius: lastPointRadius,
+            pointHoverRadius: 6,
             pointBackgroundColor: "#29614A",
+            pointBorderColor: "#FFF9F5",
+            pointBorderWidth: 2,
           },
           {
             type: "line",
-            label: "Vklad",
+            label: "Vklady",
             data: s.dataInvested,
-            borderColor: "rgba(168, 149, 110, 0.7)",
+            borderColor: "rgba(168, 149, 110, 0.75)",
             backgroundColor: "transparent",
             borderWidth: 2,
             borderDash: [5, 5],
             fill: false,
             tension: 0.4,
             pointRadius: 0,
-            pointHoverRadius: 0,
+            pointHoverRadius: 4,
+            pointBackgroundColor: "#A8956E",
+            pointBorderColor: "#FFF9F5",
+            pointBorderWidth: 2,
           },
         ],
       },
+      plugins: [hoverLinePlugin],
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        animation: { duration: 500, easing: "easeOutQuart" },
+        interaction: { mode: "index", intersect: false },
         plugins: {
           legend: { display: false },
           tooltip: {
-            backgroundColor: "rgba(255,255,255,0.95)",
-            titleColor: "#1a1a1a",
-            bodyColor: "rgba(0,0,0,0.65)",
-            borderColor: "rgba(0,0,0,0.1)",
+            backgroundColor: "rgba(2, 44, 34, 0.96)",
+            titleColor: "#fdf8f2",
+            bodyColor: "rgba(240, 235, 227, 0.92)",
+            footerColor: "#8fd4b4",
+            borderColor: "rgba(253, 248, 242, 0.15)",
             borderWidth: 1,
-            titleFont: { family: "Recoleta, Georgia, serif" },
-            bodyFont: { family: "system-ui, sans-serif" },
+            padding: 14,
+            cornerRadius: 12,
+            caretSize: 6,
+            usePointStyle: true,
+            boxPadding: 5,
+            titleFont: { family: "Recoleta, Georgia, serif", size: 14, weight: "bold" },
+            bodyFont: { family: "Gilroy, sans-serif", size: 13 },
+            footerFont: { family: "Gilroy, sans-serif", size: 13, weight: "bold" },
             callbacks: {
               label: (context) => {
                 let label = context.dataset.label || "";
@@ -316,24 +369,38 @@ export function mountInvesticnaCalculator(): () => void {
                 if (context.parsed.y !== null) label += formatCurrency(context.parsed.y);
                 return label;
               },
+              footer: (items) => {
+                const total = items.find((it) => it.datasetIndex === 0)?.parsed.y;
+                const invested = items.find((it) => it.datasetIndex === 1)?.parsed.y;
+                if (typeof total !== "number" || typeof invested !== "number") return "";
+                return "Zisk: +" + formatCurrency(Math.max(0, total - invested));
+              },
             },
           },
         },
         scales: {
           y: {
             beginAtZero: true,
-            grid: { color: "rgba(0,0,0,0.06)" },
+            border: { display: false },
+            grid: { color: "rgba(0, 0, 0, 0.05)" },
             ticks: {
-              color: "rgba(0,0,0,0.45)",
+              maxTicksLimit: 5,
+              color: "rgba(0, 0, 0, 0.4)",
+              font: { family: "Gilroy, sans-serif", size: 12 },
               callback(value) {
                 const v = Number(value);
-                return v >= 1_000_000 ? (v / 1_000_000).toFixed(1) + "M" : (v / 1000).toFixed(0) + "k";
+                return v >= 1_000_000 ? (v / 1_000_000).toFixed(1) + "M €" : (v / 1000).toFixed(0) + "k €";
               },
             },
           },
           x: {
+            border: { display: false },
             grid: { display: false },
-            ticks: { maxTicksLimit: 8, color: "rgba(0,0,0,0.45)" },
+            ticks: {
+              maxTicksLimit: 8,
+              color: "rgba(0, 0, 0, 0.4)",
+              font: { family: "Gilroy, sans-serif", size: 12 },
+            },
           },
         },
       },

@@ -1,10 +1,8 @@
 import { useLayoutEffect } from "react";
-import brandPatternDark from "@/assets/logo/js-brand-pattern-black.svg";
-import { NOISE_TEXTURE } from "@/lib/noiseTexture";
 import "../shared/calculator-toolbar.css";
 import "../shared/calc-ui.css";
 import "./rentova-calculator.css";
-import { initCalcSliders } from "../shared/calcUi";
+import { initCalcEcho, initCalcHeroPulse, initCalcSliders } from "../shared/calcUi";
 import { mountRentovaCalculator } from "./rentovaMount";
 
 const CompareIcon = () => (
@@ -15,11 +13,33 @@ const CompareIcon = () => (
   </svg>
 );
 
+/** −/+ stepper pre číselný vstup; zmenu hodnoty vždy ohlási input eventom pre mount. */
+const Stepper = ({ inputId, step, unit }: { inputId: string; step: number; unit: string }) => {
+  const nudge = (dir: "up" | "down") => {
+    const el = document.getElementById(inputId) as HTMLInputElement | null;
+    if (!el) return;
+    if (dir === "up") el.stepUp();
+    else el.stepDown();
+    el.dispatchEvent(new Event("input", { bubbles: true }));
+  };
+  return (
+    <span className="calc-stepper">
+      <span className="calc-stepper-unit" aria-hidden>{unit}</span>
+      <button type="button" aria-label={`Znížiť o ${step} ${unit}`} onClick={() => nudge("down")}>−</button>
+      <button type="button" aria-label={`Zvýšiť o ${step} ${unit}`} onClick={() => nudge("up")}>+</button>
+    </span>
+  );
+};
+
 const RentovaCalculator = () => {
   useLayoutEffect(() => {
     const unmountCalc = mountRentovaCalculator();
     const unmountSliders = initCalcSliders("rentova-calc-root");
+    const unmountEcho = initCalcEcho("rentova-calc-root");
+    const unmountPulse = initCalcHeroPulse("ml-requiredCapital");
     return () => {
+      unmountPulse();
+      unmountEcho();
       unmountSliders();
       unmountCalc?.();
     };
@@ -49,195 +69,145 @@ const RentovaCalculator = () => {
 
       <div className="calc-body-shell">
         <div className="calc-page">
-          <header className="calc-header">
-            <span className="calc-eyebrow">Kalkulačka</span>
-            <h1 className="calc-title">Rentová kalkulačka</h1>
-            <p className="calc-subtitle">
-              Zisti, aký kapitál potrebuješ na dosiahnutie svojej vysnívanej renty.
-            </p>
+          <header className="calc-header" style={{ marginBottom: "1.5rem" }}>
+            <span className="calc-eyebrow">Rentová kalkulačka</span>
           </header>
 
-          <div className="calc-layout">
-            {/* ------------------------------ Vstupy ------------------------------ */}
-            <div className="calc-col">
-              <section className="calc-panel" aria-label="Tvoje parametre">
-                <h2 className="calc-panel-title">Tvoje parametre</h2>
-                <p className="calc-panel-sub">Výsledky sa prepočítavajú okamžite.</p>
+          {/* Výsledok — hviezda stránky */}
+          <section className="calc-hero-xl" aria-label="Výsledok">
+            <p className="calc-hero-xl-label">
+              Na mesačnú rentu <span data-echo-of="ml-desiredRent" data-echo-suffix=" €">1500 €</span> potrebuješ
+            </p>
+            <p className="calc-hero-xl-value" id="ml-requiredCapital">0 €</p>
+            <div className="calc-hero-xl-chips">
+              <span className="calc-verdict-chip">
+                Mesačne treba investovať&nbsp;<strong id="ml-monthlyGap">0 €</strong>
+              </span>
+              <span className="calc-verdict-chip">
+                Pri ročnom výnose&nbsp;<strong id="ml-roiDisplay">7%</strong>
+              </span>
+            </div>
+          </section>
 
-                <div className="calc-fieldrow">
+          {/* Inline štatistiky */}
+          <div className="calc-stats-inline" role="group" aria-label="Súhrn">
+            <div>
+              <p className="calc-stat-label">Renta po inflácii</p>
+              <p className="calc-stat-value" id="ml-inflatedRentVal">0 €</p>
+            </div>
+            <div>
+              <p className="calc-stat-label">Projektovaný kapitál</p>
+              <p className="calc-stat-value" id="ml-projectedCapital">0 €</p>
+            </div>
+            <div className="ml-stat-goal">
+              <p className="calc-stat-label">Stav cieľa</p>
+              <p className="calc-stat-value" id="ml-goalStatus">0%</p>
+            </div>
+          </div>
+
+          {/* Vstupný dock */}
+          <section className="calc-dock" aria-label="Tvoje parametre">
+            <div className="calc-dock-grid">
+              <div className="calc-dock-item">
+                <label className="calc-label" htmlFor="ml-currentAge">Súčasný vek</label>
+                <input type="number" id="ml-currentAge" defaultValue={35} min={0} className="calc-input" />
+              </div>
+
+              <div className="calc-dock-item">
+                <label className="calc-label" htmlFor="ml-retirementAge">Vek odchodu</label>
+                <input type="number" id="ml-retirementAge" defaultValue={65} min={1} className="calc-input" />
+              </div>
+
+              <div className="calc-dock-item">
+                <label className="calc-label" htmlFor="ml-desiredRent">Cieľová mesačná renta</label>
+                <div className="calc-input-wrap calc-input-wrap--stepper">
+                  <input type="number" id="ml-desiredRent" defaultValue={1500} step={50} min={0} className="calc-input" />
+                  <Stepper inputId="ml-desiredRent" step={50} unit="€" />
+                </div>
+              </div>
+
+              <div className="calc-dock-item">
+                <div className="calc-label">
+                  <label htmlFor="ml-rentDuration">Doba poberania</label>
+                  <span id="ml-durationVal" className="calc-label-value" data-echo-of="ml-rentDuration" data-echo-suffix=" rokov">25 rokov</span>
+                </div>
+                <input type="range" id="ml-rentDuration" className="calc-slider" min={5} max={40} defaultValue={25} />
+              </div>
+            </div>
+
+            <div className="calc-dock-foot">
+              <div
+                id="ml-advanced-toggle"
+                className="calc-collapse-toggle"
+                role="button"
+                aria-expanded={false}
+                aria-controls="ml-advanced-content"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    e.currentTarget.click();
+                  }
+                }}
+              >
+                <span>Pokročilé nastavenia</span>
+                <span id="ml-arrow-icon" className="calc-collapse-chevron" aria-hidden>▼</span>
+              </div>
+              <div id="ml-advanced-content" className="hidden pb-4 pt-1">
+                <div className="ml-advanced-grid">
                   <div className="calc-field">
-                    <label className="calc-label" htmlFor="ml-currentAge">
-                      Súčasný vek
-                    </label>
-                    <input
-                      type="number"
-                      id="ml-currentAge"
-                      defaultValue={35}
-                      min={0}
-                      className="calc-input"
-                    />
-                  </div>
-                  <div className="calc-field">
-                    <label className="calc-label" htmlFor="ml-retirementAge">
-                      Vek odchodu
-                    </label>
-                    <input
-                      type="number"
-                      id="ml-retirementAge"
-                      defaultValue={65}
-                      min={1}
-                      className="calc-input"
-                    />
-                  </div>
-                </div>
-
-                <div className="calc-field">
-                  <label className="calc-label" htmlFor="ml-desiredRent">
-                    Cieľová mesačná renta
-                  </label>
-                  <div className="calc-input-wrap">
-                    <input
-                      type="number"
-                      id="ml-desiredRent"
-                      defaultValue={1500}
-                      step={50}
-                      min={0}
-                      className="calc-input calc-input--unit"
-                    />
-                    <span className="calc-input-unit" aria-hidden>€</span>
-                  </div>
-                </div>
-
-                <div className="calc-field">
-                  <div className="calc-label">
-                    <label htmlFor="ml-rentDuration">Doba poberania</label>
-                    <span id="ml-durationVal" className="calc-label-value">25 rokov</span>
-                  </div>
-                  <input type="range" id="ml-rentDuration" className="calc-slider" min={5} max={40} defaultValue={25} />
-                  <div className="calc-slider-scale" aria-hidden>
-                    <span>5 rokov</span>
-                    <span>40 rokov</span>
-                  </div>
-                </div>
-
-                <div
-                  id="ml-advanced-toggle"
-                  className="calc-collapse-toggle"
-                  role="button"
-                  aria-expanded={false}
-                  aria-controls="ml-advanced-content"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      e.currentTarget.click();
-                    }
-                  }}
-                >
-                  <span>Pokročilé nastavenia</span>
-                  <span id="ml-arrow-icon" className="calc-collapse-chevron" aria-hidden>▼</span>
-                </div>
-                <div id="ml-advanced-content" className="hidden mt-4 space-y-4">
-                  <div className="calc-field">
-                    <label className="calc-label" htmlFor="ml-interestRate">
-                      Očakávaný ročný výnos
-                    </label>
+                    <label className="calc-label" htmlFor="ml-interestRate">Očakávaný ročný výnos</label>
                     <div className="calc-input-wrap">
                       <input type="number" id="ml-interestRate" defaultValue={7} step={0.1} className="calc-input calc-input--unit" />
                       <span className="calc-input-unit" aria-hidden>%</span>
                     </div>
                   </div>
                   <div className="calc-field">
-                    <label className="calc-label" htmlFor="ml-inflationRate">
-                      Odhadovaná inflácia
-                    </label>
+                    <label className="calc-label" htmlFor="ml-inflationRate">Odhadovaná inflácia</label>
                     <div className="calc-input-wrap">
                       <input type="number" id="ml-inflationRate" defaultValue={2.5} step={0.1} className="calc-input calc-input--unit" />
                       <span className="calc-input-unit" aria-hidden>%</span>
                     </div>
                   </div>
                   <div className="calc-field">
-                    <label className="calc-label" htmlFor="ml-currentSavings">
-                      Súčasné úspory
-                    </label>
+                    <label className="calc-label" htmlFor="ml-currentSavings">Súčasné úspory</label>
                     <div className="calc-input-wrap">
                       <input type="number" id="ml-currentSavings" defaultValue={0} step={100} min={0} className="calc-input calc-input--unit" />
                       <span className="calc-input-unit" aria-hidden>€</span>
                     </div>
                   </div>
                   <div className="calc-field">
-                    <label className="calc-label" htmlFor="ml-monthlyInvestment">
-                      Mesačná investícia
-                    </label>
+                    <label className="calc-label" htmlFor="ml-monthlyInvestment">Mesačná investícia</label>
                     <div className="calc-input-wrap">
                       <input type="number" id="ml-monthlyInvestment" defaultValue={200} step={10} min={0} className="calc-input calc-input--unit" />
                       <span className="calc-input-unit" aria-hidden>€</span>
                     </div>
                   </div>
                 </div>
-              </section>
-
-              <p className="calc-note">
-                Kalkulačka je orientačná — počíta s konštantným výnosom a infláciou a nezohľadňuje
-                dane ani poplatky konkrétnych produktov.
-              </p>
-            </div>
-
-            {/* ----------------------------- Výsledky ----------------------------- */}
-            <div className="calc-col">
-              <section className="calc-hero" aria-label="Výsledok">
-                <div
-                  className="calc-hero-noise"
-                  style={{ backgroundImage: NOISE_TEXTURE }}
-                  aria-hidden
-                />
-                <img src={brandPatternDark} alt="" aria-hidden className="calc-hero-pattern" />
-                <p className="calc-hero-label">Potrebný kapitál pri odchode</p>
-                <p className="calc-hero-value" id="ml-requiredCapital">0 €</p>
-                <div className="calc-hero-meta">
-                  <span className="calc-hero-chip">
-                    Mesačne chýba&nbsp;<strong id="ml-monthlyGap">0 €</strong>
-                  </span>
-                  <span className="calc-hero-sub">
-                    Počítané pri <strong id="ml-roiDisplay">7%</strong> ročnom zhodnotení.
-                  </span>
-                </div>
-              </section>
-
-              <div className="calc-stats">
-                <div className="calc-stat">
-                  <p className="calc-stat-label">Inflačná renta</p>
-                  <p className="calc-stat-value" id="ml-inflatedRentVal">0 €</p>
-                  <p className="calc-stat-sub">Tvoja renta v budúcich cenách</p>
-                </div>
-                <div className="calc-stat">
-                  <p className="calc-stat-label">Tvoj kapitál</p>
-                  <p className="calc-stat-value" id="ml-projectedCapital">0 €</p>
-                  <p className="calc-stat-sub">Očakávaný stav pri odchode</p>
-                </div>
-                <div className="calc-stat">
-                  <p className="calc-stat-label">Stav cieľa</p>
-                  <p className="calc-stat-value" id="ml-goalStatus">0%</p>
-                  <p className="calc-stat-sub">Podiel z cieľovej sumy</p>
-                </div>
               </div>
-
-              <section className="calc-panel" aria-label="Vývoj majetku">
-                <div className="calc-chart-head">
-                  <h3 className="calc-panel-title">Vývoj majetku</h3>
-                  <div className="calc-legend">
-                    <span className="calc-legend-item">
-                      <span className="calc-legend-dot" style={{ background: "#29614A" }} aria-hidden />
-                      Majetok
-                    </span>
-                  </div>
-                </div>
-                <div className="calc-chart-body">
-                  <canvas id="ml-rentChart" />
-                </div>
-              </section>
             </div>
-          </div>
+          </section>
+
+          {/* Graf */}
+          <section className="calc-panel mt-5 md:mt-6" aria-label="Vývoj majetku">
+            <div className="calc-chart-head">
+              <h2 className="calc-panel-title">Vývoj majetku</h2>
+              <div className="calc-legend">
+                <span className="calc-legend-item">
+                  <span className="calc-legend-dot" style={{ background: "#29614A" }} aria-hidden />
+                  Majetok
+                </span>
+              </div>
+            </div>
+            <div className="calc-chart-body calc-chart-body--tall">
+              <canvas id="ml-rentChart" />
+            </div>
+          </section>
+
+          <p className="calc-note calc-note--center mt-5 md:mt-6">
+            Kalkulačka je orientačná — počíta s konštantným výnosom a infláciou a nezohľadňuje
+            dane ani poplatky konkrétnych produktov.
+          </p>
         </div>
       </div>
 
